@@ -10,9 +10,7 @@ import frc.robot.subsystems.DriveSubsystem;
 
 /** This is a demo program showing how to use Mecanum control with the MecanumDrive class. */
 public class Robot extends TimedRobot {
-  //public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-
-  public static DriveSubsystem Drive = new DriveSubsystem();
+  private RobotContainer myRobotContainer;
 
   private static final int kJoystickChannel = 0;
 
@@ -20,6 +18,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    myRobotContainer = new RobotContainer();
 
     m_stick = new Joystick(kJoystickChannel);
   }

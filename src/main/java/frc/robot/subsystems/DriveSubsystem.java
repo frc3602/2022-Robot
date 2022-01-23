@@ -9,18 +9,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
 
-/** Add your docs here. */
+
 public class DriveSubsystem extends SubsystemBase {
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-    WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.driveFrontLeftCANID);
-    WPI_TalonSRX backLeft = new WPI_TalonSRX(RobotMap.driveBackLeftCANID);
-   
-    WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.driveFrontRightCANID);
-    WPI_TalonSRX backRight = new WPI_TalonSRX(RobotMap.driveBackRightCANID);
-
-    MecanumDrive myDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-
-    frontRight.setInverted(true);
-    backRight.setInverted(true);
+    public DriveSubsystem() {
+        WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.driveFrontLeftCANID);
+        WPI_TalonSRX backLeft = new WPI_TalonSRX(RobotMap.driveBackLeftCANID);
+       
+        WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.driveFrontRightCANID);
+        WPI_TalonSRX backRight = new WPI_TalonSRX(RobotMap.driveBackRightCANID);
+    
+        MecanumDrive myDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+    
+        frontRight.setInverted(true);
+        backRight.setInverted(true);
+    }
 }

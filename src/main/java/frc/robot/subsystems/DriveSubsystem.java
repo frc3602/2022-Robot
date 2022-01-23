@@ -17,7 +17,7 @@ public class DriveSubsystem extends SubsystemBase {
     WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.driveFrontRightCANID);
     WPI_TalonSRX backRight = new WPI_TalonSRX(Constants.driveBackRightCANID);
 
-    MecanumDrive myDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+    MecanumDrive m_DriveSubsystem = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
     frontRight.setInverted(true);
     backRight.setInverted(true);

@@ -7,20 +7,29 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import frc.robot.RobotMap;
-
+import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
-    public DriveSubsystem() {
-        WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.driveFrontLeftCANID);
-        WPI_TalonSRX backLeft = new WPI_TalonSRX(RobotMap.driveBackLeftCANID);
-       
-        WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.driveFrontRightCANID);
-        WPI_TalonSRX backRight = new WPI_TalonSRX(RobotMap.driveBackRightCANID);
-    
-        MecanumDrive myDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-    
-        frontRight.setInverted(true);
-        backRight.setInverted(true);
-    }
+  public DriveSubsystem() {
+    WPI_TalonSRX frontLeft = new WPI_TalonSRX(Constants.driveFrontLeftCANID);
+    WPI_TalonSRX backLeft = new WPI_TalonSRX(Constants.driveBackLeftCANID);
+   
+    WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.driveFrontRightCANID);
+    WPI_TalonSRX backRight = new WPI_TalonSRX(Constants.driveBackRightCANID);
+
+    MecanumDrive myDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+
+    frontRight.setInverted(true);
+    backRight.setInverted(true);
+  }
+
+  @Override
+  public void periodic() {
+
+  }
+
+  @Override
+  public void simulationPeriodic() {
+
+  }
 }

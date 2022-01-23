@@ -4,12 +4,29 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.ExampleCommand;
+
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
 
 public class RobotContainer {
-    private final DriveSubsystem myDrive = new DriveSubsystem();
+  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
 
-    public RobotContainer() {
-        
-    }
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+
+  public RobotContainer() {
+    configureButtonBindings();
+  }
+
+  private void configureButtonBindings() {}
+
+  public Command getAutonomousCommand() {
+    return m_autoCommand;
+  }
 }

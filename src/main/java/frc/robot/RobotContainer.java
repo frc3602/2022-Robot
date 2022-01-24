@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.DriveCommand;
 
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -22,7 +22,7 @@ public class RobotContainer {
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -31,6 +31,6 @@ public class RobotContainer {
   private void configureButtonBindings() {}
 
   public Command getAutonomousCommand() {
-    return m_autoCommand;
+    return m_driveCommand;
   }
 }

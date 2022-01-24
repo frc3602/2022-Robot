@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveCommand m_driveSubsystem;
+  private final DriveSubsystem m_driveSubsystem;
 
   public DriveCommand(DriveSubsystem subsystem) {
     m_driveSubsystem = subsystem;

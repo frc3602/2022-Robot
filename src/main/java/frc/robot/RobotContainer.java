@@ -14,6 +14,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
 
 public class RobotContainer {
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
@@ -21,6 +22,7 @@ public class RobotContainer {
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final LimelightSubsystem m_visionSubsystem = new LimelightSubsystem();
+  private final IndexSubsystem m_indexSubsystem = new IndexSubsystem();
 
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
 

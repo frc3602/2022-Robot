@@ -23,4 +23,6 @@ public final class Constants {
 
   // Intake CAN IDs
   public static int intakeCANID = 2;
+
+  // Index CAN IDs
 }

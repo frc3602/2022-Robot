@@ -13,7 +13,6 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
     WPI_TalonSRX frontLeft = new WPI_TalonSRX(Constants.driveFrontLeftCANID);
     WPI_TalonSRX backLeft = new WPI_TalonSRX(Constants.driveBackLeftCANID);
-   
     WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.driveFrontRightCANID);
     WPI_TalonSRX backRight = new WPI_TalonSRX(Constants.driveBackRightCANID);
 

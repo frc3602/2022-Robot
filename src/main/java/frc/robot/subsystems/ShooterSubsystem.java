@@ -4,11 +4,14 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
-
+    WPI_TalonFX motorTop = new WPI_TalonFX(Constants.shooterMotorTopCANID);
+    WPI_TalonFX motorBottom = new WPI_TalonFX(Constants.shooterMotorBottomCANID);
   }
 
   @Override

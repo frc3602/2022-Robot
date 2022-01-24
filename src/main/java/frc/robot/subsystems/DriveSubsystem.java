@@ -4,17 +4,17 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
-    WPI_TalonSRX frontLeft = new WPI_TalonSRX(Constants.driveFrontLeftCANID);
-    WPI_TalonSRX backLeft = new WPI_TalonSRX(Constants.driveBackLeftCANID);
-    WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.driveFrontRightCANID);
-    WPI_TalonSRX backRight = new WPI_TalonSRX(Constants.driveBackRightCANID);
+    WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.driveFrontLeftCANID);
+    WPI_TalonFX backLeft = new WPI_TalonFX(Constants.driveBackLeftCANID);
+    WPI_TalonFX frontRight = new WPI_TalonFX(Constants.driveFrontRightCANID);
+    WPI_TalonFX backRight = new WPI_TalonFX(Constants.driveBackRightCANID);
 
     MecanumDrive m_DriveSubsystem = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 

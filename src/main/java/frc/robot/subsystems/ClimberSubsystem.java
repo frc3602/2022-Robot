@@ -4,17 +4,16 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
   public ClimberSubsystem() {
-    WPI_TalonSRX topLeft = new WPI_TalonSRX(Constants.climbTopLeftCANID);
-    WPI_TalonSRX bottomLeft = new WPI_TalonSRX(Constants.climbBottomLeftCANID);
-    WPI_TalonSRX topRight = new WPI_TalonSRX(Constants.climbTopRightCANID);
-    WPI_TalonSRX bottomRight = new WPI_TalonSRX(Constants.climbBottomRightCANID);
-
+    WPI_TalonFX topLeft = new WPI_TalonFX(Constants.climbTopLeftCANID);
+    WPI_TalonFX bottomLeft = new WPI_TalonFX(Constants.climbBottomLeftCANID);
+    WPI_TalonFX topRight = new WPI_TalonFX(Constants.climbTopRightCANID);
+    WPI_TalonFX bottomRight = new WPI_TalonFX(Constants.climbBottomRightCANID);
   }
 
   @Override

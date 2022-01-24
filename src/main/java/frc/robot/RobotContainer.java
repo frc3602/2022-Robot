@@ -13,14 +13,14 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 
 public class RobotContainer {
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
+  private final LimelightSubsystem m_visionSubsystem = new LimelightSubsystem();
 
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
 

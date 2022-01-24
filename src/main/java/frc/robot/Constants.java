@@ -18,6 +18,9 @@ public final class Constants {
   public static int climbBottomRightCANID = 1;
 
   // Shooter CAN IDs
+  public static int shooterMotorTopCANID = 4;
+  public static int shooterMotorBottomCANID = 1;
 
   // Intake CAN IDs
+  public static int intakeCANID = 2;
 }

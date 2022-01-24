@@ -12,10 +12,10 @@ public final class Constants {
   public static int driveBackRightCANID = 1;
 
   // Climber CAN IDs
-  public static int climbTopLeftCANID = 2;
-  public static int climbBottomLeftCANID = 3;
-  public static int climbTopRightCANID = 4;
-  public static int climbBottomRightCANID = 1;
+  public static int climbSupportLeftCANID = 2;
+  public static int climbArmLeftCANID = 3;
+  public static int climbSupportRightCANID = 4;
+  public static int climbArmRightCANID = 1;
 
   // Shooter CAN IDs
 

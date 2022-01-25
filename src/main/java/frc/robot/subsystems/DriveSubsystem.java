@@ -22,6 +22,10 @@ public class DriveSubsystem extends SubsystemBase {
     backRight.setInverted(true);
   }
 
+  public void driveCartesian() {
+
+  }
+
   @Override
   public void periodic() {
 

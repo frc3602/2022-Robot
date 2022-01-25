@@ -4,14 +4,15 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ShooterSubsystem extends SubsystemBase {
-  public ShooterSubsystem() {
-    WPI_TalonFX motorTop = new WPI_TalonFX(Constants.shooterMotorTopCANID);
-    WPI_TalonFX motorBottom = new WPI_TalonFX(Constants.shooterMotorBottomCANID);
+public class IndexSubsystem extends SubsystemBase {
+  public IndexSubsystem() {
+    WPI_VictorSPX motorTop = new WPI_VictorSPX(Constants.indexMotorTopCANID);
+    WPI_VictorSPX motorBottom = new WPI_VictorSPX(Constants.indexMotorBottomCANID);
+    WPI_VictorSPX motorExtra = new WPI_VictorSPX(Constants.indexMotorExtraCANID);
   }
 
   @Override

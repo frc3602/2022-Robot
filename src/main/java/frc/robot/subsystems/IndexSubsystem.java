@@ -10,7 +10,9 @@ import frc.robot.Constants;
 
 public class IndexSubsystem extends SubsystemBase {
   public IndexSubsystem() {
-
+    WPI_VictorSPX motorTop = new WPI_VictorSPX(Constants.indexMotorTopCANID);
+    WPI_VictorSPX motorBottom = new WPI_VictorSPX(Constants.indexMotorBottomCANID);
+    WPI_VictorSPX motorExtra = new WPI_VictorSPX(Constants.indexMotorExtraCANID);
   }
 
   @Override

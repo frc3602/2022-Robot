@@ -10,7 +10,7 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
-    WPI_TalonFX intake = new WPI_TalonFX(Constants.intakeCANID);
+    WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.intakeMotorCANID);
   }
 
   @Override

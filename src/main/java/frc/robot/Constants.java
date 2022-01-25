@@ -22,7 +22,10 @@ public final class Constants {
   public static int shooterMotorBottomCANID = 1;
 
   // Intake CAN IDs
-  public static int intakeCANID = 2;
+  public static int intakeMotorCANID = 2;
 
   // Index CAN IDs
+  public static int indexMotorTopCANID = 2;
+  public static int indexMotorBottomCANID = 2;
+  public static int indexMotorExtraCANID = 2;
 }

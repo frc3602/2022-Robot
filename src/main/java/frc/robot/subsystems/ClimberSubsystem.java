@@ -10,10 +10,10 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
   public ClimberSubsystem() {
-    WPI_TalonSRX supportLeft = new WPI_TalonSRX(Constants.climbSupportLeftCANID);
-    WPI_TalonSRX armLeft = new WPI_TalonSRX(Constants.climbArmLeftCANID);
-    WPI_TalonSRX supportRight = new WPI_TalonSRX(Constants.climbSupportRightCANID);
-    WPI_TalonSRX armRight = new WPI_TalonSRX(Constants.climbArmRightCANID);
+    WPI_TalonFX supportLeft = new WPI_TalonFX(Constants.climbSupportLeftCANID);
+    WPI_TalonFX armLeft = new WPI_TalonFX(Constants.climbArmLeftCANID);
+    WPI_TalonFX supportRight = new WPI_TalonFX(Constants.climbSupportRightCANID);
+    WPI_TalonFX armRight = new WPI_TalonFX(Constants.climbArmRightCANID);
   }
 
   @Override

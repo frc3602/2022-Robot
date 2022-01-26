@@ -35,6 +35,8 @@ public class RobotContainer {
   private final ClimbPivot m_climbPivot = new ClimbPivot(m_climberSubsystem);
   private final ClimbControl m_climbControl = new ClimbControl(m_climberSubsystem);
 
+  public static OI m_oi;
+
   public RobotContainer() {
     configureButtonBindings();
   }

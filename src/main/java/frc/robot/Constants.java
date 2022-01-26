@@ -28,4 +28,7 @@ public final class Constants {
   public static int indexMotorTopCANID = 2;
   public static int indexMotorBottomCANID = 2;
   public static int indexMotorExtraCANID = 2;
+
+  //Controller
+  public static int joystickPort = 0;
 }

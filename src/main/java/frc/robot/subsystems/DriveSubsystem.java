@@ -20,10 +20,11 @@ public class DriveSubsystem extends SubsystemBase {
     WPI_TalonFX frontRight = new WPI_TalonFX(Constants.driveFrontRightCANID);
     WPI_TalonFX backRight = new WPI_TalonFX(Constants.driveBackRightCANID);
 
-    MecanumDrive mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-
+    // Invert the right side motors.
     frontRight.setInverted(true);
     backRight.setInverted(true);
+
+    MecanumDrive mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
     try {
        AHRS ahrs = new AHRS(SPI.Port.kMXP);
@@ -39,10 +40,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double GetGyroAngle() {
     return ahrs.getAngle();
-  }
-
-  public void DriveCartesian() {
-
   }
 
   @Override

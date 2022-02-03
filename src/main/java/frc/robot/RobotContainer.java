@@ -22,18 +22,18 @@ import frc.robot.commands.ClimbPivot;
 import frc.robot.commands.ClimbControl;
 
 public class RobotContainer {
-  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  private final LimelightSubsystem m_visionSubsystem = new LimelightSubsystem();
-  private final IndexSubsystem m_indexSubsystem = new IndexSubsystem();
+  public static DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  public static ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  public static IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  public static LimelightSubsystem m_visionSubsystem = new LimelightSubsystem();
+  public static IndexSubsystem m_indexSubsystem = new IndexSubsystem();
 
-  private final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
-  private final ClimbExtend m_climbExtend = new ClimbExtend(m_climberSubsystem);
-  private final ClimbRetract m_climbRetract = new ClimbRetract(m_climberSubsystem);
-  private final ClimbPivot m_climbPivot = new ClimbPivot(m_climberSubsystem);
-  private final ClimbControl m_climbControl = new ClimbControl(m_climberSubsystem);
+  public static DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
+  public static ClimbExtend m_climbExtend = new ClimbExtend(m_climberSubsystem);
+  public static ClimbRetract m_climbRetract = new ClimbRetract(m_climberSubsystem);
+  public static ClimbPivot m_climbPivot = new ClimbPivot(m_climberSubsystem);
+  public static ClimbControl m_climbControl = new ClimbControl(m_climberSubsystem);
 
   public static OI m_oi;
 

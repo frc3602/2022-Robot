@@ -10,9 +10,12 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import frc.robot.Constants;
+import frc.robot.OI;
+import frc.robot.RobotContainer;
 
 public class DriveSubsystem extends SubsystemBase {
   public AHRS ahrs;
+  public MecanumDrive mecanumDrive;
 
   public DriveSubsystem() {
     WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.driveFrontLeftCANID);
@@ -24,10 +27,10 @@ public class DriveSubsystem extends SubsystemBase {
     frontRight.setInverted(true);
     backRight.setInverted(true);
 
-    MecanumDrive mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+    mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
     try {
-       AHRS ahrs = new AHRS(SPI.Port.kMXP);
+       ahrs = new AHRS(SPI.Port.kMXP);
     }
     catch (RuntimeException ex) {
       System.out.println("Error instantiating navX-MXP:  " + ex.getMessage());
@@ -40,6 +43,18 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double GetGyroAngle() {
     return ahrs.getAngle();
+  }
+
+  public void DriveCartesian() {
+    double rawThrottle = OI.joystick.getRawAxis(3) * -1.0;
+    double throttle = (((rawThrottle + 1.0) /2.0) * 0.6 ) + 0.4;
+    double gyroAngle = 0.0;
+
+    RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(
+      OI.joystick.getX() * throttle * -1.0,
+      OI.joystick.getY() * throttle,
+      OI.joystick.getZ() * throttle * -1.0,
+      gyroAngle);
   }
 
   @Override

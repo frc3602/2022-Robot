@@ -51,10 +51,14 @@ public class DriveSubsystem extends SubsystemBase {
     double gyroAngle = 0.0;
 
     RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(
-      OI.joystick.getX() * throttle * -1.0,
       OI.joystick.getY() * throttle,
+      OI.joystick.getX() * throttle,
       OI.joystick.getZ() * throttle * -1.0,
       gyroAngle);
+  }
+
+  public void DriveBackwards() {
+    
   }
 
   @Override

@@ -6,10 +6,10 @@ package frc.robot;
 
 public final class Constants {
   // Drivetrain CAN IDs
-  public static int driveFrontLeftCANID = 2;
-  public static int driveBackLeftCANID = 3;
-  public static int driveFrontRightCANID = 4;
-  public static int driveBackRightCANID = 1;
+  public static int driveFrontLeftCANID = 1;
+  public static int driveBackLeftCANID = 0;
+  public static int driveFrontRightCANID = 3;
+  public static int driveBackRightCANID = 4;
 
   // Climber CAN IDs
   public static int climbSupportLeftCANID = 2;

@@ -18,6 +18,7 @@ public class DriveSubsystem extends SubsystemBase {
   public MecanumDrive mecanumDrive;
 
   public DriveSubsystem() {
+    // Creates the motor controllers and maps the CAN IDs for each one
     WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.driveFrontLeftCANID);
     WPI_TalonFX backLeft = new WPI_TalonFX(Constants.driveBackLeftCANID);
     WPI_TalonFX frontRight = new WPI_TalonFX(Constants.driveFrontRightCANID);
@@ -27,6 +28,7 @@ public class DriveSubsystem extends SubsystemBase {
     frontRight.setInverted(true);
     backRight.setInverted(true);
 
+    // Creates a new mecanum drive and maps the motors to it
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
     try {
@@ -45,9 +47,11 @@ public class DriveSubsystem extends SubsystemBase {
     return ahrs.getAngle();
   }
 
+  // Creates the method to drive the mecanum drive
   public void DriveCartesian() {
+    // Sets up all the throttle stuff
     double rawThrottle = OI.joystick.getRawAxis(3) * -1.0;
-    double throttle = (((rawThrottle + 1.0) /2.0) * 0.6 ) + 0.4;
+    double throttle = (((rawThrottle + 1.0) / 2.0) * 0.6 ) + 0.4;
     double gyroAngle = 0.0;
 
     RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(
@@ -57,6 +61,7 @@ public class DriveSubsystem extends SubsystemBase {
       gyroAngle);
   }
 
+  // Creates the method to allow the robot to drive backwards
   public void DriveBackwards() {
     RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(0.0,-0.5,0.0);
   }

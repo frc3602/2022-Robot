@@ -10,6 +10,7 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
+    // Creates the motors & controllers and sets the CAN IDs for each one
     WPI_TalonFX motorTop = new WPI_TalonFX(Constants.shooterMotorTopCANID);
     WPI_TalonFX motorBottom = new WPI_TalonFX(Constants.shooterMotorBottomCANID);
   }

@@ -17,6 +17,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_robotContainer = new RobotContainer();
 
+    // Sets the default command to the drive command
     RobotContainer.m_driveSubsystem.setDefaultCommand(RobotContainer.m_driveCommand);
   }
 

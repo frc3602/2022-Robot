@@ -10,6 +10,7 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
   public ClimberSubsystem() {
+    // Creates the motors & controllers and sets the CAN IDs for each one
     WPI_TalonFX supportLeft = new WPI_TalonFX(Constants.climbSupportLeftCANID);
     WPI_TalonFX armLeft = new WPI_TalonFX(Constants.climbArmLeftCANID);
     WPI_TalonFX supportRight = new WPI_TalonFX(Constants.climbSupportRightCANID);

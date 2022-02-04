@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class OI {
+    // Creates a new joystick and sets the port number
     public static Joystick joystick = new Joystick(Constants.joystickPort);
 
     OI() {

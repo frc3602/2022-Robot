@@ -18,7 +18,7 @@ public class DriveSubsystem extends SubsystemBase {
   public MecanumDrive mecanumDrive;
 
   public DriveSubsystem() {
-    // Creates the motor controllers and maps the CAN IDs for each one
+    // Creates the motors & controllers and sets the CAN IDs for each one
     WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.driveFrontLeftCANID);
     WPI_TalonFX backLeft = new WPI_TalonFX(Constants.driveBackLeftCANID);
     WPI_TalonFX frontRight = new WPI_TalonFX(Constants.driveFrontRightCANID);
@@ -31,6 +31,7 @@ public class DriveSubsystem extends SubsystemBase {
     // Creates a new mecanum drive and maps the motors to it
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
+    // Try-catch statement to see if navX communication is working
     try {
        ahrs = new AHRS(SPI.Port.kMXP);
     }
@@ -47,13 +48,14 @@ public class DriveSubsystem extends SubsystemBase {
     return ahrs.getAngle();
   }
 
-  // Creates the method to drive the mecanum drive
+  // Creates the method to drive the drive subsystem
   public void DriveCartesian() {
     // Sets up all the throttle stuff
     double rawThrottle = OI.joystick.getRawAxis(3) * -1.0;
     double throttle = (((rawThrottle + 1.0) / 2.0) * 0.6 ) + 0.4;
     double gyroAngle = 0.0;
 
+    // Sets up the cartesian drive for the drive subsystem
     RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(
       OI.joystick.getY() * throttle,
       OI.joystick.getX() * throttle,

@@ -10,6 +10,7 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
+    // Creates the motors & controllers and sets the CAN IDs for each one
     WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.intakeMotorCANID);
   }
 

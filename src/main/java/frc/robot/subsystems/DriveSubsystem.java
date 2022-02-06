@@ -14,7 +14,7 @@ import frc.robot.OI;
 import frc.robot.RobotContainer;
 
 public class DriveSubsystem extends SubsystemBase {
-  public AHRS ahrs;
+  public AHRS navX;
   public MecanumDrive mecanumDrive;
 
   public DriveSubsystem() {
@@ -28,12 +28,12 @@ public class DriveSubsystem extends SubsystemBase {
     frontRight.setInverted(true);
     backRight.setInverted(true);
 
-    // Creates a new mecanum drive and maps the motors to it
+    // Creates a new mecanum drive and sets the motors for it
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
     // Try-catch statement to see if navX communication is working
     try {
-       ahrs = new AHRS(SPI.Port.kMXP);
+      navX = new AHRS(SPI.Port.kMXP);
     }
     catch (RuntimeException ex) {
       System.out.println("Error instantiating navX-MXP:  " + ex.getMessage());
@@ -41,11 +41,11 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void ResetGyro() {
-    ahrs.reset();
+    navX.reset();
   }
 
   public double GetGyroAngle() {
-    return ahrs.getAngle();
+    return navX.getAngle();
   }
 
   // Creates the method to drive the drive subsystem

@@ -51,22 +51,21 @@ public class DriveSubsystem extends SubsystemBase {
   // Creates the method to drive the drive subsystem
   public void DriveCartesian() {
     // Sets up all the throttle stuff
-    double rawThrottle = OI.joystick.getRawAxis(3) * -1.0;
-    double throttle = (((rawThrottle + 1.0) / 2.0) * 0.6 ) + 0.4;
-    double gyroAngle = 0.0;
+    // double rawThrottle = OI.joystick.getRawAxis(3) * -1.0;
+    // double throttle = (((rawThrottle + 1.0) / 2.0) * 0.6 ) + 0.4;
+    // double gyroAngle = 0.0;
 
     // Sets up the cartesian drive for the drive subsystem
     RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(
-      OI.joystick.getY() * throttle,
-      OI.joystick.getX() * throttle,
-      OI.joystick.getZ() * throttle,
-      gyroAngle);
+      -OI.joystick.getY(),
+      OI.joystick.getX(),
+      OI.joystick.getZ());
   }
 
   // Creates the method to allow the robot to drive backwards
-  public void DriveBackwards() {
-    RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(0.0,-0.5,0.0);
-  }
+  // public void DriveBackwards() {
+  //   RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(0.0,-0.5,0.0);
+  // }
 
   @Override
   public void periodic() {

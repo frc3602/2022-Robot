@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.kauailabs.navx.frc.AHRS;
@@ -20,16 +21,16 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
     // Creates the motors & controllers and sets the CAN IDs for each one
     WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.driveFrontLeftCANID);
-    WPI_TalonFX backLeft = new WPI_TalonFX(Constants.driveBackLeftCANID);
+    WPI_TalonFX rearLeft = new WPI_TalonFX(Constants.driveBackLeftCANID);
     WPI_TalonFX frontRight = new WPI_TalonFX(Constants.driveFrontRightCANID);
-    WPI_TalonFX backRight = new WPI_TalonFX(Constants.driveBackRightCANID);
+    WPI_TalonFX rearRight = new WPI_TalonFX(Constants.driveBackRightCANID);
 
     // Invert the right side motors.
     frontRight.setInverted(true);
-    backRight.setInverted(true);
-
+    rearRight.setInverted(true);
+    
     // Creates a new mecanum drive and sets the motors for it
-    mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+    mecanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
 
     // Try-catch statement to see if navX communication is working
     try {

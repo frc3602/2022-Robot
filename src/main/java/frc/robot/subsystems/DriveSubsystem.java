@@ -31,28 +31,27 @@ public class DriveSubsystem extends SubsystemBase {
     // Invert the right side motors.
     frontRight.setInverted(true);
     backRight.setInverted(true);
-    
+
     // Creates a new mecanum drive and sets the motors for it
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
     // Initialize NavX and check to make sure its working
     try {
       navX = new AHRS(SPI.Port.kMXP);
-    }
-    catch (RuntimeException ex) {
+    } catch (RuntimeException ex) {
       System.out.println("Error instantiating navX-MXP:  " + ex.getMessage());
     }
   }
-  
-/*
-  // Smart Dashboard Information
-  public void LogDataToSmartDashboard() {
-    SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);
-    SmartDashboard.putNumber("Back Left RPM reading:", backLeftRPM);
-    SmartDashboard.putNumber("Front Right RPM reading:", frontRightRPM);
-    SmartDashboard.putNumber("Back Right RPM reading:", backRightRPM);
-  }
-*/
+
+  /*
+   * // Smart Dashboard Information
+   * public void LogDataToSmartDashboard() {
+   * SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);
+   * SmartDashboard.putNumber("Back Left RPM reading:", backLeftRPM);
+   * SmartDashboard.putNumber("Front Right RPM reading:", frontRightRPM);
+   * SmartDashboard.putNumber("Back Right RPM reading:", backRightRPM);
+   * }
+   */
 
   // Gets current angle of the robot as a double
   public double GetGyroAngle() {
@@ -72,19 +71,19 @@ public class DriveSubsystem extends SubsystemBase {
     // double gyroAngle = 0.0;
 
     // Sets up the cartesian drive for the drive subsystem
-    RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(
-      -OI.joystick.getY(),
-      OI.joystick.getX(),
-      OI.joystick.getZ());
+    RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(
+        -OI.joystick.getY(),
+        OI.joystick.getX(),
+        OI.joystick.getZ());
   }
 
-  // Creates the method to allow the robot to drive backwards
+  // Creates the method to allow the robot to drive backwards at a slower speed
   // public void DriveBackwards() {
-  //   RobotContainer.m_driveSubsystem.mecanumDrive.driveCartesian(0.0,-0.5,0.0);
+  // RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(0.0,-0.5,0.0);
   // }
 
   @Override
   public void periodic() {
-
+    
   }
 }

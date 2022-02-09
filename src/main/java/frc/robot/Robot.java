@@ -11,14 +11,15 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  // Creates a robot container to contain all of the subsystems and commands
+  private RobotContainer robotContainer;
 
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer();
+    robotContainer = new RobotContainer();
 
     // Sets the default command to the drive command
-    RobotContainer.m_driveSubsystem.setDefaultCommand(RobotContainer.m_driveCommand);
+    RobotContainer.driveSubsystem.setDefaultCommand(RobotContainer.driveCommand);
   }
 
   @Override
@@ -34,7 +35,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

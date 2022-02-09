@@ -21,19 +21,19 @@ import frc.robot.commands.ClimbPivot;
 import frc.robot.commands.ClimbControl;
 
 public class RobotContainer {
-  public static DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  public static ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  public static ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  public static IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  public static LimelightSubsystem m_visionSubsystem = new LimelightSubsystem();
-  public static IndexSubsystem m_indexSubsystem = new IndexSubsystem();
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public static ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+  public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public static LimelightSubsystem visionSubsystem = new LimelightSubsystem();
+  public static IndexSubsystem indexSubsystem = new IndexSubsystem();
 
-  public static DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
-  public static DriveBackwardsCommand m_driveBackwardsCommand = new DriveBackwardsCommand(m_driveSubsystem);
-  public static ClimbExtend m_climbExtend = new ClimbExtend(m_climberSubsystem);
-  public static ClimbRetract m_climbRetract = new ClimbRetract(m_climberSubsystem);
-  public static ClimbPivot m_climbPivot = new ClimbPivot(m_climberSubsystem);
-  public static ClimbControl m_climbControl = new ClimbControl(m_climberSubsystem);
+  public static DriveCommand driveCommand = new DriveCommand(driveSubsystem);
+  public static DriveBackwardsCommand driveBackwardsCommand = new DriveBackwardsCommand(driveSubsystem);
+  public static ClimbExtend climbExtend = new ClimbExtend(climberSubsystem);
+  public static ClimbRetract climbRetract = new ClimbRetract(climberSubsystem);
+  public static ClimbPivot climbPivot = new ClimbPivot(climberSubsystem);
+  public static ClimbControl climbControl = new ClimbControl(climberSubsystem);
 
   public static OI m_oi;
 
@@ -44,6 +44,6 @@ public class RobotContainer {
   private void configureButtonBindings() {}
 
   public Command getAutonomousCommand() {
-    return m_driveCommand;
+    return driveCommand;
   }
 }

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class DriveCommand extends CommandBase {
 
   public DriveCommand(DriveSubsystem subsystem) {
-    addRequirements(RobotContainer.m_driveSubsystem);
+    addRequirements(RobotContainer.driveSubsystem);
   }
 
   @Override
@@ -19,7 +19,7 @@ public class DriveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.m_driveSubsystem.DriveCartesian();
+    RobotContainer.driveSubsystem.DriveCartesian();
   }
 
   @Override

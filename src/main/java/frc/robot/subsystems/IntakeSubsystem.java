@@ -19,9 +19,4 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
 
   }
-
-  @Override
-  public void simulationPeriodic() {
-
-  }
 }

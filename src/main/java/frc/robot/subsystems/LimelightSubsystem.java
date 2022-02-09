@@ -15,9 +15,4 @@ public class LimelightSubsystem extends SubsystemBase {
   public void periodic() {
 
   }
-
-  @Override
-  public void simulationPeriodic() {
-
-  }
 }

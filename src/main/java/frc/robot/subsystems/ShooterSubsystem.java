@@ -19,9 +19,4 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
 
   }
-
-  @Override
-  public void simulationPeriodic() {
-
-  }
 }

@@ -20,9 +20,4 @@ public class IndexSubsystem extends SubsystemBase {
   public void periodic() {
 
   }
-
-  @Override
-  public void simulationPeriodic() {
-
-  }
 }

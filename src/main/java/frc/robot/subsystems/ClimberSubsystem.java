@@ -21,9 +21,4 @@ public class ClimberSubsystem extends SubsystemBase {
   public void periodic() {
 
   }
-
-  @Override
-  public void simulationPeriodic() {
-
-  }
 }

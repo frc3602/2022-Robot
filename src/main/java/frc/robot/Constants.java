@@ -8,26 +8,26 @@ public final class Constants {
   // Drivetrain CAN IDs
   public static int driveFrontLeftCANID = 1;
   public static int driveBackLeftCANID = 0;
-  public static int driveFrontRightCANID = 3;
-  public static int driveBackRightCANID = 4;
+  public static int driveFrontRightCANID = 2;
+  public static int driveBackRightCANID = 3;
 
   // Climber CAN IDs
-  public static int climbSupportLeftCANID = 5;
-  public static int climbArmLeftCANID = 6;
-  public static int climbSupportRightCANID = 7;
-  public static int climbArmRightCANID = 8;
+  public static int climbSupportLeftCANID = 4;
+  public static int climbArmLeftCANID = 5;
+  public static int climbSupportRightCANID = 6;
+  public static int climbArmRightCANID = 7;
 
   // Shooter CAN IDs
-  public static int shooterMotorTopCANID = 9;
-  public static int shooterMotorBottomCANID = 10;
+  public static int shooterMotorTopCANID = 8;
+  public static int shooterMotorBottomCANID = 9;
 
   // Intake CAN IDs
-  public static int intakeMotorCANID = 11;
+  public static int intakeMotorCANID = 10;
 
   // Index CAN IDs
-  public static int indexMotorTopCANID = 12;
-  public static int indexMotorBottomCANID = 13;
-  public static int indexMotorExtraCANID = 14;
+  public static int indexMotorTopCANID = 11;
+  public static int indexMotorBottomCANID = 12;
+  public static int indexMotorExtraCANID = 13;
 
   //Controller
   public static int joystickPort = 0;

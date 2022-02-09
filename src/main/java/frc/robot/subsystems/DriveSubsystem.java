@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -39,6 +40,15 @@ public class DriveSubsystem extends SubsystemBase {
       System.out.println("Error instantiating navX-MXP:  " + ex.getMessage());
     }
   }
+  
+/*
+  public void LogDataToSmartDashboard() {
+    SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);
+    SmartDashboard.putNumber("Back Left RPM reading:", backLeftRPM);
+    SmartDashboard.putNumber("Front Right RPM reading:", frontRightRPM);
+    SmartDashboard.putNumber("Back Right RPM reading:", backRightRPM);
+  }
+*/
 
   public void ResetGyro() {
     navX.reset();

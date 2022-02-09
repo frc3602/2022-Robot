@@ -22,13 +22,14 @@ public final class Constants {
   public static int shooterMotorBottomCANID = 9;
 
   // Intake CAN IDs
-  public static int intakeMotorCANID = 10;
+  public static int intakeSpinMotorCANID = 10;
+  public static int intakePivotMotorCANID = 11;
 
   // Index CAN IDs
-  public static int indexMotorTopCANID = 11;
-  public static int indexMotorBottomCANID = 12;
-  public static int indexMotorExtraCANID = 13;
+  public static int indexMotorTopCANID = 12;
+  public static int indexMotorBottomCANID = 13;
+  public static int indexMotorExtraCANID = 14;
 
-  //Controller
+  // Controller
   public static int joystickPort = 0;
 }

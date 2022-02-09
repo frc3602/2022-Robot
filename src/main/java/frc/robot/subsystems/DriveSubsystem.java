@@ -15,8 +15,11 @@ import frc.robot.OI;
 import frc.robot.RobotContainer;
 
 public class DriveSubsystem extends SubsystemBase {
-  public AHRS navX;
-  public MecanumDrive mecanumDrive;
+  // NavX for Gyro
+  private AHRS navX;
+
+  // MecanumDrive Information
+  private MecanumDrive mecanumDrive;
 
   public DriveSubsystem() {
     // Creates the motors & controllers and sets the CAN IDs for each one
@@ -32,7 +35,7 @@ public class DriveSubsystem extends SubsystemBase {
     // Creates a new mecanum drive and sets the motors for it
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
-    // Try-catch statement to see if navX communication is working
+    // Initialize NavX and check to make sure its working
     try {
       navX = new AHRS(SPI.Port.kMXP);
     }
@@ -42,6 +45,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
   
 /*
+  // Smart Dashboard Information
   public void LogDataToSmartDashboard() {
     SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);
     SmartDashboard.putNumber("Back Left RPM reading:", backLeftRPM);
@@ -50,12 +54,14 @@ public class DriveSubsystem extends SubsystemBase {
   }
 */
 
-  public void ResetGyro() {
-    navX.reset();
-  }
-
+  // Gets current angle of the robot as a double
   public double GetGyroAngle() {
     return navX.getAngle();
+  }
+
+  // Resets the NavX
+  public void ResetGyro() {
+    navX.reset();
   }
 
   // Creates the method to drive the drive subsystem
@@ -81,9 +87,5 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
 
   }
-
-  @Override
-  public void simulationPeriodic() {
-
-  }
+  
 }

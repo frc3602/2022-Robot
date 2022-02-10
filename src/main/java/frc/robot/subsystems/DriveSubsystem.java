@@ -21,6 +21,9 @@ public class DriveSubsystem extends SubsystemBase {
   // MecanumDrive Information
   private MecanumDrive mecanumDrive;
 
+  // Field Orientation Information
+  private boolean orientField = false;
+
   public DriveSubsystem() {
     // Creates the motors & controllers and sets the CAN IDs for each one
     WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.driveFrontLeftCANID);
@@ -43,15 +46,17 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
-  /*
-   * // Smart Dashboard Information
-   * public void LogDataToSmartDashboard() {
-   * SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);
-   * SmartDashboard.putNumber("Back Left RPM reading:", backLeftRPM);
-   * SmartDashboard.putNumber("Front Right RPM reading:", frontRightRPM);
-   * SmartDashboard.putNumber("Back Right RPM reading:", backRightRPM);
-   * }
-   */
+  // Smart Dashboard Information
+  public void LogDataToSmartDashboard() {
+    /*
+     * SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);
+     * SmartDashboard.putNumber("Back Left RPM reading:", backLeftRPM);
+     * SmartDashboard.putNumber("Front Right RPM reading:", frontRightRPM);
+     * SmartDashboard.putNumber("Back Right RPM reading:", backRightRPM);
+     */
+
+    SmartDashboard.putBoolean("orientField", orientField);
+  }
 
   // Gets current angle of the robot as a double
   public double GetGyroAngle() {
@@ -63,18 +68,25 @@ public class DriveSubsystem extends SubsystemBase {
     navX.reset();
   }
 
+  // Toggles Field Orentation
+  public void ToggleOrientation() {
+    orientField = !orientField;
+  }
+
   // Creates the method to drive the drive subsystem
   public void DriveCartesian() {
-    // Sets up all the throttle stuff
-    // double rawThrottle = OI.joystick.getRawAxis(3) * -1.0;
-    // double throttle = (((rawThrottle + 1.0) / 2.0) * 0.6 ) + 0.4;
-    // double gyroAngle = 0.0;
+    double gyroAngle = 0.0;
+
+    if (orientField) {
+      gyroAngle = GetGyroAngle();
+    }
 
     // Sets up the cartesian drive for the drive subsystem
     RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(
         -OI.joystick.getY(),
         OI.joystick.getX(),
-        OI.joystick.getZ());
+        OI.joystick.getZ(),
+        gyroAngle);
   }
 
   // Creates the method to allow the robot to drive backwards at a slower speed
@@ -84,6 +96,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
+
   }
 }

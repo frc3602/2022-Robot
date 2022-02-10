@@ -13,6 +13,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 
+import frc.robot.commands.DriveOrientation;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveBackwardsCommand;
 import frc.robot.commands.ClimbExtend;
@@ -28,6 +29,7 @@ public class RobotContainer {
   public static LimelightSubsystem visionSubsystem = new LimelightSubsystem();
   public static IndexSubsystem indexSubsystem = new IndexSubsystem();
 
+  public static DriveOrientation driveOrientation = new DriveOrientation(driveSubsystem);
   public static DriveCommand driveCommand = new DriveCommand(driveSubsystem);
   public static DriveBackwardsCommand driveBackwardsCommand = new DriveBackwardsCommand(driveSubsystem);
   public static ClimbExtend climbExtend = new ClimbExtend(climberSubsystem);

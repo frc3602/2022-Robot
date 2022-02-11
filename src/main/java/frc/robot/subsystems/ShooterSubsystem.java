@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -11,12 +13,14 @@ import frc.robot.Constants;
 public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
     // Creates the motors & controllers and sets the CAN IDs for each one
-    WPI_TalonFX motorTop = new WPI_TalonFX(Constants.shooterMotorTopCANID);
-    WPI_TalonFX motorBottom = new WPI_TalonFX(Constants.shooterMotorBottomCANID);
+    // WPI_TalonFX motorTop = new WPI_TalonFX(Constants.shooterMotorTopCANID);
+    // WPI_TalonFX motorBottom = new WPI_TalonFX(Constants.shooterMotorBottomCANID);
+
+    CANSparkMax motorTop = new CANSparkMax(Constants.shooterMotorTopCANID, MotorType.kBrushless);
+    CANSparkMax motorBottom = new CANSparkMax(Constants.shooterMotorBottomCANID, MotorType.kBrushless);
   }
 
   @Override
   public void periodic() {
-
   }
 }

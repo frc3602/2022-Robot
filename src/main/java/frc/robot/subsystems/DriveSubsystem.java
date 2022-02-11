@@ -85,8 +85,7 @@ public class DriveSubsystem extends SubsystemBase {
     RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(
         -OI.joystick.getY(),
         OI.joystick.getX(),
-        OI.joystick.getZ(),
-        gyroAngle);
+        OI.joystick.getZ());
   }
 
   // Creates the method to allow the robot to drive backwards at a slower speed

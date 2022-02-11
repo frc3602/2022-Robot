@@ -18,6 +18,5 @@ public class IndexSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-
   }
 }

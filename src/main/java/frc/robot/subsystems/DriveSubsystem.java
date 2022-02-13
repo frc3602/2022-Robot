@@ -88,13 +88,6 @@ public class DriveSubsystem extends SubsystemBase {
         OI.joystick.getZ());
   }
 
-  // Creates the method to allow the robot to drive backwards at a slower speed
-  /*
-   * public void DriveBackwards() {
-   * RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(0.0,-0.5,0.0);
-   * }
-   */
-
   @Override
   public void periodic() {
   }

@@ -15,7 +15,6 @@ import frc.robot.subsystems.IndexSubsystem;
 
 import frc.robot.commands.DriveOrientation;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.DriveBackwardsCommand;
 import frc.robot.commands.ClimbExtend;
 import frc.robot.commands.ClimbRetract;
 import frc.robot.commands.ClimbPivot;
@@ -31,7 +30,6 @@ public class RobotContainer {
 
   public static DriveOrientation driveOrientation = new DriveOrientation(driveSubsystem);
   public static DriveCommand driveCommand = new DriveCommand(driveSubsystem);
-  public static DriveBackwardsCommand driveBackwardsCommand = new DriveBackwardsCommand(driveSubsystem);
   public static ClimbExtend climbExtend = new ClimbExtend(climberSubsystem);
   public static ClimbRetract climbRetract = new ClimbRetract(climberSubsystem);
   public static ClimbPivot climbPivot = new ClimbPivot(climberSubsystem);

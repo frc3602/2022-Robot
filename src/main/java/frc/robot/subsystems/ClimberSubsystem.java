@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -15,6 +16,9 @@ public class ClimberSubsystem extends SubsystemBase {
     WPI_TalonFX armLeft = new WPI_TalonFX(Constants.climbArmLeftCANID);
     WPI_TalonFX supportRight = new WPI_TalonFX(Constants.climbSupportRightCANID);
     WPI_TalonFX armRight = new WPI_TalonFX(Constants.climbArmRightCANID);
+
+    armLeft.setNeutralMode(NeutralMode.Brake);
+    armRight.setNeutralMode(NeutralMode.Brake);
   }
 
   @Override

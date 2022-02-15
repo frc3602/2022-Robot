@@ -21,11 +21,6 @@ public class DriveSubsystem extends SubsystemBase {
   // MecanumDrive Information
   private MecanumDrive mecanumDrive;
 
-  /*
-   * // Field Orientation Information
-   * private boolean orientField = false;
-   */
-
   public DriveSubsystem() {
     // Creates the motors & controllers and sets the CAN IDs for each one
     WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.driveFrontLeftCANID);
@@ -56,8 +51,6 @@ public class DriveSubsystem extends SubsystemBase {
      * SmartDashboard.putNumber("Front Right RPM reading:", frontRightRPM);
      * SmartDashboard.putNumber("Back Right RPM reading:", backRightRPM);
      */
-
-    // SmartDashboard.putBoolean("orientField", orientField);
   }
 
   // Gets current angle of the robot as a double
@@ -70,29 +63,13 @@ public class DriveSubsystem extends SubsystemBase {
     navX.reset();
   }
 
-  /*
-   * // Toggles Field Orentation
-   * public void ToggleOrientation() {
-   * orientField = !orientField;
-   * }
-   */
-
   // Creates the method to drive the drive subsystem
   public void DriveCartesian() {
-    // double gyroAngle = 0.0;
-
-    /*
-     * if (orientField) {
-     * gyroAngle = GetGyroAngle();
-     * }
-     */
-
     // Sets up the cartesian drive for the drive subsystem
     RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(
         -OI.joystick.getY(),
         OI.joystick.getX(),
-        OI.joystick.getZ(),
-        navX.getAngle());
+        OI.joystick.getZ());
   }
 
   @Override

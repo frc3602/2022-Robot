@@ -21,6 +21,12 @@ public class ClimberSubsystem extends SubsystemBase {
     armRight.setNeutralMode(NeutralMode.Brake);
   }
 
+  public void ClimbExtend() {
+  }
+
+  public void ClimbRetract() {
+  }
+
   @Override
   public void periodic() {
   }

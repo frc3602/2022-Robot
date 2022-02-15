@@ -7,18 +7,8 @@ package frc.robot;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.IndexSubsystem;
-import frc.robot.commands.DriveOrientation;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.ClimbExtend;
-import frc.robot.commands.ClimbRetract;
-import frc.robot.commands.ClimbPivot;
-import frc.robot.commands.ClimbControl;
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 import frc.robot.OI;
 
 public class RobotContainer {

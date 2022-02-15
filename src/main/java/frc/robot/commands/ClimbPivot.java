@@ -4,8 +4,10 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ClimberSubsystem;
+// WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
+import frc.robot.subsystems.ClimberSubsystem;
 
 public class ClimbPivot extends CommandBase {
   private final ClimberSubsystem m_climberSubsystem;

@@ -4,8 +4,12 @@
 
 package frc.robot.subsystems;
 
+// Phoenix Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+// WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.Constants.Index;
 
 public class IndexSubsystem extends SubsystemBase {

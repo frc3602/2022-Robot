@@ -4,9 +4,11 @@
 
 package frc.robot.commands;
 
+// WPILib Imports
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClimbExtend extends CommandBase {
   private final ClimberSubsystem climberSubsystem;

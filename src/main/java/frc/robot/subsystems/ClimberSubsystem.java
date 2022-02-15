@@ -4,10 +4,14 @@
 
 package frc.robot.subsystems;
 
+// Phoenix Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+// WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.Constants.Climber;
 
 public class ClimberSubsystem extends SubsystemBase {

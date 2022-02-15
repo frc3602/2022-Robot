@@ -6,13 +6,13 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.Intake;
 
 public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
     // Creates the motors & controllers and sets the CAN IDs for each one
-    WPI_TalonFX intakeSpinMotor = new WPI_TalonFX(Constants.intakeSpinMotorCANID);
-    WPI_TalonFX intakePivotMotor = new WPI_TalonFX(Constants.intakePivotMotorCANID);
+    WPI_TalonFX intakeSpinMotor = new WPI_TalonFX(Intake.intakeSpinMotorCANID);
+    WPI_TalonFX intakePivotMotor = new WPI_TalonFX(Intake.intakePivotMotorCANID);
   }
 
   @Override

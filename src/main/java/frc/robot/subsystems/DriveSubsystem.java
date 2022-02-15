@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
-import frc.robot.Constants;
+import frc.robot.Constants.Drivetrain;
 import frc.robot.OI;
 import frc.robot.RobotContainer;
 
@@ -23,10 +23,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public DriveSubsystem() {
     // Creates the motors & controllers and sets the CAN IDs for each one
-    WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.driveFrontLeftCANID);
-    WPI_TalonFX backLeft = new WPI_TalonFX(Constants.driveBackLeftCANID);
-    WPI_TalonFX frontRight = new WPI_TalonFX(Constants.driveFrontRightCANID);
-    WPI_TalonFX backRight = new WPI_TalonFX(Constants.driveBackRightCANID);
+    WPI_TalonFX frontLeft = new WPI_TalonFX(Drivetrain.driveFrontLeftCANID);
+    WPI_TalonFX backLeft = new WPI_TalonFX(Drivetrain.driveBackLeftCANID);
+    WPI_TalonFX frontRight = new WPI_TalonFX(Drivetrain.driveFrontRightCANID);
+    WPI_TalonFX backRight = new WPI_TalonFX(Drivetrain.driveBackRightCANID);
 
     // Invert the right side motors.
     frontRight.setInverted(true);

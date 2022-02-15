@@ -4,14 +4,15 @@
 
 package frc.robot.commands;
 
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClimbRetract extends CommandBase {
-  private final ClimberSubsystem m_climberSubsystem;
+  private final ClimberSubsystem climberSubsystem;
 
   public ClimbRetract(ClimberSubsystem subsystem) {
-    m_climberSubsystem = subsystem;
+    climberSubsystem = subsystem;
     addRequirements(subsystem);
   }
 
@@ -21,6 +22,7 @@ public class ClimbRetract extends CommandBase {
 
   @Override
   public void execute() {
+    RobotContainer.climberSubsystem.ClimberRetract();
   }
 
   @Override

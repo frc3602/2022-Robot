@@ -8,28 +8,28 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.Climber;
 
 public class ClimberSubsystem extends SubsystemBase {
-  public ClimberSubsystem() {
-    // Creates the motors & controllers and sets the CAN IDs for each one
-    WPI_TalonFX supportLeft = new WPI_TalonFX(Constants.climbSupportLeftCANID);
-    WPI_TalonFX armLeft = new WPI_TalonFX(Constants.climbArmLeftCANID);
-    WPI_TalonFX supportRight = new WPI_TalonFX(Constants.climbSupportRightCANID);
-    WPI_TalonFX armRight = new WPI_TalonFX(Constants.climbArmRightCANID);
+  // Creates the motors & controllers and sets the CAN IDs for each one
+  WPI_TalonFX supportLeft = new WPI_TalonFX(Climber.climbSupportLeftCANID);
+  WPI_TalonFX armLeft = new WPI_TalonFX(Climber.climbArmLeftCANID);
+  WPI_TalonFX supportRight = new WPI_TalonFX(Climber.climbSupportRightCANID);
+  WPI_TalonFX armRight = new WPI_TalonFX(Climber.climbArmRightCANID);
 
+  public ClimberSubsystem() {
     armLeft.setNeutralMode(NeutralMode.Brake);
     armRight.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void ClimbExtend() {
-    armLeft.set(ControlMode.PercentOutput, -0);
-    armRight.set(ControlMode.PercentOutput, -0);
+  public void ClimberExtend() {
+    armLeft.set(ControlMode.PercentOutput, -0.25);
+    armRight.set(ControlMode.PercentOutput, -0.25);
   }
 
-  public void ClimbRetract() {
-    armLeft.set(ControlMode.PercentOutput, 0);
-    armRight.set(ControlMode.PercentOutput, 0);
+  public void ClimberRetract() {
+    armLeft.set(ControlMode.PercentOutput, 0.25);
+    armRight.set(ControlMode.PercentOutput, 0.25);
   }
 
   @Override

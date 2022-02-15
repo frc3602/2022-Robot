@@ -4,32 +4,49 @@
 
 package frc.robot;
 
-public final class Constants {
-  // Drivetrain CAN IDs
-  public static int driveFrontLeftCANID = 1;
-  public static int driveBackLeftCANID = 0;
-  public static int driveFrontRightCANID = 2;
-  public static int driveBackRightCANID = 3;
+public interface Constants {
 
-  // Climber CAN IDs
-  public static int climbSupportLeftCANID = 4;
-  public static int climbArmLeftCANID = 5;
-  public static int climbSupportRightCANID = 6;
-  public static int climbArmRightCANID = 7;
+  public interface Drivetrain {
+    // Drivetrain CAN IDs
+    int driveFrontLeftCANID = 1;
+    int driveBackLeftCANID = 0;
+    int driveFrontRightCANID = 2;
+    int driveBackRightCANID = 3;
+  }
 
-  // Shooter CAN IDs
-  public static int shooterMotorTopCANID = 8;
-  public static int shooterMotorBottomCANID = 9;
+  public interface Climber {
+    // Climber CAN IDs
+    int climbSupportLeftCANID = 4;
+    int climbArmLeftCANID = 5;
+    int climbSupportRightCANID = 6;
+    int climbArmRightCANID = 7;
+  }
 
-  // Intake CAN IDs
-  public static int intakeSpinMotorCANID = 10;
-  public static int intakePivotMotorCANID = 11;
+  public interface Shooter {
+    // Shooter CAN IDs
+    int shooterMotorTopCANID = 8;
+    int shooterMotorBottomCANID = 9;
+  }
 
-  // Index CAN IDs
-  public static int indexMotorTopCANID = 12;
-  public static int indexMotorBottomCANID = 13;
-  public static int indexMotorExtraCANID = 14;
+  public interface Intake {
+    // Intake CAN IDs
+    int intakeSpinMotorCANID = 10;
+    int intakePivotMotorCANID = 11;
+  }
 
-  // Controller
-  public static int joystickPort = 0;
+  public interface Index {
+    // Index CAN IDs
+    int indexMotorTopCANID = 12;
+    int indexMotorBottomCANID = 13;
+    int indexMotorExtraCANID = 14;
+  }
+
+  public interface Controller {
+    // Controller
+    int joystickPort = 0;
+
+    int climberExtendButton = 1;
+    int climberRetractButton = 2;
+  }
+
 }

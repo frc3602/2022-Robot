@@ -43,7 +43,9 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    // OI.climberRetractButton.whileHeld(new ClimbRetract());
+    // Climber buttons
+    OI.climberRetractButton.whileHeld(new ClimbRetract(climberSubsystem));
+    OI.climberExtendButton.whileHeld(new ClimbExtend(climberSubsystem));
   }
 
   public Command getAutonomousCommand() {

@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -22,9 +23,13 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void ClimbExtend() {
+    armLeft.set(ControlMode.PercentOutput, -0);
+    armRight.set(ControlMode.PercentOutput, -0);
   }
 
   public void ClimbRetract() {
+    armLeft.set(ControlMode.PercentOutput, 0);
+    armRight.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

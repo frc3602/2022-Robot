@@ -42,7 +42,7 @@ public interface Constants {
   }
 
   public interface Controller {
-    // Controller
+    // Controller Port IDs
     int joystickPort = 0;
 
     int climberExtendButton = 1;

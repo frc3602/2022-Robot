@@ -6,21 +6,25 @@ package frc.robot;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Axis;
 
 import frc.robot.Constants.Controller;
 
 public class OI {
-    // Creates a new joystick and sets the port number
+    // Creates a new joystick and a xbox controller and sets the port number
     public static Joystick joystick = new Joystick(Controller.joystickPort);
-    public static XboxController xboxController = new XboxController(Controller.xboxPort);
+    public static XboxController xboxController = new XboxController(Controller.xboxControllerPort);
 
-    // Creates buttons on the joystick
+    // Creates all the axes for the xbox controller
+    public static POVButton povUp = new POVButton(xboxController, Controller.povUp);
+    public static POVButton povRight = new POVButton(xboxController, Controller.povRight);
+    public static POVButton povLeft = new POVButton(xboxController, Controller.povLeft);
+    public static POVButton povDown = new POVButton(xboxController, Controller.povDown);
 
-    // Xbox Controller buttons and what not
-    public static XboxController.Axis climberExtendLeftAxis = new XboxController.Axis(xboxController, Controller.climberExtendLeftAxis);
-    public static XboxController.Axis climberRetractLeftAxis = new XboxController.Axis(xboxController, Controller.climberRetractButton);
+    // Binds the commands to the buttons and stuff
+    OI() {
+        povUp.whenPressed(RobotContainer.climbExtend);
+        povDown.whenPressed(RobotContainer.climbRetract);
+    }
 }

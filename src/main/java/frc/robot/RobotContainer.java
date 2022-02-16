@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
-import frc.robot.OI;
 
 public class RobotContainer {
   // Subsystems
@@ -28,16 +27,14 @@ public class RobotContainer {
   public static ClimbPivot climbPivot = new ClimbPivot(climberSubsystem);
   public static ClimbControl climbControl = new ClimbControl(climberSubsystem);
 
-  public static OI m_oi;
+  // Operator interfaces
+  public static OI oi;
 
   public RobotContainer() {
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
-    // Climber buttons
-    OI.climberRetractButton.whileHeld(new ClimbRetract(climberSubsystem));
-    OI.climberExtendButton.whileHeld(new ClimbExtend(climberSubsystem));
   }
 
   public Command getAutonomousCommand() {

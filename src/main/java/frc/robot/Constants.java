@@ -44,14 +44,13 @@ public interface Constants {
   public interface Controller {
     // Controller Port IDs
     int joystickPort = 0;
-    int xboxPort = 1;
+    int xboxControllerPort = 1;
 
-    //Axis on the Xbox controller
-    int climberExtendLeftAxis = -1;
-    int climberRetractLeftAxis = 1;
-    
-    //Buttons on Joystick
-
+    // Xbox controller axes
+    int povUp = 0;
+    int povRight = 90;
+    int povLeft = 270;
+    int povDown = 180;
   }
 
 }

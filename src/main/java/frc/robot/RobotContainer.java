@@ -22,8 +22,10 @@ public class RobotContainer {
   // Commands
   public static DriveOrientation driveOrientation = new DriveOrientation(driveSubsystem);
   public static DriveCommand driveCommand = new DriveCommand(driveSubsystem);
-  public static ClimbExtend climbExtend = new ClimbExtend(climberSubsystem);
-  public static ClimbRetract climbRetract = new ClimbRetract(climberSubsystem);
+  public static ClimbOneExtend climbOneExtend = new ClimbOneExtend(climberSubsystem);
+  public static ClimbOneRetract climbOneRetract = new ClimbOneRetract(climberSubsystem);
+  public static ClimbTwoExtend climbTwoExtend = new ClimbTwoExtend(climberSubsystem);
+  public static ClimbTwoRetract climbTwoRetract = new ClimbTwoRetract(climberSubsystem);
   public static ClimbPivot climbPivot = new ClimbPivot(climberSubsystem);
 
   // Operator interfaces

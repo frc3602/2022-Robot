@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ClimbRetract extends CommandBase {
+public class ClimbTwoRetract extends CommandBase {
 
-  public ClimbRetract(ClimberSubsystem subsystem) {
+  public ClimbTwoRetract(ClimberSubsystem subsystem) {
     addRequirements(RobotContainer.climberSubsystem);
   }
 
@@ -22,7 +22,7 @@ public class ClimbRetract extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.climberSubsystem.ClimberRetract();
+    RobotContainer.climberSubsystem.ClimberTwoRetract();
   }
 
   @Override

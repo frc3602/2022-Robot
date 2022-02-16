@@ -24,7 +24,7 @@ public class OI {
 
     // Binds the commands to the buttons and stuff
     OI() {
-        povUp.whenPressed(RobotContainer.climbExtend);
-        povDown.whenPressed(RobotContainer.climbRetract);
+        povUp.whenPressed(RobotContainer.climbOneExtend);
+        povDown.whenPressed(RobotContainer.climbOneRetract);
     }
 }

@@ -16,29 +16,34 @@ public interface Constants {
 
   public interface Climber {
     // Climber CAN IDs
-    int climbSupportLeftCANID = 4;
-    int climbArmLeftCANID = 5;
-    int climbSupportRightCANID = 6;
-    int climbArmRightCANID = 7;
+    int climbSupportOneLeftCANID = 4;
+    int climbArmOneLeftCANID = 5;
+    int climbSupportOneRightCANID = 6;
+    int climbArmOneRightCANID = 7;
+    
+    int climbSupportTwoLeftCANID = 8;
+    int climbArmTwoLeftCANID = 9;
+    int climbSupportTwoRightCANID = 10;
+    int climbArmTwoRightCANID = 11;
   }
 
   public interface Shooter {
     // Shooter CAN IDs
-    int shooterMotorTopCANID = 8;
-    int shooterMotorBottomCANID = 9;
+    int shooterMotorTopCANID = 12;
+    int shooterMotorBottomCANID = 13;
   }
 
   public interface Intake {
     // Intake CAN IDs
-    int intakeSpinMotorCANID = 10;
-    int intakePivotMotorCANID = 11;
+    int intakeSpinMotorCANID = 14;
+    int intakePivotMotorCANID = 15;
   }
 
   public interface Index {
     // Index CAN IDs
-    int indexMotorTopCANID = 12;
-    int indexMotorBottomCANID = 13;
-    int indexMotorExtraCANID = 14;
+    int indexMotorTopCANID = 16;
+    int indexMotorBottomCANID = 17;
+    int indexMotorExtraCANID = 18;
   }
 
   public interface Controller {

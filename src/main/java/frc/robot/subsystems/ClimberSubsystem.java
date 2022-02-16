@@ -16,25 +16,43 @@ import frc.robot.Constants.Climber;
 
 public class ClimberSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one
-  WPI_TalonFX supportLeft = new WPI_TalonFX(Climber.climbSupportLeftCANID);
-  WPI_TalonFX armLeft = new WPI_TalonFX(Climber.climbArmLeftCANID);
-  WPI_TalonFX supportRight = new WPI_TalonFX(Climber.climbSupportRightCANID);
-  WPI_TalonFX armRight = new WPI_TalonFX(Climber.climbArmRightCANID);
+  WPI_TalonFX supportOneLeft = new WPI_TalonFX(Climber.climbSupportOneLeftCANID);
+  WPI_TalonFX armOneLeft = new WPI_TalonFX(Climber.climbArmOneLeftCANID);
+  WPI_TalonFX supportOneRight = new WPI_TalonFX(Climber.climbSupportOneRightCANID);
+  WPI_TalonFX armOneRight = new WPI_TalonFX(Climber.climbArmOneRightCANID);
+
+  WPI_TalonFX supportTwoLeft = new WPI_TalonFX(Climber.climbSupportTwoLeftCANID);
+  WPI_TalonFX armTwoLeft = new WPI_TalonFX(Climber.climbArmTwoLeftCANID);
+  WPI_TalonFX supportTwoRight = new WPI_TalonFX(Climber.climbSupportTwoRightCANID);
+  WPI_TalonFX armTwoRight = new WPI_TalonFX(Climber.climbArmTwoRightCANID);
 
   public ClimberSubsystem() {
     // Sets the motors to brake mode
-    armLeft.setNeutralMode(NeutralMode.Brake);
-    armRight.setNeutralMode(NeutralMode.Brake);
+    armOneLeft.setNeutralMode(NeutralMode.Brake);
+    armOneRight.setNeutralMode(NeutralMode.Brake);
+
+    armTwoLeft.setNeutralMode(NeutralMode.Brake);
+    armTwoRight.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void ClimberExtend() {
-    armLeft.set(ControlMode.PercentOutput, -0.25);
-    armRight.set(ControlMode.PercentOutput, -0.25);
+  public void ClimberOneExtend() {
+    armOneLeft.set(ControlMode.PercentOutput, -0.25);
+    armOneRight.set(ControlMode.PercentOutput, -0.25);
   }
 
-  public void ClimberRetract() {
-    armLeft.set(ControlMode.PercentOutput, 0.25);
-    armRight.set(ControlMode.PercentOutput, 0.25);
+  public void ClimberOneRetract() {
+    armOneLeft.set(ControlMode.PercentOutput, 0.25);
+    armOneRight.set(ControlMode.PercentOutput, 0.25);
+  }
+
+  public void ClimberTwoExtend() {
+    armTwoLeft.set(ControlMode.PercentOutput, -0.25);
+    armTwoRight.set(ControlMode.PercentOutput, -0.25);
+  }
+
+  public void ClimberTwoRetract() {
+    armTwoLeft.set(ControlMode.PercentOutput, 0.25);
+    armTwoRight.set(ControlMode.PercentOutput, 0.25);
   }
 
   @Override

@@ -17,13 +17,30 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
   NetworkTableEntry ta = table.getEntry("ta");
+  NetworkTableEntry tv = table.getEntry("tv");
 
   double x = tx.getDouble(0.0);
   double y = ty.getDouble(0.0);
   double area = ta.getDouble(0.0);
+  double validTarget = tv.getDouble(0.0);
 
   public LimelightSubsystem() {
 
+  }
+
+  public boolean ValidTarget() {
+    validTarget = tv.getDouble(0.0);
+    return validTarget != 0.0;
+  }
+
+  public boolean NoValidTarget() {
+    validTarget = tv.getDouble(0.0);
+    if (validTarget == 0) {
+      System.out.println("ERROR: Vision Target was lost");
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public void LogDataToSmartDashboard() {

@@ -32,6 +32,12 @@ public class DriveSubsystem extends SubsystemBase {
     WPI_TalonFX frontRight = new WPI_TalonFX(Drivetrain.driveFrontRightCANID);
     WPI_TalonFX backRight = new WPI_TalonFX(Drivetrain.driveBackRightCANID);
 
+    // Sets the motors to default configuration
+    frontLeft.configFactoryDefault();
+    backLeft.configFactoryDefault();
+    frontRight.configFactoryDefault();
+    backRight.configFactoryDefault();
+
     // Invert the right side motors.
     frontRight.setInverted(true);
     backRight.setInverted(true);
@@ -43,7 +49,7 @@ public class DriveSubsystem extends SubsystemBase {
     try {
       navX = new AHRS(SPI.Port.kMXP);
     } catch (RuntimeException ex) {
-      System.out.println("Error instantiating navX-MXP:  " + ex.getMessage());
+      System.out.println("ERROR: Unable to instantiate navX" + ex.getMessage());
     }
   }
 

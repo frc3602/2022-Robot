@@ -22,6 +22,7 @@ public class ClimberSubsystem extends SubsystemBase {
   WPI_TalonFX armRight = new WPI_TalonFX(Climber.climbArmRightCANID);
 
   public ClimberSubsystem() {
+    // Sets the motors to brake mode
     armLeft.setNeutralMode(NeutralMode.Brake);
     armRight.setNeutralMode(NeutralMode.Brake);
   }

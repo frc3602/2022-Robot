@@ -46,7 +46,7 @@ public interface Constants {
     int joystickPort = 0;
     int xboxControllerPort = 1;
 
-    // Xbox controller axes
+    // Xbox Controller Axes
     int povUp = 0;
     int povRight = 90;
     int povLeft = 270;

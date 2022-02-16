@@ -11,11 +11,9 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 
 public class ClimbExtend extends CommandBase {
-  private final ClimberSubsystem climberSubsystem;
 
   public ClimbExtend(ClimberSubsystem subsystem) {
-    climberSubsystem = subsystem;
-    addRequirements(subsystem);
+    addRequirements(RobotContainer.climberSubsystem);
   }
 
   @Override

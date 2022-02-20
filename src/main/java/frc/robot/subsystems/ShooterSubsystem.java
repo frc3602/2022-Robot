@@ -13,6 +13,7 @@ import frc.robot.OI;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import frc.robot.RobotContainer;
 import frc.robot.Constants.Shooter;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -20,10 +21,11 @@ public class ShooterSubsystem extends SubsystemBase {
   CANSparkMax shooterMotor = new CANSparkMax(Shooter.shooterMotorCANID, MotorType.kBrushless);
 
   public ShooterSubsystem() {
+    RobotContainer.shooterSubsystem.setDefaultCommand(RobotContainer.shootTest);
   }
 
   public void ShootTest() {
-    shooterMotor.set(OI.joystick.getRawAxis(3));
+    shooterMotor.set(OI.joystick.getZ());
   }
 
   @Override

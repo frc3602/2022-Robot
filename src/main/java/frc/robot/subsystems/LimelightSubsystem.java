@@ -19,6 +19,12 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ta = table.getEntry("ta");
   NetworkTableEntry tv = table.getEntry("tv");
 
+  NetworkTableEntry ledMode = table.getEntry("ledMode");
+  NetworkTableEntry camMode = table.getEntry("camMode");
+  NetworkTableEntry pipeline = table.getEntry("pipeline");
+  NetworkTableEntry stream = table.getEntry("stream");
+  NetworkTableEntry snapshot = table.getEntry("snapshot");
+
   double x = tx.getDouble(0.0);
   double y = ty.getDouble(0.0);
   double area = ta.getDouble(0.0);
@@ -26,6 +32,18 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public LimelightSubsystem() {
 
+  }
+
+  public void LightOn() {
+    ledMode.setNumber(3);
+  }
+
+  public void LightOff() {
+    ledMode.setNumber(1);
+  }
+
+  public void LightAuto() {
+    ledMode.setNumber(0);
   }
 
   public boolean ValidTarget() {

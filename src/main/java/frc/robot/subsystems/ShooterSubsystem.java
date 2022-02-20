@@ -16,8 +16,11 @@ import frc.robot.Constants.Shooter;
 public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
     // Creates the motors & controllers and sets the CAN IDs for each one
-    CANSparkMax motorTop = new CANSparkMax(Shooter.shooterMotorTopCANID, MotorType.kBrushless);
-    CANSparkMax motorBottom = new CANSparkMax(Shooter.shooterMotorBottomCANID, MotorType.kBrushless);
+    CANSparkMax shooterMotor = new CANSparkMax(Shooter.shooterMotorCANID, MotorType.kBrushless);
+  }
+
+  public void ShootTest() {
+    
   }
 
   @Override

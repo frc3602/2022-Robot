@@ -29,21 +29,20 @@ public interface Constants {
 
   public interface Shooter {
     // Shooter CAN IDs
-    int shooterMotorTopCANID = 12;
-    int shooterMotorBottomCANID = 13;
+    int shooterMotorCANID = 12;
   }
 
   public interface Intake {
     // Intake CAN IDs
-    int intakeSpinMotorCANID = 14;
-    int intakePivotMotorCANID = 15;
+    int intakeSpinMotorCANID = 13;
+    int intakePivotMotorCANID = 14;
   }
 
   public interface Index {
     // Index CAN IDs
-    int indexMotorTopCANID = 16;
-    int indexMotorBottomCANID = 17;
-    int indexMotorExtraCANID = 18;
+    int indexMotorTopCANID = 15;
+    int indexMotorBottomCANID = 16;
+    int indexMotorExtraCANID = 17;
   }
 
   public interface Controller {

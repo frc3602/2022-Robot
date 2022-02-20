@@ -27,6 +27,7 @@ public class RobotContainer {
   public static ClimbTwoExtend climbTwoExtend = new ClimbTwoExtend(climberSubsystem);
   public static ClimbTwoRetract climbTwoRetract = new ClimbTwoRetract(climberSubsystem);
   public static ClimbPivot climbPivot = new ClimbPivot(climberSubsystem);
+  public static ShootTest shootTest = new ShootTest(shooterSubsystem);
 
   // Operator interfaces
   public static OI oi;

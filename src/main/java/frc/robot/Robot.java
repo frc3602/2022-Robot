@@ -20,7 +20,7 @@ public class Robot extends TimedRobot {
     robotContainer = new RobotContainer();
 
     // Sets the default command to the drive command
-    RobotContainer.driveSubsystem.setDefaultCommand(RobotContainer.shootTest);
+    RobotContainer.shooterSubsystem.setDefaultCommand(RobotContainer.shootTest);
   }
 
   @Override

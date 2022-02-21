@@ -20,7 +20,7 @@ public interface Constants {
     int climbArmOneLeftCANID = 5;
     int climbSupportOneRightCANID = 6;
     int climbArmOneRightCANID = 7;
-    
+
     int climbSupportTwoLeftCANID = 8;
     int climbArmTwoLeftCANID = 9;
     int climbSupportTwoRightCANID = 10;
@@ -30,6 +30,14 @@ public interface Constants {
   public interface Shooter {
     // Shooter CAN IDs
     int shooterMotorCANID = 12;
+
+    // Shooter gear ratio
+    double shooterGearRatio = (0 / 0);
+
+    // Height information
+    double cameraHeight = 25;
+    double cameraAngleCorrection = 10.6;
+    double targetHeight = 98.25 - cameraHeight;
   }
 
   public interface Intake {
@@ -46,15 +54,14 @@ public interface Constants {
   }
 
   public interface Controller {
-    // Controller Port IDs
+    // Controller port IDs
     int joystickPort = 0;
     int xboxControllerPort = 1;
 
-    // Xbox Controller Axes
+    // Xbox controller axes
     int povUp = 0;
     int povRight = 90;
     int povLeft = 270;
     int povDown = 180;
   }
-
 }

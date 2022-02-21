@@ -53,7 +53,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
-  // Smart Dashboard Information
+  // Smart Dashboard information
   public void LogDataToSmartDashboard() {
     /*
      * SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);

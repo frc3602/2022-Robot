@@ -8,6 +8,7 @@ import com.frc3602.robot.OI;
 import com.frc3602.robot.Robot;
 import com.frc3602.robot.RobotContainer;
 import com.frc3602.robot.Constants.Shooter;
+
 // REV Imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;

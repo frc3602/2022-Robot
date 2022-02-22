@@ -4,9 +4,10 @@
 
 package com.frc3602.robot.subsystems;
 
+import com.frc3602.robot.Constants.Intake;
+
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.frc3602.robot.Constants.Intake;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 // WPILib Imports

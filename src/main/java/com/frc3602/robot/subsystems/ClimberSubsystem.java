@@ -4,9 +4,10 @@
 
 package com.frc3602.robot.subsystems;
 
+import com.frc3602.robot.Constants.Climber;
+
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.frc3602.robot.Constants.Climber;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 

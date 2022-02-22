@@ -139,6 +139,7 @@ public class LimelightSubsystem extends SubsystemBase {
     return validTarget != 0.0;
   }
 
+  // Returns an error if there are no valid targets
   public boolean NoValidTarget() {
     validTarget = tv.getDouble(0.0);
     if (validTarget == 0) {

@@ -2,17 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc3602.robot.commands;
+package com.frc3602.robot.commands;
+
+import com.frc3602.robot.RobotContainer;
+import com.frc3602.robot.subsystems.ClimberSubsystem;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc3602.robot.RobotContainer;
-import frc3602.robot.subsystems.ClimberSubsystem;
+public class ClimbOneRetract extends CommandBase {
 
-public class ClimbOneExtend extends CommandBase {
-
-  public ClimbOneExtend(ClimberSubsystem subsystem) {
+  public ClimbOneRetract(ClimberSubsystem subsystem) {
     addRequirements(RobotContainer.climberSubsystem);
   }
 
@@ -22,7 +22,7 @@ public class ClimbOneExtend extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.climberSubsystem.ClimberOneExtend();
+    RobotContainer.climberSubsystem.ClimberOneRetract();
   }
 
   @Override

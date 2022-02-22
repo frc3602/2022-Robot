@@ -2,10 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc3602.robot.subsystems;
+package com.frc3602.robot.subsystems;
 
 // Phoenix & navX Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.frc3602.robot.OI;
+import com.frc3602.robot.RobotContainer;
+import com.frc3602.robot.Constants.Drivetrain;
 import com.kauailabs.navx.frc.AHRS;
 
 // WPILib Imports
@@ -13,10 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.SPI;
-
-import frc3602.robot.OI;
-import frc3602.robot.RobotContainer;
-import frc3602.robot.Constants.Drivetrain;
 
 public class DriveSubsystem extends SubsystemBase {
   // NavX for Gyro

@@ -2,17 +2,16 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc3602.robot.subsystems;
+package com.frc3602.robot.subsystems;
 
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.frc3602.robot.Constants.Climber;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import frc3602.robot.Constants.Climber;
 
 public class ClimberSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one

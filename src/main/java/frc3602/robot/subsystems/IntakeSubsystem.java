@@ -6,6 +6,7 @@ package frc3602.robot.subsystems;
 
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,10 +14,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc3602.robot.Constants.Intake;
 
 public class IntakeSubsystem extends SubsystemBase {
+  // Creates the motors & controllers and sets the CAN IDs for each one
+  WPI_TalonSRX intakeSpinMotor = new WPI_TalonSRX(Intake.intakeSpinMotorCANID);
+  WPI_TalonSRX intakePivotMotor = new WPI_TalonSRX(Intake.intakePivotMotorCANID);
+
   public IntakeSubsystem() {
-    // Creates the motors & controllers and sets the CAN IDs for each one
-    WPI_TalonSRX intakeSpinMotor = new WPI_TalonSRX(Intake.intakeSpinMotorCANID);
-    WPI_TalonSRX intakePivotMotor = new WPI_TalonSRX(Intake.intakePivotMotorCANID);
   }
 
   public void ExtendIntake() {
@@ -29,5 +31,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void StopIntake() {
+    intakeSpinMotor.set(ControlMode.PercentOutput, 0.0);
+    intakePivotMotor.set(ControlMode.PercentOutput, 0.0);
+
   }
 }

@@ -19,7 +19,15 @@ public class IntakeSubsystem extends SubsystemBase {
     WPI_TalonFX intakePivotMotor = new WPI_TalonFX(Intake.intakePivotMotorCANID);
   }
 
-  @Override
-  public void periodic() {
+  public void ExtendIntake() {
+  }
+
+  public void RetractIntake() {
+  }
+
+  public void SpinIntake() {
+  }
+
+  public void StopIntake() {
   }
 }

@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 // Phoenix & REV Imports
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -21,6 +23,8 @@ import frc.robot.Constants.Shooter;
 public class ShooterSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one
   CANSparkMax shooterMotor = new CANSparkMax(Shooter.shooterMotorCANID, MotorType.kBrushless);
+
+  SparkMaxPIDController shooterPIDController = shooterMotor.getPIDController();
 
   int count = 0;
   double targetShooterMotorRPM = 0.0;
@@ -55,6 +59,10 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void GetShooterMotorSpeed() {
+  }
+
+  public void UpdateShooterMotorSpeed() {
+    shooterPIDController.setReference(RPMToSpeed(targetShooterMotorRPM), ControlType.kVelocity);
   }
 
   public double CalculateDistance() {

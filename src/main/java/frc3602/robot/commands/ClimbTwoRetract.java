@@ -2,18 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc3602.robot.commands;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveSubsystem;
+import frc3602.robot.RobotContainer;
+import frc3602.robot.subsystems.ClimberSubsystem;
 
-public class DriveCommand extends CommandBase {
+public class ClimbTwoRetract extends CommandBase {
 
-  public DriveCommand(DriveSubsystem subsystem) {
-    addRequirements(RobotContainer.driveSubsystem);
+  public ClimbTwoRetract(ClimberSubsystem subsystem) {
+    addRequirements(RobotContainer.climberSubsystem);
   }
 
   @Override
@@ -22,7 +22,7 @@ public class DriveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.driveSubsystem.DriveCartesian();
+    RobotContainer.climberSubsystem.ClimberTwoRetract();
   }
 
   @Override

@@ -4,7 +4,7 @@
 
 package frc3602.robot.subsystems;
 
-// Phoenix & REV Imports
+// REV Imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;

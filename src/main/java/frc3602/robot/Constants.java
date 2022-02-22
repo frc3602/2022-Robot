@@ -34,7 +34,7 @@ public interface Constants {
     // Shooter gear ratio
     double shooterGearRatio = (0 / 0);
 
-    // Height information
+    // Limelight information
     double cameraHeight = 25;
     double cameraAngleCorrection = 10.6;
     double targetHeight = 98.25 - cameraHeight;

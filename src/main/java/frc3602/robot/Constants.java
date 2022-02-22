@@ -36,8 +36,8 @@ public interface Constants {
 
     // Limelight information
     double cameraHeight = 25;
-    double cameraAngleCorrection = 10.6;
-    double targetHeight = 98.25 - cameraHeight;
+    double cameraAngleCorrection = 10.6; // Angle of the limelight in relation to the ground
+    double targetHeight = 98.25 - cameraHeight; // Height of the target from ground to top minus the height of the camera on the robot
   }
 
   public interface Intake {

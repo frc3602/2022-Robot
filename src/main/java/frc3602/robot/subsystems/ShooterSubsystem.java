@@ -37,22 +37,26 @@ public class ShooterSubsystem extends SubsystemBase {
   public void LogDataToSmartDashboard() {
   }
 
+  // Converts speed to RPM
   public double SpeedToRPM(double speedTo) {
     double rpm = 0.0;
     rpm = speedTo * (600.0 / 2048.0) * Shooter.shooterGearRatio;
     return rpm;
   }
 
+  // Converts RPM to speed
   public double RPMToSpeed(double RPMTo) {
     double speed = 0.0;
     speed = (RPMTo * (2048.0 / 600.0)) / Shooter.shooterGearRatio;
     return speed;
   }
 
+  // Stops all the motors
   public void StopMotors() {
     shooterMotor.set(0.0);
   }
 
+  // Sets the shooter motors RPM
   public void SetShooterMotorRPM(double rpm) {
     System.out.println("SetShooterMotorRPM " + rpm);
     targetShooterMotorRPM = rpm;
@@ -61,12 +65,13 @@ public class ShooterSubsystem extends SubsystemBase {
   public void GetShooterMotorSpeed() {
   }
 
+  // Updates the shooter motors RPM
   public void UpdateShooterMotorSpeed() {
     shooterPIDController.setReference(RPMToSpeed(targetShooterMotorRPM), ControlType.kVelocity);
   }
 
   public double CalculateDistance() {
-    double a = RobotContainer.visionSubsystem.GetTY() + 10.6;
+    double a = RobotContainer.visionSubsystem.GetTY() + Shooter.cameraAngleCorrection;
     double answer = Shooter.targetHeight / (Math.tan(Math.toRadians(a)));
 
     return answer;
@@ -87,6 +92,7 @@ public class ShooterSubsystem extends SubsystemBase {
     RobotContainer.shooterSubsystem.LogDataToSmartDashboard();
   }
 
+  // Sets the motors to factory default and sets them to coast mode
   private void ConfigShooterMotor() {
     shooterMotor.restoreFactoryDefaults();
 

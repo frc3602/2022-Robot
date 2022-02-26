@@ -37,20 +37,25 @@ public interface Constants {
     // Limelight information
     double cameraHeight = 25;
     double cameraAngleCorrection = 10.6; // Angle of the limelight in relation to the ground
-    double targetHeight = 98.25 - cameraHeight; // Height of the target from ground to top minus the height of the camera on the robot
-  }
-
-  public interface Intake {
-    // Intake CAN IDs
-    int intakeSpinMotorCANID = 13;
-    int intakePivotMotorCANID = 14;
+    double targetHeight = 98.25 - cameraHeight; // Height of the target from ground to top minus the height of the
+                                                // camera on the robot
   }
 
   public interface Index {
     // Index CAN IDs
     int indexMotorTopCANID = 15;
     int indexMotorBottomCANID = 16;
-    int indexMotorExtraCANID = 17;
+
+    // Amount of maximum balls
+    int maxBalls = 2;
+
+    // Index motor speeds
+    double motorTopSpeed = 1.0;
+    double motorBottomSpeed = 1.0;
+
+    // Sensor IDs
+    int indexSensorTopID = 0;
+    int indexSensorBottomID = 1;
   }
 
   public interface Controller {
@@ -63,5 +68,10 @@ public interface Constants {
     int povRight = 90;
     int povLeft = 270;
     int povDown = 180;
+
+    // Joystick buttons
+    int indexInButton = 3;
+    int indexOutButton = 5;
+    int shooterButton = 1;
   }
 }

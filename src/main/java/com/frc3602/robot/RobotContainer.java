@@ -15,7 +15,6 @@ public class RobotContainer {
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public static LimelightSubsystem visionSubsystem = new LimelightSubsystem();
   public static IndexSubsystem indexSubsystem = new IndexSubsystem();
 
@@ -27,7 +26,10 @@ public class RobotContainer {
   public static ClimbTwoExtend climbTwoExtend = new ClimbTwoExtend(climberSubsystem);
   public static ClimbTwoRetract climbTwoRetract = new ClimbTwoRetract(climberSubsystem);
   public static ClimbPivot climbPivot = new ClimbPivot(climberSubsystem);
-  public static ActivateIntake acticateIntake = new ActivateIntake(intakeSubsystem);
+  public static ActivateIntake acticateIntake = new ActivateIntake(indexSubsystem);
+  public static IndexIn indexIn = new IndexIn(indexSubsystem);
+  public static IndexOut indexOut = new IndexOut(indexSubsystem);
+  public static ShootStuff shootStuff = new ShootStuff(shooterSubsystem);
 
   // Operator interfaces
   public static OI oi;

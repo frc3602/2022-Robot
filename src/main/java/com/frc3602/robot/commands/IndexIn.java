@@ -10,9 +10,9 @@ import com.frc3602.robot.subsystems.IndexSubsystem;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ActivateIntake extends CommandBase {
+public class IndexIn extends CommandBase {
 
-  public ActivateIntake(IndexSubsystem subsystem) {
+  public IndexIn(IndexSubsystem subsystem) {
     addRequirements(RobotContainer.indexSubsystem);
   }
 
@@ -22,14 +22,15 @@ public class ActivateIntake extends CommandBase {
 
   @Override
   public void execute() {
+    RobotContainer.indexSubsystem.IndexIn();
+  }
+
+  @Override
+  public void end(boolean interrupted) {
   }
 
   @Override
   public boolean isFinished() {
     return false;
-  }
-
-  @Override
-  public void end(boolean interrupted) {
   }
 }

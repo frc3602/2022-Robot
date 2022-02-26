@@ -98,4 +98,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     shooterMotor.setIdleMode(IdleMode.kCoast);
   }
+
+  public void ShootStuff() {
+    shooterMotor.set(-0.75);
+  }
 }

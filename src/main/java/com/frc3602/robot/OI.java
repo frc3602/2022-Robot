@@ -34,8 +34,8 @@ public class OI {
         povDown.whenPressed(RobotContainer.climbOneRetract);
 
         // Binds index commands to buttons
-        indexInButton.whileHeld(RobotContainer.indexIn);
-        indexOutButton.whileHeld(RobotContainer.indexOut);
-        shooterButton.whileHeld(RobotContainer.shootStuff);
+        indexInButton.whenHeld(RobotContainer.indexIn);
+        indexOutButton.whenHeld(RobotContainer.indexOut);
+        shooterButton.whenHeld(RobotContainer.shootStuff);
     }
 }

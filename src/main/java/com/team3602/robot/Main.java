@@ -2,7 +2,7 @@
 /* This work is licensed under the terms of the MIT license */
 /* found in the root directory of this project. */
 
-package com.frc3602.robot;
+package com.team3602.robot;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj.RobotBase;

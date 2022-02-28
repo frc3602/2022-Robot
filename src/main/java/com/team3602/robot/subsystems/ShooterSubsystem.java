@@ -2,12 +2,7 @@
 /* This work is licensed under the terms of the MIT license */
 /* found in the root directory of this project. */
 
-package com.frc3602.robot.subsystems;
-
-import com.frc3602.robot.OI;
-import com.frc3602.robot.Robot;
-import com.frc3602.robot.RobotContainer;
-import com.frc3602.robot.Constants.Shooter;
+package com.team3602.robot.subsystems;
 
 // REV Imports
 import com.revrobotics.CANSparkMax;
@@ -15,6 +10,10 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.team3602.robot.OI;
+import com.team3602.robot.Robot;
+import com.team3602.robot.RobotContainer;
+import com.team3602.robot.Constants.Shooter;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj.Joystick;

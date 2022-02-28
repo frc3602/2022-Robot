@@ -2,18 +2,18 @@
 /* This work is licensed under the terms of the MIT license */
 /* found in the root directory of this project. */
 
-package com.frc3602.robot.commands;
+package com.team3602.robot.commands;
 
-import com.frc3602.robot.RobotContainer;
-import com.frc3602.robot.subsystems.DriveSubsystem;
+import com.team3602.robot.RobotContainer;
+import com.team3602.robot.subsystems.IndexSubsystem;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DriveCommand extends CommandBase {
+public class IndexOut extends CommandBase {
 
-  public DriveCommand(DriveSubsystem subsystem) {
-    addRequirements(RobotContainer.driveSubsystem);
+  public IndexOut(IndexSubsystem subsystem) {
+    addRequirements(RobotContainer.indexSubsystem);
   }
 
   @Override
@@ -22,7 +22,7 @@ public class DriveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.driveSubsystem.DriveCartesian();
+    RobotContainer.indexSubsystem.IndexOut();
   }
 
   @Override

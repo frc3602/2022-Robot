@@ -2,13 +2,12 @@
 /* This work is licensed under the terms of the MIT license */
 /* found in the root directory of this project. */
 
-package com.frc3602.robot.subsystems;
-
-import com.frc3602.robot.RobotContainer;
-import com.frc3602.robot.Constants.Index;
+package com.team3602.robot.subsystems;
 
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.team3602.robot.RobotContainer;
+import com.team3602.robot.Constants.Index;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 

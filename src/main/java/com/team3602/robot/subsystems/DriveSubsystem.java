@@ -2,15 +2,14 @@
 /* This work is licensed under the terms of the MIT license */
 /* found in the root directory of this project. */
 
-package com.frc3602.robot.subsystems;
-
-import com.frc3602.robot.OI;
-import com.frc3602.robot.RobotContainer;
-import com.frc3602.robot.Constants.Drivetrain;
+package com.team3602.robot.subsystems;
 
 // Phoenix & navX Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
+import com.team3602.robot.OI;
+import com.team3602.robot.RobotContainer;
+import com.team3602.robot.Constants.Drivetrain;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

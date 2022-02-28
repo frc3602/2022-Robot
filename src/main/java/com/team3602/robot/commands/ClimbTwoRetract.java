@@ -2,18 +2,18 @@
 /* This work is licensed under the terms of the MIT license */
 /* found in the root directory of this project. */
 
-package com.frc3602.robot.commands;
+package com.team3602.robot.commands;
 
-import com.frc3602.robot.RobotContainer;
-import com.frc3602.robot.subsystems.IndexSubsystem;
+import com.team3602.robot.RobotContainer;
+import com.team3602.robot.subsystems.ClimberSubsystem;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IndexOut extends CommandBase {
+public class ClimbTwoRetract extends CommandBase {
 
-  public IndexOut(IndexSubsystem subsystem) {
-    addRequirements(RobotContainer.indexSubsystem);
+  public ClimbTwoRetract(ClimberSubsystem subsystem) {
+    addRequirements(RobotContainer.climberSubsystem);
   }
 
   @Override
@@ -22,7 +22,7 @@ public class IndexOut extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.indexSubsystem.IndexOut();
+    RobotContainer.climberSubsystem.ClimberTwoRetract();
   }
 
   @Override

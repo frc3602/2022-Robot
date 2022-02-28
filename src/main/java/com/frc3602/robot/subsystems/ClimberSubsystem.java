@@ -28,10 +28,14 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public ClimberSubsystem() {
     // Sets the motors to brake mode
+    supportOneLeft.setNeutralMode(NeutralMode.Brake);
     armOneLeft.setNeutralMode(NeutralMode.Brake);
+    supportOneRight.setNeutralMode(NeutralMode.Brake);
     armOneRight.setNeutralMode(NeutralMode.Brake);
 
+    supportTwoLeft.setNeutralMode(NeutralMode.Brake);
     armTwoLeft.setNeutralMode(NeutralMode.Brake);
+    supportTwoRight.setNeutralMode(NeutralMode.Brake);
     armTwoRight.setNeutralMode(NeutralMode.Brake);
   }
 

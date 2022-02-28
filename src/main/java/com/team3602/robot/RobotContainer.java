@@ -4,6 +4,8 @@
 
 package com.team3602.robot;
 
+import com.team3602.robot.OI;
+import com.team3602.robot.Constants.Controller;
 import com.team3602.robot.commands.*;
 import com.team3602.robot.subsystems.*;
 
@@ -25,7 +27,10 @@ public class RobotContainer {
   public static ClimbOneRetract climbOneRetract = new ClimbOneRetract(climberSubsystem);
   public static ClimbTwoExtend climbTwoExtend = new ClimbTwoExtend(climberSubsystem);
   public static ClimbTwoRetract climbTwoRetract = new ClimbTwoRetract(climberSubsystem);
-  public static ClimbPivot climbPivot = new ClimbPivot(climberSubsystem);
+  public static ClimbOnePivotForwards climbOnePivotForwards = new ClimbOnePivotForwards(climberSubsystem);
+  public static ClimbOnePivotBackwards climbOnePivotBackwards = new ClimbOnePivotBackwards(climberSubsystem);
+  public static ClimbTwoPivotForwards climbTwoPivotForwards = new ClimbTwoPivotForwards(climberSubsystem);
+  public static ClimbTwoPivotBackwards climbTwoPivotBackwards = new ClimbTwoPivotBackwards(climberSubsystem);
   public static ActivateIntake acticateIntake = new ActivateIntake(indexSubsystem);
   public static IndexIn indexIn = new IndexIn(indexSubsystem);
   public static IndexOut indexOut = new IndexOut(indexSubsystem);
@@ -38,7 +43,17 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
+  // Binds the commands to the buttons and stuff
   private void configureButtonBindings() {
+    // Index commands & buttons
+    OI.indexInButton.whileHeld(RobotContainer.indexIn);
+    OI.indexOutButton.whileHeld(RobotContainer.indexOut);
+
+    // Shooter commands & buttons
+    OI.shooterButton.whileHeld(RobotContainer.shootStuff);
+
+    // Climber commands & buttons
+    Controller.leftStickX.whileHeld(RobotContainer.shootStuff);
   }
 
   public Command getAutonomousCommand() {

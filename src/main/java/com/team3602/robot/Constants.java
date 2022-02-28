@@ -64,11 +64,11 @@ public interface Constants {
     int xboxControllerPort = 1;
 
     // Xbox controller axes
-    double leftStickX = OI.xboxController.getRawAxis(0);
-    double leftStickY = OI.xboxController.getRawAxis(1);
+    Double leftStickX = OI.xboxController.getRawAxis(0);
+    Double leftStickY = OI.xboxController.getRawAxis(1);
 
-    double rightStickX = OI.xboxController.getRawAxis(4);
-    double rightStickY = OI.xboxController.getRawAxis(5);
+    Double rightStickX = OI.xboxController.getRawAxis(4);
+    Double rightStickY = OI.xboxController.getRawAxis(5);
 
     // Joystick buttons
     int indexInButton = 3;

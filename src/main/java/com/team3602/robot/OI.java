@@ -7,6 +7,7 @@ package com.team3602.robot;
 import com.team3602.robot.Constants.Controller;
 
 // WPILib Imports
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,15 +18,10 @@ public class OI {
     public static XboxController xboxController = new XboxController(Controller.xboxControllerPort);
 
     // Creates all the buttons for the joystick
-    JoystickButton indexInButton = new JoystickButton(joystick, Controller.indexInButton);
-    JoystickButton indexOutButton = new JoystickButton(joystick, Controller.indexOutButton);
-    JoystickButton shooterButton = new JoystickButton(joystick, Controller.shooterButton);
+    public static JoystickButton indexInButton = new JoystickButton(joystick, Controller.indexInButton);
+    public static JoystickButton indexOutButton = new JoystickButton(joystick, Controller.indexOutButton);
+    public static JoystickButton shooterButton = new JoystickButton(joystick, Controller.shooterButton);
 
-    // Binds the commands to the buttons and stuff
     public OI() {
-        // Binds index commands to buttons
-        indexInButton.whenHeld(RobotContainer.indexIn);
-        indexOutButton.whenHeld(RobotContainer.indexOut);
-        shooterButton.whenHeld(RobotContainer.shootStuff);
     }
 }

@@ -4,17 +4,16 @@
 
 package com.team3602.robot.commands;
 
+import com.team3602.robot.RobotContainer;
 import com.team3602.robot.subsystems.ClimberSubsystem;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ClimbPivot extends CommandBase {
-  private final ClimberSubsystem m_climberSubsystem;
+public class ClimbTwoPivotBackwards extends CommandBase {
 
-  public ClimbPivot(ClimberSubsystem subsystem) {
-    m_climberSubsystem = subsystem;
-    addRequirements(subsystem);
+  public ClimbTwoPivotBackwards(ClimberSubsystem subsystem) {
+    addRequirements(RobotContainer.climberSubsystem);
   }
 
   @Override

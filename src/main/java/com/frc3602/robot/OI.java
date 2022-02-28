@@ -17,12 +17,6 @@ public class OI {
     public static Joystick joystick = new Joystick(Controller.joystickPort);
     public static XboxController xboxController = new XboxController(Controller.xboxControllerPort);
 
-    // Creates all the axes for the xbox controller
-    public static POVButton povUp = new POVButton(xboxController, Controller.povUp);
-    public static POVButton povRight = new POVButton(xboxController, Controller.povRight);
-    public static POVButton povLeft = new POVButton(xboxController, Controller.povLeft);
-    public static POVButton povDown = new POVButton(xboxController, Controller.povDown);
-
     // Creates all the buttons for the joystick
     JoystickButton indexInButton = new JoystickButton(joystick, Controller.indexInButton);
     JoystickButton indexOutButton = new JoystickButton(joystick, Controller.indexOutButton);
@@ -30,9 +24,6 @@ public class OI {
 
     // Binds the commands to the buttons and stuff
     OI() {
-        povUp.whenPressed(RobotContainer.climbOneExtend);
-        povDown.whenPressed(RobotContainer.climbOneRetract);
-
         // Binds index commands to buttons
         indexInButton.whenHeld(RobotContainer.indexIn);
         indexOutButton.whenHeld(RobotContainer.indexOut);

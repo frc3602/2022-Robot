@@ -10,13 +10,10 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.team3602.robot.OI;
-import com.team3602.robot.Robot;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Shooter;
 
 // WPILib Imports
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {

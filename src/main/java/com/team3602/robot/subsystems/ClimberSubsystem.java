@@ -6,8 +6,9 @@ package com.team3602.robot.subsystems;
 
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.team3602.robot.Constants.Controller;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 // WPILib Imports
@@ -39,23 +40,28 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void ClimberOneExtend() {
-    armOneLeft.set(ControlMode.PercentOutput, -0.25);
-    armOneRight.set(ControlMode.PercentOutput, -0.25);
+    armOneLeft.set(-Controller.leftStickX);
+    armOneRight.set(-Controller.leftStickX);
   }
 
   public void ClimberOneRetract() {
-    armOneLeft.set(ControlMode.PercentOutput, 0.25);
-    armOneRight.set(ControlMode.PercentOutput, 0.25);
+    armOneLeft.set(Controller.leftStickX);
+    armOneRight.set(Controller.leftStickX);
   }
 
   public void ClimberTwoExtend() {
-    armTwoLeft.set(ControlMode.PercentOutput, -0.25);
-    armTwoRight.set(ControlMode.PercentOutput, -0.25);
+    armTwoLeft.set(-Controller.rightStickX);
+    armTwoRight.set(-Controller.rightStickX);
   }
 
   public void ClimberTwoRetract() {
-    armTwoLeft.set(ControlMode.PercentOutput, 0.25);
-    armTwoRight.set(ControlMode.PercentOutput, 0.25);
+    armTwoLeft.set(Controller.rightStickX);
+    armTwoRight.set(Controller.rightStickX);
+  }
+
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    setDefaultCommand(RobotContainer.climberControl);
   }
 
   @Override

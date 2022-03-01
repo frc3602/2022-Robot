@@ -10,14 +10,18 @@ import com.team3602.robot.subsystems.ClimberSubsystem;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ClimbTwoPivotBackwards extends CommandBase {
+public class ClimberControl extends CommandBase {
 
-  public ClimbTwoPivotBackwards(ClimberSubsystem subsystem) {
+  public ClimberControl(ClimberSubsystem subsystem) {
     addRequirements(RobotContainer.climberSubsystem);
   }
 
   @Override
   public void initialize() {
+    RobotContainer.climberSubsystem.ClimberOneExtend();
+    RobotContainer.climberSubsystem.ClimberOneRetract();
+    RobotContainer.climberSubsystem.ClimberTwoExtend();
+    RobotContainer.climberSubsystem.ClimberTwoRetract();
   }
 
   @Override

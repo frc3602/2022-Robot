@@ -23,14 +23,7 @@ public class RobotContainer {
   // Commands
   public static DriveOrientation driveOrientation = new DriveOrientation(driveSubsystem);
   public static DriveCommand driveCommand = new DriveCommand(driveSubsystem);
-  public static ClimbOneExtend climbOneExtend = new ClimbOneExtend(climberSubsystem);
-  public static ClimbOneRetract climbOneRetract = new ClimbOneRetract(climberSubsystem);
-  public static ClimbTwoExtend climbTwoExtend = new ClimbTwoExtend(climberSubsystem);
-  public static ClimbTwoRetract climbTwoRetract = new ClimbTwoRetract(climberSubsystem);
-  public static ClimbOnePivotForwards climbOnePivotForwards = new ClimbOnePivotForwards(climberSubsystem);
-  public static ClimbOnePivotBackwards climbOnePivotBackwards = new ClimbOnePivotBackwards(climberSubsystem);
-  public static ClimbTwoPivotForwards climbTwoPivotForwards = new ClimbTwoPivotForwards(climberSubsystem);
-  public static ClimbTwoPivotBackwards climbTwoPivotBackwards = new ClimbTwoPivotBackwards(climberSubsystem);
+  public static ClimberControl climberControl = new ClimberControl(climberSubsystem);
   public static ActivateIntake acticateIntake = new ActivateIntake(indexSubsystem);
   public static IndexIn indexIn = new IndexIn(indexSubsystem);
   public static IndexOut indexOut = new IndexOut(indexSubsystem);
@@ -51,9 +44,6 @@ public class RobotContainer {
 
     // Shooter commands & buttons
     OI.shooterButton.whileHeld(RobotContainer.shootStuff);
-
-    // Climber commands & buttons
-    Controller.leftStickX.whileHeld(RobotContainer.shootStuff);
   }
 
   public Command getAutonomousCommand() {

@@ -59,6 +59,26 @@ public class ClimberSubsystem extends SubsystemBase {
     armTwoRight.set(Controller.rightStickX);
   }
 
+  public void ClimberOneForwards() {
+    supportOneLeft.set(-Controller.leftStickY);
+    supportOneRight.set(-Controller.leftStickY);
+  }
+
+  public void ClimberOneBackwards() {
+    supportOneLeft.set(Controller.leftStickY);
+    supportOneRight.set(Controller.leftStickY);
+  }
+
+  public void ClimberTwoForwards() {
+    supportTwoLeft.set(-Controller.rightStickY);
+    supportTwoRight.set(-Controller.rightStickY);
+  }
+
+  public void ClimberTwoBackwards() {
+    supportTwoLeft.set(Controller.rightStickY);
+    supportTwoRight.set(Controller.rightStickY);
+  }
+
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(RobotContainer.climberControl);

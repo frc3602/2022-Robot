@@ -22,6 +22,11 @@ public class ClimberControl extends CommandBase {
     RobotContainer.climberSubsystem.ClimberOneRetract();
     RobotContainer.climberSubsystem.ClimberTwoExtend();
     RobotContainer.climberSubsystem.ClimberTwoRetract();
+
+    RobotContainer.climberSubsystem.ClimberOneForwards();
+    RobotContainer.climberSubsystem.ClimberOneBackwards();
+    RobotContainer.climberSubsystem.ClimberTwoForwards();
+    RobotContainer.climberSubsystem.ClimberTwoBackwards();
   }
 
   @Override

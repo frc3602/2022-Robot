@@ -36,14 +36,14 @@ public class ShooterSubsystem extends SubsystemBase {
   // Converts speed to RPM
   public double SpeedToRPM(double speedTo) {
     double rpm = 0.0;
-    rpm = speedTo * (600.0 / 2048.0) * Shooter.shooterGearRatio;
+    rpm = speedTo * (600.0 / 42.0) * Shooter.shooterGearRatio;
     return rpm;
   }
 
   // Converts RPM to speed
   public double RPMToSpeed(double RPMTo) {
     double speed = 0.0;
-    speed = (RPMTo * (2048.0 / 600.0)) / Shooter.shooterGearRatio;
+    speed = (RPMTo * (42.0 / 600.0)) / Shooter.shooterGearRatio;
     return speed;
   }
 
@@ -67,7 +67,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public double CalculateDistance() {
-    double a = RobotContainer.visionSubsystem.GetTY() + Shooter.cameraAngleCorrection;
+    double a = RobotContainer.visionSubsystem.GetTY() + Shooter.limelightAngleCorrection;
     double answer = Shooter.targetHeight / (Math.tan(Math.toRadians(a)));
 
     return answer;

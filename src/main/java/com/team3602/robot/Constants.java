@@ -35,10 +35,10 @@ public interface Constants {
     double shooterGearRatio = (0 / 0);
 
     // Limelight information
-    double cameraHeight = 25;
-    double cameraAngleCorrection = 10.6; // Angle of the limelight in relation to the ground
-    double targetHeight = 98.25 - cameraHeight; // Height of the target from ground to top minus the height of the
-                                                // camera on the robot
+    double limelightHeight = 25; // Height of the limelight from ground
+    double limelightAngleCorrection = 10.6; // Angle of the limelight in relation to the ground
+    double targetHeight = 98.25 - limelightHeight; // Height of the target from ground to top minus the height of the
+                                                   // limelight on the robot
   }
 
   public interface Index {

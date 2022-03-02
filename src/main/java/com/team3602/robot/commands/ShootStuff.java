@@ -22,7 +22,7 @@ public class ShootStuff extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.shooterSubsystem.ShootStuff();
+    RobotContainer.shooterSubsystem.shootStuff();
   }
 
   @Override

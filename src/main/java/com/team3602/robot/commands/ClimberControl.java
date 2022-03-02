@@ -18,15 +18,15 @@ public class ClimberControl extends CommandBase {
 
   @Override
   public void initialize() {
-    RobotContainer.climberSubsystem.ClimberOneExtend();
-    RobotContainer.climberSubsystem.ClimberOneRetract();
-    RobotContainer.climberSubsystem.ClimberTwoExtend();
-    RobotContainer.climberSubsystem.ClimberTwoRetract();
+    RobotContainer.climberSubsystem.climberOneExtend();
+    RobotContainer.climberSubsystem.climberOneRetract();
+    RobotContainer.climberSubsystem.climberTwoExtend();
+    RobotContainer.climberSubsystem.climberTwoRetract();
 
-    RobotContainer.climberSubsystem.ClimberOneForwards();
-    RobotContainer.climberSubsystem.ClimberOneBackwards();
-    RobotContainer.climberSubsystem.ClimberTwoForwards();
-    RobotContainer.climberSubsystem.ClimberTwoBackwards();
+    RobotContainer.climberSubsystem.climberOneForwards();
+    RobotContainer.climberSubsystem.climberOneBackwards();
+    RobotContainer.climberSubsystem.climberTwoForwards();
+    RobotContainer.climberSubsystem.climberTwoBackwards();
   }
 
   @Override

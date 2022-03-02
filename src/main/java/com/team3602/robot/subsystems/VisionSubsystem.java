@@ -11,7 +11,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class LimelightSubsystem extends SubsystemBase {
+public class VisionSubsystem extends SubsystemBase {
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
   NetworkTableEntry tx = table.getEntry("tx");
@@ -32,86 +32,86 @@ public class LimelightSubsystem extends SubsystemBase {
 
   boolean overrideLight = false;
 
-  public LimelightSubsystem() {
-    Init();
+  public VisionSubsystem() {
+    init();
   }
 
-  public void Init() {
-    LightOff();
-    SetPiP();
+  public void init() {
+    lightOff();
+    setPiP();
   }
 
-  public boolean OverrideLight() {
+  public boolean overrideLight() {
     return overrideLight;
   }
 
-  public void SetOverrideLight(boolean overrideLight) {
+  public void setOverrideLight(boolean overrideLight) {
     this.overrideLight = overrideLight;
   }
 
-  public void TakeSnapshot() {
+  public void takeSnapshot() {
     snapshot.setNumber(1);
   }
 
   // Set camera to vision processing mode
-  public void VisionMode() {
+  public void visionMode() {
     camMode.setNumber(0);
   }
 
   // Set camera to driving mode
-  public void DriverMode() {
+  public void driverMode() {
     camMode.setNumber(1);
   }
 
-  public void SetPiP() {
+  public void setPiP() {
     stream.setNumber(0);
   }
 
-  public void SetPipline(int pipe) {
+  public void setPipline(int pipe) {
     pipeline.setNumber(pipe);
   }
 
-  public int GetPipeline() {
+  public int getPipeline() {
     return (int) pipeline.getDouble(0.0);
   }
 
-  public double GetTX() {
+  public double getTX() {
     return x;
   }
 
-  public double GetTY() {
+  public double getTY() {
     return y;
   }
 
-  public void AutoZoom() {
-    if (NoValidTarget()) {
-      SetPipline(0);
+  public void autoZoom() {
+    if (noValidTarget()) {
+      setPipline(0);
       return;
     }
 
-    int currentPipeline = GetPipeline();
+    int currentPipeline = getPipeline();
     double angle = y;
 
     switch (currentPipeline) {
       case 0: {
         if (angle < 6.0) {
-          SetPipline(2);
+          setPipline(2);
         } else if (angle >= 6.0 && angle < 11.0) {
-          SetPipline(1);
+          setPipline(1);
         }
         break;
       }
       case 1: {
         if (angle < 8.0) {
-          SetPipline(2);
+          setPipline(2);
         } else if (angle >= 13.0) {
-          SetPipline(0);
+          setPipline(0);
         }
         break;
       }
       case 2: {
         if (angle > 7) {
-          SetPipline(1);
+          setPipline(1);
         }
         break;
       }
@@ -119,28 +119,28 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   // Forces light on
-  public void LightOn() {
+  public void lightOn() {
     ledMode.setNumber(3);
   }
 
   // Forces light off
-  public void LightOff() {
+  public void lightOff() {
     ledMode.setNumber(1);
   }
 
   // Changes light settings based on how vision pipeline is set
-  public void LightAuto() {
+  public void lightAuto() {
     ledMode.setNumber(0);
   }
 
   // Checks if there are no valid targets, which is then sent to isFinished()
-  public boolean ValidTarget() {
+  public boolean validTarget() {
     validTarget = tv.getDouble(0.0);
     return validTarget != 0.0;
   }
 
   // Returns an error if there are no valid targets
-  public boolean NoValidTarget() {
+  public boolean noValidTarget() {
     validTarget = tv.getDouble(0.0);
     if (validTarget == 0) {
       System.out.println("ERROR: Vision Target was lost");
@@ -151,7 +151,7 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   // Smart Dashboard information
-  public void LogDataToSmartDashboard() {
+  public void logDataToSmartDashboard() {
     SmartDashboard.putNumber("LimelightX", x);
     SmartDashboard.putNumber("LimelightY", y);
     SmartDashboard.putNumber("LimelightArea", area);

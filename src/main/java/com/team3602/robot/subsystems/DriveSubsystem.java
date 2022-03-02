@@ -55,7 +55,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   
   // Smart Dashboard information
-  public void LogDataToSmartDashboard() {
+  public void logDataToSmartDashboard() {
     /*
      * SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);
      * SmartDashboard.putNumber("Back Left RPM reading:", backLeftRPM);
@@ -65,17 +65,17 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   // Gets current angle of the robot as a double
-  public double GetGyroAngle() {
+  public double getGyroAngle() {
     return navX.getAngle();
   }
 
   // Resets the NavX
-  public void ResetGyro() {
+  public void resetGyro() {
     navX.reset();
   }
 
   // Creates the method to drive the drive subsystem
-  public void DriveCartesian() {
+  public void driveCartesian() {
     // Sets up the cartesian drive for the drive subsystem
     RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(
         -OI.joystick.getY(),

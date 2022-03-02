@@ -17,7 +17,7 @@ public class RobotContainer {
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  public static LimelightSubsystem visionSubsystem = new LimelightSubsystem();
+  public static VisionSubsystem visionSubsystem = new VisionSubsystem();
   public static IndexSubsystem indexSubsystem = new IndexSubsystem();
 
   // Commands

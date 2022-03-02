@@ -22,7 +22,7 @@ public class IndexIn extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.indexSubsystem.IndexIn();
+    RobotContainer.indexSubsystem.indexIn();
   }
 
   @Override

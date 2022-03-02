@@ -26,76 +26,76 @@ public class ShooterSubsystem extends SubsystemBase {
   double targetShooterMotorRPM = 0.0;
 
   public ShooterSubsystem() {
-    ConfigShooterMotor();
+    configureMotors();
   }
 
   // Smart Dashboard information
-  public void LogDataToSmartDashboard() {
+  public void logDataToSmartDashboard() {
   }
 
   // Converts speed to RPM
-  public double SpeedToRPM(double speedTo) {
+  public double speedToRPM(double speedTo) {
     double rpm = 0.0;
     rpm = speedTo * (600.0 / 42.0) * Shooter.shooterGearRatio;
     return rpm;
   }
 
   // Converts RPM to speed
-  public double RPMToSpeed(double RPMTo) {
+  public double rpmToSpeed(double RPMTo) {
     double speed = 0.0;
     speed = (RPMTo * (42.0 / 600.0)) / Shooter.shooterGearRatio;
     return speed;
   }
 
   // Stops all the motors
-  public void StopMotors() {
+  public void stopMotors() {
     shooterMotor.set(0.0);
   }
 
   // Sets the shooter motors RPM
-  public void SetShooterMotorRPM(double rpm) {
+  public void setShooterMotorRPM(double rpm) {
     System.out.println("SetShooterMotorRPM " + rpm);
     targetShooterMotorRPM = rpm;
   }
 
-  public void GetShooterMotorSpeed() {
+  public void getShooterMotorSpeed() {
   }
 
   // Updates the shooter motors RPM
-  public void UpdateShooterMotorSpeed() {
-    shooterPIDController.setReference(RPMToSpeed(targetShooterMotorRPM), ControlType.kVelocity);
+  public void updateShooterMotorSpeed() {
+    shooterPIDController.setReference(rpmToSpeed(targetShooterMotorRPM), ControlType.kVelocity);
   }
 
-  public double CalculateDistance() {
-    double a = RobotContainer.visionSubsystem.GetTY() + Shooter.limelightAngleCorrection;
+  public double calculateDistance() {
+    double a = RobotContainer.visionSubsystem.getTY() + Shooter.limelightAngleCorrection;
     double answer = Shooter.targetHeight / (Math.tan(Math.toRadians(a)));
 
     return answer;
   }
 
-  public void CalculateAndSetMotorSpeeds() {
-    if (RobotContainer.visionSubsystem.NoValidTarget()) {
+  public void calculateAndSetMotorSpeeds() {
+    if (RobotContainer.visionSubsystem.noValidTarget()) {
       return;
     }
 
-    double distance = CalculateDistance();
+    double distance = calculateDistance();
 
     System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
 
     double newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
 
-    RobotContainer.shooterSubsystem.SetShooterMotorRPM(newTargetShooterMotorRPM);
-    RobotContainer.shooterSubsystem.LogDataToSmartDashboard();
+    RobotContainer.shooterSubsystem.setShooterMotorRPM(newTargetShooterMotorRPM);
+    RobotContainer.shooterSubsystem.logDataToSmartDashboard();
   }
 
   // Sets the motors to factory default and sets them to coast mode
-  private void ConfigShooterMotor() {
+  private void configureMotors() {
     shooterMotor.restoreFactoryDefaults();
 
     shooterMotor.setIdleMode(IdleMode.kCoast);
   }
 
-  public void ShootStuff() {
+  public void shootStuff() {
     shooterMotor.set(-0.75);
   }
 }

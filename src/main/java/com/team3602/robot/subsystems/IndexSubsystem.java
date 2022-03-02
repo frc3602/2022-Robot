@@ -39,7 +39,7 @@ public class IndexSubsystem extends SubsystemBase {
   }
 
   /*
-   * public void AdvanceIndex(double speed) {
+   * public void advanceIndex(double speed) {
    * if (speed > 1.0) {
    * speed = 1.0;
    * }
@@ -51,51 +51,51 @@ public class IndexSubsystem extends SubsystemBase {
    * indexMotorBottom.set(speed * -1.0 * Index.motorBottomSpeed);
    * 
    * if (speed != 0.0) {
-   * RobotContainer.indexSubsystem.SpinIntake();
+   * RobotContainer.indexSubsystem.spinIntake();
    * } else {
-   * RobotContainer.indexSubsystem.StopIntake();
+   * RobotContainer.indexSubsystem.stopIntake();
    * }
    * }
    */
 
   /*
-   * public void StopIndex() {
-   * AdvanceIndex(0.0);
+   * public void stopIndex() {
+   * advanceIndex(0.0);
    * }
    */
 
-  public void InitSensors() {
+  public void initSensors() {
   }
 
-  public int BallCount() {
+  public int ballCount() {
     return ballCount;
   }
 
-  public boolean IndexSensorTop() {
+  public boolean indexSensorTop() {
     return indexSensorTop.get();
   }
 
-  public boolean IndexSensorBottom() {
+  public boolean indexSensorBottom() {
     return indexSensorBottom.get();
   }
 
-  public boolean IsIndexFull() {
+  public boolean isIndexFull() {
     return (ballCount >= Index.maxBalls);
   }
 
-  public void CheckSensors() {
+  public void checkSensors() {
     count++;
     if (count > 500) {
 
     }
   }
 
-  public void IndexIn() {
+  public void indexIn() {
     indexMotorTop.set(ControlMode.PercentOutput, -1.0);
     indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
   }
 
-  public void IndexOut() {
+  public void indexOut() {
     indexMotorTop.set(ControlMode.PercentOutput, 1.0);
     indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
   }

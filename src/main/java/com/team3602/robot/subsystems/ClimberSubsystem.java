@@ -39,42 +39,42 @@ public class ClimberSubsystem extends SubsystemBase {
     armTwoRight.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void ClimberOneExtend() {
+  public void climberOneExtend() {
     armOneLeft.set(-Controller.leftStickX);
     armOneRight.set(-Controller.leftStickX);
   }
 
-  public void ClimberOneRetract() {
+  public void climberOneRetract() {
     armOneLeft.set(Controller.leftStickX);
     armOneRight.set(Controller.leftStickX);
   }
 
-  public void ClimberTwoExtend() {
+  public void climberTwoExtend() {
     armTwoLeft.set(-Controller.rightStickX);
     armTwoRight.set(-Controller.rightStickX);
   }
 
-  public void ClimberTwoRetract() {
+  public void climberTwoRetract() {
     armTwoLeft.set(Controller.rightStickX);
     armTwoRight.set(Controller.rightStickX);
   }
 
-  public void ClimberOneForwards() {
+  public void climberOneForwards() {
     supportOneLeft.set(-Controller.leftStickY);
     supportOneRight.set(-Controller.leftStickY);
   }
 
-  public void ClimberOneBackwards() {
+  public void climberOneBackwards() {
     supportOneLeft.set(Controller.leftStickY);
     supportOneRight.set(Controller.leftStickY);
   }
 
-  public void ClimberTwoForwards() {
+  public void climberTwoForwards() {
     supportTwoLeft.set(-Controller.rightStickY);
     supportTwoRight.set(-Controller.rightStickY);
   }
 
-  public void ClimberTwoBackwards() {
+  public void climberTwoBackwards() {
     supportTwoLeft.set(Controller.rightStickY);
     supportTwoRight.set(Controller.rightStickY);
   }

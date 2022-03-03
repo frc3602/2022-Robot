@@ -5,15 +5,15 @@
 package com.team3602.robot.commands;
 
 import com.team3602.robot.RobotContainer;
-import com.team3602.robot.subsystems.DriveSubsystem;
+import com.team3602.robot.subsystems.IndexSubsystem;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DriveCommand extends CommandBase {
+public class IndexStop extends CommandBase {
 
-  public DriveCommand(DriveSubsystem subsystem) {
-    addRequirements(RobotContainer.driveSubsystem);
+  public IndexStop(IndexSubsystem subsystem) {
+    addRequirements(RobotContainer.indexSubsystem);
   }
 
   @Override
@@ -22,7 +22,7 @@ public class DriveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.driveSubsystem.driveCartesian();
+    RobotContainer.indexSubsystem.stopMotors();
   }
 
   @Override

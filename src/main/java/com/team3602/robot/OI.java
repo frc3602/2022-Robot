@@ -7,7 +7,6 @@ package com.team3602.robot;
 import com.team3602.robot.Constants.Controller;
 
 // WPILib Imports
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;

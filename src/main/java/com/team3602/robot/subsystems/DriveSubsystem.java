@@ -24,36 +24,34 @@ public class DriveSubsystem extends SubsystemBase {
   // MecanumDrive Information
   private MecanumDrive mecanumDrive;
 
-  /*
-   * public DriveSubsystem() {
-   * // Creates the motors & controllers and sets the CAN IDs for each one
-   * WPI_TalonFX frontLeft = new WPI_TalonFX(Drivetrain.driveFrontLeftCANID);
-   * WPI_TalonFX backLeft = new WPI_TalonFX(Drivetrain.driveBackLeftCANID);
-   * WPI_TalonFX frontRight = new WPI_TalonFX(Drivetrain.driveFrontRightCANID);
-   * WPI_TalonFX backRight = new WPI_TalonFX(Drivetrain.driveBackRightCANID);
-   * 
-   * // Sets the motors to default configuration
-   * frontLeft.configFactoryDefault();
-   * backLeft.configFactoryDefault();
-   * frontRight.configFactoryDefault();
-   * backRight.configFactoryDefault();
-   * 
-   * // Invert the right side motors.
-   * frontRight.setInverted(true);
-   * backRight.setInverted(true);
-   * 
-   * // Creates a new mecanum drive and sets the motors for it
-   * mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-   * 
-   * // Initialize NavX and check to make sure its working
-   * try {
-   * navX = new AHRS(SPI.Port.kMXP);
-   * } catch (RuntimeException ex) {
-   * System.out.println("ERROR: Unable to instantiate navX" + ex.getMessage());
-   * }
-   * }
-   */
-  
+  public DriveSubsystem() {
+    // Creates the motors & controllers and sets the CAN IDs for each one
+    WPI_TalonFX frontLeft = new WPI_TalonFX(Drivetrain.driveFrontLeftCANID);
+    WPI_TalonFX backLeft = new WPI_TalonFX(Drivetrain.driveBackLeftCANID);
+    WPI_TalonFX frontRight = new WPI_TalonFX(Drivetrain.driveFrontRightCANID);
+    WPI_TalonFX backRight = new WPI_TalonFX(Drivetrain.driveBackRightCANID);
+
+    // Sets the motors to default configuration
+    frontLeft.configFactoryDefault();
+    backLeft.configFactoryDefault();
+    frontRight.configFactoryDefault();
+    backRight.configFactoryDefault();
+
+    // Invert the right side motors.
+    frontRight.setInverted(true);
+    backRight.setInverted(true);
+
+    // Creates a new mecanum drive and sets the motors for it
+    mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+
+    // Initialize NavX and check to make sure its working
+    try {
+      navX = new AHRS(SPI.Port.kMXP);
+    } catch (RuntimeException ex) {
+      System.out.println("ERROR: Unable to instantiate navX" + ex.getMessage());
+    }
+  }
+
   // Smart Dashboard information
   public void logDataToSmartDashboard() {
     /*
@@ -77,9 +75,7 @@ public class DriveSubsystem extends SubsystemBase {
   // Creates the method to drive the drive subsystem
   public void driveCartesian() {
     // Sets up the cartesian drive for the drive subsystem
-    RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(
-        -OI.joystick.getY(),
-        OI.joystick.getX(),
+    RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(-OI.joystick.getY(), OI.joystick.getX(),
         OI.joystick.getZ());
   }
 

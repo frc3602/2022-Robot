@@ -39,29 +39,18 @@ public class IndexSubsystem extends SubsystemBase {
   }
 
   /*
-   * public void advanceIndex(double speed) {
-   * if (speed > 1.0) {
-   * speed = 1.0;
-   * }
-   * if (speed < -1.0) {
-   * speed = -1.0;
-   * }
+   * public void advanceIndex(double speed) { if (speed > 1.0) { speed = 1.0; } if
+   * (speed < -1.0) { speed = -1.0; }
    * 
    * indexMotorTop.set(speed * -1.0 * Index.motorTopSpeed);
    * indexMotorBottom.set(speed * -1.0 * Index.motorBottomSpeed);
    * 
-   * if (speed != 0.0) {
-   * RobotContainer.indexSubsystem.spinIntake();
-   * } else {
-   * RobotContainer.indexSubsystem.stopIntake();
-   * }
-   * }
+   * if (speed != 0.0) { RobotContainer.indexSubsystem.spinIntake(); } else {
+   * RobotContainer.indexSubsystem.stopIntake(); } }
    */
 
   /*
-   * public void stopIndex() {
-   * advanceIndex(0.0);
-   * }
+   * public void stopIndex() { advanceIndex(0.0); }
    */
 
   public void initSensors() {
@@ -98,6 +87,11 @@ public class IndexSubsystem extends SubsystemBase {
   public void indexOut() {
     indexMotorTop.set(ControlMode.PercentOutput, 1.0);
     indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+  }
+
+  public void stopMotors() {
+    indexMotorTop.set(ControlMode.PercentOutput, 0.0);
+    indexMotorBottom.set(ControlMode.PercentOutput, 0.0);
   }
 
   @Override

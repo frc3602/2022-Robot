@@ -4,8 +4,6 @@
 
 package com.team3602.robot;
 
-import com.team3602.robot.OI;
-import com.team3602.robot.Constants.Controller;
 import com.team3602.robot.commands.*;
 import com.team3602.robot.subsystems.*;
 
@@ -27,7 +25,9 @@ public class RobotContainer {
   public static ActivateIntake acticateIntake = new ActivateIntake(indexSubsystem);
   public static IndexIn indexIn = new IndexIn(indexSubsystem);
   public static IndexOut indexOut = new IndexOut(indexSubsystem);
+  public static IndexStop indexStop = new IndexStop(indexSubsystem);
   public static ShootStuff shootStuff = new ShootStuff(shooterSubsystem);
+  public static ShootStop shootStop = new ShootStop(shooterSubsystem);
 
   // Operator interfaces
   public static OI oi;
@@ -39,11 +39,14 @@ public class RobotContainer {
   // Binds the commands to the buttons and stuff
   private void configureButtonBindings() {
     // Index commands & buttons
-    OI.indexInButton.whileHeld(RobotContainer.indexIn);
-    OI.indexOutButton.whileHeld(RobotContainer.indexOut);
+    OI.indexInButton.whenPressed(RobotContainer.indexIn);
+    OI.indexOutButton.whenPressed(RobotContainer.indexOut);
+    OI.indexInButton.whenReleased(RobotContainer.indexStop);
+    OI.indexOutButton.whenReleased(RobotContainer.indexStop);
 
     // Shooter commands & buttons
-    OI.shooterButton.whileHeld(RobotContainer.shootStuff);
+    OI.shooterButton.whenPressed(RobotContainer.shootStuff);
+    OI.shooterButton.whenReleased(RobotContainer.shootStop);
   }
 
   public Command getAutonomousCommand() {

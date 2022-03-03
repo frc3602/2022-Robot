@@ -19,7 +19,6 @@ public class RobotContainer {
   public static IndexSubsystem indexSubsystem = new IndexSubsystem();
 
   // Commands
-  public static DriveOrientation driveOrientation = new DriveOrientation(driveSubsystem);
   public static DriveCommand driveCommand = new DriveCommand(driveSubsystem);
   public static ClimberControl climberControl = new ClimberControl(climberSubsystem);
   public static ActivateIntake acticateIntake = new ActivateIntake(indexSubsystem);

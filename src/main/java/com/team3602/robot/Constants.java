@@ -8,8 +8,8 @@ public interface Constants {
 
   public interface Drivetrain {
     // Drivetrain CAN IDs
-    int driveFrontLeftCANID = 1;
-    int driveBackLeftCANID = 0;
+    int driveFrontLeftCANID = 0;
+    int driveBackLeftCANID = 1;
     int driveFrontRightCANID = 2;
     int driveBackRightCANID = 3;
   }

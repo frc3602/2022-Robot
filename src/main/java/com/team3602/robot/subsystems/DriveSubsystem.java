@@ -56,10 +56,10 @@ public class DriveSubsystem extends SubsystemBase {
   // Smart Dashboard information
   public void logDataToSmartDashboard() {
     /*
-     * SmartDashboard.putNumber("Front Left RPM reading:", frontLeftRPM);
-     * SmartDashboard.putNumber("Back Left RPM reading:", backLeftRPM);
-     * SmartDashboard.putNumber("Front Right RPM reading:", frontRightRPM);
-     * SmartDashboard.putNumber("Back Right RPM reading:", backRightRPM);
+     * SmartDashboard.putNumber("Front Left RPM reading:" + frontLeftRPM);
+     * SmartDashboard.putNumber("Back Left RPM reading:" + backLeftRPM);
+     * SmartDashboard.putNumber("Front Right RPM reading:" + frontRightRPM);
+     * SmartDashboard.putNumber("Back Right RPM reading:" + backRightRPM);
      */
   }
 

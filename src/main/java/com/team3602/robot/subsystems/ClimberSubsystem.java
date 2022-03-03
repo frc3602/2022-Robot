@@ -4,11 +4,12 @@
 
 package com.team3602.robot.subsystems;
 
-// Phoenix Imports
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Controller;
+
+// Phoenix Imports
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 // WPILib Imports

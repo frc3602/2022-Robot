@@ -4,12 +4,13 @@
 
 package com.team3602.robot.subsystems;
 
-// Phoenix & navX Imports
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.kauailabs.navx.frc.AHRS;
 import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Drivetrain;
+
+// Phoenix & navX Imports
+import com.kauailabs.navx.frc.AHRS;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

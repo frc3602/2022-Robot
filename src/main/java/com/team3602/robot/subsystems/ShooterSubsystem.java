@@ -4,14 +4,15 @@
 
 package com.team3602.robot.subsystems;
 
-// REV Imports
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Shooter;
+
+// REV Imports
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;

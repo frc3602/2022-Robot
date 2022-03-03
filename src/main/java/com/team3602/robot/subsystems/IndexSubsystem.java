@@ -4,12 +4,13 @@
 
 package com.team3602.robot.subsystems;
 
-// Phoenix Imports
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Index;
+
+// Phoenix Imports
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj.DigitalInput;

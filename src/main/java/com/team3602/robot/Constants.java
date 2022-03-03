@@ -37,7 +37,7 @@ public interface Constants {
     // Limelight information
     double limelightHeight = 25; // Height of the limelight from ground
     double limelightAngleCorrection = 10.6; // Angle of the limelight in relation to the ground
-    double targetHeight = 98.25 - limelightHeight; // Height of the target from ground to top minus the height of the
+    double targetHeight = 104 - limelightHeight; // Height of the target from ground to top minus the height of the
                                                    // limelight on the robot
   }
 

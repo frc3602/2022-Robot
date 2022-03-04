@@ -1,5 +1,5 @@
 /*
- * @(#)IndexOut.java        1.0 22/03/03
+ * @(#)IndexOut.java        1.0 22/03/04
  *
  * Copyright (c) 2022 Team 3602
  * 500 S Lincoln Rd, Escanaba, Michigan, 49829, U.S.A.
@@ -24,6 +24,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @author Cody Wellman
  */
 public class IndexOut extends CommandBase {
+  /**
+   * Constructor for {@link IndexOut} class to set subsystem requirements.
+   */
   public IndexOut(IndexSubsystem subsystem) {
     addRequirements(RobotContainer.indexSubsystem);
   }

@@ -1,5 +1,5 @@
 /*
- * @(#)ShootStuff.java        1.0 22/03/03
+ * @(#)ShootStuff.java        1.0 22/03/04
  *
  * Copyright (c) 2022 Team 3602
  * 500 S Lincoln Rd, Escanaba, Michigan, 49829, U.S.A.
@@ -24,6 +24,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @author Cody Wellman
  */
 public class ShootStuff extends CommandBase {
+  /**
+   * Constructor for {@link ShootStuff} class to set subsystem requirements.
+   */
   public ShootStuff(ShooterSubsystem subsystem) {
     addRequirements(RobotContainer.shooterSubsystem);
   }

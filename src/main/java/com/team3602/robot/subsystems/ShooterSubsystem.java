@@ -1,6 +1,13 @@
-/* Copyright (C) 2022 Team 3602. All rights reserved. */
-/* This work is licensed under the terms of the MIT license */
-/* found in the root directory of this project. */
+/*
+ * @(#)ShooterSubsystem.java        1.0 22/03/03
+ *
+ * Copyright (c) 2022 Team 3602
+ * 500 S Lincoln Rd, Escanaba, Michigan, 49829, U.S.A.
+ * All rights reserved.
+ *
+ * This software is licensed under the terms of the GPLv3 license
+ * found in the root directory of this project.
+ */
 
 package com.team3602.robot.subsystems;
 
@@ -17,6 +24,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+/**
+ * The ShooterSubsystem class provides all methods and functionality of the
+ * robot's shooter.
+ *
+ * @version 1.0 04 Mar 2022
+ * @author Cody Wellman
+ */
 public class ShooterSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one
   CANSparkMax shooterMotor = new CANSparkMax(Shooter.shooterMotorCANID, MotorType.kBrushless);

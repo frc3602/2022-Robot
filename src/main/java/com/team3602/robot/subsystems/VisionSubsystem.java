@@ -1,6 +1,13 @@
-/* Copyright (C) 2022 Team 3602. All rights reserved. */
-/* This work is licensed under the terms of the MIT license */
-/* found in the root directory of this project. */
+/*
+ * @(#)VisionSubsystem.java        1.0 22/03/03
+ *
+ * Copyright (c) 2022 Team 3602
+ * 500 S Lincoln Rd, Escanaba, Michigan, 49829, U.S.A.
+ * All rights reserved.
+ *
+ * This software is licensed under the terms of the GPLv3 license
+ * found in the root directory of this project.
+ */
 
 package com.team3602.robot.subsystems;
 
@@ -11,6 +18,13 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * The VisionSubsystem class provides all methods and functionality of the
+ * robot's vision processing.
+ *
+ * @version 1.0 04 Mar 2022
+ * @author Cody Wellman
+ */
 public class VisionSubsystem extends SubsystemBase {
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
@@ -93,28 +107,28 @@ public class VisionSubsystem extends SubsystemBase {
     double angle = y;
 
     switch (currentPipeline) {
-      case 0: {
-        if (angle < 6.0) {
-          setPipline(2);
-        } else if (angle >= 6.0 && angle < 11.0) {
-          setPipline(1);
-        }
-        break;
+    case 0: {
+      if (angle < 6.0) {
+        setPipline(2);
+      } else if (angle >= 6.0 && angle < 11.0) {
+        setPipline(1);
       }
-      case 1: {
-        if (angle < 8.0) {
-          setPipline(2);
-        } else if (angle >= 13.0) {
-          setPipline(0);
-        }
-        break;
+      break;
+    }
+    case 1: {
+      if (angle < 8.0) {
+        setPipline(2);
+      } else if (angle >= 13.0) {
+        setPipline(0);
       }
-      case 2: {
-        if (angle > 7) {
-          setPipline(1);
-        }
-        break;
+      break;
+    }
+    case 2: {
+      if (angle > 7) {
+        setPipline(1);
       }
+      break;
+    }
     }
   }
 
@@ -156,5 +170,4 @@ public class VisionSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("LimelightY", y);
     SmartDashboard.putNumber("LimelightArea", area);
   }
-
 }

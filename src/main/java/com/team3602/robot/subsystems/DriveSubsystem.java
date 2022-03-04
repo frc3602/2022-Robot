@@ -33,33 +33,28 @@ import edu.wpi.first.wpilibj.SPI;
  * @author Cody Wellman
  */
 public class DriveSubsystem extends SubsystemBase {
+  // Creates the motors & controllers and sets the CAN IDs for each one
+  WPI_TalonFX frontLeft = new WPI_TalonFX(Drivetrain.driveFrontLeftCANID);
+  WPI_TalonFX backLeft = new WPI_TalonFX(Drivetrain.driveBackLeftCANID);
+  WPI_TalonFX frontRight = new WPI_TalonFX(Drivetrain.driveFrontRightCANID);
+  WPI_TalonFX backRight = new WPI_TalonFX(Drivetrain.driveBackRightCANID);
+
   // NavX for Gyro
   private AHRS navX;
 
   // MecanumDrive Information
   private MecanumDrive mecanumDrive;
 
+  /**
+   * Constructor for {@link DriveSubsystem} class to run the
+   * {@link #configureMotors()} method, set the motors for the mecanum drive, and
+   * to initialize NavX and check to make sure its working.
+   */
   public DriveSubsystem() {
-    // Creates the motors & controllers and sets the CAN IDs for each one
-    WPI_TalonFX frontLeft = new WPI_TalonFX(Drivetrain.driveFrontLeftCANID);
-    WPI_TalonFX backLeft = new WPI_TalonFX(Drivetrain.driveBackLeftCANID);
-    WPI_TalonFX frontRight = new WPI_TalonFX(Drivetrain.driveFrontRightCANID);
-    WPI_TalonFX backRight = new WPI_TalonFX(Drivetrain.driveBackRightCANID);
+    configureMotors();
 
-    // Sets the motors to default configuration
-    frontLeft.configFactoryDefault();
-    backLeft.configFactoryDefault();
-    frontRight.configFactoryDefault();
-    backRight.configFactoryDefault();
-
-    // Invert the right side motors.
-    frontRight.setInverted(true);
-    backRight.setInverted(true);
-
-    // Creates a new mecanum drive and sets the motors for it
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
-    // Initialize NavX and check to make sure its working
     try {
       navX = new AHRS(SPI.Port.kMXP);
     } catch (RuntimeException ex) {
@@ -67,7 +62,9 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
-  // Smart Dashboard information
+  /**
+   * Method to log information to the Smart Dashboard.
+   */
   public void logDataToSmartDashboard() {
     /*
      * SmartDashboard.putNumber("Front Left RPM reading:" + frontLeftRPM);
@@ -77,24 +74,40 @@ public class DriveSubsystem extends SubsystemBase {
      */
   }
 
-  // Gets current angle of the robot as a double
+  /**
+   * Method to get the current angle of the navX gyro.
+   */
   public double getGyroAngle() {
     return navX.getAngle();
   }
 
-  // Resets the NavX
+  /**
+   * Method to reset the value of the navX gyro.
+   */
   public void resetGyro() {
     navX.reset();
   }
 
-  // Creates the method to drive the drive subsystem
+  /**
+   * Method to create the cartesian drive.
+   */
   public void driveCartesian() {
     // Sets up the cartesian drive for the drive subsystem
     RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(-OI.joystick.getY(), OI.joystick.getX(),
         OI.joystick.getZ());
   }
 
-  @Override
-  public void periodic() {
+  /**
+   * Method to set the drivetrain motors to factory defaults and to invert the
+   * right side.
+   */
+  private void configureMotors() {
+    frontLeft.configFactoryDefault();
+    backLeft.configFactoryDefault();
+    frontRight.configFactoryDefault();
+    backRight.configFactoryDefault();
+
+    frontRight.setInverted(true);
+    backRight.setInverted(true);
   }
 }

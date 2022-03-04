@@ -44,13 +44,12 @@ public class IndexSubsystem extends SubsystemBase {
   boolean previousTopState = false;
   boolean previousBottomState = false;
 
+  /**
+   * Constructor for {@link IndexSubsystem} class to run the
+   * {@link #configureMotors()} method.
+   */
   public IndexSubsystem() {
-    // Sets the motors to default configuration
-    indexMotorTop.configFactoryDefault();
-    indexMotorBottom.configFactoryDefault();
-
-    indexMotorTop.setNeutralMode(NeutralMode.Brake);
-    indexMotorBottom.setNeutralMode(NeutralMode.Brake);
+    configureMotors();
   }
 
   /*
@@ -68,25 +67,45 @@ public class IndexSubsystem extends SubsystemBase {
    * public void stopIndex() { advanceIndex(0.0); }
    */
 
+  /**
+   * Initializes the sensors
+   */
   public void initSensors() {
   }
 
+  /**
+   * @return how many balls are in the index / magazine
+   */
   public int ballCount() {
     return ballCount;
   }
 
+  /**
+   * @return the value of the top index sensor
+   */
   public boolean indexSensorTop() {
     return indexSensorTop.get();
   }
 
+  /**
+   * @return the value of the bottom index sensor
+   */
   public boolean indexSensorBottom() {
     return indexSensorBottom.get();
   }
 
+  /**
+   * Method to check if the index is full or not.
+   * 
+   * @return if the index is full or not
+   */
   public boolean isIndexFull() {
     return (ballCount >= Index.maxBalls);
   }
 
+  /**
+   * Method to check the sensors.
+   */
   public void checkSensors() {
     count++;
     if (count > 500) {
@@ -94,22 +113,38 @@ public class IndexSubsystem extends SubsystemBase {
     }
   }
 
+  /**
+   * Method to run the magazine / index motors inward.
+   */
   public void indexIn() {
     indexMotorTop.set(ControlMode.PercentOutput, -1.0);
     indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
   }
 
+  /**
+   * Method to run the magazine / index motors outward.
+   */
   public void indexOut() {
     indexMotorTop.set(ControlMode.PercentOutput, 1.0);
     indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
   }
 
+  /**
+   * Method to stop the magazine / index motors.
+   */
   public void stopMotors() {
     indexMotorTop.set(ControlMode.PercentOutput, 0.0);
     indexMotorBottom.set(ControlMode.PercentOutput, 0.0);
   }
 
-  @Override
-  public void periodic() {
+  /**
+   * Method to set the shooter motor to factory defaults and coast mode
+   */
+  private void configureMotors() {
+    indexMotorTop.configFactoryDefault();
+    indexMotorBottom.configFactoryDefault();
+
+    indexMotorTop.setNeutralMode(NeutralMode.Brake);
+    indexMotorBottom.setNeutralMode(NeutralMode.Brake);
   }
 }

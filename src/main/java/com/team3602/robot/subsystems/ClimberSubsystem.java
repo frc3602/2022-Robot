@@ -42,17 +42,12 @@ public class ClimberSubsystem extends SubsystemBase {
   WPI_TalonFX supportTwoRight = new WPI_TalonFX(Climber.climbSupportTwoRightCANID);
   WPI_TalonFX armTwoRight = new WPI_TalonFX(Climber.climbArmTwoRightCANID);
 
+  /**
+   * Constructor for {@link ClimberSubsystem} class to run the
+   * {@link #configureMotors()} method.
+   */
   public ClimberSubsystem() {
-    // Sets the motors to brake mode
-    supportOneLeft.setNeutralMode(NeutralMode.Brake);
-    armOneLeft.setNeutralMode(NeutralMode.Brake);
-    supportOneRight.setNeutralMode(NeutralMode.Brake);
-    armOneRight.setNeutralMode(NeutralMode.Brake);
-
-    supportTwoLeft.setNeutralMode(NeutralMode.Brake);
-    armTwoLeft.setNeutralMode(NeutralMode.Brake);
-    supportTwoRight.setNeutralMode(NeutralMode.Brake);
-    armTwoRight.setNeutralMode(NeutralMode.Brake);
+    configureMotors();
   }
 
   public void climberOneExtend() {
@@ -100,7 +95,18 @@ public class ClimberSubsystem extends SubsystemBase {
     setDefaultCommand(RobotContainer.climberControl);
   }
 
-  @Override
-  public void periodic() {
+  /**
+   * Method to set the climber motors to factory defaults and brake mode.
+   */
+  private void configureMotors() {
+    supportOneLeft.setNeutralMode(NeutralMode.Brake);
+    armOneLeft.setNeutralMode(NeutralMode.Brake);
+    supportOneRight.setNeutralMode(NeutralMode.Brake);
+    armOneRight.setNeutralMode(NeutralMode.Brake);
+
+    supportTwoLeft.setNeutralMode(NeutralMode.Brake);
+    armTwoLeft.setNeutralMode(NeutralMode.Brake);
+    supportTwoRight.setNeutralMode(NeutralMode.Brake);
+    armTwoRight.setNeutralMode(NeutralMode.Brake);
   }
 }

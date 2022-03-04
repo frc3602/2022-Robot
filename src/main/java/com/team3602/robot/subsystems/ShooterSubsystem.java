@@ -40,47 +40,80 @@ public class ShooterSubsystem extends SubsystemBase {
   int count = 0;
   double targetShooterMotorRPM = 0.0;
 
+  /**
+   * Constructor for {@link ShooterSubsystem} class to run the
+   * {@link #configureMotors()} method.
+   */
   public ShooterSubsystem() {
     configureMotors();
   }
 
-  // Smart Dashboard information
+  /**
+   * Method to log information to the Smart Dashboard.
+   */
   public void logDataToSmartDashboard() {
   }
 
-  // Converts speed to RPM
+  /**
+   * Method to convert speed to RPM.
+   * 
+   * @param speedTo
+   * @return the current rpm
+   */
   public double speedToRPM(double speedTo) {
     double rpm = 0.0;
     rpm = speedTo * (600.0 / 42.0) * Shooter.shooterGearRatio;
     return rpm;
   }
 
-  // Converts RPM to speed
+  /**
+   * Method to convert RPM to speed.
+   * 
+   * @param RPMTo
+   * @return the current speed
+   */
   public double rpmToSpeed(double RPMTo) {
     double speed = 0.0;
     speed = (RPMTo * (42.0 / 600.0)) / Shooter.shooterGearRatio;
     return speed;
   }
 
-  // Stops all the motors
+  /**
+   * Method to stop the shooter motor.
+   */
   public void stopMotors() {
     shooterMotor.set(0.0);
   }
 
-  // Sets the shooter motors RPM
+  /**
+   * Method to set the rpm of the shooter.
+   * 
+   * @param rpm the rpm of the shooter
+   */
   public void setShooterMotorRPM(double rpm) {
     System.out.println("SetShooterMotorRPM " + rpm);
     targetShooterMotorRPM = rpm;
   }
 
+  /**
+   * Method to get the speed of the shooter motor.
+   */
   public void getShooterMotorSpeed() {
   }
 
-  // Updates the shooter motors RPM
+  /**
+   * Method to update the speed of the shooter motor.
+   */
   public void updateShooterMotorSpeed() {
     shooterPIDController.setReference(rpmToSpeed(targetShooterMotorRPM), ControlType.kVelocity);
   }
 
+  /**
+   * Method to calculate the distance from the limelight to the target taking in
+   * account of the angle that the limelight is at.
+   * 
+   * @return the calculated double for the shooter
+   */
   public double calculateDistance() {
     double a = RobotContainer.visionSubsystem.getTY() + Shooter.limelightAngleCorrection;
     double answer = Shooter.targetHeight / (Math.tan(Math.toRadians(a)));
@@ -88,6 +121,11 @@ public class ShooterSubsystem extends SubsystemBase {
     return answer;
   }
 
+  /**
+   * Method to caclulate and set the shooter motor speeds accordingly.
+   * 
+   * @return if there is a valid target
+   */
   public void calculateAndSetMotorSpeeds() {
     if (RobotContainer.visionSubsystem.noValidTarget()) {
       return;
@@ -103,13 +141,18 @@ public class ShooterSubsystem extends SubsystemBase {
     RobotContainer.shooterSubsystem.logDataToSmartDashboard();
   }
 
-  // Sets the motors to factory default and sets them to coast mode
+  /**
+   * Method to set the shooter motor to factory defaults and coast mode.
+   */
   private void configureMotors() {
     shooterMotor.restoreFactoryDefaults();
 
     shooterMotor.setIdleMode(IdleMode.kCoast);
   }
 
+  /**
+   * Method to set the shooter motor to 75% for testing.
+   */
   public void shootStuff() {
     shooterMotor.set(-0.75);
   }

@@ -21,6 +21,9 @@ import edu.wpi.first.wpilibj.RobotBase;
  * @author Cody Wellman
  */
 public final class Main {
+  /**
+   * Constructor for {@link Main} class.
+   */
   private Main() {
   }
 

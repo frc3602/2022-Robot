@@ -44,11 +44,16 @@ public class RobotContainer {
   // Operator interfaces
   public static OI oi;
 
+  /**
+   * Constructor for {@link RobotContainer} class to configure the button bindings.
+   */
   public RobotContainer() {
     configureButtonBindings();
   }
 
-  // Binds the commands to the buttons and stuff
+  /**
+   * Method to define button -> command mappings.
+   */
   private void configureButtonBindings() {
     // Index commands & buttons
     OI.indexInButton.whenPressed(RobotContainer.indexIn);
@@ -61,6 +66,11 @@ public class RobotContainer {
     OI.shooterButton.whenReleased(RobotContainer.shootStop);
   }
 
+  /**
+   * Method to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
   public Command getAutonomousCommand() {
     return driveCommand;
   }

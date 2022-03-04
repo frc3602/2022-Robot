@@ -46,57 +46,100 @@ public class VisionSubsystem extends SubsystemBase {
 
   boolean overrideLight = false;
 
+  /**
+   * Constructor for {@link VisionSubsystem} class to run the {@link #init()}
+   * method.
+   */
   public VisionSubsystem() {
     init();
   }
 
+  /**
+   * Method to set the light off and to set the stream on robot initialization.
+   */
   public void init() {
     lightOff();
     setPiP();
   }
 
+  /**
+   * @return the state of light
+   */
   public boolean overrideLight() {
     return overrideLight;
   }
 
+  /**
+   * Method to override the light on the lightlight.
+   * 
+   * @param overrideLight whether the light is overridden or not
+   */
   public void setOverrideLight(boolean overrideLight) {
     this.overrideLight = overrideLight;
   }
 
+  /**
+   * Method to save a screenshot of what is currently displayed on the limelight
+   * stream.
+   */
   public void takeSnapshot() {
     snapshot.setNumber(1);
   }
 
-  // Set camera to vision processing mode
+  /**
+   * Method to set the lightlight to vision processing mode.
+   */
   public void visionMode() {
     camMode.setNumber(0);
   }
 
-  // Set camera to driving mode
+  /**
+   * Method to set the lightlight to driving mode.
+   */
   public void driverMode() {
     camMode.setNumber(1);
   }
 
+  /**
+   * Method to set the stream on the lightlight.
+   */
   public void setPiP() {
     stream.setNumber(0);
   }
 
+  /**
+   * Method to set the pipeline on the lightlight.
+   * 
+   * @param pipe specific pipline to set
+   */
   public void setPipline(int pipe) {
     pipeline.setNumber(pipe);
   }
 
+  /**
+   * @return the current pipeline value from the limelight
+   */
   public int getPipeline() {
     return (int) pipeline.getDouble(0.0);
   }
 
+  /**
+   * @return the current TX value from the limelight
+   */
   public double getTX() {
     return x;
   }
 
+  /**
+   * @return the current TY value from the limelight
+   */
   public double getTY() {
     return y;
   }
 
+  /**
+   * Method to automatically zoom the lightlight.
+   */
   public void autoZoom() {
     if (noValidTarget()) {
       setPipline(0);
@@ -132,28 +175,41 @@ public class VisionSubsystem extends SubsystemBase {
     }
   }
 
-  // Forces light on
+  /**
+   * Method to force the limelight light on.
+   */
   public void lightOn() {
     ledMode.setNumber(3);
   }
 
-  // Forces light off
+  /**
+   * Method to force the limelight light off.
+   */
   public void lightOff() {
     ledMode.setNumber(1);
   }
 
-  // Changes light settings based on how vision pipeline is set
+  /**
+   * Method to change the limelight light settings based on how the pipeline is
+   * set.
+   */
   public void lightAuto() {
     ledMode.setNumber(0);
   }
 
-  // Checks if there are no valid targets, which is then sent to isFinished()
+  /**
+   * Method to check if there is a valid target.
+   *
+   * @return validTarget as a double
+   */
   public boolean validTarget() {
     validTarget = tv.getDouble(0.0);
     return validTarget != 0.0;
   }
 
-  // Returns an error if there are no valid targets
+  /**
+   * @return a boolean if there is no valid target
+   */
   public boolean noValidTarget() {
     validTarget = tv.getDouble(0.0);
     if (validTarget == 0) {
@@ -164,7 +220,9 @@ public class VisionSubsystem extends SubsystemBase {
     }
   }
 
-  // Smart Dashboard information
+  /**
+   * Method to log information to the Smart Dashboard.
+   */
   public void logDataToSmartDashboard() {
     SmartDashboard.putNumber("LimelightX", x);
     SmartDashboard.putNumber("LimelightY", y);

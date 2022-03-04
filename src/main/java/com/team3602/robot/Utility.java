@@ -19,6 +19,9 @@ package com.team3602.robot;
  * @author Cody Wellman
  */
 public class Utility {
+    /**
+     * Constructor for {@link Utility} class.
+     */
     public Utility() {
 
     }

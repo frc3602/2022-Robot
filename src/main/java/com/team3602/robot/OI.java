@@ -34,6 +34,9 @@ public class OI {
     public static JoystickButton indexOutButton = new JoystickButton(joystick, Controller.indexOutButton);
     public static JoystickButton shooterButton = new JoystickButton(joystick, Controller.shooterButton);
 
+    /**
+     * Constructor for {@link OI} class.
+     */
     public OI() {
     }
 }

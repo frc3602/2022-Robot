@@ -16,8 +16,9 @@ import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Controller;
 
 // Phoenix Imports
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -55,43 +56,43 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void climberOneExtend() {
-    armOneLeft.set(-Controller.leftStickX);
-    armOneRight.set(-Controller.leftStickX);
+    armOneLeft.set(ControlMode.PercentOutput, -Controller.leftStickX);
+    armOneRight.set(ControlMode.PercentOutput, -Controller.leftStickX);
   }
 
   public void climberOneRetract() {
-    armOneLeft.set(Controller.leftStickX);
-    armOneRight.set(Controller.leftStickX);
+    armOneLeft.set(ControlMode.PercentOutput, Controller.leftStickX);
+    armOneRight.set(ControlMode.PercentOutput, Controller.leftStickX);
   }
 
   public void climberTwoExtend() {
-    armTwoLeft.set(-Controller.rightStickX);
-    armTwoRight.set(-Controller.rightStickX);
+    armTwoLeft.set(ControlMode.PercentOutput, -Controller.rightStickX);
+    armTwoRight.set(ControlMode.PercentOutput, -Controller.rightStickX);
   }
 
   public void climberTwoRetract() {
-    armTwoLeft.set(Controller.rightStickX);
-    armTwoRight.set(Controller.rightStickX);
+    armTwoLeft.set(ControlMode.PercentOutput, Controller.rightStickX);
+    armTwoRight.set(ControlMode.PercentOutput, Controller.rightStickX);
   }
 
   public void climberOneForwards() {
-    supportOneLeft.set(-Controller.leftStickY);
-    supportOneRight.set(-Controller.leftStickY);
+    supportOneLeft.set(ControlMode.PercentOutput, -Controller.leftStickY);
+    supportOneRight.set(ControlMode.PercentOutput, -Controller.leftStickY);
   }
 
   public void climberOneBackwards() {
-    supportOneLeft.set(Controller.leftStickY);
-    supportOneRight.set(Controller.leftStickY);
+    supportOneLeft.set(ControlMode.PercentOutput, Controller.leftStickY);
+    supportOneRight.set(ControlMode.PercentOutput, Controller.leftStickY);
   }
 
   public void climberTwoForwards() {
-    supportTwoLeft.set(-Controller.rightStickY);
-    supportTwoRight.set(-Controller.rightStickY);
+    supportTwoLeft.set(ControlMode.PercentOutput, -Controller.rightStickY);
+    supportTwoRight.set(ControlMode.PercentOutput, -Controller.rightStickY);
   }
 
   public void climberTwoBackwards() {
-    supportTwoLeft.set(Controller.rightStickY);
-    supportTwoRight.set(Controller.rightStickY);
+    supportTwoLeft.set(ControlMode.PercentOutput, Controller.rightStickY);
+    supportTwoRight.set(ControlMode.PercentOutput, Controller.rightStickY);
   }
 
   public void initDefaultCommand() {

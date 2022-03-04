@@ -90,8 +90,10 @@ public class ClimberSubsystem extends SubsystemBase {
     supportTwoRight.set(ControlMode.PercentOutput, Controller.rightStickY);
   }
 
+  /**
+   * Method to set the default command for the {@link ClimberSubsystem}.
+   */
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
     setDefaultCommand(RobotContainer.climberControl);
   }
 

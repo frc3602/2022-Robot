@@ -11,6 +11,9 @@
 
 package com.team3602.robot.commands;
 
+import javax.lang.model.util.ElementScanner6;
+
+import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.subsystems.DriveSubsystem;
 
@@ -37,7 +40,22 @@ public class DriveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.driveSubsystem.driveCartesian();
+
+    double speed = OI.joystick.getRawAxis(1) * -1.0;
+    double turn = OI.joystick.getRawAxis(0);
+    double leftTrigger = OI.joystick.getRawAxis(2);
+    double rightTrigger = OI.joystick.getRawAxis(3);
+
+    double rotate = 0.0;
+
+    if (leftTrigger > 0.0)
+      rotate = leftTrigger * -1.0;
+    else if (rightTrigger > 0.0)
+      rotate = rightTrigger;
+    else
+      rotate = 0.0;
+
+    RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
   }
 
   @Override

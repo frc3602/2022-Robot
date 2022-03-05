@@ -33,15 +33,15 @@ public interface Constants {
    * The Climber interface provides climber subsystem CAN IDs.
    */
   public interface Climber {
-    int climbSupportOneLeftCANID = 4;
-    int climbArmOneLeftCANID = 5;
-    int climbSupportOneRightCANID = 6;
-    int climbArmOneRightCANID = 7;
+    int climbSupportInnerLeftCANID = 4;
+    int climbArmInnerLeftCANID = 5;
+    int climbSupportInnerRightCANID = 6;
+    int climbArmInnerRightCANID = 7;
 
-    int climbSupportTwoLeftCANID = 8;
-    int climbArmTwoLeftCANID = 9;
-    int climbSupportTwoRightCANID = 10;
-    int climbArmTwoRightCANID = 11;
+    int climbSupportOuterLeftCANID = 8;
+    int climbArmOuterLeftCANID = 9;
+    int climbSupportOuterRightCANID = 10;
+    int climbArmOuterRightCANID = 11;
   }
 
   /**
@@ -85,8 +85,6 @@ public interface Constants {
     int xboxControllerPort = 1;
 
     double leftStickX = OI.xboxController.getRawAxis(0) / 4;
-    double leftStickY = OI.xboxController.getRawAxis(1) / 4;
-    double rightStickX = OI.xboxController.getRawAxis(4) / 4;
     double rightStickY = OI.xboxController.getRawAxis(5) / 4;
 
     int indexInButton = 3;

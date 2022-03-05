@@ -91,10 +91,20 @@ public class DriveSubsystem extends SubsystemBase {
   /**
    * Method to create the cartesian drive.
    */
-  public void driveCartesian() {
+  public void driveCartesian(double y, double x, double z) {
     // Sets up the cartesian drive for the drive subsystem
-    RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(-OI.joystick.getY(), OI.joystick.getX(),
-        OI.joystick.getZ());
+    //RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(OI.joystick.getY() * -1.0, OI.joystick.getX(),OI.joystick.getZ());
+
+    // double deadband = 0.001;
+
+    // if(y < deadband)
+    //   y = 0.0;
+    // if(x < deadband)
+    //   x = 0.0;
+    // if(z < deadband)
+    //   z = 0.0;
+
+    RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y, x, z);
   }
 
   /**
@@ -107,6 +117,8 @@ public class DriveSubsystem extends SubsystemBase {
     frontRight.configFactoryDefault();
     backRight.configFactoryDefault();
 
+    frontLeft.setInverted(false);
+    backLeft.setInverted(false);
     frontRight.setInverted(true);
     backRight.setInverted(true);
   }

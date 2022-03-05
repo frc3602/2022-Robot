@@ -11,7 +11,9 @@
 
 package com.team3602.robot.commands;
 
+import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
+import com.team3602.robot.Constants.Controller;
 import com.team3602.robot.subsystems.ClimberSubsystem;
 
 // WPILib Imports
@@ -33,19 +35,15 @@ public class ClimberControl extends CommandBase {
 
   @Override
   public void initialize() {
-    RobotContainer.climberSubsystem.climberOneExtend();
-    RobotContainer.climberSubsystem.climberOneRetract();
-    RobotContainer.climberSubsystem.climberTwoExtend();
-    RobotContainer.climberSubsystem.climberTwoRetract();
-
-    RobotContainer.climberSubsystem.climberOneForwards();
-    RobotContainer.climberSubsystem.climberOneBackwards();
-    RobotContainer.climberSubsystem.climberTwoForwards();
-    RobotContainer.climberSubsystem.climberTwoBackwards();
   }
 
   @Override
   public void execute() {
+    RobotContainer.climberSubsystem.climberOneArm(OI.xboxController.getLeftY());
+    RobotContainer.climberSubsystem.climberTwoArm(OI.xboxController.getRightY());
+
+    RobotContainer.climberSubsystem.climberOneSupport(OI.xboxController.getLeftX());
+    RobotContainer.climberSubsystem.climberTwoSupport(OI.xboxController.getRightX());
   }
 
   @Override

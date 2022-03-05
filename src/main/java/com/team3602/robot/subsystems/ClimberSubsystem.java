@@ -32,15 +32,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class ClimberSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one
-  WPI_TalonFX supportOneLeft = new WPI_TalonFX(Climber.climbSupportOneLeftCANID);
-  WPI_TalonFX armOneLeft = new WPI_TalonFX(Climber.climbArmOneLeftCANID);
-  WPI_TalonFX supportOneRight = new WPI_TalonFX(Climber.climbSupportOneRightCANID);
-  WPI_TalonFX armOneRight = new WPI_TalonFX(Climber.climbArmOneRightCANID);
+  WPI_TalonFX supportInnerLeft = new WPI_TalonFX(Climber.climbSupportInnerLeftCANID);
+  WPI_TalonFX armInnerLeft = new WPI_TalonFX(Climber.climbArmInnerLeftCANID);
+  WPI_TalonFX supportInnerRight = new WPI_TalonFX(Climber.climbSupportInnerRightCANID);
+  WPI_TalonFX armInnerRight = new WPI_TalonFX(Climber.climbArmInnerRightCANID);
 
-  WPI_TalonFX supportTwoLeft = new WPI_TalonFX(Climber.climbSupportTwoLeftCANID);
-  WPI_TalonFX armTwoLeft = new WPI_TalonFX(Climber.climbArmTwoLeftCANID);
-  WPI_TalonFX supportTwoRight = new WPI_TalonFX(Climber.climbSupportTwoRightCANID);
-  WPI_TalonFX armTwoRight = new WPI_TalonFX(Climber.climbArmTwoRightCANID);
+  WPI_TalonFX supportOuterLeft = new WPI_TalonFX(Climber.climbSupportOuterLeftCANID);
+  WPI_TalonFX armOuterLeft = new WPI_TalonFX(Climber.climbArmOuterLeftCANID);
+  WPI_TalonFX supportOuterRight = new WPI_TalonFX(Climber.climbSupportOuterRightCANID);
+  WPI_TalonFX armOuterRight = new WPI_TalonFX(Climber.climbArmOuterRightCANID);
 
   /**
    * Constructor for {@link ClimberSubsystem} class to run the
@@ -50,65 +50,46 @@ public class ClimberSubsystem extends SubsystemBase {
     configureMotors();
   }
 
-  public void climberOneExtend() {
-    armOneLeft.set(ControlMode.PercentOutput, -Controller.leftStickX);
-    armOneRight.set(ControlMode.PercentOutput, -Controller.leftStickX);
+  public void climberOneArm(double speed) {
+    armInnerLeft.set(ControlMode.PercentOutput, speed);
+    armInnerRight.set(ControlMode.PercentOutput, speed);
   }
 
-  public void climberOneRetract() {
-    armOneLeft.set(ControlMode.PercentOutput, Controller.leftStickX);
-    armOneRight.set(ControlMode.PercentOutput, Controller.leftStickX);
+  public void climberTwoArm(double speed) {
+    armOuterLeft.set(ControlMode.PercentOutput, speed);
+    armOuterRight.set(ControlMode.PercentOutput, speed);
   }
 
-  public void climberTwoExtend() {
-    armTwoLeft.set(ControlMode.PercentOutput, -Controller.rightStickX);
-    armTwoRight.set(ControlMode.PercentOutput, -Controller.rightStickX);
+  public void climberOneSupport(double speed) {
+    supportInnerLeft.set(ControlMode.PercentOutput, speed);
+    supportInnerRight.set(ControlMode.PercentOutput, speed);
   }
 
-  public void climberTwoRetract() {
-    armTwoLeft.set(ControlMode.PercentOutput, Controller.rightStickX);
-    armTwoRight.set(ControlMode.PercentOutput, Controller.rightStickX);
+  public void climberTwoSupport(double speed) {
+    supportOuterLeft.set(ControlMode.PercentOutput, speed);
+    supportOuterRight.set(ControlMode.PercentOutput, speed);
   }
 
-  public void climberOneForwards() {
-    supportOneLeft.set(ControlMode.PercentOutput, -Controller.leftStickY);
-    supportOneRight.set(ControlMode.PercentOutput, -Controller.leftStickY);
-  }
-
-  public void climberOneBackwards() {
-    supportOneLeft.set(ControlMode.PercentOutput, Controller.leftStickY);
-    supportOneRight.set(ControlMode.PercentOutput, Controller.leftStickY);
-  }
-
-  public void climberTwoForwards() {
-    supportTwoLeft.set(ControlMode.PercentOutput, -Controller.rightStickY);
-    supportTwoRight.set(ControlMode.PercentOutput, -Controller.rightStickY);
-  }
-
-  public void climberTwoBackwards() {
-    supportTwoLeft.set(ControlMode.PercentOutput, Controller.rightStickY);
-    supportTwoRight.set(ControlMode.PercentOutput, Controller.rightStickY);
-  }
 
   /**
    * Method to set the default command for the {@link ClimberSubsystem}.
    */
-  public void initDefaultCommand() {
-    setDefaultCommand(RobotContainer.climberControl);
-  }
+  // public void initDefaultCommand() {
+  //   setDefaultCommand(RobotContainer.climberControl);
+  // }
 
   /**
    * Method to set the climber motors to factory defaults and brake mode.
    */
   private void configureMotors() {
-    supportOneLeft.setNeutralMode(NeutralMode.Brake);
-    armOneLeft.setNeutralMode(NeutralMode.Brake);
-    supportOneRight.setNeutralMode(NeutralMode.Brake);
-    armOneRight.setNeutralMode(NeutralMode.Brake);
+    supportInnerLeft.setNeutralMode(NeutralMode.Brake);
+    armInnerLeft.setNeutralMode(NeutralMode.Brake);
+    supportInnerRight.setNeutralMode(NeutralMode.Brake);
+    armInnerRight.setNeutralMode(NeutralMode.Brake);
 
-    supportTwoLeft.setNeutralMode(NeutralMode.Brake);
-    armTwoLeft.setNeutralMode(NeutralMode.Brake);
-    supportTwoRight.setNeutralMode(NeutralMode.Brake);
-    armTwoRight.setNeutralMode(NeutralMode.Brake);
+    supportOuterLeft.setNeutralMode(NeutralMode.Brake);
+    armOuterLeft.setNeutralMode(NeutralMode.Brake);
+    supportOuterRight.setNeutralMode(NeutralMode.Brake);
+    armOuterRight.setNeutralMode(NeutralMode.Brake);
   }
 }

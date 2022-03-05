@@ -91,5 +91,8 @@ public class ClimberSubsystem extends SubsystemBase {
     armOuterLeft.setNeutralMode(NeutralMode.Brake);
     supportOuterRight.setNeutralMode(NeutralMode.Brake);
     armOuterRight.setNeutralMode(NeutralMode.Brake);
+
+    supportOuterRight.setInverted(true);
+    supportInnerRight.setInverted(true);
   }
 }

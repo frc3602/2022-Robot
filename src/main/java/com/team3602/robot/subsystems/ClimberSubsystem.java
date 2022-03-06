@@ -11,13 +11,17 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Controller;
 
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 // WPILib Imports
@@ -32,67 +36,123 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class ClimberSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one
-  WPI_TalonFX supportInnerLeft = new WPI_TalonFX(Climber.climbSupportInnerLeftCANID);
-  WPI_TalonFX armInnerLeft = new WPI_TalonFX(Climber.climbArmInnerLeftCANID);
-  WPI_TalonFX supportInnerRight = new WPI_TalonFX(Climber.climbSupportInnerRightCANID);
-  WPI_TalonFX armInnerRight = new WPI_TalonFX(Climber.climbArmInnerRightCANID);
+  WPI_TalonFX pivotInnerLeft = new WPI_TalonFX(Climber.climbPivotInnerLeftCANID);
+  WPI_TalonFX extendInnerLeft = new WPI_TalonFX(Climber.climbExtendInnerLeftCANID);
+  WPI_TalonFX pivotInnerRight = new WPI_TalonFX(Climber.climbPivotInnerRightCANID);
+  WPI_TalonFX extendInnerRight = new WPI_TalonFX(Climber.climbExtendInnerRightCANID);
 
-  WPI_TalonFX supportOuterLeft = new WPI_TalonFX(Climber.climbSupportOuterLeftCANID);
-  WPI_TalonFX armOuterLeft = new WPI_TalonFX(Climber.climbArmOuterLeftCANID);
-  WPI_TalonFX supportOuterRight = new WPI_TalonFX(Climber.climbSupportOuterRightCANID);
-  WPI_TalonFX armOuterRight = new WPI_TalonFX(Climber.climbArmOuterRightCANID);
+  WPI_TalonFX pivotOuterLeft = new WPI_TalonFX(Climber.climbPivotOuterLeftCANID);
+  WPI_TalonFX extendOuterLeft = new WPI_TalonFX(Climber.climbExtendOuterLeftCANID);
+  WPI_TalonFX pivotOuterRight = new WPI_TalonFX(Climber.climbPivotOuterRightCANID);
+  WPI_TalonFX extendOuterRight = new WPI_TalonFX(Climber.climbExtendOuterRightCANID);
 
-  /**
-   * Constructor for {@link ClimberSubsystem} class to run the
-   * {@link #configureMotors()} method.
-   */
   public ClimberSubsystem() {
     configureMotors();
   }
 
-  public void climberOneArm(double speed) {
-    armInnerLeft.set(ControlMode.PercentOutput, speed);
-    armInnerRight.set(ControlMode.PercentOutput, speed);
+  public void Pivot(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
+    {
+      motor1.set(TalonFXControlMode.MotionMagic,  ticks);
+      motor2.set(TalonFXControlMode.MotionMagic,  ticks);
+    }
+
+  public void Extend(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
+    {
+      motor1.set(TalonFXControlMode.MotionMagic,  ticks);
+      motor2.set(TalonFXControlMode.MotionMagic,  ticks);
+    }
+
+
+  private void configurePivotMotor(WPI_TalonFX motor) {
+
+    motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+      // motor.setSensorPhase(true);
+    // motor.setInverted(false);
+    /* Set relevant frame periods to be at least as fast as periodic rate*/
+    motor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
+
+    motor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
+    /* set the peak and nominal outputs */
+    motor.configNominalOutputForward(0, Constants.kTimeoutMs);
+    motor.configNominalOutputReverse(0, Constants.kTimeoutMs);
+    motor.configPeakOutputForward(1, Constants.kTimeoutMs);
+    motor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+    // motor.configPeakOutputForward(0.5, Constants.kTimeoutMs);
+    // motor.configPeakOutputReverse(-0.5, Constants.kTimeoutMs);
+
+    // motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
+    // motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
+    
+    /* set closed loop gains in slot0 - see documentation */
+    motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
+    motor.config_kF(0, (1023.0/1200), Constants.kTimeoutMs);
+    motor.config_kP(0, 0.9, Constants.kTimeoutMs);
+    motor.config_kI(0, 0, Constants.kTimeoutMs);
+    motor.config_kD(0, 0, Constants.kTimeoutMs);
+    /* set acceleration and vcruise velocity - see documentation */
+    // motor.configMotionCruiseVelocity(1150, Constants.kTimeoutMs);
+    // motor.configMotionAcceleration(990, Constants.kTimeoutMs);
+    motor.configMotionCruiseVelocity(1800, Constants.kTimeoutMs);
+    motor.configMotionAcceleration(1500, Constants.kTimeoutMs);
+
+    motor.configForwardSoftLimitThreshold(Climber.pivotSoftLimitTicks);
+    motor.configReverseSoftLimitThreshold(Climber.pivotSoftLimitTicks * -1.0);
+    
+    // motor.current(40, Constants.kTimeoutMs);
+    // motor.configContinuousCurrentLimit(40, Constants.kTimeoutMs);
+
   }
 
-  public void climberTwoArm(double speed) {
-    armOuterLeft.set(ControlMode.PercentOutput, speed);
-    armOuterRight.set(ControlMode.PercentOutput, speed);
+  private void configureExtendMotor(WPI_TalonFX motor) {
+
+    motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+      // motor.setSensorPhase(true);
+    // motor.setInverted(false);
+    /* Set relevant frame periods to be at least as fast as periodic rate*/
+    motor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
+
+    motor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
+    /* set the peak and nominal outputs */
+    motor.configNominalOutputForward(0, Constants.kTimeoutMs);
+    motor.configNominalOutputReverse(0, Constants.kTimeoutMs);
+    motor.configPeakOutputForward(1, Constants.kTimeoutMs);
+    motor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+    // motor.configPeakOutputForward(0.5, Constants.kTimeoutMs);
+    // motor.configPeakOutputReverse(-0.5, Constants.kTimeoutMs);
+
+    // motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
+    // motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
+    
+    /* set closed loop gains in slot0 - see documentation */
+    motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
+    motor.config_kF(0, (1023.0/1200), Constants.kTimeoutMs);
+    motor.config_kP(0, 0.9, Constants.kTimeoutMs);
+    motor.config_kI(0, 0, Constants.kTimeoutMs);
+    motor.config_kD(0, 0, Constants.kTimeoutMs);
+    /* set acceleration and vcruise velocity - see documentation */
+    // motor.configMotionCruiseVelocity(1150, Constants.kTimeoutMs);
+    // motor.configMotionAcceleration(990, Constants.kTimeoutMs);
+    motor.configMotionCruiseVelocity(1800, Constants.kTimeoutMs);
+    motor.configMotionAcceleration(1500, Constants.kTimeoutMs);
+
+    motor.configForwardSoftLimitThreshold(Climber.extendSoftLimitTicks);
+    motor.configReverseSoftLimitThreshold(0.0);
+
   }
 
-  public void climberOneSupport(double speed) {
-    supportInnerLeft.set(ControlMode.PercentOutput, speed);
-    supportInnerRight.set(ControlMode.PercentOutput, speed);
-  }
+  private void configureMotors()
+  {
+    configurePivotMotor(pivotInnerLeft);
+    configurePivotMotor(pivotInnerRight);
+    configurePivotMotor(pivotOuterLeft);
+    configurePivotMotor(pivotOuterRight);
 
-  public void climberTwoSupport(double speed) {
-    supportOuterLeft.set(ControlMode.PercentOutput, speed);
-    supportOuterRight.set(ControlMode.PercentOutput, speed);
-  }
+    configureExtendMotor(extendInnerLeft);
+    configureExtendMotor(extendInnerRight);
+    configureExtendMotor(extendOuterLeft);
+    configureExtendMotor(extendOuterRight);
 
-
-  /**
-   * Method to set the default command for the {@link ClimberSubsystem}.
-   */
-  // public void initDefaultCommand() {
-  //   setDefaultCommand(RobotContainer.climberControl);
-  // }
-
-  /**
-   * Method to set the climber motors to factory defaults and brake mode.
-   */
-  private void configureMotors() {
-    supportInnerLeft.setNeutralMode(NeutralMode.Brake);
-    armInnerLeft.setNeutralMode(NeutralMode.Brake);
-    supportInnerRight.setNeutralMode(NeutralMode.Brake);
-    armInnerRight.setNeutralMode(NeutralMode.Brake);
-
-    supportOuterLeft.setNeutralMode(NeutralMode.Brake);
-    armOuterLeft.setNeutralMode(NeutralMode.Brake);
-    supportOuterRight.setNeutralMode(NeutralMode.Brake);
-    armOuterRight.setNeutralMode(NeutralMode.Brake);
-
-    supportOuterRight.setInverted(true);
-    supportInnerRight.setInverted(true);
+    // supportOuterRight.setInverted(true);
+    // supportInnerRight.setInverted(true);
   }
 }

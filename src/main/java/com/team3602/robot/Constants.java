@@ -19,6 +19,26 @@ package com.team3602.robot;
  */
 public interface Constants {
 
+    	/**
+	 * Which PID slot to pull gains from. Starting 2018, you can choose from
+	 * 0,1,2 or 3. Only the first two (0,1) are visible in web-based
+	 * configuration.
+	 */
+	public static final int kSlotIdx = 0;
+
+	/*
+	 * Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops. For
+	 * now we just want the primary one.
+	 */
+	public static final int kPIDLoopIdx = 0;
+
+	/*
+	 * set to zero to skip waiting for confirmation, set to nonzero to wait and
+	 * report to DS if action fails.
+	 */
+  public static final int kTimeoutMs = 10;
+
+
   /**
    * The Drivetrain interface provides drive subsystem CAN IDs.
    */
@@ -33,15 +53,19 @@ public interface Constants {
    * The Climber interface provides climber subsystem CAN IDs.
    */
   public interface Climber {
-    int climbSupportInnerLeftCANID = 4;
-    int climbArmInnerLeftCANID = 5;
-    int climbSupportInnerRightCANID = 6;
-    int climbArmInnerRightCANID = 7;
+    int climbPivotInnerLeftCANID = 4;
+    int climbExtendInnerLeftCANID = 5;
+    int climbPivotInnerRightCANID = 6;
+    int climbExtendInnerRightCANID = 7;
 
-    int climbSupportOuterLeftCANID = 8;
-    int climbArmOuterLeftCANID = 9;
-    int climbSupportOuterRightCANID = 10;
-    int climbArmOuterRightCANID = 11;
+    int climbPivotOuterLeftCANID = 8;
+    int climbExtendOuterLeftCANID = 9;
+    int climbPivotOuterRightCANID = 10;
+    int climbExtendOuterRightCANID = 11;
+
+
+    double pivotSoftLimitTicks = 2048;
+    double extendSoftLimitTicks = 5000;
   }
 
   /**

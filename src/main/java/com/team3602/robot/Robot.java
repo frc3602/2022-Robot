@@ -35,7 +35,8 @@ public class Robot extends TimedRobot {
     // Sets the default command to the drive command
     RobotContainer.driveSubsystem.setDefaultCommand(RobotContainer.driveCommand);
     RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.climberControl);
-  }
+    RobotContainer.shooterSubsystem.setDefaultCommand(RobotContainer.calculateShooterSpeedCommand);
+ }
 
   @Override
   public void robotPeriodic() {

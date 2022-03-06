@@ -54,34 +54,34 @@ public class ShooterSubsystem extends SubsystemBase {
   public void logDataToSmartDashboard() {
   }
 
-  /**
-   * Method to convert speed to RPM.
-   * 
-   * @param speedTo
-   * @return the current rpm
-   */
-  public double speedToRPM(double speedTo) {
-    double rpm = 0.0;
-    rpm = speedTo * (600.0 / 42.0) * Shooter.shooterGearRatio;
-    return rpm;
-  }
+  // /**
+  //  * Method to convert speed to RPM.
+  //  * 
+  //  * @param speedTo
+  //  * @return the current rpm
+  //  */
+  // public double speedToRPM(double speedTo) {
+  //   double rpm = 0.0;
+  //   rpm = speedTo * (600.0 / 42.0) * Shooter.shooterGearRatio;
+  //   return rpm;
+  // }
 
-  /**
-   * Method to convert RPM to speed.
-   * 
-   * @param RPMTo
-   * @return the current speed
-   */
-  public double rpmToSpeed(double RPMTo) {
-    double speed = 0.0;
-    speed = (RPMTo * (42.0 / 600.0)) / Shooter.shooterGearRatio;
-    return speed;
-  }
+  // /**
+  //  * Method to convert RPM to speed.
+  //  * 
+  //  * @param RPMTo
+  //  * @return the current speed
+  //  */
+  // public double rpmToSpeed(double RPMTo) {
+  //   double speed = 0.0;
+  //   speed = (RPMTo * (42.0 / 600.0)) / Shooter.shooterGearRatio;
+  //   return speed;
+  // }
 
   /**
    * Method to stop the shooter motor.
    */
-  public void stopMotors() {
+  public void stopMotor() {
     shooterMotor.set(0.0);
   }
 
@@ -105,7 +105,7 @@ public class ShooterSubsystem extends SubsystemBase {
    * Method to update the speed of the shooter motor.
    */
   public void updateShooterMotorSpeed() {
-    shooterPIDController.setReference(rpmToSpeed(targetShooterMotorRPM), ControlType.kVelocity);
+    shooterPIDController.setReference(targetShooterMotorRPM, ControlType.kVelocity);
   }
 
   /**
@@ -126,14 +126,18 @@ public class ShooterSubsystem extends SubsystemBase {
    * 
    * @return if there is a valid target
    */
-  public void calculateAndSetMotorSpeeds() {
-    if (RobotContainer.visionSubsystem.noValidTarget()) {
+  public void calculateAndSetMotorSpeeds()
+  {
+    if (RobotContainer.visionSubsystem.noValidTarget())
+    {
       return;
     }
 
     double distance = calculateDistance();
 
     System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
+
+    //some magic decimal crazyness going on
 
     double newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
 
@@ -144,7 +148,8 @@ public class ShooterSubsystem extends SubsystemBase {
   /**
    * Method to set the shooter motor to factory defaults and coast mode.
    */
-  private void configureMotors() {
+  private void configureMotors()
+  {
     shooterMotor.restoreFactoryDefaults();
 
     shooterMotor.setIdleMode(IdleMode.kCoast);

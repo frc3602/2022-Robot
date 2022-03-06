@@ -37,7 +37,7 @@ public class ShootStop extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.shooterSubsystem.stopMotors();
+    RobotContainer.shooterSubsystem.stopMotor();
   }
 
   @Override

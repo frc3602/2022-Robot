@@ -39,11 +39,11 @@ public class ClimberControl extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.climberSubsystem.climberOneArm(OI.xboxController.getLeftY());
-    RobotContainer.climberSubsystem.climberTwoArm(OI.xboxController.getRightY());
+    // RobotContainer.climberSubsystem.climberOneArm(OI.xboxController.getLeftY());
+    // RobotContainer.climberSubsystem.climberTwoArm(OI.xboxController.getRightY());
 
-    RobotContainer.climberSubsystem.climberOneSupport(OI.xboxController.getLeftX() * 0.25);
-    RobotContainer.climberSubsystem.climberTwoSupport(OI.xboxController.getRightX() * 0.25);
+    // RobotContainer.climberSubsystem.climberOneSupport(OI.xboxController.getLeftX() * 0.25);
+    // RobotContainer.climberSubsystem.climberTwoSupport(OI.xboxController.getRightX() * 0.25);
   }
 
   @Override

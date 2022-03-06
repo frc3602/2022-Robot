@@ -40,6 +40,7 @@ public class RobotContainer {
   public static IndexStop indexStop = new IndexStop(indexSubsystem);
   public static ShootStuff shootStuff = new ShootStuff(shooterSubsystem);
   public static ShootStop shootStop = new ShootStop(shooterSubsystem);
+  public static CalculateShooterSpeedCommand calculateShooterSpeedCommand = new CalculateShooterSpeedCommand();
 
   // Operator interfaces
   public static OI oi;

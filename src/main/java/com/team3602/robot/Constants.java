@@ -81,6 +81,10 @@ public interface Constants {
     double limelightAngleCorrection = 27; // Angle of the limelight in relation to the ground
     double targetHeight = 104 - limelightHeight; // Height of the target from ground to top minus the height of the
                                                  // limelight on the robot
+
+    public static final double rotationalErrorTolerance = 2.0f; // 0.5 degree error tolerance 
+    public static final double shooterSpeedErrorTolerance = 175.1f;
+                                               
   }
 
   /**

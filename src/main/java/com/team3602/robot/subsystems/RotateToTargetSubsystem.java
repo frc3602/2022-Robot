@@ -32,13 +32,16 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
     setSetpoint(0); // Sets where the PID controller should move the system
 
 
-    // super.se
-    // this.set
     // setInputRange(-27f, 27f); // Lowest value is -27 degrees (to the left), highest value is 27 degrees (to the right)
 
     // setOutputRange(-0.5, 0.5); // The outputs sent to the motors, which ranges from -1 to 1.
 
-    m_controller.setTolerance(Shooter.rotationalErrorTolerance);
+    getController().enableContinuousInput(-27.0, 27.0); //parameters moved to the controller. call getController() for access
+    getController().setIntegratorRange(-0.5, 0.5);
+
+    getController().setTolerance(Shooter.rotationalErrorTolerance);
+
+    //m_controller.setTolerance(Shooter.rotationalErrorTolerance);
     //setAbsoluteTolerance(Shooter.rotationalErrorTolerance); 
     
     disable(); // - Enables the PID controller.

@@ -26,11 +26,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @version 1.0 04 Mar 2022
  * @author Cody Wellman
  */
-public class DriveCommand extends CommandBase {
+public class DriveCommandCommand extends CommandBase {
   /**
-   * Constructor for {@link DriveCommand} class to set subsystem requirements.
+   * Constructor for {@link DriveCommandCommand} class to set subsystem requirements.
    */
-  public DriveCommand(DriveSubsystem subsystem) {
+  public DriveCommandCommand(DriveSubsystem subsystem) {
     addRequirements(RobotContainer.driveSubsystem);
   }
 

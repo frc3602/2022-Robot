@@ -32,14 +32,14 @@ public class RobotContainer {
   public static IndexSubsystem indexSubsystem = new IndexSubsystem();
 
   // Commands
-  public static DriveCommand driveCommand = new DriveCommand(driveSubsystem);
-  public static ClimberControl climberControl = new ClimberControl(climberSubsystem);
-  public static ActivateIntake acticateIntake = new ActivateIntake(indexSubsystem);
-  public static IndexIn indexIn = new IndexIn(indexSubsystem);
-  public static IndexOut indexOut = new IndexOut(indexSubsystem);
-  public static IndexStop indexStop = new IndexStop(indexSubsystem);
-  public static ShootStuff shootStuff = new ShootStuff(shooterSubsystem);
-  public static ShootStop shootStop = new ShootStop(shooterSubsystem);
+  public static DriveCommandCommand driveCommand = new DriveCommandCommand(driveSubsystem);
+  public static ClimberControlCommand climberControl = new ClimberControlCommand(climberSubsystem);
+  public static ActivateIntakeCommand acticateIntake = new ActivateIntakeCommand(indexSubsystem);
+  public static IndexInCommand indexIn = new IndexInCommand(indexSubsystem);
+  public static IndexOutCommand indexOut = new IndexOutCommand(indexSubsystem);
+  public static IndexStopCommand indexStop = new IndexStopCommand(indexSubsystem);
+  public static ShootStuffCommand shootStuff = new ShootStuffCommand(shooterSubsystem);
+  public static ShootStopCommand shootStop = new ShootStopCommand(shooterSubsystem);
   public static CalculateShooterSpeedCommand calculateShooterSpeedCommand = new CalculateShooterSpeedCommand();
 
   // Operator interfaces

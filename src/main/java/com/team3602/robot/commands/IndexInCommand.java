@@ -1,5 +1,5 @@
 /*
- * @(#)IndexStop.java        1.0 22/03/04
+ * @(#)IndexIn.java        1.0 22/03/04
  *
  * Copyright (c) 2022 Team 3602
  * 500 S Lincoln Rd, Escanaba, Michigan, 49829, U.S.A.
@@ -18,16 +18,16 @@ import com.team3602.robot.subsystems.IndexSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
- * The IndexStop class provides the cancellation of the indexer / magazine.
+ * The IndexIn class provides the execution of the indexer / magazine.
  *
  * @version 1.0 04 Mar 2022
  * @author Cody Wellman
  */
-public class IndexStop extends CommandBase {
+public class IndexInCommand extends CommandBase {
   /**
-   * Constructor for {@link IndexStop} class to set subsystem requirements.
+   * Constructor for {@link IndexInCommand} class to set subsystem requirements.
    */
-  public IndexStop(IndexSubsystem subsystem) {
+  public IndexInCommand(IndexSubsystem subsystem) {
     addRequirements(RobotContainer.indexSubsystem);
   }
 
@@ -37,7 +37,7 @@ public class IndexStop extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.indexSubsystem.stopMotors();
+    RobotContainer.indexSubsystem.indexIn();
   }
 
   @Override

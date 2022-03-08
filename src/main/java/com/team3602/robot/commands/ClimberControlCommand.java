@@ -25,11 +25,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @version 1.0 04 Mar 2022
  * @author Cody Wellman
  */
-public class ClimberControl extends CommandBase {
+public class ClimberControlCommand extends CommandBase {
   /**
-   * Constructor for {@link ClimberControl} class to set subsystem requirements.
+   * Constructor for {@link ClimberControlCommand} class to set subsystem requirements.
    */
-  public ClimberControl(ClimberSubsystem subsystem) {
+  public ClimberControlCommand(ClimberSubsystem subsystem) {
     addRequirements(RobotContainer.climberSubsystem);
   }
 

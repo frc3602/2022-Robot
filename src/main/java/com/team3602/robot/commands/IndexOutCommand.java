@@ -1,5 +1,5 @@
 /*
- * @(#)ShootStop.java        1.0 22/03/04
+ * @(#)IndexOut.java        1.0 22/03/04
  *
  * Copyright (c) 2022 Team 3602
  * 500 S Lincoln Rd, Escanaba, Michigan, 49829, U.S.A.
@@ -12,23 +12,23 @@
 package com.team3602.robot.commands;
 
 import com.team3602.robot.RobotContainer;
-import com.team3602.robot.subsystems.ShooterSubsystem;
+import com.team3602.robot.subsystems.IndexSubsystem;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
- * The ShootStop class provides the cancellation of the shooter.
+ * The IndexOut class provides the revered execution of the indexer / magazine.
  *
  * @version 1.0 04 Mar 2022
  * @author Cody Wellman
  */
-public class ShootStop extends CommandBase {
+public class IndexOutCommand extends CommandBase {
   /**
-   * Constructor for {@link ShootStop} class to set subsystem requirements.
+   * Constructor for {@link IndexOutCommand} class to set subsystem requirements.
    */
-  public ShootStop(ShooterSubsystem subsystem) {
-    addRequirements(RobotContainer.shooterSubsystem);
+  public IndexOutCommand(IndexSubsystem subsystem) {
+    addRequirements(RobotContainer.indexSubsystem);
   }
 
   @Override
@@ -37,7 +37,7 @@ public class ShootStop extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.shooterSubsystem.stopMotor();
+    RobotContainer.indexSubsystem.indexOut();
   }
 
   @Override

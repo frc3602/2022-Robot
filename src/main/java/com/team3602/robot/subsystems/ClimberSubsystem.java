@@ -50,6 +50,25 @@ public class ClimberSubsystem extends SubsystemBase {
     configureMotors();
   }
 
+  private double PivotDegreesToTicks(double degrees)
+    {
+    double ticks = 0.0;
+
+    ticks = Climber.pivotInverseTotalRatio * Constants.falconTicksPerRotation * (degrees / 360.0);
+
+    return ticks;
+    }
+
+  private double ExtendLengthToTicks(double length)
+    {
+    double ticks = 0.0;
+
+    ticks = Climber.extendInversePlanetaryRatio * Constants.falconTicksPerRotation * ( length / Climber.extendRotationsToInches);
+
+    return ticks;
+    }
+
+
   public void Pivot(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
     {
       motor1.set(TalonFXControlMode.MotionMagic,  ticks);

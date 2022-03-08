@@ -38,6 +38,8 @@ public interface Constants {
 	 */
   public static final int kTimeoutMs = 10;
 
+  public static final double falconTicksPerRotation = 2048.0;
+
 
   /**
    * The Drivetrain interface provides drive subsystem CAN IDs.
@@ -64,8 +66,23 @@ public interface Constants {
     int climbExtendOuterRightCANID = 11;
 
 
-    double pivotSoftLimitTicks = 2048;
-    double extendSoftLimitTicks = 5000;
+    double pivotSoftLimitTicks = 23893;
+    double extendSoftLimitTicks = 97784;
+
+
+    double pivotPlanetaryRatio = 1.0/60;
+    double pivotChainRatio = 12.0/26.0;
+    double pivotGearsRatio = 20.0/64.0;
+
+    double pivotTotalRatio = pivotPlanetaryRatio * pivotGearsRatio * pivotChainRatio;
+
+    double pivotInverseTotalRatio = 1.0 / pivotTotalRatio;
+
+
+    double extendPlanetaryRatio = 1.0/20.0;
+    double extendInversePlanetaryRatio = 20.0/1.0;
+    double extendDrumDiameter = 2.0;
+    double extendRotationsToInches = Math.PI * extendDrumDiameter;
   }
 
   /**

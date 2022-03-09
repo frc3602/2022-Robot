@@ -16,6 +16,7 @@ import com.team3602.robot.Constants.Controller;
 // WPILib Imports
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -33,6 +34,27 @@ public class OI {
     public static JoystickButton indexInButton = new JoystickButton(joystick, Controller.indexInButton);
     public static JoystickButton indexOutButton = new JoystickButton(joystick, Controller.indexOutButton);
     public static JoystickButton shooterButton = new JoystickButton(joystick, Controller.shooterButton);
+
+    // public enum Button {
+    //     kLeftBumper(5),
+    //     kRightBumper(6),
+    //     kLeftStick(9),
+    //     kRightStick(10),
+    //     kA(1),
+    //     kB(2),
+    //     kX(3),
+    //     kY(4),
+    //     kBack(7),
+    //     kStart(8);
+    
+
+    public static JoystickButton xButton            = new JoystickButton(xboxController, 3);
+    public static JoystickButton yButton            = new JoystickButton(xboxController, 4);
+    public static JoystickButton aButton            = new JoystickButton(xboxController, 1);
+    public static JoystickButton bButton            = new JoystickButton(xboxController, 2);
+
+    public static JoystickButton leftBumperButton   = new JoystickButton(xboxController, 5);
+    public static JoystickButton rightBumperButton  = new JoystickButton(xboxController, 6);
 
     /**
      * Constructor for {@link OI} class.

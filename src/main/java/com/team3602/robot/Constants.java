@@ -129,8 +129,6 @@ public interface Constants {
     int joystickPort = 0;
     int xboxControllerPort = 1;
 
-    double leftStickX = OI.xboxController.getRawAxis(0) / 4;
-    double rightStickY = OI.xboxController.getRawAxis(5) / 4;
 
     int indexInButton = 3;
     int indexOutButton = 5;

@@ -50,6 +50,53 @@ public class ClimberSubsystem extends SubsystemBase {
     configureMotors();
   }
 
+  public double GetCurrentOuterLeftLength()
+  {
+    return ExtendTicksToLength( extendOuterLeft.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+
+  }
+
+  public double GetCurrentOuterRightLength()
+  {
+    return ExtendTicksToLength( extendOuterRight.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+
+  }
+
+  public double GetCurrentInnerLeftLength()
+  {
+    return ExtendTicksToLength( extendInnerLeft.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+
+  }
+
+  public double GetCurrentInnerRightLength()
+  {
+    return ExtendTicksToLength( extendInnerRight.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+
+  }
+
+  public double GetCurrentOuterLeftAngle()
+  {
+    return PivotTicksToDegrees( pivotOuterLeft.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+
+  }
+  public double GetCurrentOuterRightAngle()
+  {
+    return PivotTicksToDegrees( pivotOuterRight.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+
+  }
+  public double GetCurrentInnerLeftAngle()
+  {
+    return PivotTicksToDegrees( pivotInnerLeft.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+
+  }
+  public double GetCurrentInnerRightAngle()
+  {
+    return PivotTicksToDegrees( pivotInnerRight.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+
+  }
+
+
+
   private double PivotDegreesToTicks(double degrees)
     {
     double ticks = 0.0;
@@ -57,6 +104,15 @@ public class ClimberSubsystem extends SubsystemBase {
     ticks = Climber.pivotInverseTotalRatio * Constants.falconTicksPerRotation * (degrees / 360.0);
 
     return ticks;
+    }
+
+  private double PivotTicksToDegrees(double ticks)
+    {
+    double angle = 0.0;
+
+    angle = (ticks / (Climber.pivotInverseTotalRatio * Constants.falconTicksPerRotation)) * 360.0 ;
+
+    return angle;
     }
 
   private double ExtendLengthToTicks(double length)
@@ -68,21 +124,58 @@ public class ClimberSubsystem extends SubsystemBase {
     return ticks;
     }
 
+  private double ExtendTicksToLength(double ticks)
+    {
+    double length = 0.0;
 
-  public void Pivot(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
+    length = (ticks / (Climber.extendInversePlanetaryRatio * Constants.falconTicksPerRotation) ) * Climber.extendRotationsToInches;
+
+    return length;
+    }
+
+  public void PivotInner(double angle)
+    {
+      double ticks = PivotDegreesToTicks(angle);
+  
+      Pivot(pivotInnerLeft, pivotInnerRight, ticks);
+    }
+  
+  public void PivotOuter(double angle)
+    {
+      double ticks = PivotDegreesToTicks(angle);
+  
+      Pivot(pivotOuterLeft, pivotOuterRight, ticks);
+    }
+
+  public void ExtendInner(double length)
+  {
+    double ticks = ExtendLengthToTicks(length);
+
+    Extend(extendInnerLeft, extendInnerRight, ticks);
+  }
+
+  public void ExtendOuter(double length)
+  {
+    double ticks = ExtendLengthToTicks(length);
+
+    Extend(extendOuterLeft, extendOuterRight, ticks);
+  }
+
+  private void Pivot(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
     {
       motor1.set(TalonFXControlMode.MotionMagic,  ticks);
       motor2.set(TalonFXControlMode.MotionMagic,  ticks);
     }
 
-  public void Extend(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
+  private void Extend(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
     {
       motor1.set(TalonFXControlMode.MotionMagic,  ticks);
       motor2.set(TalonFXControlMode.MotionMagic,  ticks);
     }
 
 
-  private void configurePivotMotor(WPI_TalonFX motor) {
+  private void configurePivotMotor(WPI_TalonFX motor)
+    {
 
     motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
       // motor.setSensorPhase(true);

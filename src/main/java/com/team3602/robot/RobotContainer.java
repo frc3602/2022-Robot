@@ -65,7 +65,16 @@ public class RobotContainer {
     // Shooter commands & buttons
     OI.shooterButton.whenPressed(RobotContainer.shootStuff);
     OI.shooterButton.whenReleased(RobotContainer.shootStop);
-  }
+
+    OI.xButton.whenPressed(new ExtendDistanceCommand(true, 0.0));
+    OI.yButton.whenPressed(new ExtendDistanceCommand(true, 15.0));
+    OI.aButton.whenPressed(new ExtendDistanceCommand(false, 0.0));
+    OI.bButton.whenPressed(new ExtendDistanceCommand(false, 15.0));
+
+    OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(5.0));
+    OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-5.0));
+
+}
 
   /**
    * Method to pass the autonomous command to the main {@link Robot} class.

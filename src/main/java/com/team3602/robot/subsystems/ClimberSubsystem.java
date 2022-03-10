@@ -24,6 +24,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -48,6 +49,38 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public ClimberSubsystem() {
     configureMotors();
+  }
+
+  public void ResetEncoders()
+  {
+  pivotInnerLeft.setSelectedSensorPosition(0.0);
+  extendInnerLeft.setSelectedSensorPosition(0.0); 
+  pivotInnerRight.setSelectedSensorPosition(0.0); 
+  extendInnerRight.setSelectedSensorPosition(0.0);
+  pivotOuterLeft.setSelectedSensorPosition(0.0);
+  extendOuterLeft.setSelectedSensorPosition(0.0); 
+  pivotOuterRight.setSelectedSensorPosition(0.0); 
+  extendOuterRight.setSelectedSensorPosition(0.0);
+  }
+
+  public void InitPositions()
+  {
+    ExtendInner(0.0);
+    ExtendOuter(0.0);
+    PivotInner(0.0);
+    PivotOuter(0.0);
+  }
+
+  public void ReoportStuff()
+  {
+    SmartDashboard.putNumber("pivotInnerLeft", pivotInnerLeft.getSelectedSensorPosition());
+    SmartDashboard.putNumber("pivotInnerRight", pivotInnerRight.getSelectedSensorPosition());
+    SmartDashboard.putNumber("pivotOuterLeft", pivotOuterLeft.getSelectedSensorPosition());
+    SmartDashboard.putNumber("pivotOuterRight", pivotOuterRight.getSelectedSensorPosition());
+    SmartDashboard.putNumber("extendInnerLeft", extendInnerLeft.getSelectedSensorPosition());
+    SmartDashboard.putNumber("extendInnerRight", extendInnerRight.getSelectedSensorPosition());
+    SmartDashboard.putNumber("extendOuterLeft", extendOuterLeft.getSelectedSensorPosition());
+    SmartDashboard.putNumber("extendOuterRight", extendOuterRight.getSelectedSensorPosition());
   }
 
   public double GetCurrentOuterLeftLength()
@@ -177,7 +210,7 @@ public class ClimberSubsystem extends SubsystemBase {
   private void configurePivotMotor(WPI_TalonFX motor)
     {
 
-    motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
       // motor.setSensorPhase(true);
     // motor.setInverted(false);
     /* Set relevant frame periods to be at least as fast as periodic rate*/
@@ -217,9 +250,11 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private void configureExtendMotor(WPI_TalonFX motor) {
 
-    motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+
+
+    motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
       // motor.setSensorPhase(true);
-    // motor.setInverted(false);
+    motor.setInverted(false);
     /* Set relevant frame periods to be at least as fast as periodic rate*/
     motor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
 
@@ -227,8 +262,8 @@ public class ClimberSubsystem extends SubsystemBase {
     /* set the peak and nominal outputs */
     motor.configNominalOutputForward(0, Constants.kTimeoutMs);
     motor.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    motor.configPeakOutputForward(1, Constants.kTimeoutMs);
-    motor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+    motor.configPeakOutputForward(1.0, Constants.kTimeoutMs);
+    motor.configPeakOutputReverse(-1.0, Constants.kTimeoutMs);
     // motor.configPeakOutputForward(0.5, Constants.kTimeoutMs);
     // motor.configPeakOutputReverse(-0.5, Constants.kTimeoutMs);
 
@@ -238,14 +273,14 @@ public class ClimberSubsystem extends SubsystemBase {
     /* set closed loop gains in slot0 - see documentation */
     motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
     motor.config_kF(0, (1023.0/1200), Constants.kTimeoutMs);
-    motor.config_kP(0, 0.9, Constants.kTimeoutMs);
+    motor.config_kP(0, 0.40, Constants.kTimeoutMs);
     motor.config_kI(0, 0, Constants.kTimeoutMs);
     motor.config_kD(0, 0, Constants.kTimeoutMs);
     /* set acceleration and vcruise velocity - see documentation */
     // motor.configMotionCruiseVelocity(1150, Constants.kTimeoutMs);
     // motor.configMotionAcceleration(990, Constants.kTimeoutMs);
-    motor.configMotionCruiseVelocity(1800, Constants.kTimeoutMs);
-    motor.configMotionAcceleration(1500, Constants.kTimeoutMs);
+    motor.configMotionCruiseVelocity(30000, Constants.kTimeoutMs);
+    motor.configMotionAcceleration(30000, Constants.kTimeoutMs);
 
     motor.configForwardSoftLimitThreshold(Climber.extendSoftLimitTicks);
     motor.configReverseSoftLimitThreshold(0.0);
@@ -255,12 +290,20 @@ public class ClimberSubsystem extends SubsystemBase {
   private void configureMotors()
   {
     configurePivotMotor(pivotInnerLeft);
+    pivotInnerLeft.setInverted(true);
+
     configurePivotMotor(pivotInnerRight);
+
     configurePivotMotor(pivotOuterLeft);
+    pivotOuterLeft.setInverted(true);
+
     configurePivotMotor(pivotOuterRight);
+    //pivotOuterRight.setInverted(true);
 
     configureExtendMotor(extendInnerLeft);
     configureExtendMotor(extendInnerRight);
+    //extendInnerRight.setInverted(true);
+    
     configureExtendMotor(extendOuterLeft);
     configureExtendMotor(extendOuterRight);
 

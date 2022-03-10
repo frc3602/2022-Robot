@@ -31,13 +31,16 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
+    //robotContainer.Init();
 
     // Sets the default command to the drive command
     RobotContainer.driveSubsystem.setDefaultCommand(RobotContainer.driveCommand);
-    RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.climberControl);
+    RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.reportCommand);
+    RobotContainer.climberSubsystem.ResetEncoders();
+    RobotContainer.climberSubsystem.InitPositions();
 
     RobotContainer.shooterSubsystem.InitShooter();
-    RobotContainer.shooterSubsystem.setDefaultCommand(RobotContainer.calculateShooterSpeedCommand);
+   // RobotContainer.shooterSubsystem.setDefaultCommand(RobotContainer.calculateShooterSpeedCommand);
  }
 
   @Override
@@ -70,6 +73,8 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+
+     // robotContainer.Init();
     }
   }
 

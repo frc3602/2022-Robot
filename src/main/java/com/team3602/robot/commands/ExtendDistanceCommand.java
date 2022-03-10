@@ -34,7 +34,8 @@ public class ExtendDistanceCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    RobotContainer.climberSubsystem.ReoportStuff();
+  
   }
 
   // Called once the command ends or is interrupted.
@@ -48,16 +49,16 @@ public class ExtendDistanceCommand extends CommandBase {
 
     if(isInner)
       {
-      if(Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterLeftLength() - distance ) < 0.1 &&
-         Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterRightLength() - distance ) < 0.1)
+      if(Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterLeftLength() - distance ) < 0.25 &&
+         Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterRightLength() - distance ) < 0.25)
        return true;
       else
        return false;
       }
     else //outer
       {
-      if(Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerLeftLength() - distance ) < 0.1 &&
-         Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerRightLength() - distance ) < 0.1)
+      if(Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerLeftLength() - distance ) < 0.25 &&
+         Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerRightLength() - distance ) < 0.25)
        return true;
       else
        return false;

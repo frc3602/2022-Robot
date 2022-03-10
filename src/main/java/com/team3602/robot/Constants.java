@@ -66,7 +66,8 @@ public interface Constants {
     int climbExtendOuterRightCANID = 11;
 
 
-    double pivotSoftLimitTicks = 23893;
+    //double pivotSoftLimitTicks = 23893; // 10 degrees
+    double pivotSoftLimitTicks = 71000; // 30 degrees
     double extendSoftLimitTicks = 97784;
 
 

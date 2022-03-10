@@ -42,6 +42,8 @@ public class RobotContainer {
   public static ShootStopCommand shootStop = new ShootStopCommand(shooterSubsystem);
   public static CalculateShooterSpeedCommand calculateShooterSpeedCommand = new CalculateShooterSpeedCommand();
 
+  public static ReportStuffCommand reportCommand = new ReportStuffCommand();
+
   // Operator interfaces
   public static OI oi;
 
@@ -50,6 +52,11 @@ public class RobotContainer {
    */
   public RobotContainer() {
     configureButtonBindings();
+  }
+
+  public void Init()
+  {
+    //reportCommand.schedule();
   }
 
   /**
@@ -71,8 +78,10 @@ public class RobotContainer {
     OI.aButton.whenPressed(new ExtendDistanceCommand(false, 0.0));
     OI.bButton.whenPressed(new ExtendDistanceCommand(false, 15.0));
 
-    OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(5.0));
-    OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-5.0));
+    OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(10.0));
+    OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-10.0));
+
+    OI.startButton.whenPressed(new PivotScissorCommandGroup(0.0));
 
 }
 

@@ -24,6 +24,7 @@ public class PivotAngleCommand extends CommandBase {
   @Override
   public void initialize()
   {
+    System.out.println("PivotAngleCommand initialize");
     if(isInner)
       RobotContainer.climberSubsystem.PivotInner(angle);
     else
@@ -35,7 +36,8 @@ public class PivotAngleCommand extends CommandBase {
   @Override
   public void execute()
    {
-
+    RobotContainer.climberSubsystem.ReoportStuff();
+  
    }
 
   // Called once the command ends or is interrupted.
@@ -46,19 +48,28 @@ public class PivotAngleCommand extends CommandBase {
   @Override
   public boolean isFinished()
   {
+    System.out.println("PivotAngleCommand isFinished");
     if(isInner)
       {
-      if(Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterLeftLength() - angle ) < 0.1 &&
-         Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterRightLength() - angle ) < 0.1)
-       return true;
+      if(Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerLeftAngle() - angle ) < 1.0 &&
+         Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerRightAngle() - angle ) < 1.0)
+         {
+          System.out.println("PivotAngleCommand isFinished");
+          return true;
+
+         }
       else
        return false;
       }
     else //outer
       {
-      if(Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerLeftLength() - angle ) < 0.1 &&
-         Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerRightLength() - angle ) < 0.1)
-       return true;
+      if(Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterLeftAngle() - angle ) < 1.0 &&
+         Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterRightAngle() - angle ) < 1.0)
+         {
+          System.out.println("PivotAngleCommand isFinished");
+          return true;
+
+         }
       else
        return false;
       }

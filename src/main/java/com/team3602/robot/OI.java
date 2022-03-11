@@ -55,7 +55,9 @@ public class OI {
 
     public static JoystickButton leftBumperButton   = new JoystickButton(xboxController, 5);
     public static JoystickButton rightBumperButton  = new JoystickButton(xboxController, 6);
-    public static JoystickButton startButton  = new JoystickButton(xboxController, 8);
+    public static JoystickButton startButton        = new JoystickButton(xboxController, 8);
+    public static JoystickButton menuButton         = new JoystickButton(xboxController, 7);
+
 
     /**
      * Constructor for {@link OI} class.

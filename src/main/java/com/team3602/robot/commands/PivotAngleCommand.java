@@ -48,7 +48,7 @@ public class PivotAngleCommand extends CommandBase {
   @Override
   public boolean isFinished()
   {
-    System.out.println("PivotAngleCommand isFinished");
+    //System.out.println("PivotAngleCommand isFinished");
     if(isInner)
       {
       if(Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerLeftAngle() - angle ) < 1.0 &&

@@ -168,7 +168,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void PivotInner(double angle)
     {
-      double ticks = PivotDegreesToTicks(angle);
+      double ticks = PivotDegreesToTicks(angle * -1.0);
   
       Pivot(pivotInnerLeft, pivotInnerRight, ticks);
     }
@@ -230,7 +230,7 @@ public class ClimberSubsystem extends SubsystemBase {
     
     /* set closed loop gains in slot0 - see documentation */
     motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-    motor.config_kF(0, (1023.0/1200), Constants.kTimeoutMs);
+    motor.config_kF(0, (1023.0/410.0), Constants.kTimeoutMs);
     motor.config_kP(0, 0.9, Constants.kTimeoutMs);
     motor.config_kI(0, 0, Constants.kTimeoutMs);
     motor.config_kD(0, 0, Constants.kTimeoutMs);

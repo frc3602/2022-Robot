@@ -68,7 +68,8 @@ public interface Constants {
 
     //double pivotSoftLimitTicks = 23893; // 10 degrees
     double pivotSoftLimitTicks = 71000; // 30 degrees
-    double extendSoftLimitTicks = 97784;
+    //double extendSoftLimitTicks = 97784; // 15 inches
+    double extendSoftLimitTicks = 150012; // 23 inches
 
 
     double pivotPlanetaryRatio = 1.0/60;

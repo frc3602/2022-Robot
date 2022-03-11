@@ -74,14 +74,20 @@ public class RobotContainer {
     OI.shooterButton.whenReleased(RobotContainer.shootStop);
 
     OI.xButton.whenPressed(new ExtendDistanceCommand(true, 0.0));
-    OI.yButton.whenPressed(new ExtendDistanceCommand(true, 15.0));
+    OI.yButton.whenPressed(new ExtendDistanceCommand(true, 23.0));
     OI.aButton.whenPressed(new ExtendDistanceCommand(false, 0.0));
     OI.bButton.whenPressed(new ExtendDistanceCommand(false, 15.0));
 
-    OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(10.0));
-    OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-10.0));
+    // OI.xButton.whenPressed(new PivotAngleCommand(true, 10));
+    // OI.yButton.whenPressed(new PivotAngleCommand(true, -10.0));
+    // OI.aButton.whenPressed(new PivotAngleCommand(false, 10.0));
+    // OI.bButton.whenPressed(new PivotAngleCommand(false, -15.0));
+
+    OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(15.0));
+    OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-15.0));
 
     OI.startButton.whenPressed(new PivotScissorCommandGroup(0.0));
+    OI.menuButton.whenPressed(new ClimberReadyCommandGroup());
 
 }
 

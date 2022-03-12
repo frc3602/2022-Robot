@@ -34,7 +34,6 @@ public class RobotContainer {
   // Commands
   public static DriveCommandCommand driveCommand = new DriveCommandCommand(driveSubsystem);
   public static ClimberControlCommand climberControl = new ClimberControlCommand(climberSubsystem);
-  public static ActivateIntakeCommand acticateIntake = new ActivateIntakeCommand(indexSubsystem);
   public static IndexInCommand indexIn = new IndexInCommand(indexSubsystem);
   public static IndexOutCommand indexOut = new IndexOutCommand(indexSubsystem);
   public static IndexStopCommand indexStop = new IndexStopCommand(indexSubsystem);

@@ -14,17 +14,17 @@ package com.team3602.robot.subsystems;
 import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
-import com.team3602.robot.Constants.Controller;
-
+import com.team3602.robot.commands.ClimberReadyCommandGroup;
+import com.team3602.robot.commands.ExtendDistanceCommand;
+import com.team3602.robot.commands.PivotAngleCommand;
 // Phoenix Imports
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -47,12 +47,32 @@ public class ClimberSubsystem extends SubsystemBase {
   WPI_TalonFX pivotOuterRight = new WPI_TalonFX(Climber.climbPivotOuterRightCANID);
   WPI_TalonFX extendOuterRight = new WPI_TalonFX(Climber.climbExtendOuterRightCANID);
 
+  private Climber.ClimbStageEnum currentStage = Climber.ClimbStageEnum.ready;
+
+  private boolean startedClimb = false;
+
   public ClimberSubsystem() {
     configureMotors();
   }
 
+  public boolean StartedClimb()
+  {
+    return startedClimb;
+  }
+
+  public void StartTheClimb()
+  {
+    startedClimb = true;
+
+    ClimberReadyCommandGroup climberReady = new ClimberReadyCommandGroup();
+
+    climberReady.schedule();
+
+  }
+
   public void ResetEncoders()
   {
+  System.out.println("ClimberSubsystem ResetEncoders");
   pivotInnerLeft.setSelectedSensorPosition(0.0);
   extendInnerLeft.setSelectedSensorPosition(0.0); 
   pivotInnerRight.setSelectedSensorPosition(0.0); 
@@ -230,15 +250,18 @@ public class ClimberSubsystem extends SubsystemBase {
     
     /* set closed loop gains in slot0 - see documentation */
     motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-    motor.config_kF(0, (1023.0/410.0), Constants.kTimeoutMs);
-    motor.config_kP(0, 0.9, Constants.kTimeoutMs);
+    // motor.config_kF(0, (1023.0/410.0), Constants.kTimeoutMs);
+    motor.config_kF(0, (1023.0), Constants.kTimeoutMs);
+    motor.config_kP(0, 0.25, Constants.kTimeoutMs);
     motor.config_kI(0, 0, Constants.kTimeoutMs);
     motor.config_kD(0, 0, Constants.kTimeoutMs);
     /* set acceleration and vcruise velocity - see documentation */
     // motor.configMotionCruiseVelocity(1150, Constants.kTimeoutMs);
     // motor.configMotionAcceleration(990, Constants.kTimeoutMs);
-    motor.configMotionCruiseVelocity(1800, Constants.kTimeoutMs);
-    motor.configMotionAcceleration(1500, Constants.kTimeoutMs);
+    // motor.configMotionCruiseVelocity(1800, Constants.kTimeoutMs);
+    // motor.configMotionAcceleration(1500, Constants.kTimeoutMs);
+    motor.configMotionCruiseVelocity(21777.0, Constants.kTimeoutMs);
+    motor.configMotionAcceleration(10000.0, Constants.kTimeoutMs);
 
     motor.configForwardSoftLimitThreshold(Climber.pivotSoftLimitTicks);
     motor.configReverseSoftLimitThreshold(Climber.pivotSoftLimitTicks * -1.0);
@@ -272,15 +295,17 @@ public class ClimberSubsystem extends SubsystemBase {
     
     /* set closed loop gains in slot0 - see documentation */
     motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-    motor.config_kF(0, (1023.0/1200), Constants.kTimeoutMs);
-    motor.config_kP(0, 0.40, Constants.kTimeoutMs);
+    motor.config_kF(0, (1023.0), Constants.kTimeoutMs);
+    motor.config_kP(0, 0.25, Constants.kTimeoutMs);
     motor.config_kI(0, 0, Constants.kTimeoutMs);
     motor.config_kD(0, 0, Constants.kTimeoutMs);
     /* set acceleration and vcruise velocity - see documentation */
     // motor.configMotionCruiseVelocity(1150, Constants.kTimeoutMs);
     // motor.configMotionAcceleration(990, Constants.kTimeoutMs);
-    motor.configMotionCruiseVelocity(30000, Constants.kTimeoutMs);
-    motor.configMotionAcceleration(30000, Constants.kTimeoutMs);
+    // motor.configMotionCruiseVelocity(30000, Constants.kTimeoutMs);
+    // motor.configMotionAcceleration(30000, Constants.kTimeoutMs);
+    motor.configMotionCruiseVelocity(21777.0, Constants.kTimeoutMs);
+    motor.configMotionAcceleration(10000.0, Constants.kTimeoutMs);
 
     motor.configForwardSoftLimitThreshold(Climber.extendSoftLimitTicks);
     motor.configReverseSoftLimitThreshold(0.0);
@@ -298,16 +323,66 @@ public class ClimberSubsystem extends SubsystemBase {
     pivotOuterLeft.setInverted(true);
 
     configurePivotMotor(pivotOuterRight);
-    //pivotOuterRight.setInverted(true);
 
     configureExtendMotor(extendInnerLeft);
     configureExtendMotor(extendInnerRight);
-    //extendInnerRight.setInverted(true);
     
     configureExtendMotor(extendOuterLeft);
     configureExtendMotor(extendOuterRight);
 
-    // supportOuterRight.setInverted(true);
-    // supportInnerRight.setInverted(true);
   }
+
+  public void NextStageClimb()
+  {
+    switch(currentStage)
+    {
+      case ready : 
+      {
+        ParallelCommandGroup temp = new ParallelCommandGroup(
+          // new PivotAngleCommand(true, -10.0),
+          // new PivotAngleCommand(false, 0.0),
+
+          new ExtendDistanceCommand(true, 12.0),
+          new ExtendDistanceCommand(false, 1.0)
+          );
+
+        temp.schedule();
+
+        currentStage = Climber.ClimbStageEnum.climbMidBar;
+        break;
+      }
+      case climbMidBar : 
+      {
+        break;
+      }
+      case hookHighBar : 
+      {
+        break;
+      }
+      case ClimbHighBar : 
+      {
+        break;
+      }
+      case readyHighBar : 
+      {
+        break;
+      }
+      case hookTravers : 
+      {
+        break;
+      }
+      case climbTraverse : 
+      {
+        break;
+      }
+
+    }
+
+  }
+
+  public void PrevStageClimb()
+  {
+    
+  }
+
 }

@@ -85,6 +85,17 @@ public interface Constants {
     double extendInversePlanetaryRatio = 20.0/1.0;
     double extendDrumDiameter = 2.0;
     double extendRotationsToInches = Math.PI * extendDrumDiameter;
+
+    public enum ClimbStageEnum
+    {
+      ready,
+      climbMidBar,
+      hookHighBar,
+      ClimbHighBar,
+      readyHighBar,
+      hookTravers,
+      climbTraverse
+    }
   }
 
   /**

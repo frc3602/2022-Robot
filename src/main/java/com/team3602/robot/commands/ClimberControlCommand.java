@@ -13,7 +13,6 @@ package com.team3602.robot.commands;
 
 import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
-import com.team3602.robot.Constants.Controller;
 import com.team3602.robot.subsystems.ClimberSubsystem;
 
 // WPILib Imports
@@ -38,7 +37,21 @@ public class ClimberControlCommand extends CommandBase {
   }
 
   @Override
-  public void execute() {
+  public void execute()
+  {
+    // public static JoystickButton leftBumperButton   = new JoystickButton(xboxController, 5);
+    // public static JoystickButton rightBumperButton  = new JoystickButton(xboxController, 6);
+
+    if(OI.joystick.getRawButtonPressed(6))
+    {
+      RobotContainer.climberSubsystem.NextStageClimb();
+
+    }
+    else if(OI.joystick.getRawButtonPressed(5))
+    {
+      RobotContainer.climberSubsystem.PrevStageClimb();
+    }
+
     // RobotContainer.climberSubsystem.climberOneArm(OI.xboxController.getLeftY());
     // RobotContainer.climberSubsystem.climberTwoArm(OI.xboxController.getRightY());
 

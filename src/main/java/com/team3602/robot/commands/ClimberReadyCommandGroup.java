@@ -4,8 +4,6 @@
 
 package com.team3602.robot.commands;
 
-import com.team3602.robot.RobotContainer;
-
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 public class ClimberReadyCommandGroup extends ParallelCommandGroup {

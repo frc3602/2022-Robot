@@ -11,7 +11,6 @@
 
 package com.team3602.robot.subsystems;
 
-import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Drivetrain;
 
@@ -20,7 +19,6 @@ import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 // WPILib Imports
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.SPI;
@@ -104,7 +102,15 @@ public class DriveSubsystem extends SubsystemBase {
     // if(z < deadband)
     //   z = 0.0;
 
-    RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y, x, z);
+    if(RobotContainer.climberSubsystem.StartedClimb())
+    {
+      RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y * 0.5, x * 0.5, z * 0.5);
+    }
+    else
+    {
+      RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y, x, z);
+
+    }
   }
 
   /**

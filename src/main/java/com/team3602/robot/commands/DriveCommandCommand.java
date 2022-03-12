@@ -11,8 +11,6 @@
 
 package com.team3602.robot.commands;
 
-import javax.lang.model.util.ElementScanner6;
-
 import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.subsystems.DriveSubsystem;

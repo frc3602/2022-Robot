@@ -42,6 +42,7 @@ public class RobotContainer {
   public static CalculateShooterSpeedCommand calculateShooterSpeedCommand = new CalculateShooterSpeedCommand();
 
   public static ReportStuffCommand reportCommand = new ReportStuffCommand();
+  public static SetClimbReadyCommand climbReadyCommand = new SetClimbReadyCommand();
 
   // Operator interfaces
   public static OI oi;
@@ -82,11 +83,11 @@ public class RobotContainer {
     // OI.aButton.whenPressed(new PivotAngleCommand(false, 10.0));
     // OI.bButton.whenPressed(new PivotAngleCommand(false, -15.0));
 
-    OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(15.0));
-    OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-15.0));
+    // OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(15.0));
+    // OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-15.0));
 
     OI.startButton.whenPressed(new PivotScissorCommandGroup(0.0));
-    OI.menuButton.whenPressed(new ClimberReadyCommandGroup());
+    OI.menuButton.whenPressed(climbReadyCommand);
 
 }
 

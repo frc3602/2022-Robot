@@ -16,7 +16,6 @@ import com.team3602.robot.Constants.Controller;
 // WPILib Imports
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -53,8 +52,8 @@ public class OI {
     public static JoystickButton aButton            = new JoystickButton(xboxController, 1);
     public static JoystickButton bButton            = new JoystickButton(xboxController, 2);
 
-    public static JoystickButton leftBumperButton   = new JoystickButton(xboxController, 5);
-    public static JoystickButton rightBumperButton  = new JoystickButton(xboxController, 6);
+    // public static JoystickButton leftBumperButton   = new JoystickButton(xboxController, 5);
+    // public static JoystickButton rightBumperButton  = new JoystickButton(xboxController, 6);
     public static JoystickButton startButton        = new JoystickButton(xboxController, 8);
     public static JoystickButton menuButton         = new JoystickButton(xboxController, 7);
 

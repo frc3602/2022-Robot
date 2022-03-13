@@ -14,6 +14,7 @@ package com.team3602.robot.subsystems;
 import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
+import com.team3602.robot.Constants.Climber.ClimbStageEnum;
 import com.team3602.robot.commands.ClimberReadyCommandGroup;
 import com.team3602.robot.commands.ExtendDistanceCommand;
 import com.team3602.robot.commands.PivotAngleCommand;
@@ -21,10 +22,12 @@ import com.team3602.robot.commands.PivotAngleCommand;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -51,6 +54,9 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private boolean startedClimb = false;
 
+  // double maxVoltage = 0.0;
+  // double maxVelocity = 0.0;
+
   public ClimberSubsystem() {
     configureMotors();
   }
@@ -69,6 +75,12 @@ public class ClimberSubsystem extends SubsystemBase {
     climberReady.schedule();
 
   }
+
+  public void ResetTheClimb()
+  {
+    currentStage = Climber.ClimbStageEnum.ready;
+  }
+
 
   public void ResetEncoders()
   {
@@ -89,7 +101,28 @@ public class ClimberSubsystem extends SubsystemBase {
     ExtendOuter(0.0);
     PivotInner(0.0);
     PivotOuter(0.0);
+
+    currentStage = ClimbStageEnum.ready;
   }
+
+  public void BrakeAllTheMotors()
+  {
+    extendInnerLeft.setNeutralMode(NeutralMode.Brake); 
+    extendInnerRight.setNeutralMode(NeutralMode.Brake); 
+    extendOuterLeft.setNeutralMode(NeutralMode.Brake); 
+    extendOuterRight.setNeutralMode(NeutralMode.Brake); 
+  }
+
+
+  // private void MaxVelocity(double newValue)
+  // {
+  //   maxVelocity = Math.max(newValue, maxVelocity);
+  // }
+
+  // private void MaxVoltage(double newValue)
+  // {
+  //   maxVoltage = Math.max(newValue, maxVoltage);
+  // }
 
   public void ReoportStuff()
   {
@@ -101,6 +134,26 @@ public class ClimberSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("extendInnerRight", extendInnerRight.getSelectedSensorPosition());
     SmartDashboard.putNumber("extendOuterLeft", extendOuterLeft.getSelectedSensorPosition());
     SmartDashboard.putNumber("extendOuterRight", extendOuterRight.getSelectedSensorPosition());
+
+    SmartDashboard.putNumber("GetCurrentOuterLeftLength", GetCurrentOuterLeftLength());
+    SmartDashboard.putNumber("GetCurrentInnerLeftLength", GetCurrentInnerLeftLength());
+    SmartDashboard.putNumber("GetCurrentOuterRightLength", GetCurrentOuterRightLength());
+    SmartDashboard.putNumber("GetCurrentInnerRightLength", GetCurrentInnerRightLength());
+
+    SmartDashboard.putNumber("GetCurrentOuterLeftAngle", GetCurrentOuterLeftAngle());
+    SmartDashboard.putNumber("GetCurrentOuterRightAngle", GetCurrentOuterRightAngle());
+    SmartDashboard.putNumber("GetCurrentInnerLeftAngle", GetCurrentInnerLeftAngle());
+    SmartDashboard.putNumber("GetCurrentInnerRightAngle", GetCurrentInnerRightAngle());
+
+    // SmartDashboard.putNumber("extendInnerRight.getMotorOutputVoltage", extendInnerRight.getMotorOutputVoltage());
+    // SmartDashboard.putNumber("extendInnerRight.getSelectedSensorVelocity", extendInnerRight.getSelectedSensorVelocity());
+
+    // MaxVelocity(extendInnerRight.getSelectedSensorVelocity());
+    // MaxVoltage(extendInnerRight.getMotorOutputVoltage());
+    SmartDashboard.putString("ClimberStage", currentStage.name());
+    // SmartDashboard.putNumber("extendInnerRight.MaxVelocity", maxVelocity);
+    // SmartDashboard.putNumber("extendInnerRight.MaxVoltage", maxVoltage);
+
   }
 
   public double GetCurrentOuterLeftLength()
@@ -139,12 +192,12 @@ public class ClimberSubsystem extends SubsystemBase {
   }
   public double GetCurrentInnerLeftAngle()
   {
-    return PivotTicksToDegrees( pivotInnerLeft.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+    return PivotTicksToDegrees( pivotInnerLeft.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) * -1.0;
 
   }
   public double GetCurrentInnerRightAngle()
   {
-    return PivotTicksToDegrees( pivotInnerRight.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) ;
+    return PivotTicksToDegrees( pivotInnerRight.getSelectedSensorPosition(Constants.kPIDLoopIdx) ) * -1.0 ;
 
   }
 
@@ -251,7 +304,7 @@ public class ClimberSubsystem extends SubsystemBase {
     /* set closed loop gains in slot0 - see documentation */
     motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
     // motor.config_kF(0, (1023.0/410.0), Constants.kTimeoutMs);
-    motor.config_kF(0, (1023.0), Constants.kTimeoutMs);
+    motor.config_kF(0, (1023.0/7200.0), Constants.kTimeoutMs);
     motor.config_kP(0, 0.25, Constants.kTimeoutMs);
     motor.config_kI(0, 0, Constants.kTimeoutMs);
     motor.config_kD(0, 0, Constants.kTimeoutMs);
@@ -263,9 +316,12 @@ public class ClimberSubsystem extends SubsystemBase {
     motor.configMotionCruiseVelocity(21777.0, Constants.kTimeoutMs);
     motor.configMotionAcceleration(10000.0, Constants.kTimeoutMs);
 
-    motor.configForwardSoftLimitThreshold(Climber.pivotSoftLimitTicks);
-    motor.configReverseSoftLimitThreshold(Climber.pivotSoftLimitTicks * -1.0);
+    motor.configForwardSoftLimitEnable(true, Constants.kTimeoutMs);
+
+    motor.configForwardSoftLimitThreshold(Climber.pivotSoftLimitTicks, Constants.kTimeoutMs);
+    motor.configReverseSoftLimitThreshold(Climber.pivotSoftLimitTicks * -1.0, Constants.kTimeoutMs);
     
+    // motor.configForwardSoftLimitEnable(true,)
     // motor.current(40, Constants.kTimeoutMs);
     // motor.configContinuousCurrentLimit(40, Constants.kTimeoutMs);
 
@@ -295,8 +351,9 @@ public class ClimberSubsystem extends SubsystemBase {
     
     /* set closed loop gains in slot0 - see documentation */
     motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-    motor.config_kF(0, (1023.0), Constants.kTimeoutMs);
-    motor.config_kP(0, 0.25, Constants.kTimeoutMs);
+    //motor.config_kF(0, (1023.0/1200), Constants.kTimeoutMs);
+    motor.config_kF(0, (1023.0/7200.0), Constants.kTimeoutMs);
+    motor.config_kP(0, 0.9, Constants.kTimeoutMs);
     motor.config_kI(0, 0, Constants.kTimeoutMs);
     motor.config_kD(0, 0, Constants.kTimeoutMs);
     /* set acceleration and vcruise velocity - see documentation */
@@ -304,11 +361,13 @@ public class ClimberSubsystem extends SubsystemBase {
     // motor.configMotionAcceleration(990, Constants.kTimeoutMs);
     // motor.configMotionCruiseVelocity(30000, Constants.kTimeoutMs);
     // motor.configMotionAcceleration(30000, Constants.kTimeoutMs);
-    motor.configMotionCruiseVelocity(21777.0, Constants.kTimeoutMs);
-    motor.configMotionAcceleration(10000.0, Constants.kTimeoutMs);
+    motor.configMotionCruiseVelocity(19000.0, Constants.kTimeoutMs);
+    motor.configMotionAcceleration(19000.0, Constants.kTimeoutMs);
 
-    motor.configForwardSoftLimitThreshold(Climber.extendSoftLimitTicks);
-    motor.configReverseSoftLimitThreshold(0.0);
+    motor.configForwardSoftLimitEnable(true, Constants.kTimeoutMs);
+
+    motor.configForwardSoftLimitThreshold(Climber.extendSoftLimitTicks, Constants.kTimeoutMs);
+    motor.configReverseSoftLimitThreshold(0.0, Constants.kTimeoutMs);
 
   }
 
@@ -334,21 +393,216 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void NextStageClimb()
   {
+
+    System.out.println("climber NextStageClimb");
+    System.out.print("currentStage: ");
+    System.out.println(currentStage);
+
+
     switch(currentStage)
     {
       case ready : 
       {
+        currentStage = Climber.ClimbStageEnum.climbMidBar;
         ParallelCommandGroup temp = new ParallelCommandGroup(
-          // new PivotAngleCommand(true, -10.0),
-          // new PivotAngleCommand(false, 0.0),
+          new PivotAngleCommand(true, -23.0),
+          new PivotAngleCommand(false, 0.0),
 
-          new ExtendDistanceCommand(true, 12.0),
-          new ExtendDistanceCommand(false, 1.0)
+          new ExtendDistanceCommand(true, 22.5),
+          new ExtendDistanceCommand(false, 0.0)
           );
 
         temp.schedule();
 
-        currentStage = Climber.ClimbStageEnum.climbMidBar;
+        break;
+      }
+      case climbMidBar : 
+      {
+        currentStage = Climber.ClimbStageEnum.hookHighBar;
+        
+        // ParallelCommandGroup temp = new ParallelCommandGroup(
+        //   new PivotAngleCommand(true, -18.0),
+        //   new PivotAngleCommand(false, 0.0),
+
+        //   new ExtendDistanceCommand(true, 19.5),
+        //   new ExtendDistanceCommand(false, 1.0)
+        //   );
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, -18.0),
+              new PivotAngleCommand(false, 0.0),
+    
+              new ExtendDistanceCommand(true, 22.5),
+              new ExtendDistanceCommand(false, 0.0)
+            )
+            ,
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, -18.0),
+              new PivotAngleCommand(false, 0.0),
+    
+              new ExtendDistanceCommand(true, 19.0),
+              new ExtendDistanceCommand(false, 0.0)
+            )
+            ,
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, -18.0),
+              new PivotAngleCommand(false, 0.0),
+    
+              new ExtendDistanceCommand(true, 19.0),
+              new ExtendDistanceCommand(false, 2.5)
+            )
+  
+        );
+
+        temp.schedule();
+
+        break;
+      }
+      case hookHighBar : 
+      {
+        currentStage = Climber.ClimbStageEnum.ClimbHighBar;
+
+        ParallelCommandGroup temp = new ParallelCommandGroup(
+          new PivotAngleCommand(true, -20.0),
+          new PivotAngleCommand(false, 0.0),
+
+          new ExtendDistanceCommand(true, 15.0),
+          new ExtendDistanceCommand(false, 10.0)
+          );
+
+        temp.schedule();
+
+        break;
+      }
+      case ClimbHighBar : 
+      {
+        currentStage = Climber.ClimbStageEnum.readyHighBar;
+
+        // ParallelCommandGroup temp = new ParallelCommandGroup(
+        //   new PivotAngleCommand(true, 0.0),
+        //   new PivotAngleCommand(false, -10.0),
+
+        //   new ExtendDistanceCommand(true, 0.0),
+        //   new ExtendDistanceCommand(false, 18.0)
+        //   );
+
+
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, 0.0),
+              new PivotAngleCommand(false, -20.0),
+    
+              new ExtendDistanceCommand(true, 15.0),
+              new ExtendDistanceCommand(false, 5.0)
+                )
+            ,
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, 0.0),
+              new PivotAngleCommand(false, -20.0),
+  
+            new ExtendDistanceCommand(true, 0.0),
+            new ExtendDistanceCommand(false, 22.5)
+            )
+  
+        );
+        
+        
+
+        temp.schedule();
+
+        break;
+      }
+      case readyHighBar : 
+      {
+        currentStage = Climber.ClimbStageEnum.hookTravers;
+
+        // ParallelCommandGroup temp = new ParallelCommandGroup(
+        //   new PivotAngleCommand(true, 0.0),
+        //   new PivotAngleCommand(false, -18.0),
+
+        //   new ExtendDistanceCommand(true, 0.0),
+        //   new ExtendDistanceCommand(false, 18.0)
+        //   );
+
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, 0.0),
+              new PivotAngleCommand(false, -18.0),
+    
+              new ExtendDistanceCommand(true, 0.0),
+              new ExtendDistanceCommand(false, 22.5)
+            )
+            ,
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, 0.0),
+              new PivotAngleCommand(false, -18.0),
+    
+              new ExtendDistanceCommand(true, 0.0),
+              new ExtendDistanceCommand(false, 19.0)
+            )
+            ,
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, 0.0),
+              new PivotAngleCommand(false, -18.0),
+    
+              new ExtendDistanceCommand(true, 2.5),
+              new ExtendDistanceCommand(false, 19.0)
+            )
+  
+        );
+
+
+        temp.schedule();
+
+        break;
+      }
+      case hookTravers : 
+      {
+        currentStage = Climber.ClimbStageEnum.climbTraverse;
+
+        ParallelCommandGroup temp = new ParallelCommandGroup(
+          new PivotAngleCommand(true, 15.0),
+          new PivotAngleCommand(false, 0.0),
+
+          new ExtendDistanceCommand(true, 0.0),
+          new ExtendDistanceCommand(false, 0.0)
+          );
+
+        temp.schedule();
+
+        break;
+      }
+      case climbTraverse : 
+      {
+        break;
+      }
+
+    }
+
+  }
+
+  public void PrevStageClimb()
+  {
+    System.out.println("climber PrevStageClimb");
+    
+    System.out.print("currentStage: ");
+    System.out.println(currentStage);
+
+    switch(currentStage)
+      {
+      case ready : 
+      {
         break;
       }
       case climbMidBar : 
@@ -375,14 +629,9 @@ public class ClimberSubsystem extends SubsystemBase {
       {
         break;
       }
-
     }
 
-  }
 
-  public void PrevStageClimb()
-  {
-    
   }
 
 }

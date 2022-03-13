@@ -102,6 +102,14 @@ public class DriveSubsystem extends SubsystemBase {
     // if(z < deadband)
     //   z = 0.0;
 
+    if(true)
+    {
+      y = 0.0;
+      x = 0.0;
+      z = 0.0;
+
+    }
+
     if(RobotContainer.climberSubsystem.StartedClimb())
     {
       RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y * 0.5, x * 0.5, z * 0.5);

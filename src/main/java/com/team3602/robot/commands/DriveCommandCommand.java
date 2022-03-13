@@ -54,6 +54,8 @@ public class DriveCommandCommand extends CommandBase {
       rotate = 0.0;
 
     RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
+
+    RobotContainer.climberSubsystem.ReoportStuff();
   }
 
   @Override

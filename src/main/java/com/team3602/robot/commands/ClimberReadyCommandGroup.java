@@ -11,10 +11,10 @@ public class ClimberReadyCommandGroup extends ParallelCommandGroup {
   public ClimberReadyCommandGroup()
   {
     addCommands(
-      new PivotAngleCommand(true, -10.0),
+      new PivotAngleCommand(true, -20.0),
       new PivotAngleCommand(false, 0.0),
       new ExtendDistanceCommand(true, 0.0),
-      new ExtendDistanceCommand(false, 12.5));
+      new ExtendDistanceCommand(false, 19.0));
   }
 
 }

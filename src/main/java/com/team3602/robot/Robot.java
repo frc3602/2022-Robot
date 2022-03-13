@@ -11,6 +11,8 @@
 
 package com.team3602.robot;
 
+import com.team3602.robot.subsystems.ClimberSubsystem;
+
 // WPILib Imports
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,9 +37,10 @@ public class Robot extends TimedRobot {
 
     // Sets the default command to the drive command
     RobotContainer.driveSubsystem.setDefaultCommand(RobotContainer.driveCommand);
-    RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.reportCommand);
+    //RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.reportCommand);
     RobotContainer.climberSubsystem.ResetEncoders();
     RobotContainer.climberSubsystem.InitPositions();
+    RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.climberControl);
 
     RobotContainer.shooterSubsystem.InitShooter();
    // RobotContainer.shooterSubsystem.setDefaultCommand(RobotContainer.calculateShooterSpeedCommand);
@@ -49,7 +52,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledInit() {
+  public void disabledInit()
+  {
+
+    RobotContainer.climberSubsystem.BrakeAllTheMotors();
+
   }
 
   @Override
@@ -74,8 +81,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
 
-     // robotContainer.Init();
     }
+    RobotContainer.climberSubsystem.ResetTheClimb();
   }
 
   @Override

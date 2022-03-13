@@ -34,6 +34,8 @@ public class ClimberControlCommand extends CommandBase {
 
   @Override
   public void initialize() {
+    System.out.println("ClimberControlCommand init");
+
   }
 
   @Override
@@ -42,13 +44,15 @@ public class ClimberControlCommand extends CommandBase {
     // public static JoystickButton leftBumperButton   = new JoystickButton(xboxController, 5);
     // public static JoystickButton rightBumperButton  = new JoystickButton(xboxController, 6);
 
-    if(OI.joystick.getRawButtonPressed(6))
+    if(OI.xboxController.getRawButtonPressed(6))
     {
+      System.out.println("ClimberControlCommand rightBumper Pressed");
       RobotContainer.climberSubsystem.NextStageClimb();
 
     }
-    else if(OI.joystick.getRawButtonPressed(5))
+    else if(OI.xboxController.getRawButtonPressed(5))
     {
+      System.out.println("ClimberControlCommand leftBumper Pressed");
       RobotContainer.climberSubsystem.PrevStageClimb();
     }
 
@@ -61,6 +65,8 @@ public class ClimberControlCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    System.out.println("ClimberControlCommand end");
+
   }
 
   @Override

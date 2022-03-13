@@ -69,6 +69,11 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
     return x;
   }
 
+  public boolean onTarget()
+  {
+    return this.getController().atSetpoint();
+  }
+
 
   public boolean IsRunning()
     {

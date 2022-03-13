@@ -145,8 +145,8 @@ public interface Constants {
     int xboxControllerPort = 1;
 
 
-    int indexInButton = 3;
-    int indexOutButton = 5;
+    int indexInButton = 2;
+    int indexOutButton = 4;
     int shooterButton = 1;
   }
 }

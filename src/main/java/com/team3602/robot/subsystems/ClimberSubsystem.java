@@ -482,14 +482,6 @@ public class ClimberSubsystem extends SubsystemBase {
       {
         currentStage = Climber.ClimbStageEnum.readyHighBar;
 
-        // ParallelCommandGroup temp = new ParallelCommandGroup(
-        //   new PivotAngleCommand(true, 0.0),
-        //   new PivotAngleCommand(false, -10.0),
-
-        //   new ExtendDistanceCommand(true, 0.0),
-        //   new ExtendDistanceCommand(false, 18.0)
-        //   );
-
 
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
@@ -522,14 +514,6 @@ public class ClimberSubsystem extends SubsystemBase {
       case readyHighBar : 
       {
         currentStage = Climber.ClimbStageEnum.hookTravers;
-
-        // ParallelCommandGroup temp = new ParallelCommandGroup(
-        //   new PivotAngleCommand(true, 0.0),
-        //   new PivotAngleCommand(false, -18.0),
-
-        //   new ExtendDistanceCommand(true, 0.0),
-        //   new ExtendDistanceCommand(false, 18.0)
-        //   );
 
         SequentialCommandGroup temp = new SequentialCommandGroup
         (

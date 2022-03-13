@@ -31,6 +31,7 @@ public class RobotContainer {
   public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   public static VisionSubsystem visionSubsystem = new VisionSubsystem();
   public static IndexSubsystem indexSubsystem = new IndexSubsystem();
+  public static RotateToTargetSubsystem rotateToTargetSubsystem = new RotateToTargetSubsystem();
 
   // Commands
   public static DriveCommandCommand driveCommand = new DriveCommandCommand(driveSubsystem);
@@ -65,14 +66,14 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Index commands & buttons
-    OI.indexInButton.whenPressed(RobotContainer.indexIn);
+    OI.indexInButton.whileHeld(RobotContainer.indexIn);
     OI.indexOutButton.whenPressed(RobotContainer.indexOut);
-    OI.indexInButton.whenReleased(RobotContainer.indexStop);
-    OI.indexOutButton.whenReleased(RobotContainer.indexStop);
+    // OI.indexInButton.whenReleased(RobotContainer.indexStop);
+    // OI.indexOutButton.whenReleased(RobotContainer.indexStop);
 
     // Shooter commands & buttons
-    OI.shooterButton.whenPressed(RobotContainer.shootStuff);
-    OI.shooterButton.whenReleased(RobotContainer.shootStop);
+    OI.shooterButton.whileHeld(RobotContainer.shootStuff);
+    //OI.shooterButton.whenReleased(RobotContainer.shootStop);
 
     OI.xButton.whenPressed(new ExtendDistanceCommand(true, 0.0));
     OI.yButton.whenPressed(new ExtendDistanceCommand(true, 22.5));

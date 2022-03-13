@@ -14,6 +14,8 @@ package com.team3602.robot.subsystems;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Shooter;
 
+import javax.lang.model.util.ElementScanner6;
+
 // REV Imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -58,29 +60,6 @@ public class ShooterSubsystem extends SubsystemBase {
   public void logDataToSmartDashboard() {
   }
 
-  // /**
-  //  * Method to convert speed to RPM.
-  //  * 
-  //  * @param speedTo
-  //  * @return the current rpm
-  //  */
-  // public double speedToRPM(double speedTo) {
-  //   double rpm = 0.0;
-  //   rpm = speedTo * (600.0 / 42.0) * Shooter.shooterGearRatio;
-  //   return rpm;
-  // }
-
-  // /**
-  //  * Method to convert RPM to speed.
-  //  * 
-  //  * @param RPMTo
-  //  * @return the current speed
-  //  */
-  // public double rpmToSpeed(double RPMTo) {
-  //   double speed = 0.0;
-  //   speed = (RPMTo * (42.0 / 600.0)) / Shooter.shooterGearRatio;
-  //   return speed;
-  // }
 
   /**
    * Method to stop the shooter motor.
@@ -103,6 +82,15 @@ public class ShooterSubsystem extends SubsystemBase {
    * Method to get the speed of the shooter motor.
    */
   public void getShooterMotorSpeed() {
+  }
+
+  public boolean IsShooterSpeedOnTarget()
+  {
+    double delta = Math.abs(shooterMotor.getEncoder().getVelocity() - targetShooterMotorRPM);
+
+    System.out.println("IsShooterSpeedOnTarget Delta: " + delta);
+
+    return (delta < 1.0);
   }
 
   /**
@@ -182,12 +170,33 @@ public class ShooterSubsystem extends SubsystemBase {
 
     System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
 
-    //some magic decimal crazyness going on
+  //some magic decimal crazyness going on
+  RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
 
     double newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
 
     setShooterMotorRPM(newTargetShooterMotorRPM);
     logDataToSmartDashboard();
+  }
+
+  private double CalculateMagicMath(double distance)
+  {
+  double ret = 0.0;
+
+  if(distance <= 5 )
+  {
+    ret = 1000.0;
+  }
+  else if(distance <= 10 )
+  {
+    ret = 1000.0;
+  }
+  else
+  {
+    ret = 2500.0;
+  }
+
+  return ret;
   }
 
   /**
@@ -232,7 +241,7 @@ public class ShooterSubsystem extends SubsystemBase {
   /**
    * Method to set the shooter motor to 75% for testing.
    */
-  public void shootStuff() {
-    shooterMotor.set(-0.75);
-  }
+  // public void shootStuff() {
+  //   shooterMotor.set(-0.75);
+  // }
 }

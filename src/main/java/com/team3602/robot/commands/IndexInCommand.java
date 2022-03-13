@@ -42,6 +42,7 @@ public class IndexInCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.indexSubsystem.stopMotors();    
   }
 
   @Override

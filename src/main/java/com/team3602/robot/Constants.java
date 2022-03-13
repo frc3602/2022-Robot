@@ -73,7 +73,9 @@ public interface Constants {
 
 
     double pivotPlanetaryRatio = 1.0/60;
-    double pivotChainRatio = 12.0/26.0;
+    //double pivotChainRatio = 12.0/26.0;
+    double pivotChainRatio = 12.0/54.0; //big sprockets
+
     double pivotGearsRatio = 20.0/64.0;
 
     double pivotTotalRatio = pivotPlanetaryRatio * pivotGearsRatio * pivotChainRatio;

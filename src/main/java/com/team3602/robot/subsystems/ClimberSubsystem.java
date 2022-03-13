@@ -496,7 +496,7 @@ public class ClimberSubsystem extends SubsystemBase {
           new ParallelCommandGroup
             (
               new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -20.0),
+              new PivotAngleCommand(false, -22.0),
     
               new ExtendDistanceCommand(true, 15.0),
               new ExtendDistanceCommand(false, 5.0)
@@ -505,7 +505,7 @@ public class ClimberSubsystem extends SubsystemBase {
           new ParallelCommandGroup
             (
               new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -20.0),
+              new PivotAngleCommand(false, -22.0),
   
             new ExtendDistanceCommand(true, 0.0),
             new ExtendDistanceCommand(false, 22.5)
@@ -575,7 +575,7 @@ public class ClimberSubsystem extends SubsystemBase {
           new PivotAngleCommand(true, 15.0),
           new PivotAngleCommand(false, 0.0),
 
-          new ExtendDistanceCommand(true, 0.0),
+          new ExtendDistanceCommand(true, 10.0),
           new ExtendDistanceCommand(false, 0.0)
           );
 

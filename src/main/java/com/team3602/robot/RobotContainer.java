@@ -75,10 +75,10 @@ public class RobotContainer {
     OI.shooterButton.whileHeld(RobotContainer.shootStuff);
     //OI.shooterButton.whenReleased(RobotContainer.shootStop);
 
-    OI.xButton.whenPressed(new ExtendDistanceCommand(true, 0.0));
-    OI.yButton.whenPressed(new ExtendDistanceCommand(true, 22.5));
-    OI.aButton.whenPressed(new ExtendDistanceCommand(false, 0.0));
-    OI.bButton.whenPressed(new ExtendDistanceCommand(false, 15.0));
+    // OI.xButton.whenPressed(new ExtendDistanceCommand(true, 0.0));
+    // OI.yButton.whenPressed(new ExtendDistanceCommand(true, 22.5));
+    // OI.aButton.whenPressed(new ExtendDistanceCommand(false, 0.0));
+    // OI.bButton.whenPressed(new ExtendDistanceCommand(false, 15.0));
 
     // OI.xButton.whenPressed(new PivotAngleCommand(true, 5));
     // OI.yButton.whenPressed(new PivotAngleCommand(true, -5.0));
@@ -88,15 +88,15 @@ public class RobotContainer {
     // OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(15.0));
     // OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-15.0));
 
-    OI.startButton.whenPressed(
-      new ParallelCommandGroup(
-        new PivotAngleCommand(true, 0.0),
-        new PivotAngleCommand(false, 0.0),
-        new ExtendDistanceCommand(true, 0.0),
-        new ExtendDistanceCommand(false, 0.0)
-      ));
+    // OI.startButton.whenPressed(
+    //   new ParallelCommandGroup(
+    //     new PivotAngleCommand(true, 0.0),
+    //     new PivotAngleCommand(false, 0.0),
+    //     new ExtendDistanceCommand(true, 0.0),
+    //     new ExtendDistanceCommand(false, 0.0)
+    //   ));
       
-    OI.menuButton.whenPressed(climbReadyCommand);
+    // OI.menuButton.whenPressed(climbReadyCommand);
 
 }
 

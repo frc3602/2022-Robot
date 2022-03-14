@@ -72,7 +72,8 @@ public interface Constants {
     double extendSoftLimitTicks = 150012; // 23 inches
 
 
-    double pivotPlanetaryRatio = 1.0/60;
+    //double pivotPlanetaryRatio = 1.0/60;
+    double pivotPlanetaryRatio = 1.0/20;
     //double pivotChainRatio = 12.0/26.0;
     double pivotChainRatio = 12.0/54.0; //big sprockets
 

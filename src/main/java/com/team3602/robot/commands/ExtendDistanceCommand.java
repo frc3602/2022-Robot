@@ -24,12 +24,18 @@ public class ExtendDistanceCommand extends CommandBase {
   @Override
   public void initialize()
   {
-    System.out.println("ExtendDistanceCommand initialize");
 
     if(isInner)
+    {
+      System.out.println("ExtendDistanceCommand inner initialize " + distance);
       RobotContainer.climberSubsystem.ExtendInner(distance);
+
+    }
     else
+    {
+      System.out.println("ExtendDistanceCommand outer initialize " + distance);
       RobotContainer.climberSubsystem.ExtendOuter(distance);
+      }
 
   }
 
@@ -54,7 +60,7 @@ public class ExtendDistanceCommand extends CommandBase {
       if(Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerLeftLength() - distance ) < 0.5 &&
          Math.abs( RobotContainer.climberSubsystem.GetCurrentInnerRightLength() - distance ) < 0.5)
          {
-          System.out.println("ExtendDistanceCommand isFinished");
+          System.out.println("ExtendDistanceCommand isFinished " + distance);
           return true;
 
          }
@@ -67,7 +73,7 @@ public class ExtendDistanceCommand extends CommandBase {
         if(Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterLeftLength() - distance ) < 0.5 &&
            Math.abs( RobotContainer.climberSubsystem.GetCurrentOuterRightLength() - distance ) < 0.5)
            {
-            System.out.println("ExtendDistanceCommand isFinished");
+            System.out.println("ExtendDistanceCommand isFinished " + distance);
             return true;
   
            }

@@ -26,12 +26,12 @@ public class PivotAngleCommand extends CommandBase {
   {
     if(isInner)
     {
-      System.out.println("PivotAngleCommand inner initialize");
+      System.out.println("PivotAngleCommand inner initialize " + angle);
       RobotContainer.climberSubsystem.PivotInner(angle);
     }
     else
     {
-      System.out.println("PivotAngleCommand outer initialize");
+      System.out.println("PivotAngleCommand outer initialize " + angle);
       RobotContainer.climberSubsystem.PivotOuter(angle);
     }
 

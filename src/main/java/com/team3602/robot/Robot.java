@@ -83,6 +83,9 @@ public class Robot extends TimedRobot {
 
     }
     RobotContainer.climberSubsystem.ResetTheClimb();
+
+    robotContainer.ClearStickeyFaults();
+
   }
 
   @Override

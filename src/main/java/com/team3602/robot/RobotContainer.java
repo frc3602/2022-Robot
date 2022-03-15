@@ -14,9 +14,11 @@ package com.team3602.robot;
 import com.team3602.robot.commands.*;
 import com.team3602.robot.subsystems.*;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+//import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 /**
  * The RobotContainer class provides subsytems and commands.
@@ -36,8 +38,8 @@ public class RobotContainer {
   // Commands
   public static DriveCommandCommand driveCommand = new DriveCommandCommand(driveSubsystem);
   public static ClimberControlCommand climberControl = new ClimberControlCommand(climberSubsystem);
-  public static IndexInCommand indexIn = new IndexInCommand(indexSubsystem);
-  public static IndexOutCommand indexOut = new IndexOutCommand(indexSubsystem);
+  // public static IndexInCommand indexIn = new IndexInCommand(indexSubsystem);
+  // public static IndexOutCommand indexOut = new IndexOutCommand(indexSubsystem);
   public static IndexStopCommand indexStop = new IndexStopCommand(indexSubsystem);
   public static ShootStuffCommand shootStuff = new ShootStuffCommand(shooterSubsystem);
   public static ShootStopCommand shootStop = new ShootStopCommand(shooterSubsystem);
@@ -49,6 +51,8 @@ public class RobotContainer {
   // Operator interfaces
   public static OI oi;
 
+  //PowerDistribution m_pdh = new PowerDistribution(0,ModuleType.kRev);
+
   /**
    * Constructor for {@link RobotContainer} class to configure the button bindings.
    */
@@ -56,9 +60,11 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  public void Init()
+  public void ClearStickeyFaults()
   {
     //reportCommand.schedule();
+
+    //m_pdh.clearStickyFaults();
   }
 
   /**
@@ -66,10 +72,13 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Index commands & buttons
-    OI.indexInButton.whileHeld(RobotContainer.indexIn);
-    OI.indexOutButton.whenPressed(RobotContainer.indexOut);
-    // OI.indexInButton.whenReleased(RobotContainer.indexStop);
+    // OI.indexInButton.whileHeld(new IndexInCommand(indexSubsystem));
+    // OI.indexOutButton.whenPressed(new IndexOutCommand(indexSubsystem));
+    //  OI.indexInButton.whenReleased(RobotContainer.indexStop);
     // OI.indexOutButton.whenReleased(RobotContainer.indexStop);
+
+    OI.indexInButton.whileHeld(new IndexInCommand(indexSubsystem));
+    OI.indexOutButton.whileHeld(new TestIntakeCommand(-1.0));
 
     // Shooter commands & buttons
     OI.shooterButton.whileHeld(RobotContainer.shootStuff);

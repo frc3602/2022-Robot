@@ -32,16 +32,20 @@ public class IndexOutCommand extends CommandBase {
   }
 
   @Override
-  public void initialize() {
+  public void initialize()
+  {
   }
 
   @Override
-  public void execute() {
+  public void execute()
+  {
     RobotContainer.indexSubsystem.indexOut();
   }
 
   @Override
-  public void end(boolean interrupted) {
+  public void end(boolean interrupted)
+  {
+    RobotContainer.shooterSubsystem.stopMotor();
   }
 
   @Override

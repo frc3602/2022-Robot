@@ -13,8 +13,6 @@ package com.team3602.robot.subsystems;
 
 import com.team3602.robot.Constants.Index;
 
-import javax.lang.model.util.ElementScanner6;
-
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -22,6 +20,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
@@ -108,45 +107,68 @@ public class IndexSubsystem extends SubsystemBase {
    * Method to check the sensors.
    */
   public void checkSensors() {
-    count++;
-    if (count > 500) {
+    // count++;
+    // if (count > 500) {
 
-      count = 0;
-    }
+
+      SmartDashboard.putBoolean("TopSensor", indexSensorTop());
+      SmartDashboard.putBoolean("BottomSensor", indexSensorBottom());
+    //   count = 0;
+    // }
   }
 
   /**
    * Method to run the magazine / index motors inward.
    */
   public void shoot() {
-    indexMotorTop.set(ControlMode.PercentOutput, -1.0);
-    indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
+    // indexMotorTop.set(ControlMode.PercentOutput, -1.0);
+    // indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
   }
 
   public void indexIn()
   {
-    if(!indexSensorTop())
-      {
-      indexMotorTop.set(ControlMode.PercentOutput, -1.0);
-      indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
-      }
-      else if(indexSensorTop() && indexSensorBottom())
-      {
-        indexMotorTop.set(ControlMode.PercentOutput, 0.0);
-        indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
-      }
-      else
-      {
-        stopMotors();
-      }
+    checkSensors();
+
+    if(indexSensorTop() && indexSensorBottom())
+    {
+      stopMotors();
+    }
+    else if(indexSensorTop())
+    {
+      indexMotorTop.set(ControlMode.PercentOutput, 0.0);
+      indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+    }
+    else
+    {
+      indexMotorTop.set(ControlMode.PercentOutput, 1.0);
+      indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+    }
+
+
+    // if(!indexSensorTop())
+    //   {
+    //   indexMotorTop.set(ControlMode.PercentOutput, 1.0);
+    //   indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+    //   }
+    //   else if(indexSensorTop() && !indexSensorBottom())
+    //   {
+    //     indexMotorTop.set(ControlMode.PercentOutput, 0.0);
+    //     indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+    //   }
+    //   else
+    //   {
+    //     stopMotors();
+    //   }
+      // indexMotorTop.set(ControlMode.PercentOutput, 1.0);
+      // indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
   }
 
   /**
    * Method to run the magazine / index motors outward.
    */
   public void indexOut() {
-    indexMotorTop.set(ControlMode.PercentOutput, 1.0);
-    indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+    indexMotorTop.set(ControlMode.PercentOutput, -1.0);
+    indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
   }
 
   /**
@@ -156,6 +178,13 @@ public class IndexSubsystem extends SubsystemBase {
     indexMotorTop.set(ControlMode.PercentOutput, 0.0);
     indexMotorBottom.set(ControlMode.PercentOutput, 0.0);
   }
+
+  public void SpinIntakeMotors(double speed)
+  {
+    indexMotorTop.set(ControlMode.PercentOutput, speed);
+    indexMotorBottom.set(ControlMode.PercentOutput, speed);
+  }
+
 
   /**
    * Method to set the shooter motor to factory defaults and coast mode

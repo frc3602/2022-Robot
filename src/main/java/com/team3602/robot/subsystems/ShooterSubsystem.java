@@ -14,8 +14,6 @@ package com.team3602.robot.subsystems;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Shooter;
 
-import javax.lang.model.util.ElementScanner6;
-
 // REV Imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -161,10 +159,10 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void calculateAndSetMotorSpeeds()
   {
-    if (RobotContainer.visionSubsystem.noValidTarget())
-    {
-      return;
-    }
+    // if (RobotContainer.visionSubsystem.noValidTarget())
+    // {
+    //   return;
+    // }
 
     double distance = calculateDistance();
 
@@ -185,15 +183,15 @@ public class ShooterSubsystem extends SubsystemBase {
 
   if(distance <= 5 )
   {
-    ret = 1000.0;
+    ret = 100.0;
   }
   else if(distance <= 10 )
   {
-    ret = 1000.0;
+    ret = 100.0;
   }
   else
   {
-    ret = 2500.0;
+    ret = 250.0;
   }
 
   return ret;
@@ -205,6 +203,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public void InitShooter()
   {
     shooterMotor.restoreFactoryDefaults();
+    shooterMotor.clearFaults();
+    shooterMotor.burnFlash();
 
     //shooterMotor.setIdleMode(IdleMode.kCoast);
 

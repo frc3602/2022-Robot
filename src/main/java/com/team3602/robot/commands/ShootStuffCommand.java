@@ -34,19 +34,25 @@ public class ShootStuffCommand extends CommandBase {
   @Override
   public void initialize()
   {
+    System.out.println("ShootStuffCommand init");
     RobotContainer.visionSubsystem.lightOn();
-    RobotContainer.rotateToTargetSubsystem.enable();
-
+    //RobotContainer.rotateToTargetSubsystem.enable();
   }
 
   @Override
   public void execute() {
+
     RobotContainer.shooterSubsystem.calculateAndSetMotorSpeeds();
     RobotContainer.shooterSubsystem.updateShooterMotorSpeed();
 
-    if(RobotContainer.visionSubsystem.validTarget() &&
-        RobotContainer.rotateToTargetSubsystem.IsRunning() &&
-        RobotContainer.rotateToTargetSubsystem.onTarget() &&
+    // if(RobotContainer.visionSubsystem.validTarget() &&
+    // RobotContainer.rotateToTargetSubsystem.IsRunning() &&
+    // RobotContainer.rotateToTargetSubsystem.onTarget() &&
+    // RobotContainer.shooterSubsystem.IsShooterSpeedOnTarget())
+
+    if(
+        //RobotContainer.rotateToTargetSubsystem.IsRunning() &&
+        //RobotContainer.rotateToTargetSubsystem.onTarget() &&
         RobotContainer.shooterSubsystem.IsShooterSpeedOnTarget())
       {
         RobotContainer.indexSubsystem.shoot();
@@ -59,6 +65,8 @@ public class ShootStuffCommand extends CommandBase {
   @Override
   public void end(boolean interrupted)
   {
+    System.out.println("ShootStuffCommand init");
+
     RobotContainer.visionSubsystem.lightOff();
     RobotContainer.rotateToTargetSubsystem.disable();
     RobotContainer.shooterSubsystem.setShooterMotorRPM(0.0);

@@ -45,7 +45,7 @@ public interface Constants {
    * The Drivetrain interface provides drive subsystem CAN IDs.
    */
   public interface Drivetrain {
-    int driveFrontLeftCANID = 0;
+    int driveFrontLeftCANID = 20;
     int driveBackLeftCANID = 1;
     int driveFrontRightCANID = 2;
     int driveBackRightCANID = 3;
@@ -133,8 +133,8 @@ public interface Constants {
     double motorTopSpeed = 0.5;
     double motorBottomSpeed = 0.5;
 
-    int indexSensorTopID = 0;
-    int indexSensorBottomID = 1;
+    int indexSensorTopID = 1;
+    int indexSensorBottomID = 0;
   }
 
   /**

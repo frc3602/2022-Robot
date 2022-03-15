@@ -31,7 +31,7 @@ public class OI {
 
     // Creates all the buttons for the joystick
     public static JoystickButton indexInButton = new JoystickButton(joystick, Controller.indexInButton);
-    public static JoystickButton indexOutButton = new JoystickButton(joystick, Controller.indexOutButton);
+    public static JoystickButton indexOutButton = new JoystickButton(joystick,3);
     public static JoystickButton shooterButton = new JoystickButton(joystick, Controller.shooterButton);
 
     // public enum Button {

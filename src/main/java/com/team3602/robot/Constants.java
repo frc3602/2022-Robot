@@ -40,6 +40,7 @@ public interface Constants {
 
   public static final double falconTicksPerRotation = 2048.0;
 
+  int powerDistributionHubCANID = 17;
 
   /**
    * The Drivetrain interface provides drive subsystem CAN IDs.
@@ -108,7 +109,7 @@ public interface Constants {
   public interface Shooter {
     int shooterMotorCANID = 12;
 
-    double shooterGearRatio = (0 / 0);
+    public static double shooterGearRatio = (48.0/32.0);
 
     double limelightHeight = 25; // Height of the limelight from ground
     double limelightAngleCorrection = 27; // Angle of the limelight in relation to the ground
@@ -128,6 +129,8 @@ public interface Constants {
     int indexMotorTopCANID = 15;
     int indexMotorBottomCANID = 16;
 
+    int indexLiftCANID = 25;
+
     int maxBalls = 2;
 
     double motorTopSpeed = 0.5;
@@ -146,8 +149,8 @@ public interface Constants {
     int xboxControllerPort = 1;
 
 
-    int indexInButton = 2;
-    int indexOutButton = 4;
-    int shooterButton = 1;
+    int indexInButton = 1;
+    int indexOutButton = 3;
+    int shooterButton = 2;
   }
 }

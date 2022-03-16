@@ -44,6 +44,8 @@ public class Robot extends TimedRobot {
 
     RobotContainer.shooterSubsystem.InitShooter();
    // RobotContainer.shooterSubsystem.setDefaultCommand(RobotContainer.calculateShooterSpeedCommand);
+
+   robotContainer.ClearStickeyFaults();
  }
 
   @Override

@@ -121,8 +121,8 @@ public class IndexSubsystem extends SubsystemBase {
    * Method to run the magazine / index motors inward.
    */
   public void shoot() {
-    // indexMotorTop.set(ControlMode.PercentOutput, -1.0);
-    // indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
+    indexMotorTop.set(ControlMode.PercentOutput, 1.0);
+    indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
   }
 
   public void indexIn()

@@ -11,14 +11,14 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Shooter;
-
-// REV Imports
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
@@ -33,11 +33,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class ShooterSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one
-  CANSparkMax shooterMotor = new CANSparkMax(Shooter.shooterMotorCANID, MotorType.kBrushless);
+  WPI_TalonFX shooterMotor = new WPI_TalonFX(Shooter.shooterMotorCANID);
 
-  SparkMaxPIDController shooterPIDController = shooterMotor.getPIDController();
+  // SparkMaxPIDController shooterPIDController = shooterMotor.getPIDController();
   
-  private RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
+  // private RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
 
   int count = 0;
   double targetShooterMotorRPM = 0.0;
@@ -58,6 +58,10 @@ public class ShooterSubsystem extends SubsystemBase {
   public void logDataToSmartDashboard() {
   }
 
+  public void SetTestMotorSpeed(double percent)
+  {
+
+  }
 
   /**
    * Method to stop the shooter motor.
@@ -82,13 +86,31 @@ public class ShooterSubsystem extends SubsystemBase {
   public void getShooterMotorSpeed() {
   }
 
+  private double Speed2RPM(double speed_)
+    {
+    double rpm = 0.0;
+
+    rpm = speed_ * (600.0 / 2048.0) * Shooter.shooterGearRatio;
+
+    return rpm;
+    }
+    
+  private double RPM2Speed(double rpm_)
+    {
+    double speed = 0.0;
+
+    speed = (rpm_ * ( 2048.0 / 600.0)) / Shooter.shooterGearRatio;
+
+    return speed;
+    }
+
   public boolean IsShooterSpeedOnTarget()
   {
-    double delta = Math.abs(shooterMotor.getEncoder().getVelocity() - targetShooterMotorRPM);
+    double delta = Math.abs(Speed2RPM(shooterMotor.getSelectedSensorVelocity()) - targetShooterMotorRPM);
 
     System.out.println("IsShooterSpeedOnTarget Delta: " + delta);
 
-    return (delta < 1.0);
+    return (Math.abs(delta) < 25.0);
   }
 
   /**
@@ -97,24 +119,24 @@ public class ShooterSubsystem extends SubsystemBase {
   public void updateShooterMotorSpeed() {
 
 
-    double p = SmartDashboard.getNumber("P Gain", 0);
-    double i = SmartDashboard.getNumber("I Gain", 0);
-    double d = SmartDashboard.getNumber("D Gain", 0);
-    double iz = SmartDashboard.getNumber("I Zone", 0);
-    double ff = SmartDashboard.getNumber("Feed Forward", 0);
-    double max = SmartDashboard.getNumber("Max Output", 0);
-    double min = SmartDashboard.getNumber("Min Output", 0);
+    // double p = SmartDashboard.getNumber("P Gain", 0);
+    // double i = SmartDashboard.getNumber("I Gain", 0);
+    // double d = SmartDashboard.getNumber("D Gain", 0);
+    // double iz = SmartDashboard.getNumber("I Zone", 0);
+    // double ff = SmartDashboard.getNumber("Feed Forward", 0);
+    // double max = SmartDashboard.getNumber("Max Output", 0);
+    // double min = SmartDashboard.getNumber("Min Output", 0);
 
     // if PID coefficients on SmartDashboard have changed, write new values to controller
-    if((p != kP)) { shooterPIDController.setP(p); kP = p; }
-    if((i != kI)) { shooterPIDController.setI(i); kI = i; }
-    if((d != kD)) { shooterPIDController.setD(d); kD = d; }
-    if((iz != kIz)) { shooterPIDController.setIZone(iz); kIz = iz; }
-    if((ff != kFF)) { shooterPIDController.setFF(ff); kFF = ff; }
-    if((max != kMaxOutput) || (min != kMinOutput)) { 
-      shooterPIDController.setOutputRange(min, max); 
-      kMinOutput = min; kMaxOutput = max; 
-    }
+    // if((p != kP)) { shooterPIDController.setP(p); kP = p; }
+    // if((i != kI)) { shooterPIDController.setI(i); kI = i; }
+    // if((d != kD)) { shooterPIDController.setD(d); kD = d; }
+    // if((iz != kIz)) { shooterPIDController.setIZone(iz); kIz = iz; }
+    // if((ff != kFF)) { shooterPIDController.setFF(ff); kFF = ff; }
+    // if((max != kMaxOutput) || (min != kMinOutput)) { 
+    //   shooterPIDController.setOutputRange(min, max); 
+    //   kMinOutput = min; kMaxOutput = max; 
+    // }
 
     /**
      * PIDController objects are commanded to a set point using the 
@@ -131,10 +153,14 @@ public class ShooterSubsystem extends SubsystemBase {
      *  com.revrobotics.CANSparkMax.ControlType.kVoltage
      */
     // double setPoint = m_stick.getY()*maxRPM;
-    shooterPIDController.setReference(targetShooterMotorRPM, CANSparkMax.ControlType.kVelocity);
+    // shooterPIDController.setReference(targetShooterMotorRPM, CANSparkMax.ControlType.kVelocity);
+
+    SmartDashboard.putNumber("SetPoint Ticks",  RPM2Speed(targetShooterMotorRPM));
+
+    shooterMotor.set(TalonFXControlMode.Velocity, RPM2Speed(targetShooterMotorRPM));
     
     SmartDashboard.putNumber("SetPoint", targetShooterMotorRPM);
-    SmartDashboard.putNumber("ProcessVariable", shooterEncoder.getVelocity());
+    SmartDashboard.putNumber("ProcessVariable", shooterMotor.getSelectedSensorVelocity());
 
 
   }
@@ -159,10 +185,10 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void calculateAndSetMotorSpeeds()
   {
-    // if (RobotContainer.visionSubsystem.noValidTarget())
-    // {
-    //   return;
-    // }
+    if (RobotContainer.visionSubsystem.noValidTarget())
+    {
+      return;
+    }
 
     double distance = calculateDistance();
 
@@ -202,40 +228,34 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void InitShooter()
   {
-    shooterMotor.restoreFactoryDefaults();
-    shooterMotor.clearFaults();
-    shooterMotor.burnFlash();
+    shooterMotor.configFactoryDefault();
 
-    //shooterMotor.setIdleMode(IdleMode.kCoast);
+    /* Config sensor used for Primary PID [Velocity] */
+    shooterMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
+    Constants.kPIDLoopIdx, 
+    Constants.kTimeoutMs);
 
+    shooterMotor.setNeutralMode(NeutralMode.Coast);      
+        /**
+     * Phase sensor accordingly. 
+         * Positive Sensor Reading should match Green (blinking) Leds on Talon
+         */
+        //shooterMotor.setSensorPhase(true);
+    // topShooter.configVelocityMeasurementPeriod(VelocityMeasPeriod.Period_10Ms, RobotMap.kTimeoutMs);
 
-    // PID coefficients
-    kP = 6e-5; 
-    kI = 0;
-    kD = 0; 
-    kIz = 0; 
-    kFF = 0.000015; 
-    kMaxOutput = 1; 
-    kMinOutput = -1;
-    maxRPM = 5700;
+    shooterMotor.setInverted(TalonFXInvertType.Clockwise);
 
-    // set PID coefficients
-    shooterPIDController.setP(kP);
-    shooterPIDController.setI(kI);
-    shooterPIDController.setD(kD);
-    shooterPIDController.setIZone(kIz);
-    shooterPIDController.setFF(kFF);
-    shooterPIDController.setOutputRange(kMinOutput, kMaxOutput);
+    /* Config the peak and nominal outputs */
+    shooterMotor.configNominalOutputForward(0, Constants.kTimeoutMs);
+    shooterMotor.configNominalOutputReverse(0, Constants.kTimeoutMs);
+    shooterMotor.configPeakOutputForward(1, Constants.kTimeoutMs);
+    shooterMotor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
-    // display PID coefficients on SmartDashboard
-    SmartDashboard.putNumber("P Gain", kP);
-    SmartDashboard.putNumber("I Gain", kI);
-    SmartDashboard.putNumber("D Gain", kD);
-    SmartDashboard.putNumber("I Zone", kIz);
-    SmartDashboard.putNumber("Feed Forward", kFF);
-    SmartDashboard.putNumber("Max Output", kMaxOutput);
-    SmartDashboard.putNumber("Min Output", kMinOutput);
-
+    /* Config the Velocity closed loop gains in slot0 */
+    shooterMotor.config_kF(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kF, Constants.kTimeoutMs);
+    shooterMotor.config_kP(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kP, Constants.kTimeoutMs);
+    shooterMotor.config_kI(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kI, Constants.kTimeoutMs);
+    shooterMotor.config_kD(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kD, Constants.kTimeoutMs);
   }
 
   /**

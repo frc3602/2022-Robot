@@ -26,7 +26,7 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
   public RotateToTargetSubsystem()
   {
     // The PIDController used by the subsystem
-    super( new PIDController(0.12, 0.0, 0.1));
+    super( new PIDController(0.025, 0.0, 0.0));
 
     setSetpoint(0); // Sets where the PID controller should move the system
 
@@ -36,7 +36,7 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
     // setOutputRange(-0.5, 0.5); // The outputs sent to the motors, which ranges from -1 to 1.
 
     getController().enableContinuousInput(-27.0, 27.0); //parameters moved to the controller. call getController() for access
-    getController().setIntegratorRange(-0.5, 0.5);
+    getController().setIntegratorRange(-0.125, 0.125);
 
     getController().setTolerance(Shooter.rotationalErrorTolerance);
 
@@ -53,9 +53,10 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
 
     double speed = OI.joystick.getRawAxis(1) * -1.0;
     double turn = OI.joystick.getRawAxis(0);
+    SmartDashboard.putBoolean("useOutput IsRunning", IsRunning() );
 
     if(IsRunning())
-      RobotContainer.driveSubsystem.driveCartesian(speed, turn, output); // If all on its own, rotate until on target
+      RobotContainer.driveSubsystem.driveCartesian(speed, turn, output * -1.0); // If all on its own, rotate until on target
     // else
     //   Robot.Drive.rotate(0.0);
 
@@ -63,7 +64,7 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    x = RobotContainer.visionSubsystem.getTX(); // updates x value
+    x = RobotContainer.visionSubsystem.GetTX(); // updates x value
 
     SmartDashboard.putNumber("PID Error", x );
     return x;

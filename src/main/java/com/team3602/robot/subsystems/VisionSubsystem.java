@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Cody Wellman
  */
 public class VisionSubsystem extends SubsystemBase {
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight-robomos");
 
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
@@ -39,10 +39,10 @@ public class VisionSubsystem extends SubsystemBase {
   NetworkTableEntry stream = table.getEntry("stream");
   NetworkTableEntry snapshot = table.getEntry("snapshot");
 
-  double x = tx.getDouble(0.0);
-  double y = ty.getDouble(0.0);
-  double area = ta.getDouble(0.0);
-  double validTarget = tv.getDouble(0.0);
+  // double x = tx.getDouble(0.0);
+  // double y = ty.getDouble(0.0);
+  // double area = ta.getDouble(0.0);
+  // double validTarget = tv.getDouble(0.0);
 
   boolean overrideLight = false;
 
@@ -60,6 +60,7 @@ public class VisionSubsystem extends SubsystemBase {
   public void init() {
     lightOff();
     setPiP();
+    //setPipline(0);
   }
 
   /**
@@ -123,19 +124,15 @@ public class VisionSubsystem extends SubsystemBase {
     return (int) pipeline.getDouble(0.0);
   }
 
-  /**
-   * @return the current TX value from the limelight
-   */
-  public double getTX() {
-    return x;
-  }
+  public double GetTX()
+    {
+    return tx.getDouble(0.0);
+    }
 
-  /**
-   * @return the current TY value from the limelight
-   */
-  public double getTY() {
-    return y;
-  }
+  public double GetTY()
+    {
+    return ty.getDouble(0.0);
+    }
 
   /**
    * Method to automatically zoom the lightlight.
@@ -203,7 +200,7 @@ public class VisionSubsystem extends SubsystemBase {
    * @return validTarget as a double
    */
   public boolean validTarget() {
-    validTarget = tv.getDouble(0.0);
+    double validTarget = tv.getDouble(0.0);
     return validTarget != 0.0;
   }
 
@@ -211,7 +208,7 @@ public class VisionSubsystem extends SubsystemBase {
    * @return a boolean if there is no valid target
    */
   public boolean noValidTarget() {
-    validTarget = tv.getDouble(0.0);
+    double validTarget = tv.getDouble(0.0);
     if (validTarget == 0) {
       System.out.println("ERROR: Vision Target was lost");
       return true;
@@ -224,8 +221,10 @@ public class VisionSubsystem extends SubsystemBase {
    * Method to log information to the Smart Dashboard.
    */
   public void logDataToSmartDashboard() {
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightArea", area);
+    SmartDashboard.putNumber("LimelightX", GetTX());
+    SmartDashboard.putNumber("LimelightY", GetTY());
+    SmartDashboard.putNumber("LimelightArea", ta.getDouble(0.0));
+    SmartDashboard.putBoolean("ValidTargetightArea", validTarget());
+
   }
 }

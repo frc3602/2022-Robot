@@ -107,6 +107,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public boolean IsShooterSpeedOnTarget()
   {
     double delta = Math.abs(Speed2RPM(shooterMotor.getSelectedSensorVelocity()) - targetShooterMotorRPM);
+    System.out.println("IsShooterSpeedOnTarget targetShooterMotorRPM: " + targetShooterMotorRPM);
 
     System.out.println("IsShooterSpeedOnTarget Delta: " + delta);
 
@@ -122,7 +123,7 @@ public class ShooterSubsystem extends SubsystemBase {
     // double p = SmartDashboard.getNumber("P Gain", 0);
     // double i = SmartDashboard.getNumber("I Gain", 0);
     // double d = SmartDashboard.getNumber("D Gain", 0);
-    // double iz = SmartDashboard.getNumber("I Zone", 0);
+    // // double iz = SmartDashboard.getNumber("I Zone", 0);
     // double ff = SmartDashboard.getNumber("Feed Forward", 0);
     // double max = SmartDashboard.getNumber("Max Output", 0);
     // double min = SmartDashboard.getNumber("Min Output", 0);
@@ -155,6 +156,11 @@ public class ShooterSubsystem extends SubsystemBase {
     // double setPoint = m_stick.getY()*maxRPM;
     // shooterPIDController.setReference(targetShooterMotorRPM, CANSparkMax.ControlType.kVelocity);
 
+    // shooterMotor.config_kF(Constants.kPIDLoopIdx, ff, Constants.kTimeoutMs);
+    // shooterMotor.config_kP(Constants.kPIDLoopIdx, p, Constants.kTimeoutMs);
+    // shooterMotor.config_kI(Constants.kPIDLoopIdx, i, Constants.kTimeoutMs);
+    // shooterMotor.config_kD(Constants.kPIDLoopIdx, d, Constants.kTimeoutMs);
+
     SmartDashboard.putNumber("SetPoint Ticks",  RPM2Speed(targetShooterMotorRPM));
 
     shooterMotor.set(TalonFXControlMode.Velocity, RPM2Speed(targetShooterMotorRPM));
@@ -162,6 +168,7 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("SetPoint", targetShooterMotorRPM);
     SmartDashboard.putNumber("ProcessVariable", shooterMotor.getSelectedSensorVelocity());
 
+    SmartDashboard.putBoolean("IsShooterSpeedOnTarget", IsShooterSpeedOnTarget());
 
   }
 
@@ -172,7 +179,7 @@ public class ShooterSubsystem extends SubsystemBase {
    * @return the calculated double for the shooter
    */
   public double calculateDistance() {
-    double a = RobotContainer.visionSubsystem.getTY() + Shooter.limelightAngleCorrection;
+    double a = RobotContainer.visionSubsystem.GetTY() + Shooter.limelightAngleCorrection;
     double answer = Shooter.targetHeight / (Math.tan(Math.toRadians(a)));
 
     return answer;
@@ -205,22 +212,28 @@ public class ShooterSubsystem extends SubsystemBase {
 
   private double CalculateMagicMath(double distance)
   {
-  double ret = 0.0;
+    // https://www.mathcelebrity.com/3ptquad.php?p1=120%2C4500&p2=180%2C5500&p3=240%2C7500&pl=Calculate+Equation
+    //0.13888888888889x2 - 25x + 5500
 
-  if(distance <= 5 )
-  {
-    ret = 100.0;
-  }
-  else if(distance <= 10 )
-  {
-    ret = 100.0;
-  }
-  else
-  {
-    ret = 250.0;
-  }
+  double ret = (0.13888888888889 * distance * distance) - (25 * distance) + 5500;
 
   return ret;
+  }
+
+  public void GetPIDValuesFromDash()
+  {
+    double p = SmartDashboard.getNumber("P Gain", 0.25);
+    double i = SmartDashboard.getNumber("I Gain", 0);
+    double d = SmartDashboard.getNumber("D Gain", 0);
+    // double iz = SmartDashboard.getNumber("I Zone", 0);
+    double ff = SmartDashboard.getNumber("Feed Forward", 0.5);
+
+
+    /* Config the Velocity closed loop gains in slot0 */
+    shooterMotor.config_kF(Constants.kPIDLoopIdx, ff, Constants.kTimeoutMs);
+    shooterMotor.config_kP(Constants.kPIDLoopIdx, p, Constants.kTimeoutMs);
+    shooterMotor.config_kI(Constants.kPIDLoopIdx, i, Constants.kTimeoutMs);
+    shooterMotor.config_kD(Constants.kPIDLoopIdx, d, Constants.kTimeoutMs);
   }
 
   /**
@@ -228,6 +241,12 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void InitShooter()
   {
+    // SmartDashboard.putNumber("P Gain", 0.25);
+    // SmartDashboard.putNumber("I Gain", 0);
+    // SmartDashboard.putNumber("D Gain", 0);
+    // SmartDashboard.putNumber("Feed Forward", 0.5);
+
+
     shooterMotor.configFactoryDefault();
 
     /* Config sensor used for Primary PID [Velocity] */
@@ -241,7 +260,6 @@ public class ShooterSubsystem extends SubsystemBase {
          * Positive Sensor Reading should match Green (blinking) Leds on Talon
          */
         //shooterMotor.setSensorPhase(true);
-    // topShooter.configVelocityMeasurementPeriod(VelocityMeasPeriod.Period_10Ms, RobotMap.kTimeoutMs);
 
     shooterMotor.setInverted(TalonFXInvertType.Clockwise);
 
@@ -251,11 +269,24 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.configPeakOutputForward(1, Constants.kTimeoutMs);
     shooterMotor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
+    // double p = SmartDashboard.getNumber("P Gain", 0.25);
+    // double i = SmartDashboard.getNumber("I Gain", 0);
+    // double d = SmartDashboard.getNumber("D Gain", 0);
+    // // double iz = SmartDashboard.getNumber("I Zone", 0);
+    // double ff = SmartDashboard.getNumber("Feed Forward", 0.5);
+
+
     /* Config the Velocity closed loop gains in slot0 */
+    // shooterMotor.config_kF(Constants.kPIDLoopIdx, ff, Constants.kTimeoutMs);
+    // shooterMotor.config_kP(Constants.kPIDLoopIdx, p, Constants.kTimeoutMs);
+    // shooterMotor.config_kI(Constants.kPIDLoopIdx, i, Constants.kTimeoutMs);
+    // shooterMotor.config_kD(Constants.kPIDLoopIdx, d, Constants.kTimeoutMs);
+
     shooterMotor.config_kF(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kF, Constants.kTimeoutMs);
     shooterMotor.config_kP(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kP, Constants.kTimeoutMs);
     shooterMotor.config_kI(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kI, Constants.kTimeoutMs);
     shooterMotor.config_kD(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kD, Constants.kTimeoutMs);
+
   }
 
   /**

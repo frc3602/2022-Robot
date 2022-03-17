@@ -34,6 +34,7 @@ public class IndexSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one
   WPI_TalonSRX indexMotorTop = new WPI_TalonSRX(Index.indexMotorTopCANID);
   WPI_TalonSRX indexMotorBottom = new WPI_TalonSRX(Index.indexMotorBottomCANID);
+  WPI_TalonSRX indexLift = new WPI_TalonSRX(Index.indexLiftCANID);
 
   DigitalInput indexSensorTop = new DigitalInput(Index.indexSensorTopID);
   DigitalInput indexSensorBottom = new DigitalInput(Index.indexSensorBottomID);
@@ -127,6 +128,7 @@ public class IndexSubsystem extends SubsystemBase {
 
   public void indexIn()
   {
+    DropIntake();
     checkSensors();
 
     if(indexSensorTop() && indexSensorBottom())
@@ -145,22 +147,6 @@ public class IndexSubsystem extends SubsystemBase {
     }
 
 
-    // if(!indexSensorTop())
-    //   {
-    //   indexMotorTop.set(ControlMode.PercentOutput, 1.0);
-    //   indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
-    //   }
-    //   else if(indexSensorTop() && !indexSensorBottom())
-    //   {
-    //     indexMotorTop.set(ControlMode.PercentOutput, 0.0);
-    //     indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
-    //   }
-    //   else
-    //   {
-    //     stopMotors();
-    //   }
-      // indexMotorTop.set(ControlMode.PercentOutput, 1.0);
-      // indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
   }
 
   /**
@@ -175,6 +161,7 @@ public class IndexSubsystem extends SubsystemBase {
    * Method to stop the magazine / index motors.
    */
   public void stopMotors() {
+    LiftIntake();
     indexMotorTop.set(ControlMode.PercentOutput, 0.0);
     indexMotorBottom.set(ControlMode.PercentOutput, 0.0);
   }
@@ -183,6 +170,16 @@ public class IndexSubsystem extends SubsystemBase {
   {
     indexMotorTop.set(ControlMode.PercentOutput, speed);
     indexMotorBottom.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void LiftIntake()
+  {
+    //indexLift.set(ControlMode.PercentOutput, 1.0);
+  }
+
+  public void DropIntake()
+  {
+    //indexLift.set(ControlMode.PercentOutput, -1.0);
   }
 
 

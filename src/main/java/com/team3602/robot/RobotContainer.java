@@ -58,8 +58,8 @@ public class RobotContainer {
    * kF: 1023 represents output value to Talon at 100%, 7200 represents Velocity units at 100% output
    * 
    * 	                                    			  kP   kI   kD   kF          Iz    PeakOut */
- // public final static Gains kGains_Velocit = new Gains( 0.25, 0.001, 20, 1023.0/7200.0,  300,  1.00);
-  public final static Gains kGains_Velocit = new Gains( 0.30, 0.0, 0, 1023.0/7200.0,  300,  1.00);
+  public final static Gains kGains_Velocit = new Gains( 0.25, 0.001, 20, 1023.0/7200.0,  300,  1.00);
+  // public final static Gains kGains_Velocit = new Gains( 0.30, 0.0, 0, 1023.0/7200.0,  0,  1.00);
 
   /**
    * Constructor for {@link RobotContainer} class to configure the button bindings.
@@ -89,7 +89,8 @@ public class RobotContainer {
     OI.indexOutButton.whileHeld(new TestIntakeCommand(-1.0));
 
     // Shooter commands & buttons
-    OI.shooterButton.whileHeld(new TestShooterSpeedCommand());
+    //OI.shooterButton.whileHeld(new TestShooterSpeedCommand());
+    OI.shooterButton.whileHeld(new ShootStuffCommand(shooterSubsystem));
     //OI.shooterButton.whenReleased(RobotContainer.shootStop);
 
     // OI.xButton.whenPressed(new ExtendDistanceCommand(true, 0.0));
@@ -113,7 +114,7 @@ public class RobotContainer {
     //     new ExtendDistanceCommand(false, 0.0)
     //   ));
       
-    // OI.menuButton.whenPressed(climbReadyCommand);
+    OI.menuButton.whenPressed(climbReadyCommand);
 
 }
 

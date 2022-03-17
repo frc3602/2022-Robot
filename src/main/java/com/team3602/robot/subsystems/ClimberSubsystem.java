@@ -313,8 +313,10 @@ public class ClimberSubsystem extends SubsystemBase {
     // motor.configMotionAcceleration(990, Constants.kTimeoutMs);
     // motor.configMotionCruiseVelocity(1800, Constants.kTimeoutMs);
     // motor.configMotionAcceleration(1500, Constants.kTimeoutMs);
-    motor.configMotionCruiseVelocity(21777.0, Constants.kTimeoutMs);
-    motor.configMotionAcceleration(10000.0, Constants.kTimeoutMs);
+    // motor.configMotionCruiseVelocity(21777.0, Constants.kTimeoutMs);
+    // motor.configMotionAcceleration(10000.0, Constants.kTimeoutMs);
+    motor.configMotionCruiseVelocity(10000.0, Constants.kTimeoutMs);
+    motor.configMotionAcceleration(5000.0, Constants.kTimeoutMs);
 
     motor.configForwardSoftLimitEnable(true, Constants.kTimeoutMs);
 
@@ -394,8 +396,8 @@ public class ClimberSubsystem extends SubsystemBase {
   public void NextStageClimb()
   {
 
-    if(true)
-      return;
+    // if(true)
+    //   return;
 
     System.out.println("climber NextStageClimb");
     System.out.print("currentStage: ");
@@ -408,7 +410,7 @@ public class ClimberSubsystem extends SubsystemBase {
       {
         currentStage = Climber.ClimbStageEnum.climbMidBar;
         ParallelCommandGroup temp = new ParallelCommandGroup(
-          new PivotAngleCommand(true, -27.0),
+          new PivotAngleCommand(true, -29.0),
           new PivotAngleCommand(false, 0.0),
 
           new ExtendDistanceCommand(true, 23.5),
@@ -440,7 +442,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(true, -20.0),
               new PivotAngleCommand(false, 0.0),
     
-              new ExtendDistanceCommand(true, 20.0),
+              new ExtendDistanceCommand(true, 19.0),
               new ExtendDistanceCommand(false, 0.0)
             )
             ,
@@ -449,7 +451,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(true, -20.0),
               new PivotAngleCommand(false, 0.0),
     
-              new ExtendDistanceCommand(true, 20.0),
+              new ExtendDistanceCommand(true, 19.0),
               new ExtendDistanceCommand(false, 1.5)
             )
   
@@ -462,13 +464,31 @@ public class ClimberSubsystem extends SubsystemBase {
       case hookHighBar : 
       {
         currentStage = Climber.ClimbStageEnum.ClimbHighBar;
+        // ParallelCommandGroup temp = new ParallelCommandGroup(
+        //   new PivotAngleCommand(true, -20.0),
+        //   new PivotAngleCommand(false, 0.0),
 
-        ParallelCommandGroup temp = new ParallelCommandGroup(
+        //   new ExtendDistanceCommand(true, 15.0),
+        //   new ExtendDistanceCommand(false, 10.0)
+        //   );
+
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+        new ParallelCommandGroup(
           new PivotAngleCommand(true, -20.0),
           new PivotAngleCommand(false, 0.0),
 
-          new ExtendDistanceCommand(true, 15.0),
-          new ExtendDistanceCommand(false, 10.0)
+          new ExtendDistanceCommand(true, 19.0),
+          new ExtendDistanceCommand(false, 15.0)
+          )
+          ,
+          new ParallelCommandGroup(
+            new PivotAngleCommand(true, -20.0),
+            new PivotAngleCommand(false, 0.0),
+  
+            new ExtendDistanceCommand(true, 15.0),
+            new ExtendDistanceCommand(false, 15.0)
+            )
           );
 
         temp.schedule();
@@ -485,7 +505,7 @@ public class ClimberSubsystem extends SubsystemBase {
           new ParallelCommandGroup
             (
               new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -26.0),
+              new PivotAngleCommand(false, -29.0),
     
               new ExtendDistanceCommand(true, 15.0),
               new ExtendDistanceCommand(false, 5.0)
@@ -494,7 +514,7 @@ public class ClimberSubsystem extends SubsystemBase {
           new ParallelCommandGroup
             (
               new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -27.0),
+              new PivotAngleCommand(false, -29.0),
   
             new ExtendDistanceCommand(true, 0.0),
             new ExtendDistanceCommand(false, 23.5)
@@ -529,7 +549,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(false, -20.0),
     
               new ExtendDistanceCommand(true, 0.0),
-              new ExtendDistanceCommand(false, 20.0)
+              new ExtendDistanceCommand(false, 19.0)
             )
             ,
           new ParallelCommandGroup
@@ -538,7 +558,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(false, -20.0),
     
               new ExtendDistanceCommand(true, 1.5),
-              new ExtendDistanceCommand(false, 20.0)
+              new ExtendDistanceCommand(false, 19.0)
             )
   
         );
@@ -575,7 +595,16 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(true, 0.0),
               new PivotAngleCommand(false, -20.0),
     
-              new ExtendDistanceCommand(true, 5.0),
+              new ExtendDistanceCommand(true, 15.0),
+              new ExtendDistanceCommand(false, 19.0)
+                )
+            ,
+            new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, 0.0),
+              new PivotAngleCommand(false, -20.0),
+    
+              new ExtendDistanceCommand(true, 15.0),
               new ExtendDistanceCommand(false, 15.0)
                 )
             ,

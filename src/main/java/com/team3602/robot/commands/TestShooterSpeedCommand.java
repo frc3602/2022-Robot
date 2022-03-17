@@ -20,6 +20,8 @@ public class TestShooterSpeedCommand extends CommandBase {
   public void initialize()
   {
     //SmartDashboard.putNumber("TestShooterSpeed", 150.0);
+    //RobotContainer.shooterSubsystem.GetPIDValuesFromDash();
+    RobotContainer.visionSubsystem.lightOn();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -27,6 +29,7 @@ public class TestShooterSpeedCommand extends CommandBase {
   public void execute()
   {
     double speed = SmartDashboard.getNumber("TestShooterSpeed", 150.0);
+    RobotContainer.visionSubsystem.logDataToSmartDashboard();
     
     RobotContainer.shooterSubsystem.setShooterMotorRPM(speed);
 
@@ -45,6 +48,8 @@ public class TestShooterSpeedCommand extends CommandBase {
   @Override
   public void end(boolean interrupted)
   {
+    RobotContainer.visionSubsystem.lightOff();
+
     RobotContainer.shooterSubsystem.stopMotor();
   }
 

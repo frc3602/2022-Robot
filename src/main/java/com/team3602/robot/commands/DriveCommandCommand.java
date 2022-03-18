@@ -42,16 +42,9 @@ public class DriveCommandCommand extends CommandBase {
     double speed = OI.joystick.getRawAxis(1) * -1.0;
     double turn = OI.joystick.getRawAxis(0);
     double rotate = OI.joystick.getRawAxis(2);
-    // double rightTrigger = OI.joystick.getRawAxis(3);
 
-    // double rotate = 0.0;
-
-    // if (leftTrigger > 0.0)
-    //   rotate = leftTrigger * -1.0;
-    // else if (rightTrigger > 0.0)
-    //   rotate = rightTrigger;
-    // else
-    //   rotate = 0.0;
+    if(Math.abs(rotate) <= 0.1)
+      rotate = 0.0;
 
     if(!RobotContainer.rotateToTargetSubsystem.IsRunning())
       RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);

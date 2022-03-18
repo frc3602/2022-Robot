@@ -413,7 +413,7 @@ public class ClimberSubsystem extends SubsystemBase {
           new PivotAngleCommand(true, -29.0),
           new PivotAngleCommand(false, 0.0),
 
-          new ExtendDistanceCommand(true, 23.5),
+          new ExtendDistanceCommand(true, 13.5),
           new ExtendDistanceCommand(false, 0.0)
           );
 
@@ -428,6 +428,15 @@ public class ClimberSubsystem extends SubsystemBase {
         System.out.println("hookHighBar begin sequential");
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, -27.0),
+              new PivotAngleCommand(false, 0.0),
+    
+              new ExtendDistanceCommand(true, 23.5),
+              new ExtendDistanceCommand(false, 0.0)
+            )
+            ,
           new ParallelCommandGroup
             (
               new PivotAngleCommand(true, -20.0),
@@ -464,13 +473,6 @@ public class ClimberSubsystem extends SubsystemBase {
       case hookHighBar : 
       {
         currentStage = Climber.ClimbStageEnum.ClimbHighBar;
-        // ParallelCommandGroup temp = new ParallelCommandGroup(
-        //   new PivotAngleCommand(true, -20.0),
-        //   new PivotAngleCommand(false, 0.0),
-
-        //   new ExtendDistanceCommand(true, 15.0),
-        //   new ExtendDistanceCommand(false, 10.0)
-        //   );
 
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
@@ -517,7 +519,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(false, -29.0),
   
             new ExtendDistanceCommand(true, 0.0),
-            new ExtendDistanceCommand(false, 23.5)
+            new ExtendDistanceCommand(false, 13.5)
             )
   
         );
@@ -537,10 +539,19 @@ public class ClimberSubsystem extends SubsystemBase {
           new ParallelCommandGroup
             (
               new PivotAngleCommand(true, 0.0),
+              new PivotAngleCommand(false, -29.0),
+    
+              new ExtendDistanceCommand(true, 0.0),
+              new ExtendDistanceCommand(false, 23.5)
+            )
+            ,
+          new ParallelCommandGroup
+            (
+              new PivotAngleCommand(true, 0.0),
               new PivotAngleCommand(false, -20.0),
     
               new ExtendDistanceCommand(true, 0.0),
-              new ExtendDistanceCommand(false, 22.5)
+              new ExtendDistanceCommand(false, 23.5)
             )
             ,
           new ParallelCommandGroup
@@ -571,22 +582,6 @@ public class ClimberSubsystem extends SubsystemBase {
       case hookTravers : 
       {
         currentStage = Climber.ClimbStageEnum.climbTraverse;
-
-        // ParallelCommandGroup temp = new ParallelCommandGroup(
-        //   new PivotAngleCommand(true, 15.0),
-        //   new PivotAngleCommand(false, 0.0),
-
-        //   new ExtendDistanceCommand(true, 10.0),
-        //   new ExtendDistanceCommand(false, 0.0)
-        //   );
-        // new ParallelCommandGroup
-        // (
-        //   new PivotAngleCommand(true, 0.0),
-        //   new PivotAngleCommand(false, -18.0),
-
-        //   new ExtendDistanceCommand(true, 1.5),
-        //   new ExtendDistanceCommand(false, 20.0)
-        // )
 
         SequentialCommandGroup temp = new SequentialCommandGroup
         (

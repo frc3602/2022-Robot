@@ -50,6 +50,12 @@ public interface Constants {
     int driveBackLeftCANID = 1;
     int driveFrontRightCANID = 2;
     int driveBackRightCANID = 3;
+
+    double driveRatio = 14.0/69.0;
+
+    double driveInverseRatio = 1.0 / driveRatio;
+
+    double distancePerRev = 4.0 * Math.PI;
   }
 
   /**

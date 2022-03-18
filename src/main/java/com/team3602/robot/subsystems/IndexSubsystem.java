@@ -11,11 +11,16 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.Constants.Index;
 
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 // WPILib Imports
@@ -111,9 +116,12 @@ public class IndexSubsystem extends SubsystemBase {
     // count++;
     // if (count > 500) {
 
+      System.out.println("index checkSensors");
 
       SmartDashboard.putBoolean("TopSensor", indexSensorTop());
       SmartDashboard.putBoolean("BottomSensor", indexSensorBottom());
+      SmartDashboard.putBoolean("Limit FWD", (indexLift.isFwdLimitSwitchClosed() != 0 ));
+      SmartDashboard.putBoolean("Limit REV", (indexLift.isRevLimitSwitchClosed() != 0 ));
     //   count = 0;
     // }
   }
@@ -174,12 +182,12 @@ public class IndexSubsystem extends SubsystemBase {
 
   public void LiftIntake()
   {
-    //indexLift.set(ControlMode.PercentOutput, 1.0);
+    //indexLift.set(ControlMode.PercentOutput, 0.25);
   }
 
   public void DropIntake()
   {
-    //indexLift.set(ControlMode.PercentOutput, -1.0);
+    //indexLift.set(ControlMode.PercentOutput, -0.25);
   }
 
 
@@ -192,5 +200,9 @@ public class IndexSubsystem extends SubsystemBase {
 
     indexMotorTop.setNeutralMode(NeutralMode.Brake);
     indexMotorBottom.setNeutralMode(NeutralMode.Brake);
+
+
+    indexLift.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
+    indexLift.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
   }
 }

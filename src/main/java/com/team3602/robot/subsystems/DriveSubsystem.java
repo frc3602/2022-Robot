@@ -11,6 +11,7 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Drivetrain;
 
@@ -72,6 +73,12 @@ public class DriveSubsystem extends SubsystemBase {
      */
   }
 
+  public double GetEncoderDistance(WPI_TalonFX motor)
+  {
+    double dist = motor.getSelectedSensorPosition() * Constants.Drivetrain.driveInverseRatio;
+    return dist;
+  }
+
   /**
    * Method to get the current angle of the navX gyro.
    */
@@ -90,25 +97,6 @@ public class DriveSubsystem extends SubsystemBase {
    * Method to create the cartesian drive.
    */
   public void driveCartesian(double y, double x, double z) {
-    // Sets up the cartesian drive for the drive subsystem
-    //RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(OI.joystick.getY() * -1.0, OI.joystick.getX(),OI.joystick.getZ());
-
-    // double deadband = 0.001;
-
-    // if(y < deadband)
-    //   y = 0.0;
-    // if(x < deadband)
-    //   x = 0.0;
-    // if(z < deadband)
-    //   z = 0.0;
-
-    // if(true)
-    // {
-    //   y = 0.0;
-    //   x = 0.0;
-    //   z = 0.0;
-
-    // }
 
     if(RobotContainer.climberSubsystem.StartedClimb())
     {

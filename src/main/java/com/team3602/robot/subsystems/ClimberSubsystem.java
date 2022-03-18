@@ -84,7 +84,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void ResetEncoders()
   {
-  System.out.println("ClimberSubsystem ResetEncoders");
+  if(Constants.testingEnabled)
+    System.out.println("ClimberSubsystem ResetEncoders");
   pivotInnerLeft.setSelectedSensorPosition(0.0);
   extendInnerLeft.setSelectedSensorPosition(0.0); 
   pivotInnerRight.setSelectedSensorPosition(0.0); 
@@ -126,6 +127,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void ReoportStuff()
   {
+    if(Constants.testingEnabled)
+    {
     SmartDashboard.putNumber("pivotInnerLeft", pivotInnerLeft.getSelectedSensorPosition());
     SmartDashboard.putNumber("pivotInnerRight", pivotInnerRight.getSelectedSensorPosition());
     SmartDashboard.putNumber("pivotOuterLeft", pivotOuterLeft.getSelectedSensorPosition());
@@ -144,6 +147,8 @@ public class ClimberSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("GetCurrentOuterRightAngle", GetCurrentOuterRightAngle());
     SmartDashboard.putNumber("GetCurrentInnerLeftAngle", GetCurrentInnerLeftAngle());
     SmartDashboard.putNumber("GetCurrentInnerRightAngle", GetCurrentInnerRightAngle());
+
+    }
 
     // SmartDashboard.putNumber("extendInnerRight.getMotorOutputVoltage", extendInnerRight.getMotorOutputVoltage());
     // SmartDashboard.putNumber("extendInnerRight.getSelectedSensorVelocity", extendInnerRight.getSelectedSensorVelocity());

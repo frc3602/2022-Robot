@@ -11,6 +11,8 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.Constants;
+
 // WPILib Imports
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -135,44 +137,6 @@ public class VisionSubsystem extends SubsystemBase {
     }
 
   /**
-   * Method to automatically zoom the lightlight.
-   */
-  // // public void autoZoom() {
-  //   if (noValidTarget()) {
-  //     setPipline(0);
-  //     return;
-  //   }
-
-  //   int currentPipeline = getPipeline();
-  //   double angle = y;
-
-  //   switch (currentPipeline) {
-  //   case 0: {
-  //     if (angle < 6.0) {
-  //       setPipline(2);
-  //     } else if (angle >= 6.0 && angle < 11.0) {
-  //       setPipline(1);
-  //     }
-  //     break;
-  //   }
-  //   case 1: {
-  //     if (angle < 8.0) {
-  //       setPipline(2);
-  //     } else if (angle >= 13.0) {
-  //       setPipline(0);
-  //     }
-  //     break;
-  //   }
-  //   case 2: {
-  //     if (angle > 7) {
-  //       setPipline(1);
-  //     }
-  //     break;
-  //   }
-  //   }
-  // }
-
-  /**
    * Method to force the limelight light on.
    */
   public void lightOn() {
@@ -221,10 +185,15 @@ public class VisionSubsystem extends SubsystemBase {
    * Method to log information to the Smart Dashboard.
    */
   public void logDataToSmartDashboard() {
+    if(Constants.testingEnabled)
+    {
     SmartDashboard.putNumber("LimelightX", GetTX());
     SmartDashboard.putNumber("LimelightY", GetTY());
     SmartDashboard.putNumber("LimelightArea", ta.getDouble(0.0));
     SmartDashboard.putBoolean("ValidTargetightArea", validTarget());
+
+    }
+
 
   }
 }

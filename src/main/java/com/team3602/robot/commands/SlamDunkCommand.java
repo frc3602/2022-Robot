@@ -8,50 +8,47 @@ import com.team3602.robot.RobotContainer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class AutonDriveCommand extends CommandBase {
-
-  double distance = 0.0;
-  double speed = 0.4;
-  /** Creates a new AutonDriveCommand. */
-  public AutonDriveCommand(double distance) {
+public class SlamDunkCommand extends CommandBase {
+  /** Creates a new SlamDunkCommand. */
+  public SlamDunkCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-
-    addRequirements(RobotContainer.driveSubsystem);
-
-    if(distance < 0.0)
-      speed = speed * -1.0;
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize()
   {
-    RobotContainer.driveSubsystem.resetGyro();
-    RobotContainer.driveSubsystem.ResetEncoders();
+    RobotContainer.shooterSubsystem.setShooterMotorRPM(200);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute()
   {
-    RobotContainer.driveSubsystem.driveCartesian(speed, 0.0, 0.0);
+    RobotContainer.shooterSubsystem.updateShooterMotorSpeed();
+    RobotContainer.visionSubsystem.logDataToSmartDashboard();
+
+    if(RobotContainer.shooterSubsystem.IsShooterSpeedOnTarget())
+      {
+        RobotContainer.indexSubsystem.shoot();
+      }
+    else
+      RobotContainer.indexSubsystem.stopMotors();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted)
   {
-    
+    RobotContainer.shooterSubsystem.setShooterMotorRPM(0.0);
+    RobotContainer.shooterSubsystem.updateShooterMotorSpeed();
+    RobotContainer.shooterSubsystem.stopMotor();
+    RobotContainer.indexSubsystem.stopMotors();
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished()
-  {
-    if( Math.abs(RobotContainer.driveSubsystem.GetAverageDistance() - distance) < 5.0)
-      return true;
-    else
-      return false;
+  public boolean isFinished() {
+    return false;
   }
 }

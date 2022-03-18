@@ -34,6 +34,7 @@ public class RobotContainer {
   public static VisionSubsystem visionSubsystem = new VisionSubsystem();
   public static IndexSubsystem indexSubsystem = new IndexSubsystem();
   public static RotateToTargetSubsystem rotateToTargetSubsystem = new RotateToTargetSubsystem();
+  public static AutonRotatePIDSubsystem autonRotatePIDSubsystem = new AutonRotatePIDSubsystem();
 
   // Commands
   public static DriveCommandCommand driveCommand = new DriveCommandCommand(driveSubsystem);
@@ -47,6 +48,7 @@ public class RobotContainer {
 
   public static ReportStuffCommand reportCommand = new ReportStuffCommand();
   public static SetClimbReadyCommand climbReadyCommand = new SetClimbReadyCommand();
+  public static AutonGrabAndTurnCommandGroup autonGrabAndTurnCommandGroup = new AutonGrabAndTurnCommandGroup();
 
  // PowerDistribution powerHub = new PowerDistribution(Constants.powerDistributionHubCANID, ModuleType.kRev);
 
@@ -91,6 +93,8 @@ public class RobotContainer {
     // Shooter commands & buttons
     //OI.shooterButton.whileHeld(new TestShooterSpeedCommand());
     OI.shooterButton.whileHeld(new ShootStuffCommand(shooterSubsystem));
+
+    OI.dunkButton.whenHeld(new SlamDunkCommand());
     //OI.shooterButton.whenReleased(RobotContainer.shootStop);
 
     // OI.xButton.whenPressed(new ExtendDistanceCommand(true, 0.0));
@@ -124,6 +128,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    //return autonGrabAndTurnCommandGroup;
     return driveCommand;
   }
 }

@@ -33,6 +33,7 @@ public class OI {
     public static JoystickButton indexInButton = new JoystickButton(joystick, Controller.indexInButton);
     public static JoystickButton indexOutButton = new JoystickButton(joystick,3);
     public static JoystickButton shooterButton = new JoystickButton(joystick, Controller.shooterButton);
+    public static JoystickButton dunkButton = new JoystickButton(joystick,4);
 
     // public enum Button {
     //     kLeftBumper(5),

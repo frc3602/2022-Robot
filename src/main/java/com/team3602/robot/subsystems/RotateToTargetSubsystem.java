@@ -4,6 +4,7 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Shooter;
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 public class RotateToTargetSubsystem extends PIDSubsystem {
 
-  double x = RobotContainer.visionSubsystem.tx.getDouble(0.0);
+  //double x = RobotContainer.visionSubsystem.tx.getDouble(0.0);
 
   public double PIDOut; 
 
@@ -49,11 +50,17 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // turnValue = output;
-    SmartDashboard.putNumber("PID Output", output );
+
+    if(Constants.testingEnabled)
+    {
+    SmartDashboard.putNumber("RotateToTarget PID Output", output );
+    SmartDashboard.putBoolean("RotateToTarget useOutput IsRunning", IsRunning() );
+      
+    }
+
 
     double speed = OI.joystick.getRawAxis(1) * -1.0;
     double turn = OI.joystick.getRawAxis(0);
-    SmartDashboard.putBoolean("useOutput IsRunning", IsRunning() );
 
     if(IsRunning())
       RobotContainer.driveSubsystem.driveCartesian(speed, turn, output * -1.0); // If all on its own, rotate until on target
@@ -64,9 +71,11 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    x = RobotContainer.visionSubsystem.GetTX(); // updates x value
+    double x = RobotContainer.visionSubsystem.GetTX(); // updates x value
 
-    SmartDashboard.putNumber("PID Error", x );
+    if(Constants.testingEnabled)
+      SmartDashboard.putNumber("PID Error", x );
+
     return x;
   }
 
@@ -84,7 +93,8 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
   @Override
   public void enable()
     {
-    System.out.println("enable");
+    if(Constants.testingEnabled)
+      System.out.println("enable");
     isRunning = true;
     super.enable();
     }
@@ -92,7 +102,8 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
 
   public void disable()
     {
-    System.out.println("disable");
+    if(Constants.testingEnabled)
+      System.out.println("disable");
     isRunning = false;
     super.disable();
     }

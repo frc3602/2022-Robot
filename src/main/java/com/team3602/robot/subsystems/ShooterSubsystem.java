@@ -161,14 +161,21 @@ public class ShooterSubsystem extends SubsystemBase {
     // shooterMotor.config_kI(Constants.kPIDLoopIdx, i, Constants.kTimeoutMs);
     // shooterMotor.config_kD(Constants.kPIDLoopIdx, d, Constants.kTimeoutMs);
 
-    SmartDashboard.putNumber("SetPoint Ticks",  RPM2Speed(targetShooterMotorRPM));
+
 
     shooterMotor.set(TalonFXControlMode.Velocity, RPM2Speed(targetShooterMotorRPM));
-    
-    SmartDashboard.putNumber("SetPoint", targetShooterMotorRPM);
-    SmartDashboard.putNumber("ProcessVariable", shooterMotor.getSelectedSensorVelocity());
 
-    SmartDashboard.putBoolean("IsShooterSpeedOnTarget", IsShooterSpeedOnTarget());
+    if(Constants.testingEnabled)
+    {
+      SmartDashboard.putNumber("SetPoint Ticks",  RPM2Speed(targetShooterMotorRPM));
+
+      SmartDashboard.putNumber("SetPoint", targetShooterMotorRPM);
+      SmartDashboard.putNumber("ProcessVariable", shooterMotor.getSelectedSensorVelocity());
+  
+      SmartDashboard.putBoolean("IsShooterSpeedOnTarget", IsShooterSpeedOnTarget());
+  
+    }
+    
 
   }
 
@@ -199,7 +206,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     double distance = calculateDistance();
 
-    System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
+    if(Constants.testingEnabled)
+      System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
 
   //some magic decimal crazyness going on
   RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);

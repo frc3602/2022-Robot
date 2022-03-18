@@ -8,50 +8,39 @@ import com.team3602.robot.RobotContainer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class AutonDriveCommand extends CommandBase {
+public class AutonRotateDegreesCommand extends CommandBase {
 
-  double distance = 0.0;
-  double speed = 0.4;
-  /** Creates a new AutonDriveCommand. */
-  public AutonDriveCommand(double distance) {
+  double angle = 0.0;
+  /** Creates a new AutonRotateDegreesCommand. */
+  public AutonRotateDegreesCommand(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
-
     addRequirements(RobotContainer.driveSubsystem);
 
-    if(distance < 0.0)
-      speed = speed * -1.0;
-
+    this.angle = angle;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize()
   {
-    RobotContainer.driveSubsystem.resetGyro();
-    RobotContainer.driveSubsystem.ResetEncoders();
+    RobotContainer.autonRotatePIDSubsystem.setSetpoint(angle);
+    RobotContainer.autonRotatePIDSubsystem.enable();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute()
-  {
-    RobotContainer.driveSubsystem.driveCartesian(speed, 0.0, 0.0);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted)
   {
-    
+    RobotContainer.autonRotatePIDSubsystem.disable();
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished()
-  {
-    if( Math.abs(RobotContainer.driveSubsystem.GetAverageDistance() - distance) < 5.0)
-      return true;
-    else
-      return false;
+  public boolean isFinished() {
+    return RobotContainer.autonRotatePIDSubsystem.onTarget();
   }
 }

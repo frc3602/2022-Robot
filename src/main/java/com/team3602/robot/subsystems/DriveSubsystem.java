@@ -22,6 +22,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
@@ -75,8 +76,18 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double GetEncoderDistance(WPI_TalonFX motor)
   {
-    double dist = motor.getSelectedSensorPosition() * Constants.Drivetrain.driveInverseRatio;
+    double dist = (motor.getSelectedSensorPosition() / Constants.falconTicksPerRotation) * Constants.Drivetrain.distancePerRev;
     return dist;
+  }
+
+
+  public double GetAverageDistance()
+  {
+
+    double total = GetEncoderDistance(frontLeft) + GetEncoderDistance(backLeft) + GetEncoderDistance(frontRight) + GetEncoderDistance(backRight);
+
+    return total / 4.0;
+
   }
 
   /**
@@ -96,7 +107,15 @@ public class DriveSubsystem extends SubsystemBase {
   /**
    * Method to create the cartesian drive.
    */
-  public void driveCartesian(double y, double x, double z) {
+  public void driveCartesian(double y, double x, double z)
+  {
+    if(Constants.testingEnabled)
+    {
+      SmartDashboard.putNumber("Front Left distance reading:", GetEncoderDistance(frontLeft));
+      SmartDashboard.putNumber("Back Left distance reading:", GetEncoderDistance(backLeft));
+      SmartDashboard.putNumber("Front Right distance reading:", GetEncoderDistance(frontRight));
+      SmartDashboard.putNumber("Back Right distance reading:", GetEncoderDistance(backRight));
+     }
 
     if(RobotContainer.climberSubsystem.StartedClimb())
     {
@@ -107,6 +126,15 @@ public class DriveSubsystem extends SubsystemBase {
       RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y, x, z);
 
     }
+  }
+
+  public void ResetEncoders()
+  {
+    frontLeft.setSelectedSensorPosition(0.0);
+    backLeft.setSelectedSensorPosition(0.0);
+    frontRight.setSelectedSensorPosition(0.0);
+    backRight.setSelectedSensorPosition(0.0);
+
   }
 
   /**

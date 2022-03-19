@@ -49,6 +49,7 @@ public class RobotContainer {
   public static ReportStuffCommand reportCommand = new ReportStuffCommand();
   public static SetClimbReadyCommand climbReadyCommand = new SetClimbReadyCommand();
   public static AutonGrabAndTurnCommandGroup autonGrabAndTurnCommandGroup = new AutonGrabAndTurnCommandGroup();
+  public static AutonReverseAndShootCommandGroup autonReverseAndShootCommandGroup = new AutonReverseAndShootCommandGroup();
 
  // PowerDistribution powerHub = new PowerDistribution(Constants.powerDistributionHubCANID, ModuleType.kRev);
 
@@ -127,8 +128,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    //return autonGrabAndTurnCommandGroup;
-    return driveCommand;
+  public Command getAutonomousCommand()
+  {
+    return autonReverseAndShootCommandGroup;
+    //return driveCommand;
   }
 }

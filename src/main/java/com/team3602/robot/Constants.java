@@ -19,7 +19,7 @@ package com.team3602.robot;
  */
 public interface Constants {
 
-  boolean testingEnabled = true;
+  boolean testingEnabled = false;
 
     	/**
 	 * Which PID slot to pull gains from. Starting 2018, you can choose from
@@ -78,7 +78,8 @@ public interface Constants {
     //double pivotSoftLimitTicks = 23893; // 10 degrees
     double pivotSoftLimitTicks = 71000; // 30 degrees
     //double extendSoftLimitTicks = 97784; // 15 inches
-    double extendSoftLimitTicks = 150012; // 23 inches
+    //double extendSoftLimitTicks = 150012; // 23 inches
+    double extendSoftLimitTicks = 195668; // 30 inches
 
 
     //double pivotPlanetaryRatio = 1.0/60;

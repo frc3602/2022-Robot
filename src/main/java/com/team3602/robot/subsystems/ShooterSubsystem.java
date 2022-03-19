@@ -207,7 +207,10 @@ public class ShooterSubsystem extends SubsystemBase {
     double distance = calculateDistance();
 
     if(Constants.testingEnabled)
+    {
       System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
+      SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
+    }
 
   //some magic decimal crazyness going on
   RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
@@ -223,7 +226,10 @@ public class ShooterSubsystem extends SubsystemBase {
     // https://www.mathcelebrity.com/3ptquad.php?p1=120%2C4500&p2=180%2C5500&p3=240%2C7500&pl=Calculate+Equation
     //0.13888888888889x2 - 25x + 5500
 
-  double ret = (0.13888888888889 * distance * distance) - (25 * distance) + 5500;
+    //0.13888888888889x2 - 18.333333333333x + 4980
+
+  //double ret = (0.13888888888889 * distance * distance) - (25 * distance) + 5500;
+  double ret = (0.13888888888889 * distance * distance) - (18.333333333333 * distance) + 4980;
 
   return ret;
   }

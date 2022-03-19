@@ -117,6 +117,9 @@ public class DriveSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("Back Right distance reading:", GetEncoderDistance(backRight));
      }
 
+
+     
+
     if(RobotContainer.climberSubsystem.StartedClimb())
     {
       RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y * 0.5, x * 0.5, z * 0.5);

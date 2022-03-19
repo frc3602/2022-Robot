@@ -16,6 +16,7 @@ import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Climber.ClimbStageEnum;
 import com.team3602.robot.commands.ClimberReadyCommandGroup;
+import com.team3602.robot.commands.DummyTimerCommand;
 import com.team3602.robot.commands.ExtendDistanceCommand;
 import com.team3602.robot.commands.PivotAngleCommand;
 // Phoenix Imports
@@ -438,7 +439,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(true, -27.0),
               new PivotAngleCommand(false, 0.0),
     
-              new ExtendDistanceCommand(true, 23.5),
+              new ExtendDistanceCommand(true, 25.0),
               new ExtendDistanceCommand(false, 0.0)
             )
             ,
@@ -447,7 +448,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(true, -20.0),
               new PivotAngleCommand(false, 0.0),
     
-              new ExtendDistanceCommand(true, 23.5),
+              new ExtendDistanceCommand(true, 25.0),
               new ExtendDistanceCommand(false, 0.0)
             )
             ,
@@ -547,7 +548,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(false, -29.0),
     
               new ExtendDistanceCommand(true, 0.0),
-              new ExtendDistanceCommand(false, 23.5)
+              new ExtendDistanceCommand(false, 25.0)
             )
             ,
           new ParallelCommandGroup
@@ -556,7 +557,7 @@ public class ClimberSubsystem extends SubsystemBase {
               new PivotAngleCommand(false, -20.0),
     
               new ExtendDistanceCommand(true, 0.0),
-              new ExtendDistanceCommand(false, 23.5)
+              new ExtendDistanceCommand(false, 25.0)
             )
             ,
           new ParallelCommandGroup

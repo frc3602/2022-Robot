@@ -11,10 +11,12 @@
 
 package com.team3602.robot.commands;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.subsystems.DriveSubsystem;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -43,8 +45,19 @@ public class DriveCommandCommand extends CommandBase {
     double turn = OI.joystick.getRawAxis(0);
     double rotate = OI.joystick.getRawAxis(2);
 
+    double rawThrottle = OI.joystick.getRawAxis(3);
+
+    double throttle = ((1.0 - rawThrottle)  / 4.0) + 0.5;
+
+    if(Constants.testingEnabled)
+    {
+      SmartDashboard.putNumber("Twist Trottle", throttle);
+    }
+
     if(Math.abs(rotate) <= 0.1)
       rotate = 0.0;
+
+    rotate *= throttle;
 
     if(!RobotContainer.rotateToTargetSubsystem.IsRunning())
       RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);

@@ -39,7 +39,8 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
     getController().enableContinuousInput(-27.0, 27.0); //parameters moved to the controller. call getController() for access
     getController().setIntegratorRange(-0.125, 0.125);
 
-    getController().setTolerance(Shooter.rotationalErrorTolerance);
+//    getController().setTolerance(Shooter.rotationalErrorTolerance);
+    getController().setTolerance(7.5);
 
     //m_controller.setTolerance(Shooter.rotationalErrorTolerance);
     //setAbsoluteTolerance(Shooter.rotationalErrorTolerance); 

@@ -186,12 +186,12 @@ public class IndexSubsystem extends SubsystemBase {
 
   public void LiftIntake()
   {
-    //indexLift.set(ControlMode.PercentOutput, 0.25);
+    indexLift.set(ControlMode.PercentOutput, 0.60);
   }
 
   public void DropIntake()
   {
-    //indexLift.set(ControlMode.PercentOutput, -0.25);
+    indexLift.set(ControlMode.PercentOutput, -0.5);
   }
 
 

@@ -10,12 +10,9 @@
  */
 
 package com.team3602.robot;
-
 import com.team3602.robot.commands.*;
 import com.team3602.robot.subsystems.*;
 
-import edu.wpi.first.wpilibj.PowerDistribution;
-import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -47,7 +44,8 @@ public class RobotContainer {
   public static CalculateShooterSpeedCommand calculateShooterSpeedCommand = new CalculateShooterSpeedCommand();
 
   public static ReportStuffCommand reportCommand = new ReportStuffCommand();
-  public static SetClimbReadyCommand climbReadyCommand = new SetClimbReadyCommand();
+  public static StageClimbReadyCommandGroup climbReadyCommand = new StageClimbReadyCommandGroup();
+  public static StageClimbResetCommandGroup climbResetCommand = new StageClimbResetCommandGroup();
   public static AutonGrabAndTurnCommandGroup autonGrabAndTurnCommandGroup = new AutonGrabAndTurnCommandGroup();
   public static AutonReverseAndShootCommandGroup autonReverseAndShootCommandGroup = new AutonReverseAndShootCommandGroup();
 
@@ -96,29 +94,9 @@ public class RobotContainer {
     OI.shooterButton.whileHeld(new ShootStuffCommand(shooterSubsystem));
 
     OI.dunkButton.whenHeld(new SlamDunkCommand());
-    //OI.shooterButton.whenReleased(RobotContainer.shootStop);
 
-    // OI.xButton.whenPressed(new ExtendDistanceCommand(true, 0.0));
-    // OI.yButton.whenPressed(new ExtendDistanceCommand(true, 22.5));
-    // OI.aButton.whenPressed(new ExtendDistanceCommand(false, 0.0));
-    // OI.bButton.whenPressed(new ExtendDistanceCommand(false, 15.0));
-
-    // OI.xButton.whenPressed(new PivotAngleCommand(true, 5));
-    // OI.yButton.whenPressed(new PivotAngleCommand(true, -5.0));
-    // OI.aButton.whenPressed(new PivotAngleCommand(false, 10.0));
-    // OI.bButton.whenPressed(new PivotAngleCommand(false, -10.0));
-
-    // OI.leftBumperButton.whenPressed(new PivotScissorCommandGroup(15.0));
-    // OI.rightBumperButton.whenPressed(new PivotScissorCommandGroup(-15.0));
-
-    // OI.startButton.whenPressed(
-    //   new ParallelCommandGroup(
-    //     new PivotAngleCommand(true, 0.0),
-    //     new PivotAngleCommand(false, 0.0),
-    //     new ExtendDistanceCommand(true, 0.0),
-    //     new ExtendDistanceCommand(false, 0.0)
-    //   ));
-      
+    
+    OI.startButton.whenPressed(climbResetCommand);
     OI.menuButton.whenPressed(climbReadyCommand);
 
 }

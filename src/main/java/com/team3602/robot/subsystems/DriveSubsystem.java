@@ -23,6 +23,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
@@ -44,6 +45,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   // MecanumDrive Information
   private MecanumDrive mecanumDrive;
+
+  private final SlewRateLimiter xspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter yspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter rotLimiter = new SlewRateLimiter(3);  
 
   /**
    * Constructor for {@link DriveSubsystem} class to run the
@@ -115,20 +120,20 @@ public class DriveSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("Back Left distance reading:", GetEncoderDistance(backLeft));
       SmartDashboard.putNumber("Front Right distance reading:", GetEncoderDistance(frontRight));
       SmartDashboard.putNumber("Back Right distance reading:", GetEncoderDistance(backRight));
-     }
-
-
-     
-
-    if(RobotContainer.climberSubsystem.StartedClimb())
-    {
-      RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y * 0.5, x * 0.5, z * 0.5);
     }
-    else
-    {
-      RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(y, x, z);
 
-    }
+      double maxSpeed = 1.0;
+
+      if(RobotContainer.climberSubsystem.ClimberActive())
+        maxSpeed = 0.5;
+
+      double xSpeed = xspeedLimiter.calculate(y) * maxSpeed;
+
+      double ySpeed = yspeedLimiter.calculate(x) * maxSpeed;
+
+      double rot = rotLimiter.calculate(z) * maxSpeed;
+
+      RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(xSpeed, ySpeed, rot);
   }
 
   public void ResetEncoders()

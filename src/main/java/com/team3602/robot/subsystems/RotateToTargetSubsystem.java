@@ -7,7 +7,6 @@ package com.team3602.robot.subsystems;
 import com.team3602.robot.Constants;
 import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
-import com.team3602.robot.Constants.Shooter;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

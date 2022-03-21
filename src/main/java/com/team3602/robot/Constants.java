@@ -101,6 +101,7 @@ public interface Constants {
 
     public enum ClimbStageEnum
     {
+      notReady,
       ready,
       climbMidBar,
       hookHighBar,

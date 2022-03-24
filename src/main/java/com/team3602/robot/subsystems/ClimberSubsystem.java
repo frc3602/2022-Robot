@@ -15,6 +15,7 @@ import com.team3602.robot.Constants;
 import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Climber.ClimbStageEnum;
 import com.team3602.robot.commands.ClimberSetLocationCoordiatedCommandGroup;
+import com.team3602.robot.commands.DummyTimerCommand;
 import com.team3602.robot.commands.StageClimbFinishMoveCommand;
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -425,6 +426,7 @@ public class ClimberSubsystem extends SubsystemBase {
         (
         new ClimberSetLocationCoordiatedCommandGroup(-27.0, 0.0, 25.5, 0.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 25.5, 0.0 ),
+        new DummyTimerCommand().withTimeout(0.5),
         new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 0.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 1.5 ),
         new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.hookHighBar)
@@ -464,8 +466,9 @@ public class ClimberSubsystem extends SubsystemBase {
         isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
-        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 0.0, 25.0 ),
-        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 25.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 0.0, 25.5 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 25.5 ),
+        new DummyTimerCommand().withTimeout(0.5),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 19.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 1.5, 19.0 ),
         new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.hookTravers)
@@ -517,35 +520,42 @@ public class ClimberSubsystem extends SubsystemBase {
     switch(currentStage)
       {
       case notReady : 
-      {
-        break;
-      }
       case ready : 
-      {
-        break;
-      }
       case climbMidBar : 
+      case ClimbHighBar : 
+      case readyHighBar : 
+      case climbTraverse : 
       {
         break;
       }
       case hookHighBar : 
       {
-        break;
-      }
-      case ClimbHighBar : 
-      {
-        break;
-      }
-      case readyHighBar : 
-      {
+        isMoving = true;
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+        new ClimberSetLocationCoordiatedCommandGroup(-29.0, 0.0, 19.0, 1.5 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-29.0, 0.0, 25.5, 0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 25.5, 0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 1.5 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.hookHighBar)
+        );
+        temp.schedule();
         break;
       }
       case hookTravers : 
       {
-        break;
-      }
-      case climbTraverse : 
-      {
+        isMoving = true;
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 1.5, 19.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 0.0, 25.5 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 25.5 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 19.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 1.5, 19.0 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.hookTravers)
+        );
+        temp.schedule();
         break;
       }
     }

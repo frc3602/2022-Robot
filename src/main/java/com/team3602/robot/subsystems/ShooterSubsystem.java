@@ -70,6 +70,16 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.set(0.0);
   }
 
+  @Override
+  public void periodic()
+  {
+    // This method will be called once per scheduler run
+    calculateAndSetMotorSpeeds();
+
+    updateShooterMotorSpeed();
+  }
+
+
   /**
    * Method to set the rpm of the shooter.
    * 
@@ -78,12 +88,6 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setShooterMotorRPM(double rpm) {
     System.out.println("SetShooterMotorRPM " + rpm);
     targetShooterMotorRPM = rpm;
-  }
-
-  /**
-   * Method to get the speed of the shooter motor.
-   */
-  public void getShooterMotorSpeed() {
   }
 
   private double Speed2RPM(double speed_)
@@ -199,23 +203,34 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void calculateAndSetMotorSpeeds()
   {
-    if (RobotContainer.visionSubsystem.noValidTarget())
+
+    double newTargetShooterMotorRPM = Shooter.defaultShooterRPM;
+
+    if(RobotContainer.rotateToTargetSubsystem.isEnabled())
     {
-      return;
+
+      if (RobotContainer.visionSubsystem.noValidTarget())
+      {
+        return;
+      }
+
+      double distance = calculateDistance();
+
+      if(Constants.testingEnabled)
+      {
+        System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
+        SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
+      }
+
+    //some magic decimal crazyness going on
+    RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
+
+    newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
     }
-
-    double distance = calculateDistance();
-
-    if(Constants.testingEnabled)
+    else if(RobotContainer.climberSubsystem.ClimberActive())
     {
-      System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
-      SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
+      newTargetShooterMotorRPM = 0.0;
     }
-
-  //some magic decimal crazyness going on
-  RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
-
-    double newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
 
     setShooterMotorRPM(newTargetShooterMotorRPM);
     logDataToSmartDashboard();

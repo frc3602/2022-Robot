@@ -174,7 +174,10 @@ public class VisionSubsystem extends SubsystemBase {
   public boolean noValidTarget() {
     double validTarget = tv.getDouble(0.0);
     if (validTarget == 0) {
-      System.out.println("ERROR: Vision Target was lost");
+      if(Constants.testingEnabled)
+      {
+        System.out.println("ERROR: Vision Target was lost");
+      }
       return true;
     } else {
       return false;

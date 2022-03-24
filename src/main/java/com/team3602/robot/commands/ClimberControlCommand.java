@@ -42,16 +42,42 @@ public class ClimberControlCommand extends CommandBase {
   public void execute()
   {
 
-    if(OI.xboxController.getRawButtonPressed(6))
+    if(!RobotContainer.climberSubsystem.ClimberActive())
+    {
+      return;
+    }
+    // public enum Button {
+    //     kLeftBumper(5),
+    //     kRightBumper(6),
+    //     kLeftStick(9),
+    //     kRightStick(10),
+    //     kA(1),
+    //     kB(2),
+    //     kX(3),
+    //     kY(4),
+    //     kBack(7),
+    //     kStart(8);
+
+    if(OI.xboxController.getRawButtonPressed(6)) // right bumper on xbox controller
     {
       System.out.println("ClimberControlCommand rightBumper Pressed");
-      RobotContainer.climberSubsystem.NextStageClimb();
+      //RobotContainer.climberSubsystem.NextStageClimb();
 
     }
-    else if(OI.xboxController.getRawButtonPressed(5))
+    else if(OI.xboxController.getRawButtonPressed(5)) // left bumper on xbox controller
     {
       System.out.println("ClimberControlCommand leftBumper Pressed");
       // RobotContainer.climberSubsystem.PrevStageClimb();
+    }
+    else if(OI.xboxController.getRawButtonPressed(2)) // B button on xbox controller
+    {
+      System.out.println("ClimberControlCommand B button Pressed");
+      RobotContainer.climberSubsystem.NextStageClimb();
+    }
+    else if(OI.xboxController.getRawButtonPressed(3)) // X button on xbox controller
+    {
+      System.out.println("ClimberControlCommand X button Pressed");
+      RobotContainer.climberSubsystem.RetryStageClimb();
     }
 
   }

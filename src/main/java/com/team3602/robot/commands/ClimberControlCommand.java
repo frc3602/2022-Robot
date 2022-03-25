@@ -41,26 +41,45 @@ public class ClimberControlCommand extends CommandBase {
   @Override
   public void execute()
   {
-    // public static JoystickButton leftBumperButton   = new JoystickButton(xboxController, 5);
-    // public static JoystickButton rightBumperButton  = new JoystickButton(xboxController, 6);
 
-    if(OI.xboxController.getRawButtonPressed(6))
+    if(!RobotContainer.climberSubsystem.ClimberActive())
+    {
+      return;
+    }
+    // public enum Button {
+    //     kLeftBumper(5),
+    //     kRightBumper(6),
+    //     kLeftStick(9),
+    //     kRightStick(10),
+    //     kA(1),
+    //     kB(2),
+    //     kX(3),
+    //     kY(4),
+    //     kBack(7),
+    //     kStart(8);
+
+    if(OI.xboxController.getRawButtonPressed(6)) // right bumper on xbox controller
     {
       System.out.println("ClimberControlCommand rightBumper Pressed");
-      RobotContainer.climberSubsystem.NextStageClimb();
+      //RobotContainer.climberSubsystem.NextStageClimb();
 
     }
-    else if(OI.xboxController.getRawButtonPressed(5))
+    else if(OI.xboxController.getRawButtonPressed(5)) // left bumper on xbox controller
     {
       System.out.println("ClimberControlCommand leftBumper Pressed");
-      RobotContainer.climberSubsystem.PrevStageClimb();
+      // RobotContainer.climberSubsystem.PrevStageClimb();
+    }
+    else if(OI.xboxController.getRawButtonPressed(2)) // B button on xbox controller
+    {
+      System.out.println("ClimberControlCommand B button Pressed");
+      RobotContainer.climberSubsystem.NextStageClimb();
+    }
+    else if(OI.xboxController.getRawButtonPressed(3)) // X button on xbox controller
+    {
+      System.out.println("ClimberControlCommand X button Pressed");
+      RobotContainer.climberSubsystem.RetryStageClimb();
     }
 
-    // RobotContainer.climberSubsystem.climberOneArm(OI.xboxController.getLeftY());
-    // RobotContainer.climberSubsystem.climberTwoArm(OI.xboxController.getRightY());
-
-    // RobotContainer.climberSubsystem.climberOneSupport(OI.xboxController.getLeftX() * 0.25);
-    // RobotContainer.climberSubsystem.climberTwoSupport(OI.xboxController.getRightX() * 0.25);
   }
 
   @Override

@@ -48,10 +48,10 @@ public class OI {
     //     kStart(8);
     
 
-    public static JoystickButton xButton            = new JoystickButton(xboxController, 3);
-    public static JoystickButton yButton            = new JoystickButton(xboxController, 4);
-    public static JoystickButton aButton            = new JoystickButton(xboxController, 1);
-    public static JoystickButton bButton            = new JoystickButton(xboxController, 2);
+    // public static JoystickButton xButton            = new JoystickButton(xboxController, 3);
+    // public static JoystickButton yButton            = new JoystickButton(xboxController, 4);
+    // public static JoystickButton aButton            = new JoystickButton(xboxController, 1);
+    // public static JoystickButton bButton            = new JoystickButton(xboxController, 2);
 
     // public static JoystickButton leftBumperButton   = new JoystickButton(xboxController, 5);
     // public static JoystickButton rightBumperButton  = new JoystickButton(xboxController, 6);

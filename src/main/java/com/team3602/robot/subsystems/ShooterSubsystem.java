@@ -70,6 +70,16 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.set(0.0);
   }
 
+  @Override
+  public void periodic()
+  {
+    // This method will be called once per scheduler run
+    calculateAndSetMotorSpeeds();
+
+    updateShooterMotorSpeed();
+  }
+
+
   /**
    * Method to set the rpm of the shooter.
    * 
@@ -78,12 +88,6 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setShooterMotorRPM(double rpm) {
     System.out.println("SetShooterMotorRPM " + rpm);
     targetShooterMotorRPM = rpm;
-  }
-
-  /**
-   * Method to get the speed of the shooter motor.
-   */
-  public void getShooterMotorSpeed() {
   }
 
   private double Speed2RPM(double speed_)
@@ -162,8 +166,16 @@ public class ShooterSubsystem extends SubsystemBase {
     // shooterMotor.config_kD(Constants.kPIDLoopIdx, d, Constants.kTimeoutMs);
 
 
+    if(targetShooterMotorRPM < 25.0)
+    {
+      stopMotor();
+    }
+    else
+    {
+      shooterMotor.set(TalonFXControlMode.Velocity, RPM2Speed(targetShooterMotorRPM));
+    }
 
-    shooterMotor.set(TalonFXControlMode.Velocity, RPM2Speed(targetShooterMotorRPM));
+
 
     if(Constants.testingEnabled)
     {
@@ -199,23 +211,34 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void calculateAndSetMotorSpeeds()
   {
-    if (RobotContainer.visionSubsystem.noValidTarget())
+
+    double newTargetShooterMotorRPM = Shooter.defaultShooterRPM;
+
+    // if(RobotContainer.rotateToTargetSubsystem.isEnabled())
     {
-      return;
+
+      // if (RobotContainer.visionSubsystem.noValidTarget())
+      // {
+      //   return;
+      // }
+
+      double distance = calculateDistance();
+
+      if(Constants.testingEnabled)
+      {
+       // System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
+        SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
+      }
+
+    //some magic decimal crazyness going on
+    RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
+
+    newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
+    // }
+    // else if(RobotContainer.climberSubsystem.ClimberActive())
+    // {
+      newTargetShooterMotorRPM = 0.0;
     }
-
-    double distance = calculateDistance();
-
-    if(Constants.testingEnabled)
-    {
-      System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
-      SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
-    }
-
-  //some magic decimal crazyness going on
-  RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
-
-    double newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
 
     setShooterMotorRPM(newTargetShooterMotorRPM);
     logDataToSmartDashboard();

@@ -23,6 +23,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 
@@ -124,7 +125,7 @@ public class DriveSubsystem extends SubsystemBase {
 
       double maxSpeed = 1.0;
 
-      if(RobotContainer.climberSubsystem.StartedClimb())
+      if(RobotContainer.climberSubsystem.ClimberActive())
         maxSpeed = 0.5;
 
       double xSpeed = xspeedLimiter.calculate(y) * maxSpeed;

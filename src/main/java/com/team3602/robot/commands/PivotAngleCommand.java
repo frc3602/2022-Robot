@@ -18,6 +18,7 @@ public class PivotAngleCommand extends CommandBase {
     this.angle = angle;
     this.isInner = isInner;
     // Use addRequirements() here to declare subsystem dependencies.
+    //addRequirements(RobotContainer.climberSubsystem);
   }
 
   // Called when the command is initially scheduled.

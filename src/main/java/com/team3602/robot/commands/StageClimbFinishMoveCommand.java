@@ -4,20 +4,32 @@
 
 package com.team3602.robot.commands;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
+import com.team3602.robot.Constants.Climber.ClimbStageEnum;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class SetClimbReadyCommand extends CommandBase {
-  /** Creates a new SetClimbReadyCommand. */
-  public SetClimbReadyCommand() {
+public class StageClimbFinishMoveCommand extends CommandBase {
+
+  Constants.Climber.ClimbStageEnum stage = ClimbStageEnum.ready;
+
+  /** Creates a new StageClimbSetCommand. */
+  public StageClimbFinishMoveCommand( Constants.Climber.ClimbStageEnum stage)
+  {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.climberSubsystem);
+
+    this.stage = stage;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    RobotContainer.climberSubsystem.StartTheClimb();
+  public void initialize()
+  {
+    RobotContainer.climberSubsystem.FinishMove(stage);
+    System.out.println("StageClimbSetCommand stage: " + stage);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.

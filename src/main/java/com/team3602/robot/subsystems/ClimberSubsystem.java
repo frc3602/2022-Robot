@@ -12,13 +12,11 @@
 package com.team3602.robot.subsystems;
 
 import com.team3602.robot.Constants;
-import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Climber.ClimbStageEnum;
-import com.team3602.robot.commands.ClimberReadyCommandGroup;
+import com.team3602.robot.commands.ClimberSetLocationCoordiatedCommandGroup;
 import com.team3602.robot.commands.DummyTimerCommand;
-import com.team3602.robot.commands.ExtendDistanceCommand;
-import com.team3602.robot.commands.PivotAngleCommand;
+import com.team3602.robot.commands.StageClimbFinishMoveCommand;
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
@@ -27,7 +25,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -51,9 +48,10 @@ public class ClimberSubsystem extends SubsystemBase {
   WPI_TalonFX pivotOuterRight = new WPI_TalonFX(Climber.climbPivotOuterRightCANID);
   WPI_TalonFX extendOuterRight = new WPI_TalonFX(Climber.climbExtendOuterRightCANID);
 
-  private Climber.ClimbStageEnum currentStage = Climber.ClimbStageEnum.ready;
+  private Climber.ClimbStageEnum currentStage = Climber.ClimbStageEnum.notReady;
+  boolean isMoving = false;
 
-  private boolean startedClimb = false;
+  // private boolean startedClimb = false;
 
   // double maxVoltage = 0.0;
   // double maxVelocity = 0.0;
@@ -62,25 +60,30 @@ public class ClimberSubsystem extends SubsystemBase {
     configureMotors();
   }
 
-  public boolean StartedClimb()
+  public boolean ClimberActive()
   {
-    return startedClimb;
+    return currentStage != ClimbStageEnum.notReady;
   }
 
-  public void StartTheClimb()
+  public void FinishMove(ClimbStageEnum stage)
   {
-    startedClimb = true;
-
-    ClimberReadyCommandGroup climberReady = new ClimberReadyCommandGroup();
-
-    climberReady.schedule();
-
+    currentStage = stage;
+    isMoving = false;
   }
+  // public void StartTheClimb()
+  // {
+  //   startedClimb = true;
 
-  public void ResetTheClimb()
-  {
-    currentStage = Climber.ClimbStageEnum.ready;
-  }
+  //   ClimberReadyCommandGroup climberReady = new ClimberReadyCommandGroup();
+
+  //   climberReady.schedule();
+
+  // }
+
+  // public void ResetTheClimb()
+  // {
+  //   currentStage = Climber.ClimbStageEnum.ready;
+  // }
 
 
   public void ResetEncoders()
@@ -104,7 +107,7 @@ public class ClimberSubsystem extends SubsystemBase {
     PivotInner(0.0);
     PivotOuter(0.0);
 
-    currentStage = ClimbStageEnum.ready;
+    currentStage = ClimbStageEnum.notReady;
   }
 
   public void BrakeAllTheMotors()
@@ -115,16 +118,6 @@ public class ClimberSubsystem extends SubsystemBase {
     extendOuterRight.setNeutralMode(NeutralMode.Brake); 
   }
 
-
-  // private void MaxVelocity(double newValue)
-  // {
-  //   maxVelocity = Math.max(newValue, maxVelocity);
-  // }
-
-  // private void MaxVoltage(double newValue)
-  // {
-  //   maxVoltage = Math.max(newValue, maxVoltage);
-  // }
 
   public void ReoportStuff()
   {
@@ -151,14 +144,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     }
 
-    // SmartDashboard.putNumber("extendInnerRight.getMotorOutputVoltage", extendInnerRight.getMotorOutputVoltage());
-    // SmartDashboard.putNumber("extendInnerRight.getSelectedSensorVelocity", extendInnerRight.getSelectedSensorVelocity());
-
-    // MaxVelocity(extendInnerRight.getSelectedSensorVelocity());
-    // MaxVoltage(extendInnerRight.getMotorOutputVoltage());
     SmartDashboard.putString("ClimberStage", currentStage.name());
-    // SmartDashboard.putNumber("extendInnerRight.MaxVelocity", maxVelocity);
-    // SmartDashboard.putNumber("extendInnerRight.MaxVoltage", maxVoltage);
 
   }
 
@@ -402,8 +388,12 @@ public class ClimberSubsystem extends SubsystemBase {
   public void NextStageClimb()
   {
 
-    // if(true)
-    //   return;
+    if(isMoving)
+    {
+      System.out.println("NextStageClimb climber isMoving cant stage.");
+
+      return;
+    }
 
     System.out.println("climber NextStageClimb");
     System.out.print("currentStage: ");
@@ -412,242 +402,94 @@ public class ClimberSubsystem extends SubsystemBase {
 
     switch(currentStage)
     {
+      case notReady : 
+      {
+
+        break;
+      }
       case ready : 
       {
-        currentStage = Climber.ClimbStageEnum.climbMidBar;
-        ParallelCommandGroup temp = new ParallelCommandGroup(
-          new PivotAngleCommand(true, -29.0),
-          new PivotAngleCommand(false, 0.0),
-
-          new ExtendDistanceCommand(true, 13.5),
-          new ExtendDistanceCommand(false, 0.0)
-          );
+        isMoving = true;
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+        new ClimberSetLocationCoordiatedCommandGroup(-29.0, 0.0, 13.5, 0.0 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.climbMidBar)
+        );
 
         temp.schedule();
-
         break;
       }
       case climbMidBar : 
       {
-        currentStage = Climber.ClimbStageEnum.hookHighBar;
-        
-        System.out.println("hookHighBar begin sequential");
+        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, -27.0),
-              new PivotAngleCommand(false, 0.0),
-    
-              new ExtendDistanceCommand(true, 25.0),
-              new ExtendDistanceCommand(false, 0.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, -20.0),
-              new PivotAngleCommand(false, 0.0),
-    
-              new ExtendDistanceCommand(true, 25.0),
-              new ExtendDistanceCommand(false, 0.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, -20.0),
-              new PivotAngleCommand(false, 0.0),
-    
-              new ExtendDistanceCommand(true, 19.0),
-              new ExtendDistanceCommand(false, 0.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, -20.0),
-              new PivotAngleCommand(false, 0.0),
-    
-              new ExtendDistanceCommand(true, 19.0),
-              new ExtendDistanceCommand(false, 1.5)
-            )
-  
+        new ClimberSetLocationCoordiatedCommandGroup(-27.0, 0.0, 25.5, 0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 25.5, 0.0 ),
+        new DummyTimerCommand().withTimeout(0.5),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 1.5 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.hookHighBar)
         );
-
         temp.schedule();
 
         break;
       }
       case hookHighBar : 
       {
-        currentStage = Climber.ClimbStageEnum.ClimbHighBar;
-
+        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
-        new ParallelCommandGroup(
-          new PivotAngleCommand(true, -20.0),
-          new PivotAngleCommand(false, 0.0),
-
-          new ExtendDistanceCommand(true, 19.0),
-          new ExtendDistanceCommand(false, 15.0)
-          )
-          ,
-          new ParallelCommandGroup(
-            new PivotAngleCommand(true, -20.0),
-            new PivotAngleCommand(false, 0.0),
-  
-            new ExtendDistanceCommand(true, 15.0),
-            new ExtendDistanceCommand(false, 15.0)
-            )
-          );
-
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 15.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 15.0, 15.0 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.ClimbHighBar)
+        );
         temp.schedule();
 
         break;
       }
       case ClimbHighBar : 
       {
-        currentStage = Climber.ClimbStageEnum.readyHighBar;
-
-
+        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -29.0),
-    
-              new ExtendDistanceCommand(true, 15.0),
-              new ExtendDistanceCommand(false, 5.0)
-                )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -29.0),
-  
-            new ExtendDistanceCommand(true, 0.0),
-            new ExtendDistanceCommand(false, 13.5)
-            )
-  
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 15.0,  5.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0,  0.0, 13.5 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.readyHighBar)
         );
-        
-        
-
         temp.schedule();
 
         break;
       }
       case readyHighBar : 
       {
-        currentStage = Climber.ClimbStageEnum.hookTravers;
-
+        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -29.0),
-    
-              new ExtendDistanceCommand(true, 0.0),
-              new ExtendDistanceCommand(false, 25.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -20.0),
-    
-              new ExtendDistanceCommand(true, 0.0),
-              new ExtendDistanceCommand(false, 25.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -20.0),
-    
-              new ExtendDistanceCommand(true, 0.0),
-              new ExtendDistanceCommand(false, 19.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -20.0),
-    
-              new ExtendDistanceCommand(true, 1.5),
-              new ExtendDistanceCommand(false, 19.0)
-            )
-  
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 0.0, 25.5 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 25.5 ),
+        new DummyTimerCommand().withTimeout(0.5),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 19.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 1.5, 19.0 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.hookTravers)
         );
-
-
         temp.schedule();
 
         break;
       }
       case hookTravers : 
       {
-        currentStage = Climber.ClimbStageEnum.climbTraverse;
-
+        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -20.0),
-    
-              new ExtendDistanceCommand(true, 15.0),
-              new ExtendDistanceCommand(false, 19.0)
-                )
-            ,
-            new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, -20.0),
-    
-              new ExtendDistanceCommand(true, 15.0),
-              new ExtendDistanceCommand(false, 15.0)
-                )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, -15.0),
-              new PivotAngleCommand(false, 0.0),
-    
-              new ExtendDistanceCommand(true, 5.0),
-              new ExtendDistanceCommand(false, 15.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, -15.0),
-              new PivotAngleCommand(false, 0.0),
-    
-              new ExtendDistanceCommand(true, 5.0),
-              new ExtendDistanceCommand(false, 0.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, 0.0),
-    
-              new ExtendDistanceCommand(true, 5.0),
-              new ExtendDistanceCommand(false, 0.0)
-            )
-            ,
-          new ParallelCommandGroup
-            (
-              new PivotAngleCommand(true, 0.0),
-              new PivotAngleCommand(false, 0.0),
-    
-              new ExtendDistanceCommand(true, 0.0),
-              new ExtendDistanceCommand(false, 0.0)
-            )
-  
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 15.0,  19.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 15.0,  15.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-15.0, 0.0,  5.0,  15.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-15.0, 0.0,  5.0,  0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(  0.0, 0.0,  5.0,  0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(  0.0, 0.0,  0.0,  0.0 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.climbTraverse)
         );
-
-
         temp.schedule();
 
         break;
@@ -661,41 +503,59 @@ public class ClimberSubsystem extends SubsystemBase {
 
   }
 
-  public void PrevStageClimb()
+  public void RetryStageClimb()
   {
-    System.out.println("climber PrevStageClimb");
+    if(isMoving)
+    {
+      System.out.println("RetryStageClimb climber isMoving cant stage.");
+
+      return;
+    }
+
+    System.out.println("climber RetryStageClimb");
     
     System.out.print("currentStage: ");
     System.out.println(currentStage);
 
     switch(currentStage)
       {
+      case notReady : 
       case ready : 
-      {
-        break;
-      }
       case climbMidBar : 
+      case ClimbHighBar : 
+      case readyHighBar : 
+      case climbTraverse : 
       {
         break;
       }
       case hookHighBar : 
       {
-        break;
-      }
-      case ClimbHighBar : 
-      {
-        break;
-      }
-      case readyHighBar : 
-      {
+        isMoving = true;
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+        new ClimberSetLocationCoordiatedCommandGroup(-29.0, 0.0, 19.0, 1.5 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-29.0, 0.0, 25.5, 0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 25.5, 0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 0.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 1.5 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.hookHighBar)
+        );
+        temp.schedule();
         break;
       }
       case hookTravers : 
       {
-        break;
-      }
-      case climbTraverse : 
-      {
+        isMoving = true;
+        SequentialCommandGroup temp = new SequentialCommandGroup
+        (
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 1.5, 19.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 0.0, 25.5 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 25.5 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 19.0 ),
+        new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 1.5, 19.0 ),
+        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.hookTravers)
+        );
+        temp.schedule();
         break;
       }
     }

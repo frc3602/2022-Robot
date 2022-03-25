@@ -18,6 +18,8 @@ public class ExtendDistanceCommand extends CommandBase {
     this.distance = distance;
     this.isInner = isInner;
     // Use addRequirements() here to declare subsystem dependencies.
+
+    //addRequirements(RobotContainer.climberSubsystem);
   }
 
   // Called when the command is initially scheduled.

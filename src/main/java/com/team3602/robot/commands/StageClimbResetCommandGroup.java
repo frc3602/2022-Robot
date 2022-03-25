@@ -17,7 +17,7 @@ public class StageClimbResetCommandGroup extends SequentialCommandGroup {
     addCommands(
       new ClimberSetLocationCoordiatedCommandGroup(0.0, 0.0, 0.0, 0.0)
       ,
-      new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.ready)
+      new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.notReady)
     );
   }
 }

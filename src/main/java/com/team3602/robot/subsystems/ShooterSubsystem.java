@@ -166,8 +166,16 @@ public class ShooterSubsystem extends SubsystemBase {
     // shooterMotor.config_kD(Constants.kPIDLoopIdx, d, Constants.kTimeoutMs);
 
 
+    if(targetShooterMotorRPM < 25.0)
+    {
+      stopMotor();
+    }
+    else
+    {
+      shooterMotor.set(TalonFXControlMode.Velocity, RPM2Speed(targetShooterMotorRPM));
+    }
 
-    shooterMotor.set(TalonFXControlMode.Velocity, RPM2Speed(targetShooterMotorRPM));
+
 
     if(Constants.testingEnabled)
     {
@@ -206,19 +214,19 @@ public class ShooterSubsystem extends SubsystemBase {
 
     double newTargetShooterMotorRPM = Shooter.defaultShooterRPM;
 
-    if(RobotContainer.rotateToTargetSubsystem.isEnabled())
+    // if(RobotContainer.rotateToTargetSubsystem.isEnabled())
     {
 
-      if (RobotContainer.visionSubsystem.noValidTarget())
-      {
-        return;
-      }
+      // if (RobotContainer.visionSubsystem.noValidTarget())
+      // {
+      //   return;
+      // }
 
       double distance = calculateDistance();
 
       if(Constants.testingEnabled)
       {
-        System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
+       // System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
         SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
       }
 
@@ -226,9 +234,9 @@ public class ShooterSubsystem extends SubsystemBase {
     RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
 
     newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
-    }
-    else if(RobotContainer.climberSubsystem.ClimberActive())
-    {
+    // }
+    // else if(RobotContainer.climberSubsystem.ClimberActive())
+    // {
       newTargetShooterMotorRPM = 0.0;
     }
 

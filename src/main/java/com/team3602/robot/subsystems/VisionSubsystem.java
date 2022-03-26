@@ -89,6 +89,10 @@ public class VisionSubsystem extends SubsystemBase {
     snapshot.setNumber(1);
   }
 
+  public void resetSnapshot() {
+    snapshot.setNumber(0);
+  }
+
   /**
    * Method to set the lightlight to vision processing mode.
    */

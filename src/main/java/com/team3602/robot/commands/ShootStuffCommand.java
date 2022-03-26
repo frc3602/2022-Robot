@@ -58,6 +58,7 @@ public class ShootStuffCommand extends CommandBase {
     //     RobotContainer.shooterSubsystem.IsShooterSpeedOnTarget())
       {
         RobotContainer.indexSubsystem.shoot();
+        RobotContainer.visionSubsystem.takeSnapshot();
       }
     else
       RobotContainer.indexSubsystem.stopMotors();
@@ -75,6 +76,7 @@ public class ShootStuffCommand extends CommandBase {
     RobotContainer.shooterSubsystem.updateShooterMotorSpeed();
     RobotContainer.shooterSubsystem.stopMotor();
     RobotContainer.indexSubsystem.stopMotors();
+    RobotContainer.visionSubsystem.resetSnapshot();
 
   }
 

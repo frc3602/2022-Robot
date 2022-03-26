@@ -197,7 +197,8 @@ public class ShooterSubsystem extends SubsystemBase {
    * 
    * @return the calculated double for the shooter
    */
-  public double calculateDistance() {
+  public double calculateDistance()
+  {
     double a = RobotContainer.visionSubsystem.GetTY() + Shooter.limelightAngleCorrection;
     double answer = Shooter.targetHeight / (Math.tan(Math.toRadians(a)));
 

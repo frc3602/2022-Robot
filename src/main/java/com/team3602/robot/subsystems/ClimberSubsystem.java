@@ -260,17 +260,80 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   private void Pivot(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
-    {
-      motor1.set(TalonFXControlMode.MotionMagic,  ticks);
-      motor2.set(TalonFXControlMode.MotionMagic,  ticks);
-    }
+  {
+    motor1.set(TalonFXControlMode.MotionMagic,  ticks);
+    motor2.set(TalonFXControlMode.MotionMagic,  ticks);
+  }
 
   private void Extend(WPI_TalonFX motor1, WPI_TalonFX motor2, double ticks)
-    {
-      motor1.set(TalonFXControlMode.MotionMagic,  ticks);
-      motor2.set(TalonFXControlMode.MotionMagic,  ticks);
-    }
+  {
+    motor1.set(TalonFXControlMode.MotionMagic,  ticks);
+    motor2.set(TalonFXControlMode.MotionMagic,  ticks);
+  }
 
+  private void PivotSingle(WPI_TalonFX motor, double ticks)
+  {
+    motor.set(TalonFXControlMode.MotionMagic,  ticks);
+  }
+
+  private void PivotSingleAngle(WPI_TalonFX motor, double angle)
+  {
+    double ticks = PivotDegreesToTicks(angle);
+
+    PivotSingle(motor, ticks);
+  }
+
+  private void ExtendSingle(WPI_TalonFX motor, double ticks)
+  {
+    motor.set(TalonFXControlMode.MotionMagic,  ticks);
+  }
+
+  private void ExtendSingleLength(WPI_TalonFX motor, double length)
+  {
+  double ticks = ExtendLengthToTicks(length);
+
+  ExtendSingle(motor, ticks);
+  }
+
+  public void ExtendOuterLeft(double length)
+  {
+    ExtendSingleLength(extendOuterLeft, length);
+  }
+
+  public void ExtendInnerLeft(double length)
+  {
+    ExtendSingleLength(extendInnerLeft, length);
+  }
+
+  public void ExtendOuterRight(double length)
+  {
+    ExtendSingleLength(extendOuterRight, length);
+  }
+
+  public void ExtendInnerRight(double length)
+  {
+    ExtendSingleLength(extendInnerRight, length);
+  }
+
+  public void PivotOuterLeft(double angle)
+  {
+  PivotSingleAngle(pivotOuterLeft, angle);
+  }
+
+  public void PivotInnerLeft(double angle)
+  {
+  PivotSingleAngle(pivotInnerLeft, angle);
+  }
+
+  public void PivotOuterRight(double angle)
+  {
+  PivotSingleAngle(pivotOuterRight, angle);
+  }
+
+  public void PivotInnerRight(double angle)
+  {
+  PivotSingleAngle(pivotInnerRight, angle);
+  }
 
   private void configurePivotMotor(WPI_TalonFX motor)
     {

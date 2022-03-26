@@ -151,8 +151,7 @@ public class VisionSubsystem extends SubsystemBase {
    * Method to force the limelight light off.
    */
   public void lightOff() {
-    //ledMode.setNumber(1);
-    ledMode.setNumber(3);
+    ledMode.setNumber(1);
   }
 
   /**
@@ -199,6 +198,7 @@ public class VisionSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("LimelightY", GetTY());
     SmartDashboard.putNumber("LimelightArea", ta.getDouble(0.0));
     SmartDashboard.putBoolean("ValidTargetightArea", validTarget());
+
 
     }
 

@@ -4,12 +4,14 @@
 
 package com.team3602.robot.commands;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TestShooterSpeedCommand extends CommandBase {
+
   /** Creates a new TestShooterSpeedCommand. */
   public TestShooterSpeedCommand() {
     addRequirements(); // here to declare subsystem dependencies.
@@ -19,7 +21,7 @@ public class TestShooterSpeedCommand extends CommandBase {
   @Override
   public void initialize()
   {
-    //SmartDashboard.putNumber("TestShooterSpeed", 150.0);
+    //SmartDashboard.putNumber("TestShooterSpeed", Constants.Shooter.defaultShooterRPM);
     //RobotContainer.shooterSubsystem.GetPIDValuesFromDash();
     RobotContainer.visionSubsystem.lightOn();
   }
@@ -28,8 +30,13 @@ public class TestShooterSpeedCommand extends CommandBase {
   @Override
   public void execute()
   {
-    double speed = SmartDashboard.getNumber("TestShooterSpeed", 150.0);
+    double speed = SmartDashboard.getNumber("TestShooterSpeed", Constants.Shooter.defaultShooterRPM);
     RobotContainer.visionSubsystem.logDataToSmartDashboard();
+
+    double distance = RobotContainer.shooterSubsystem.calculateDistance();
+
+    SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
+
     
     RobotContainer.shooterSubsystem.setShooterMotorRPM(speed);
 
@@ -40,7 +47,9 @@ public class TestShooterSpeedCommand extends CommandBase {
       RobotContainer.indexSubsystem.shoot();
       }
     else
+    {
       RobotContainer.indexSubsystem.stopMotors();
+    }
 
   }
 
@@ -51,6 +60,7 @@ public class TestShooterSpeedCommand extends CommandBase {
     RobotContainer.visionSubsystem.lightOff();
 
     RobotContainer.shooterSubsystem.stopMotor();
+    RobotContainer.indexSubsystem.stopMotors();
   }
 
   // Returns true when the command should end.

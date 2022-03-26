@@ -42,14 +42,14 @@ public class ShootStuffCommand extends CommandBase {
   @Override
   public void execute() {
 
-    // RobotContainer.shooterSubsystem.calculateAndSetMotorSpeeds();
-    // RobotContainer.shooterSubsystem.updateShooterMotorSpeed();
+    RobotContainer.shooterSubsystem.calculateAndSetMotorSpeeds();
+    RobotContainer.shooterSubsystem.updateShooterMotorSpeed();
     RobotContainer.visionSubsystem.logDataToSmartDashboard();
 
     
     if(RobotContainer.visionSubsystem.validTarget() &&
     RobotContainer.rotateToTargetSubsystem.IsRunning() &&
-    // RobotContainer.rotateToTargetSubsystem.onTarget() &&
+    RobotContainer.rotateToTargetSubsystem.onTarget() &&
     RobotContainer.shooterSubsystem.IsShooterSpeedOnTarget())
 
     // if(

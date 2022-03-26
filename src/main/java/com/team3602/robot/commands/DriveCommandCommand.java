@@ -59,6 +59,10 @@ public class DriveCommandCommand extends CommandBase {
 
     rotate *= throttle;
 
+    // speed = 0.0;
+    // turn = 0.0;
+    // rotate = 0.0;
+
     if(!RobotContainer.rotateToTargetSubsystem.IsRunning())
       RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
 

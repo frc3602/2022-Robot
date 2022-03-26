@@ -74,9 +74,9 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic()
   {
     // This method will be called once per scheduler run
-    calculateAndSetMotorSpeeds();
+    //calculateAndSetMotorSpeeds();
 
-    updateShooterMotorSpeed();
+    //updateShooterMotorSpeed();
   }
 
 
@@ -111,9 +111,11 @@ public class ShooterSubsystem extends SubsystemBase {
   public boolean IsShooterSpeedOnTarget()
   {
     double delta = Math.abs(Speed2RPM(shooterMotor.getSelectedSensorVelocity()) - targetShooterMotorRPM);
-    System.out.println("IsShooterSpeedOnTarget targetShooterMotorRPM: " + targetShooterMotorRPM);
+    //System.out.println("IsShooterSpeedOnTarget targetShooterMotorRPM: " + targetShooterMotorRPM);
 
-    System.out.println("IsShooterSpeedOnTarget Delta: " + delta);
+    //System.out.println("IsShooterSpeedOnTarget Delta: " + delta);
+
+    SmartDashboard.putNumber("IsShooterSpeedOnTarget Delta", delta);
 
     return (Math.abs(delta) < 25.0);
   }
@@ -215,13 +217,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
     double newTargetShooterMotorRPM = Shooter.defaultShooterRPM;
 
-    // if(RobotContainer.rotateToTargetSubsystem.isEnabled())
+    if(RobotContainer.rotateToTargetSubsystem.isEnabled())
     {
 
-      // if (RobotContainer.visionSubsystem.noValidTarget())
-      // {
-      //   return;
-      // }
+      if (RobotContainer.visionSubsystem.noValidTarget())
+      {
+        return;
+      }
 
       double distance = calculateDistance();
 
@@ -235,9 +237,9 @@ public class ShooterSubsystem extends SubsystemBase {
     RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
 
     newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
-    // }
-    // else if(RobotContainer.climberSubsystem.ClimberActive())
-    // {
+    }
+    else if(RobotContainer.climberSubsystem.ClimberActive())
+    {
       newTargetShooterMotorRPM = 0.0;
     }
 
@@ -253,7 +255,9 @@ public class ShooterSubsystem extends SubsystemBase {
     //0.13888888888889x2 - 18.333333333333x + 4980
 
   //double ret = (0.13888888888889 * distance * distance) - (25 * distance) + 5500;
-  double ret = (0.13888888888889 * distance * distance) - (18.333333333333 * distance) + 4980;
+  //double ret = (0.13888888888889 * distance * distance) - (18.333333333333 * distance) + 4980;
+  //0.11111111111111x2 - 21.666666666667x + 5800
+  double ret = (0.11111111111111 * distance * distance) - (21.666666666667 * distance) + 5800;
 
   return ret;
   }
@@ -324,6 +328,10 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.config_kP(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kP, Constants.kTimeoutMs);
     shooterMotor.config_kI(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kI, Constants.kTimeoutMs);
     shooterMotor.config_kD(Constants.kPIDLoopIdx, RobotContainer.kGains_Velocit.kD, Constants.kTimeoutMs);
+
+    //shooterMotor.configMotionCruiseVelocity(sensorUnitsPer100ms);
+    shooterMotor.configMotionCruiseVelocity(RPM2Speed(3500), Constants.kTimeoutMs);
+    shooterMotor.configMotionAcceleration(19000.0, Constants.kTimeoutMs);
 
   }
 

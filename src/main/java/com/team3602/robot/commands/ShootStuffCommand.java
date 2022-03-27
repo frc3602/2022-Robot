@@ -11,6 +11,7 @@
 
 package com.team3602.robot.commands;
 
+import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.subsystems.ShooterSubsystem;
 
@@ -67,9 +68,9 @@ public class ShootStuffCommand extends CommandBase {
 
     RobotContainer.visionSubsystem.lightOff();
     RobotContainer.rotateToTargetSubsystem.disable();
-    RobotContainer.shooterSubsystem.setShooterMotorRPM(0.0);
+    RobotContainer.shooterSubsystem.setShooterMotorRPM(Constants.Shooter.defaultShooterRPM);
     RobotContainer.shooterSubsystem.updateShooterMotorSpeed();
-    RobotContainer.shooterSubsystem.stopMotor();
+    //RobotContainer.shooterSubsystem.stopMotor();
     RobotContainer.indexSubsystem.stopMotors();
     RobotContainer.visionSubsystem.resetSnapshot();
 

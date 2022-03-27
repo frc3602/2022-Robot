@@ -87,7 +87,10 @@ public class ShooterSubsystem extends SubsystemBase {
    * @param rpm the rpm of the shooter
    */
   public void setShooterMotorRPM(double rpm) {
-    System.out.println("SetShooterMotorRPM " + rpm);
+    //System.out.println("SetShooterMotorRPM " + rpm);
+
+    SmartDashboard.putNumber("SetShooterMotorRPM ", rpm);
+
     targetShooterMotorRPM = rpm;
   }
 
@@ -243,6 +246,10 @@ public class ShooterSubsystem extends SubsystemBase {
     {
       newTargetShooterMotorRPM = 0.0;
     }
+    else if(!RobotContainer.climberSubsystem.ClimberActive())
+    {
+      newTargetShooterMotorRPM = Constants.Shooter.defaultShooterRPM;
+    }
 
     setShooterMotorRPM(newTargetShooterMotorRPM);
     logDataToSmartDashboard();
@@ -332,7 +339,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
     //shooterMotor.configMotionCruiseVelocity(sensorUnitsPer100ms);
     shooterMotor.configMotionCruiseVelocity(RPM2Speed(3500), Constants.kTimeoutMs);
-    shooterMotor.configMotionAcceleration(19000.0, Constants.kTimeoutMs);
+    shooterMotor.configMotionAcceleration(RPM2Speed(3500) / 3.0, Constants.kTimeoutMs);
+
+    SmartDashboard.putNumber("Shooter P Gain", RobotContainer.kGains_Velocit.kP);
+    SmartDashboard.putNumber("Shooter I Gain", RobotContainer.kGains_Velocit.kI);
+    SmartDashboard.putNumber("Shooter D Gain", RobotContainer.kGains_Velocit.kD);
+    SmartDashboard.putNumber("Shooter Feed Forward", RobotContainer.kGains_Velocit.kF);
+
 
   }
 

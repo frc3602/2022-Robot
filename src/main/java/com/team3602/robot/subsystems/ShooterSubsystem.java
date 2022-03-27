@@ -77,6 +77,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //calculateAndSetMotorSpeeds();
 
     //updateShooterMotorSpeed();
+    GetPIDValuesFromDash();
   }
 
 
@@ -264,11 +265,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void GetPIDValuesFromDash()
   {
-    double p = SmartDashboard.getNumber("P Gain", 0.25);
-    double i = SmartDashboard.getNumber("I Gain", 0);
-    double d = SmartDashboard.getNumber("D Gain", 0);
+    double p = SmartDashboard.getNumber("Shooter P Gain", 0.25);
+    double i = SmartDashboard.getNumber("Shooter I Gain", 0);
+    double d = SmartDashboard.getNumber("Shooter D Gain", 0);
     // double iz = SmartDashboard.getNumber("I Zone", 0);
-    double ff = SmartDashboard.getNumber("Feed Forward", 0.5);
+    double ff = SmartDashboard.getNumber("Shooter Feed Forward", 0.5);
 
 
     /* Config the Velocity closed loop gains in slot0 */

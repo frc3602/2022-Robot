@@ -48,14 +48,9 @@ public class ShootStuffCommand extends CommandBase {
 
     
     if(RobotContainer.visionSubsystem.validTarget() &&
-    RobotContainer.rotateToTargetSubsystem.IsRunning() &&
-    RobotContainer.rotateToTargetSubsystem.onTarget() &&
-    RobotContainer.shooterSubsystem.IsShooterSpeedOnTarget())
-
-    // if(
-    //     //RobotContainer.rotateToTargetSubsystem.IsRunning() &&
-    //     //RobotContainer.rotateToTargetSubsystem.onTarget() &&
-    //     RobotContainer.shooterSubsystem.IsShooterSpeedOnTarget())
+      RobotContainer.rotateToTargetSubsystem.IsRunning() &&
+      RobotContainer.rotateToTargetSubsystem.onTarget() &&
+      RobotContainer.shooterSubsystem.IsShooterSpeedOnTarget())
       {
         RobotContainer.indexSubsystem.shoot();
         RobotContainer.visionSubsystem.takeSnapshot();

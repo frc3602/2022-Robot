@@ -36,12 +36,9 @@ public class RobotContainer {
   // Commands
   public static DriveCommandCommand driveCommand = new DriveCommandCommand(driveSubsystem);
   public static ClimberControlCommand climberControl = new ClimberControlCommand(climberSubsystem);
-  // public static IndexInCommand indexIn = new IndexInCommand(indexSubsystem);
-  // public static IndexOutCommand indexOut = new IndexOutCommand(indexSubsystem);
   public static IndexStopCommand indexStop = new IndexStopCommand(indexSubsystem);
   public static ShootStuffCommand shootStuff = new ShootStuffCommand(shooterSubsystem);
   public static ShootStopCommand shootStop = new ShootStopCommand(shooterSubsystem);
-  public static CalculateShooterSpeedCommand calculateShooterSpeedCommand = new CalculateShooterSpeedCommand();
 
   public static ReportStuffCommand reportCommand = new ReportStuffCommand();
   public static StageClimbReadyCommandGroup climbReadyCommand = new StageClimbReadyCommandGroup();

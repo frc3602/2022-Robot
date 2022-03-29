@@ -127,7 +127,7 @@ public interface Constants {
                                                  // limelight on the robot
 
     //public static final double defaultShooterRPM = 2500.0;
-    public static final double defaultShooterRPM = 3500.0;
+    //public static final double defaultShooterRPM = 3500.0;
 
     public static final double rotationalErrorTolerance = 2.0f; // 0.5 degree error tolerance 
     public static final double shooterSpeedErrorTolerance = 175.1f;

@@ -82,13 +82,13 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
 
-      RobotContainer.shooterSubsystem.setShooterMotorRPM(Constants.Shooter.defaultShooterRPM);
+      //RobotContainer.shooterSubsystem.setShooterMotorRPM(Constants.Shooter.defaultShooterRPM);
 
     }
 
     if(Constants.testingEnabled)
     {
-      SmartDashboard.putNumber("TestShooterSpeed", Constants.Shooter.defaultShooterRPM);
+      SmartDashboard.putNumber("TestShooterSpeed", 3500);
     }
     // RobotContainer.climberSubsystem.ResetTheClimb();
 

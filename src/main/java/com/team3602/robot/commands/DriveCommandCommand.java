@@ -54,7 +54,7 @@ public class DriveCommandCommand extends CommandBase {
       SmartDashboard.putNumber("Twist Trottle", throttle);
     }
 
-    if(Math.abs(rotate) <= 0.1)
+    if(Math.abs(rotate) <= 0.2)
       rotate = 0.0;
 
     rotate *= throttle;

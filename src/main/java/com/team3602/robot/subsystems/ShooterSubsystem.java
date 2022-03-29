@@ -219,7 +219,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public void calculateAndSetMotorSpeeds()
   {
 
-    double newTargetShooterMotorRPM = Shooter.defaultShooterRPM;
+    double newTargetShooterMotorRPM = 0.0;
 
     if(RobotContainer.rotateToTargetSubsystem.isEnabled())
     {
@@ -238,18 +238,16 @@ public class ShooterSubsystem extends SubsystemBase {
       }
 
     //some magic decimal crazyness going on
-    RobotContainer.shooterSubsystem.targetShooterMotorRPM = CalculateMagicMath(distance);
-
-    newTargetShooterMotorRPM = RobotContainer.shooterSubsystem.targetShooterMotorRPM;
+    newTargetShooterMotorRPM = CalculateMagicMath(distance);
     }
     else if(RobotContainer.climberSubsystem.ClimberActive())
     {
       newTargetShooterMotorRPM = 0.0;
     }
-    else if(!RobotContainer.climberSubsystem.ClimberActive())
-    {
-      newTargetShooterMotorRPM = Constants.Shooter.defaultShooterRPM;
-    }
+    // else if(!RobotContainer.climberSubsystem.ClimberActive())
+    // {
+    //   newTargetShooterMotorRPM = Constants.Shooter.defaultShooterRPM;
+    // }
 
     setShooterMotorRPM(newTargetShooterMotorRPM);
     logDataToSmartDashboard();

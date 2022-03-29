@@ -68,7 +68,7 @@ public class ShootStuffCommand extends CommandBase {
 
     RobotContainer.visionSubsystem.lightOff();
     RobotContainer.rotateToTargetSubsystem.disable();
-    RobotContainer.shooterSubsystem.setShooterMotorRPM(Constants.Shooter.defaultShooterRPM);
+    RobotContainer.shooterSubsystem.setShooterMotorRPM(0.0);
     RobotContainer.shooterSubsystem.updateShooterMotorSpeed();
     //RobotContainer.shooterSubsystem.stopMotor();
     RobotContainer.indexSubsystem.stopMotors();

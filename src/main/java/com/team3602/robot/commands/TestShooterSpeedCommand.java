@@ -30,7 +30,7 @@ public class TestShooterSpeedCommand extends CommandBase {
   @Override
   public void execute()
   {
-    double speed = SmartDashboard.getNumber("TestShooterSpeed", Constants.Shooter.defaultShooterRPM);
+    double speed = SmartDashboard.getNumber("TestShooterSpeed", 3500);
     RobotContainer.visionSubsystem.logDataToSmartDashboard();
 
     double distance = RobotContainer.shooterSubsystem.calculateDistance();

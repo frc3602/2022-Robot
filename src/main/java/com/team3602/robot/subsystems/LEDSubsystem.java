@@ -124,11 +124,14 @@ public class LEDSubsystem extends SubsystemBase
         case notReady : 
         {
           climbStarted = false;
+          colorStrip.SetNewSectionSize(2);
           break;
         }
         case ready : 
         {
           climbStarted = true;
+
+          colorStrip.SetNewSectionSize(7);
 
           colorStrip.SetSectionColor(StageSectionIndex(stage), Color.kOrange);
 

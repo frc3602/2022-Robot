@@ -57,7 +57,7 @@ public class LEDSubsystem extends SubsystemBase
     {
       loopCounter++;
 
-      if(loopCounter >= 25)
+      if(loopCounter >= 1)
       {
         loopCounter = 0;
 
@@ -73,28 +73,29 @@ public class LEDSubsystem extends SubsystemBase
         {
           if(RobotContainer.indexSubsystem.indexSensorTop() && !prevUpperSensor) 
             {
-              colorStrip.SetSectionColor(0, Color.kGreen);
+              colorStrip.SetSectionColor(1, Color.kGreen);
             }
           else if(!RobotContainer.indexSubsystem.indexSensorTop() && prevUpperSensor)
             {
-              colorStrip.SetSectionColor(0, GetAllianceColor());
+              colorStrip.SetSectionColor(1, GetAllianceColor());
             }
       
           if(RobotContainer.indexSubsystem.indexSensorBottom() && !prevLowerSensor) 
             {
-              colorStrip.SetSectionColor(1, Color.kGreen);
+              colorStrip.SetSectionColor(0, Color.kGreen);
             }
           else if(!RobotContainer.indexSubsystem.indexSensorBottom() && prevLowerSensor)
             {
-              colorStrip.SetSectionColor(1, GetAllianceColor());
+              colorStrip.SetSectionColor(0, GetAllianceColor());
             }
+            prevUpperSensor = RobotContainer.indexSubsystem.indexSensorTop();
+            prevLowerSensor = RobotContainer.indexSubsystem.indexSensorBottom();
+      
         }
 
     
       }
 
-      prevUpperSensor = RobotContainer.indexSubsystem.indexSensorTop();
-      prevLowerSensor = RobotContainer.indexSubsystem.indexSensorBottom();
   
 
       // This method will be called once per scheduler run
@@ -131,14 +132,16 @@ public class LEDSubsystem extends SubsystemBase
         {
           climbStarted = true;
 
+          colorStrip.SetAllColor(Color.kBlack);
+
           colorStrip.SetNewSectionSize(7);
 
           colorStrip.SetSectionColor(StageSectionIndex(stage), Color.kOrange);
 
-          for(int i=1; i < 7; i++)
-          {
-            colorStrip.SetSectionColor(i, Color.kBlack);
-          }
+          // for(int i=1; i < 7; i++)
+          // {
+          //   colorStrip.SetSectionColor(i, Color.kBlack);
+          // }
           break;
         }
         case climbMidBar :

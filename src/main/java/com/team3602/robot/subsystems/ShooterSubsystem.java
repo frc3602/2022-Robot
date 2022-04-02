@@ -77,7 +77,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //calculateAndSetMotorSpeeds();
 
     //updateShooterMotorSpeed();
-    GetPIDValuesFromDash();
+    //GetPIDValuesFromDash();
   }
 
 

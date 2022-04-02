@@ -72,7 +72,7 @@ public class PixySubsystem extends SubsystemBase {
   {
     int getBlocksError = PixySubsystem.pixyCamera.getCCC().getBlocks(false, GetAllianceSignature(), 25);
 
-    System.out.println("ERROR: getBlocksError " + getBlocksError);          
+    //System.out.println("ERROR: getBlocksError " + getBlocksError);          
 
 
     ArrayList<Block> blocks = PixySubsystem.pixyCamera.getCCC().getBlockCache(); // Gets a list of all blocks found

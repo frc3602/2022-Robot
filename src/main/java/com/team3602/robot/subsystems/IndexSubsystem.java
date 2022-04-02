@@ -120,7 +120,7 @@ public class IndexSubsystem extends SubsystemBase {
    */
   public void shoot() {
     indexMotorTop.set(ControlMode.PercentOutput, 1.0);
-    indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+    indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
   }
 
   public void indexIn()
@@ -135,12 +135,12 @@ public class IndexSubsystem extends SubsystemBase {
     else if(indexSensorTop())
     {
       indexMotorTop.set(ControlMode.PercentOutput, 0.0);
-      indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+      indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
     }
     else
     {
       indexMotorTop.set(ControlMode.PercentOutput, 1.0);
-      indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+      indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
     }
 
 
@@ -151,7 +151,7 @@ public class IndexSubsystem extends SubsystemBase {
    */
   public void indexOut() {
     indexMotorTop.set(ControlMode.PercentOutput, -1.0);
-    indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
+    indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
   }
 
   /**
@@ -166,7 +166,7 @@ public class IndexSubsystem extends SubsystemBase {
   public void SpinIntakeMotors(double speed)
   {
     indexMotorTop.set(ControlMode.PercentOutput, speed);
-    indexMotorBottom.set(ControlMode.PercentOutput, speed);
+    indexMotorBottom.set(ControlMode.PercentOutput, -1.0 * speed);
   }
 
   public void LiftIntake()

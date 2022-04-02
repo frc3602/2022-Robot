@@ -11,6 +11,8 @@
 
 package com.team3602.robot;
 
+import com.team3602.robot.commands.PixyCamGetBlocksCommand;
+
 // WPILib Imports
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -41,6 +43,8 @@ public class Robot extends TimedRobot {
     RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.climberControl);
 
     RobotContainer.shooterSubsystem.InitShooter();
+
+    RobotContainer.pixySubsystem.setDefaultCommand(new PixyCamGetBlocksCommand());
 
    RobotContainer.visionSubsystem.init();
    RobotContainer.ledSubsystem.Init();

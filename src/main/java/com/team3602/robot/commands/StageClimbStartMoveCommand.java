@@ -4,19 +4,17 @@
 
 package com.team3602.robot.commands;
 
-import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber.ClimbStageEnum;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class StageClimbFinishMoveCommand extends CommandBase {
+public class StageClimbStartMoveCommand extends CommandBase {
 
   ClimbStageEnum stage = ClimbStageEnum.notReady;
 
-  /** Creates a new StageClimbSetCommand. */
-  public StageClimbFinishMoveCommand( Constants.Climber.ClimbStageEnum stage)
-  {
+  /** Creates a new StageClimbStartMoveCommand. */
+  public StageClimbStartMoveCommand(ClimbStageEnum stage) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.climberSubsystem);
 
@@ -27,8 +25,8 @@ public class StageClimbFinishMoveCommand extends CommandBase {
   @Override
   public void initialize()
   {
-    RobotContainer.climberSubsystem.FinishMove(stage);
-    System.out.println("StageClimbFinishMoveCommand stage: " + stage);
+    RobotContainer.climberSubsystem.StartMove(stage);
+    System.out.println("StageClimbStartMoveCommand stage: " + stage);
 
   }
 

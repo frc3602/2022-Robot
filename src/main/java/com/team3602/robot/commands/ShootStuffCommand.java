@@ -11,7 +11,6 @@
 
 package com.team3602.robot.commands;
 
-import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.subsystems.ShooterSubsystem;
 

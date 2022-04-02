@@ -12,11 +12,13 @@
 package com.team3602.robot.subsystems;
 
 import com.team3602.robot.Constants;
+import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Climber.ClimbStageEnum;
 import com.team3602.robot.commands.ClimberSetLocationCoordiatedCommandGroup;
 import com.team3602.robot.commands.DummyTimerCommand;
 import com.team3602.robot.commands.StageClimbFinishMoveCommand;
+import com.team3602.robot.commands.StageClimbStartMoveCommand;
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
@@ -65,26 +67,23 @@ public class ClimberSubsystem extends SubsystemBase {
     return currentStage != ClimbStageEnum.notReady;
   }
 
+  public ClimbStageEnum CurrentStage()
+  {
+    return currentStage;
+  }
+
+  public void StartMove(ClimbStageEnum stage)
+  {
+    RobotContainer.ledSubsystem.StartMove(CurrentStage());
+    isMoving = true;
+  }
+
   public void FinishMove(ClimbStageEnum stage)
   {
     currentStage = stage;
     isMoving = false;
+    RobotContainer.ledSubsystem.FinishMove(CurrentStage());
   }
-  // public void StartTheClimb()
-  // {
-  //   startedClimb = true;
-
-  //   ClimberReadyCommandGroup climberReady = new ClimberReadyCommandGroup();
-
-  //   climberReady.schedule();
-
-  // }
-
-  // public void ResetTheClimb()
-  // {
-  //   currentStage = Climber.ClimbStageEnum.ready;
-  // }
-
 
   public void ResetEncoders()
   {
@@ -472,11 +471,12 @@ public class ClimberSubsystem extends SubsystemBase {
       }
       case ready : 
       {
-        isMoving = true;
+        // StartMove();
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+        new StageClimbStartMoveCommand(ClimbStageEnum.climbMidBar),
         new ClimberSetLocationCoordiatedCommandGroup(-29.0, 0.0, 13.5, 0.0 ),
-        new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.climbMidBar)
+        new StageClimbFinishMoveCommand(ClimbStageEnum.climbMidBar)
         );
 
         temp.schedule();
@@ -484,9 +484,9 @@ public class ClimberSubsystem extends SubsystemBase {
       }
       case climbMidBar : 
       {
-        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+        new StageClimbStartMoveCommand(ClimbStageEnum.hookHighBar),
         new ClimberSetLocationCoordiatedCommandGroup(-27.0, 0.0, 25.5, 0.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 25.5, 0.0 ),
         new DummyTimerCommand().withTimeout(0.5),
@@ -500,9 +500,9 @@ public class ClimberSubsystem extends SubsystemBase {
       }
       case hookHighBar : 
       {
-        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+        new StageClimbStartMoveCommand(ClimbStageEnum.ClimbHighBar),
         new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 19.0, 15.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 15.0, 15.0 ),
         new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.ClimbHighBar)
@@ -513,9 +513,9 @@ public class ClimberSubsystem extends SubsystemBase {
       }
       case ClimbHighBar : 
       {
-        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+        new StageClimbStartMoveCommand(ClimbStageEnum.readyHighBar),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 15.0,  5.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0,  0.0, 13.5 ),
         new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.readyHighBar)
@@ -526,9 +526,9 @@ public class ClimberSubsystem extends SubsystemBase {
       }
       case readyHighBar : 
       {
-        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+        new StageClimbStartMoveCommand(ClimbStageEnum.hookTravers),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 0.0, 25.5 ),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 25.5 ),
         new DummyTimerCommand().withTimeout(0.5),
@@ -542,9 +542,9 @@ public class ClimberSubsystem extends SubsystemBase {
       }
       case hookTravers : 
       {
-        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+        new StageClimbStartMoveCommand(ClimbStageEnum.climbTraverse),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 15.0,  19.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 15.0,  15.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(-15.0, 0.0,  5.0,  15.0 ),
@@ -593,9 +593,9 @@ public class ClimberSubsystem extends SubsystemBase {
       }
       case hookHighBar : 
       {
-        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+        new StageClimbStartMoveCommand(ClimbStageEnum.hookHighBar),
         new ClimberSetLocationCoordiatedCommandGroup(-29.0, 0.0, 19.0, 1.5 ),
         new ClimberSetLocationCoordiatedCommandGroup(-29.0, 0.0, 25.5, 0.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(-20.0, 0.0, 25.5, 0.0 ),
@@ -608,9 +608,9 @@ public class ClimberSubsystem extends SubsystemBase {
       }
       case hookTravers : 
       {
-        isMoving = true;
         SequentialCommandGroup temp = new SequentialCommandGroup
         (
+        new StageClimbStartMoveCommand(ClimbStageEnum.hookTravers),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 1.5, 19.0 ),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -29.0, 0.0, 25.5 ),
         new ClimberSetLocationCoordiatedCommandGroup(0.0, -20.0, 0.0, 25.5 ),

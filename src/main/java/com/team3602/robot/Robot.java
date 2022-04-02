@@ -43,6 +43,7 @@ public class Robot extends TimedRobot {
     RobotContainer.shooterSubsystem.InitShooter();
 
    RobotContainer.visionSubsystem.init();
+   RobotContainer.ledSubsystem.Init();
 
    robotContainer.ClearStickeyFaults();
  }

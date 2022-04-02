@@ -153,6 +153,26 @@ public interface Constants {
     int indexSensorBottomID = 0;
   }
 
+  public interface LEDColorStrip
+  {
+    public static int ledPWMPort = 0;
+    public static int ledSegmentLength = 72;
+    public static int ledSegmentSections = 2;
+    public static int ledDeadSpace = 0;
+    public static int repeatSegmentCount = 4;
+
+
+    public static double brightnessPercentage = 0.2;
+  }
+
+  public interface PixeyCam
+  {
+    public static final int Signature_RED_BALL = 2;
+    public static final int Signature_BLUE_BALL = 1;
+
+    public static final double targetX = 315.0 / 2.0;
+  }
+
   /**
    * The Controller interface provides controller port IDs, xbox controller axes,
    * and button IDs.

@@ -1,17 +1,15 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package com.team3602.robot;
 
-import org.w3c.dom.css.RGBColor;
+import com.team3602.robot.Constants.LEDColorStrip;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.util.Color;
+
 
 /**
  * Add your docs here.
@@ -25,24 +23,29 @@ public class EColorStrip
   private int sections = 1;
   private int sectionSize = 1;
   private int deadSpace = 1;
-  private int endIndex = 1;
+
+  private int rainbowFirstPixelHue = 0;
+
 
   public EColorStrip(int port, int length_, int sections_, int deadSpace)
     {
     this.length = length_;
-    this.sections = sections_;
     this.deadSpace = deadSpace;
 
-    sectionSize = length / sections;
-
-    System.out.println("section size" + sectionSize); 
+    SetNewSectionSize(sections_);
 
     led = new AddressableLED(port);
-    int buffersize = (length + this.deadSpace) * 2;
-    endIndex = buffersize - 1;
+    int buffersize = (length + this.deadSpace) * LEDColorStrip.repeatSegmentCount;
     ledBuffer = new AddressableLEDBuffer(buffersize);
     led.setLength(ledBuffer.getLength());
     SetAllColor(Color.kWhite);
+
+    }
+
+    public void SetNewSectionSize(int sections)
+    {
+      this.sections = sections;
+      sectionSize = length / sections;
     }
 
     public void start()
@@ -56,27 +59,69 @@ public class EColorStrip
       return sections;
       }
 
+    public static double[] RGBtoHSV(double r, double g, double b)
+      {
+
+      double h, s, v;
+  
+      double min, max, delta;
+  
+      min = Math.min(Math.min(r, g), b);
+      max = Math.max(Math.max(r, g), b);
+      
+      // V
+      v = max;
+  
+        delta = max - min;
+  
+      // S
+        if( max != 0 )
+          s = delta / max;
+        else {
+          s = 0;
+          h = -1;
+          return new double[]{h,s,v};
+        }
+  
+      // H
+        if( r == max )
+          h = ( g - b ) / delta; // between yellow & magenta
+        else if( g == max )
+          h = 2 + ( b - r ) / delta; // between cyan & yellow
+        else
+          h = 4 + ( r - g ) / delta; // between magenta & cyan
+  
+        h *= 60;    // degrees
+  
+      if( h < 0 )
+          h += 360;
+  
+      return new double[]{h,s,v};
+    }
+
+    public static Color CapColorBrightness(Color startColor, double brightnessPercent)
+    {
+      double[] hsv = EColorStrip.RGBtoHSV(startColor.red, startColor.green, startColor.blue);
+
+      int newH = (int)(hsv[0] / 2.0);
+      int newS = (int)(hsv[1] * 255.0);
+      int newV = (int)(Math.min(hsv[2], brightnessPercent) * 255.0);
+
+      return Color.fromHSV(newH, newS, newV);
+    }
+
     public void SetAllColor(Color color)
       {
-      SetAllColor( (int)(color.red * 255.999) , (int)(color.green * 255.999), (int)(color.blue * 255.999));
-      }
+      Color newColor = CapColorBrightness(color, LEDColorStrip.brightnessPercentage);
 
-    public void SetAllColor(int red, int green, int blue)
-      {
-      for (var i = 0; i < length; i++)
+      for(var j = 0; j < LEDColorStrip.repeatSegmentCount; j++)
         {
-        // Sets the specified LED to the RGB values for red
-        ledBuffer.setRGB(i, red, green, blue);
+          for (var i = 0; i < length; i++)
+          {
+          ledBuffer.setLED(i + (length * j), newColor);
+          }
+    
         }
-
-        //mirror
-
-        for (var i = endIndex; i > (endIndex - length); i--)
-        {
-        // Sets the specified LED to the RGB values for red
-        ledBuffer.setRGB(i, red, green, blue);
-        }
-
 
       System.out.println("SetAllColor");          
 
@@ -85,13 +130,9 @@ public class EColorStrip
 
     public void SetSectionColor(int index, Color color)
       {
-      SetSectionColor(index, (int)(color.red * 255.999) , (int)(color.green * 255.999), (int)(color.blue * 255.999));
-      }
-
-    public void SetSectionColor(int index, int red, int green, int blue)
-      {
       int firstIndex = sectionSize * index;
       int lastIndex = firstIndex + sectionSize;
+      Color newColor = CapColorBrightness(color, LEDColorStrip.brightnessPercentage);
 
       if(firstIndex > ledBuffer.getLength())
         {
@@ -105,24 +146,34 @@ public class EColorStrip
         return;
         }
 
-      // int mirrorIndex = ledBuffer.getLength() - firstIndex;
-      for (var i = firstIndex; i < lastIndex; i++)
+      for(var j = 0; j < LEDColorStrip.repeatSegmentCount; j++)
+      {
+        for (var i = firstIndex; i < lastIndex; i++)
         {
-        // Sets the specified LED to the RGB values for red
-        ledBuffer.setRGB(i, red, green, blue);
+        ledBuffer.setLED(i + (length * j), newColor);
         }
-
-        
-
-
-        for(int j = endIndex - firstIndex; j > endIndex - lastIndex; j--)
-        {
-        ledBuffer.setRGB(j, red, green, blue);
-        }
-
-      //System.out.println("SetSectionColor");
-
+      }
+  
       led.setData(ledBuffer);
       } 
 
+    public void rainbow()
+    {
+        // For every pixel
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+          // Calculate the hue - hue is easier for rainbows because the color
+          // shape is a circle so only one value needs to precess
+          final var hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
+          // Set the value
+          ledBuffer.setHSV(i, hue, 255, 128);
+        }
+        // Increase by to make the rainbow "move"
+        rainbowFirstPixelHue += 3;
+        // Check bounds
+        rainbowFirstPixelHue %= 180;
+        led.setData(ledBuffer);
+    }
+    
+
   }
+

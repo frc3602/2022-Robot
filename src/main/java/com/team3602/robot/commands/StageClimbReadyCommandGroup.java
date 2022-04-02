@@ -4,7 +4,7 @@
 
 package com.team3602.robot.commands;
 
-import com.team3602.robot.Constants.Climber;
+import com.team3602.robot.Constants.Climber.ClimbStageEnum;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
@@ -17,9 +17,11 @@ public class StageClimbReadyCommandGroup extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new StageClimbStartMoveCommand(ClimbStageEnum.ready)
+      ,
       new ClimberSetLocationCoordiatedCommandGroup( -27.0, 0.0, 0.0, 19.0)
       ,
-      new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.ready)
+      new StageClimbFinishMoveCommand(ClimbStageEnum.ready)
     );
   }
 }

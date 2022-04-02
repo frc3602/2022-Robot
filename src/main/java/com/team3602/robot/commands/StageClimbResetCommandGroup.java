@@ -3,7 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package com.team3602.robot.commands;
-import com.team3602.robot.Constants.Climber;
+import com.team3602.robot.Constants.Climber.ClimbStageEnum;
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -15,9 +16,11 @@ public class StageClimbResetCommandGroup extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new StageClimbStartMoveCommand(ClimbStageEnum.notReady)
+      ,
       new ClimberSetLocationCoordiatedCommandGroup(0.0, 0.0, 0.0, 0.0)
       ,
-      new StageClimbFinishMoveCommand(Climber.ClimbStageEnum.notReady)
+      new StageClimbFinishMoveCommand(ClimbStageEnum.notReady)
     );
   }
 }

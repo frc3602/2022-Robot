@@ -32,6 +32,8 @@ public class RobotContainer {
   public static IndexSubsystem indexSubsystem = new IndexSubsystem();
   public static RotateToTargetSubsystem rotateToTargetSubsystem = new RotateToTargetSubsystem();
   public static AutonRotatePIDSubsystem autonRotatePIDSubsystem = new AutonRotatePIDSubsystem();
+  public static LEDSubsystem ledSubsystem = new LEDSubsystem();
+  public static PixySubsystem pixySubsystem = new PixySubsystem();
 
   // Commands
   public static DriveCommandCommand driveCommand = new DriveCommandCommand(driveSubsystem);

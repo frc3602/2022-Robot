@@ -34,9 +34,11 @@ public class RobotContainer {
   public static AutonRotatePIDSubsystem autonRotatePIDSubsystem = new AutonRotatePIDSubsystem();
   public static LEDSubsystem ledSubsystem = new LEDSubsystem();
   public static PixySubsystem pixySubsystem = new PixySubsystem();
+  public static PixyRotatePIDSubsystem pixyRotatePIDSubsystem = new PixyRotatePIDSubsystem();
+  public static DriveSpeedPIDSubsystem driveSpeedPIDSubsystem = new DriveSpeedPIDSubsystem();
 
   // Commands
-  public static DriveCommandCommand driveCommand = new DriveCommandCommand(driveSubsystem);
+  public static DriveCommand driveCommand = new DriveCommand(driveSubsystem);
   public static ClimberControlCommand climberControl = new ClimberControlCommand(climberSubsystem);
   public static IndexStopCommand indexStop = new IndexStopCommand(indexSubsystem);
   public static ShootStuffCommand shootStuff = new ShootStuffCommand(shooterSubsystem);
@@ -97,6 +99,9 @@ public class RobotContainer {
     
     OI.startButton.whenPressed(climbResetCommand);
     OI.menuButton.whenPressed(climbReadyCommand);
+
+    OI.button11.whileHeld(new DriveWithPixyCommand());
+    OI.button11.whileHeld(new FindCargoCommand());
 
 }
 

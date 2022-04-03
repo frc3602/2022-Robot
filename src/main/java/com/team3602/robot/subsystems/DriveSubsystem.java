@@ -17,7 +17,6 @@ import com.team3602.robot.Constants.Drivetrain;
 
 // Phoenix & navX Imports
 import com.kauailabs.navx.frc.AHRS;
-import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -118,6 +117,18 @@ public class DriveSubsystem extends SubsystemBase {
     return total / 4.0;
 
   }
+
+  public double GetEncoderSpeed(WPI_TalonFX motor)
+  {
+    return ((motor.getSelectedSensorVelocity() / Constants.falconTicksPerRotation) / 600.0) * Constants.Drivetrain.distancePerMotorRev;
+  }
+
+  public double GetAverageSpeed()
+    {
+      double total = GetEncoderSpeed(frontLeft) + GetEncoderSpeed(backLeft) + GetEncoderSpeed(frontRight) + GetEncoderSpeed(backRight);
+
+      return total / 4.0;
+      }
 
   /**
    * Method to get the current angle of the navX gyro.

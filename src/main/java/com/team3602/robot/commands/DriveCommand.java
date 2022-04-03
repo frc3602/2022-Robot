@@ -26,11 +26,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @version 1.0 04 Mar 2022
  * @author Cody Wellman
  */
-public class DriveCommandCommand extends CommandBase {
+public class DriveCommand extends CommandBase {
   /**
-   * Constructor for {@link DriveCommandCommand} class to set subsystem requirements.
+   * Constructor for {@link DriveCommand} class to set subsystem requirements.
    */
-  public DriveCommandCommand(DriveSubsystem subsystem) {
+  public DriveCommand(DriveSubsystem subsystem) {
     addRequirements(RobotContainer.driveSubsystem);
   }
 
@@ -64,7 +64,14 @@ public class DriveCommandCommand extends CommandBase {
     // rotate = 0.0;
 
     if(!RobotContainer.rotateToTargetSubsystem.IsRunning())
+    {
+      if(RobotContainer.pixyRotatePIDSubsystem.isEnabled())
+      {
+        rotate = RobotContainer.pixyRotatePIDSubsystem.GetOutputValue();
+      }
+
       RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
+    }
 
     RobotContainer.climberSubsystem.ReoportStuff();
   }

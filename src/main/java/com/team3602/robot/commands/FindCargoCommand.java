@@ -24,7 +24,7 @@ public class FindCargoCommand extends CommandBase {
   @Override
   public void initialize()
   {
-    RobotContainer.driveSpeedPIDSubsystem.setSetpoint(65.0);
+    RobotContainer.driveSpeedPIDSubsystem.setSetpoint(50.0);
     RobotContainer.driveSpeedPIDSubsystem.enable();
     RobotContainer.pixyRotatePIDSubsystem.enable();
   }

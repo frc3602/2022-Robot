@@ -22,7 +22,7 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
   public PixyRotatePIDSubsystem() {
     super(
         // The PIDController used by the subsystem
-        new PIDController(0.008, 0.5, 0.0));
+        new PIDController(0.0025, 0.5, 0.0));
 
         setSetpoint(PixeyCam.targetX); // Sets where the PID controller should move the system
 

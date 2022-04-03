@@ -60,7 +60,7 @@ public class PixySubsystem extends SubsystemBase {
     {
     logDataToSmartDashboard();
     loopCounter++;
-    if(loopCounter>=5)
+    if(loopCounter>=1)
       {
         GetBlockInfo();
         loopCounter=0;

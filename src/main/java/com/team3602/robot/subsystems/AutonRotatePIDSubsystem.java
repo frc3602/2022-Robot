@@ -19,13 +19,13 @@ public class AutonRotatePIDSubsystem extends PIDSubsystem {
   /** Add your docs here. */
   public AutonRotatePIDSubsystem() {
     // Intert a subsystem name and PID values here
-    super( new PIDController(0.025, 0.0, 0.0));
+    super( new PIDController(0.0005, 0.5, 0.0));
     setSetpoint(0); // Sets where the PID controller should move the system
 
-    getController().enableContinuousInput(-190.0, 190.0); //parameters moved to the controller. call getController() for access
-    getController().setIntegratorRange(-0.125, 0.125);
+    getController().enableContinuousInput(180.0, -180.0); //parameters moved to the controller. call getController() for access
+    getController().setIntegratorRange(0.4, -0.4);
 
-    getController().setTolerance(5.0);
+    getController().setTolerance(2.0);
 
     
     disable();
@@ -43,7 +43,7 @@ public class AutonRotatePIDSubsystem extends PIDSubsystem {
     }
 
     if(IsRunning())
-      RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, output * -1.0); // If all on its own, rotate until on target
+      RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, output * 1.0); // If all on its own, rotate until on target
   }
 
   @Override

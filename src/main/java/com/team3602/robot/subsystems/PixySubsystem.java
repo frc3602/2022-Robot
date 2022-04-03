@@ -28,6 +28,8 @@ public class PixySubsystem extends SubsystemBase {
   private int largestBlockSignature = -1;
   private int largestBlockX = (int)Constants.PixeyCam.targetX;
   private int largestBlockY = -1;
+  private int loopCounter = 0;
+
 
   /** Creates a new PixySubsystem. */
   public PixySubsystem()
@@ -57,7 +59,11 @@ public class PixySubsystem extends SubsystemBase {
   public void periodic()
     {
     logDataToSmartDashboard();
-    GetBlockInfo();
+    loopCounter++;
+    if(loopCounter>=20)
+      {
+        GetBlockInfo();
+      }
     }
 
   public int GetAllianceSignature()

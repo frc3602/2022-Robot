@@ -17,6 +17,8 @@ import com.team3602.robot.Constants.Drivetrain;
 
 // Phoenix & navX Imports
 import com.kauailabs.navx.frc.AHRS;
+import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 // WPILib Imports
@@ -56,7 +58,7 @@ public class DriveSubsystem extends SubsystemBase {
    * to initialize NavX and check to make sure its working.
    */
   public DriveSubsystem() {
-    configureMotors();
+    //configureMotors();
 
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
@@ -67,10 +69,32 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
+  @Override
+  public void periodic()
+    {
+      logDataToSmartDashboard();
+    }
+
   /**
    * Method to log information to the Smart Dashboard.
    */
-  public void logDataToSmartDashboard() {
+  public void logDataToSmartDashboard()
+  {
+    if(Constants.testingEnabled)
+    {
+      SmartDashboard.putNumber("Front Left distance reading:", GetEncoderDistance(frontLeft));
+      SmartDashboard.putNumber("frontLeft.getSelectedSensorPosition reading:", frontLeft.getSelectedSensorPosition());
+      SmartDashboard.putNumber("Back Left distance reading:", GetEncoderDistance(backLeft));
+      SmartDashboard.putNumber("Front Right distance reading:", GetEncoderDistance(frontRight));
+      SmartDashboard.putNumber("Back Right distance reading:", GetEncoderDistance(backRight));
+
+      SmartDashboard.putNumber("GetAverageDistance reading:", GetAverageDistance());
+
+      SmartDashboard.putNumber("gyro roll", navX.getRoll());
+      SmartDashboard.putNumber("gyro Yaw", navX.getYaw());
+      SmartDashboard.putNumber("gyro pitch", navX.getPitch());
+      SmartDashboard.putNumber("gyro getGyroAngle", getGyroAngle());
+  }
     /*
      * SmartDashboard.putNumber("Front Left RPM reading:" + frontLeftRPM);
      * SmartDashboard.putNumber("Back Left RPM reading:" + backLeftRPM);
@@ -81,7 +105,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double GetEncoderDistance(WPI_TalonFX motor)
   {
-    double dist = (motor.getSelectedSensorPosition() / Constants.falconTicksPerRotation) * Constants.Drivetrain.distancePerRev;
+    double dist = (motor.getSelectedSensorPosition() / Constants.falconTicksPerRotation) * Constants.Drivetrain.distancePerMotorRev;
     return dist;
   }
 
@@ -114,13 +138,6 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void driveCartesian(double y, double x, double z)
   {
-    if(Constants.testingEnabled)
-    {
-      SmartDashboard.putNumber("Front Left distance reading:", GetEncoderDistance(frontLeft));
-      SmartDashboard.putNumber("Back Left distance reading:", GetEncoderDistance(backLeft));
-      SmartDashboard.putNumber("Front Right distance reading:", GetEncoderDistance(frontRight));
-      SmartDashboard.putNumber("Back Right distance reading:", GetEncoderDistance(backRight));
-    }
 
       double maxSpeed = 1.0;
 
@@ -138,7 +155,12 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void ResetEncoders()
   {
+    System.out.println("ResetEncoders drivetrain");
+
+    //frontLeft.getSensorCollection().setIntegratedSensorPosition(0.0, Constants.kTimeoutMs);
     frontLeft.setSelectedSensorPosition(0.0);
+    //System.out.println("ResetEncoders drivetrain errorcode: " + errCode);
+
     backLeft.setSelectedSensorPosition(0.0);
     frontRight.setSelectedSensorPosition(0.0);
     backRight.setSelectedSensorPosition(0.0);
@@ -149,11 +171,16 @@ public class DriveSubsystem extends SubsystemBase {
    * Method to set the drivetrain motors to factory defaults and to invert the
    * right side.
    */
-  private void configureMotors() {
-    frontLeft.configFactoryDefault();
-    backLeft.configFactoryDefault();
-    frontRight.configFactoryDefault();
-    backRight.configFactoryDefault();
+  public void configureMotors() {
+    // frontLeft.configFactoryDefault();
+    frontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    backRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+
+    // // backLeft.configFactoryDefault();
+    // frontRight.configFactoryDefault();
+    // backRight.configFactoryDefault();
 
     frontLeft.setInverted(false);
     backLeft.setInverted(false);

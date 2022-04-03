@@ -37,7 +37,9 @@ public class Robot extends TimedRobot {
     //robotContainer.Init();
 
     // Sets the default command to the drive command
+    RobotContainer.driveSubsystem.configureMotors();
     RobotContainer.driveSubsystem.setDefaultCommand(RobotContainer.driveCommand);
+    RobotContainer.driveSubsystem.ResetEncoders();
     RobotContainer.climberSubsystem.ResetEncoders();
     RobotContainer.climberSubsystem.InitPositions();
     RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.climberControl);
@@ -91,6 +93,8 @@ public class Robot extends TimedRobot {
 
     }
 
+    RobotContainer.driveSubsystem.ResetEncoders();
+    
     if(Constants.testingEnabled)
     {
       SmartDashboard.putNumber("TestShooterSpeed", 3500);

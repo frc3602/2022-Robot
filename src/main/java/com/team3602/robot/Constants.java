@@ -57,7 +57,9 @@ public interface Constants {
 
     double driveInverseRatio = 1.0 / driveRatio;
 
-    double distancePerRev = 4.0 * Math.PI;
+    double distancePerWheelRev = 4.0 * Math.PI;
+    double distancePerMotorRev = distancePerWheelRev * driveRatio;
+
   }
 
   /**

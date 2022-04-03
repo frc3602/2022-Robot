@@ -18,14 +18,19 @@ public class AutonGrabAndTurnCommandGroup extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ParallelDeadlineGroup(
-        new AutonDriveCommand(60.0)
-        ,
-        new IndexInCommand(RobotContainer.indexSubsystem)
-      )
-      ,
-      new AutonRotateDegreesCommand(180)
-      ,
+      new ResetDriveEncodersCommand(),
+      new ResetGyroCommand(),
+      new AutonDrivePIDCommand(25.0),
+      new AutonRotateDegreesCommand(120.0),
+      // new AutonDrivePIDCommand(-30.0)
+      // new ParallelDeadlineGroup(
+      //   new AutonDriveCommand(60.0)
+      //   ,
+      //   new IndexInCommand(RobotContainer.indexSubsystem)
+      // )
+      // ,
+      // new AutonRotateDegreesCommand(180)
+      // ,
       new ShootStuffCommand(RobotContainer.shooterSubsystem).withTimeout(5.0)
 
 

@@ -135,12 +135,12 @@ public class IndexSubsystem extends SubsystemBase {
     else if(indexSensorTop())
     {
       indexMotorTop.set(ControlMode.PercentOutput, 0.0);
-      indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
+      indexMotorBottom.set(ControlMode.PercentOutput, -0.5);
     }
     else
     {
-      indexMotorTop.set(ControlMode.PercentOutput, 1.0);
-      indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
+      indexMotorTop.set(ControlMode.PercentOutput, 0.8);
+      indexMotorBottom.set(ControlMode.PercentOutput, -0.5);
     }
 
 
@@ -151,7 +151,7 @@ public class IndexSubsystem extends SubsystemBase {
    */
   public void indexOut() {
     indexMotorTop.set(ControlMode.PercentOutput, -1.0);
-    indexMotorBottom.set(ControlMode.PercentOutput, 1.0);
+    indexMotorBottom.set(ControlMode.PercentOutput, 0.50);
   }
 
   /**

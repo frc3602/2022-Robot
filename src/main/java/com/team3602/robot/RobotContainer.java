@@ -107,7 +107,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand()
   {
-    return autonReverseAndShootCommandGroup;
-    //return driveCommand;
+    //return autonReverseAndShootCommandGroup;
+    return autonGrabAndTurnCommandGroup;
   }
 }

@@ -7,6 +7,7 @@ package com.team3602.robot.commands;
 import com.team3602.robot.RobotContainer;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -17,7 +18,7 @@ public class AutonDrivePIDCommand extends PIDCommand {
   public AutonDrivePIDCommand(double distance) {
     super(
         // The controller that the command will use
-        new PIDController(0.25, 0, 0),
+        new PIDController(0.025, 0, 0),
         // This should return the measurement
         () -> RobotContainer.driveSubsystem.GetAverageDistance(),
         // This should return the setpoint (can also be a constant)
@@ -30,15 +31,21 @@ public class AutonDrivePIDCommand extends PIDCommand {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveSubsystem);
     // Configure additional PID options by calling `getController` here.
-    getController().setIntegratorRange(-0.5, 0.5);
-    getController().setSetpoint(5.0);
+    getController().setIntegratorRange(-0.45, 0.45);
+    getController().setTolerance(1.0);
     //getController().enableContinuousInput(minimumInput, maximumInput);
     // );
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
-    return getController().atSetpoint();
+  public boolean isFinished()
+  {
+    boolean atPoint = getController().atSetpoint();
+
+    SmartDashboard.putNumber("AutonDrivePIDCommand error",getController().getPositionError());
+
+    SmartDashboard.putBoolean("AutonDrivePIDCommand atPoint", atPoint);
+    return atPoint;
   }
 }

@@ -99,14 +99,6 @@ public class IndexSubsystem extends SubsystemBase {
     // count++;
     // if (count > 500) {
 
-      if(Constants.testingEnabled)
-      {
-      System.out.println("index checkSensors");
-      
-      SmartDashboard.putBoolean("Limit FWD", (indexLift.isFwdLimitSwitchClosed() != 0 ));
-      SmartDashboard.putBoolean("Limit REV", (indexLift.isRevLimitSwitchClosed() != 0 ));
-
-      }
 
 
       SmartDashboard.putBoolean("TopSensor", indexSensorTop());
@@ -135,12 +127,12 @@ public class IndexSubsystem extends SubsystemBase {
     else if(indexSensorTop())
     {
       indexMotorTop.set(ControlMode.PercentOutput, 0.0);
-      indexMotorBottom.set(ControlMode.PercentOutput, -0.5);
+      indexMotorBottom.set(ControlMode.PercentOutput, -0.99);
     }
     else
     {
       indexMotorTop.set(ControlMode.PercentOutput, 0.8);
-      indexMotorBottom.set(ControlMode.PercentOutput, -0.5);
+      indexMotorBottom.set(ControlMode.PercentOutput, -0.99);
     }
 
 
@@ -151,7 +143,7 @@ public class IndexSubsystem extends SubsystemBase {
    */
   public void indexOut() {
     indexMotorTop.set(ControlMode.PercentOutput, -1.0);
-    indexMotorBottom.set(ControlMode.PercentOutput, 0.50);
+    indexMotorBottom.set(ControlMode.PercentOutput, 0.99);
   }
 
   /**

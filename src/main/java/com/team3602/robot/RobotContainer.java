@@ -101,7 +101,7 @@ public class RobotContainer {
     OI.menuButton.whenPressed(climbReadyCommand);
 
     OI.button11.whileHeld(new DriveWithPixyCommand());
-    OI.button11.whileHeld(new FindCargoCommand());
+    OI.button12.whileHeld(new FindCargoCommand());
 
 }
 
@@ -114,5 +114,7 @@ public class RobotContainer {
   {
     //return autonReverseAndShootCommandGroup;
     return autonGrabAndTurnCommandGroup;
+    //return new AutonDrivePIDCommand(20.0);
+
   }
 }

@@ -89,10 +89,12 @@ public class DriveSubsystem extends SubsystemBase {
 
       SmartDashboard.putNumber("GetAverageDistance reading:", GetAverageDistance());
 
-      SmartDashboard.putNumber("gyro roll", navX.getRoll());
-      SmartDashboard.putNumber("gyro Yaw", navX.getYaw());
-      SmartDashboard.putNumber("gyro pitch", navX.getPitch());
-      SmartDashboard.putNumber("gyro getGyroAngle", getGyroAngle());
+      // SmartDashboard.putNumber("gyro roll", navX.getRoll());
+      // SmartDashboard.putNumber("gyro Yaw", navX.getYaw());
+      // SmartDashboard.putNumber("gyro pitch", navX.getPitch());
+      // SmartDashboard.putNumber("gyro getGyroAngle", getGyroAngle());
+      SmartDashboard.putNumber("GetAverageSpeed reading:", GetAverageSpeed());
+
   }
     /*
      * SmartDashboard.putNumber("Front Left RPM reading:" + frontLeftRPM);
@@ -120,7 +122,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double GetEncoderSpeed(WPI_TalonFX motor)
   {
-    return ((motor.getSelectedSensorVelocity() / Constants.falconTicksPerRotation) / 600.0) * Constants.Drivetrain.distancePerMotorRev;
+    return ((motor.getSelectedSensorVelocity() / Constants.falconTicksPerRotation) * 10.0) * Constants.Drivetrain.distancePerMotorRev;
   }
 
   public double GetAverageSpeed()

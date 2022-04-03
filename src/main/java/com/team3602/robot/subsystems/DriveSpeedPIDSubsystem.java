@@ -20,11 +20,11 @@ public class DriveSpeedPIDSubsystem extends PIDSubsystem
   public DriveSpeedPIDSubsystem() {
     super(
         // The PIDController used by the subsystem
-        new PIDController(0.025, 0, 0));
+        new PIDController(0.017, 0.001, 0.0));
 
         setSetpoint(0.0);
 
-        getController().setIntegratorRange(-0.45, 0.45);
+        getController().setIntegratorRange(-0.50, 0.5);
         getController().setTolerance(1.0);
 
         disable();

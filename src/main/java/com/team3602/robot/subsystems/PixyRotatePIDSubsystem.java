@@ -22,7 +22,7 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
   public PixyRotatePIDSubsystem() {
     super(
         // The PIDController used by the subsystem
-        new PIDController(0.0005, 0.5, 0.0));
+        new PIDController(0.008, 0.5, 0.0));
 
         setSetpoint(PixeyCam.targetX); // Sets where the PID controller should move the system
 
@@ -51,15 +51,19 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
 
     }
 
-    outputValue = output;
+    outputValue = output * -1.0;
 
     // if(IsRunning())
     //   RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, output * 1.0); // If all on its own, rotate until on target
   }
 
   @Override
-  public double getMeasurement() {
-    return RobotContainer.pixySubsystem.getLargestBlockX();
+  public double getMeasurement()
+  {
+    if(RobotContainer.pixySubsystem.getBlockCount() > 0)
+      return RobotContainer.pixySubsystem.getLargestBlockX();
+    else
+      return Constants.PixeyCam.targetX;
   }
 
   public boolean onTarget()

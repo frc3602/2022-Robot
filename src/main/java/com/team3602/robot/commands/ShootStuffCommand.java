@@ -23,7 +23,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @version 1.0 04 Mar 2022
  * @author Cody Wellman
  */
-public class ShootStuffCommand extends CommandBase {
+public class ShootStuffCommand extends CommandBase
+{
+  boolean upperBall = false;
+  boolean lowerBall = false;
+  int bothCount = 0;
+
   /**
    * Constructor for {@link ShootStuffCommand} class to set subsystem requirements.
    */
@@ -58,6 +63,19 @@ public class ShootStuffCommand extends CommandBase {
     else
       RobotContainer.indexSubsystem.stopMotors();
 
+      lowerBall = RobotContainer.indexSubsystem.indexSensorBottom();
+      upperBall = RobotContainer.indexSubsystem.indexSensorTop();
+  
+      if(!upperBall && !lowerBall)
+      {
+        bothCount++;
+      }
+      else
+      {
+        bothCount = 0;
+      }
+  
+
   }
 
   @Override
@@ -77,6 +95,6 @@ public class ShootStuffCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return bothCount > 20;
   }
 }

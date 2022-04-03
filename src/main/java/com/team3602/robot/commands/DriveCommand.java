@@ -69,6 +69,10 @@ public class DriveCommand extends CommandBase {
       {
         rotate = RobotContainer.pixyRotatePIDSubsystem.GetOutputValue();
       }
+      if(RobotContainer.driveSpeedPIDSubsystem.isEnabled())
+      {
+        speed = RobotContainer.driveSpeedPIDSubsystem.GetOutputValue();
+      }
 
       RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
     }

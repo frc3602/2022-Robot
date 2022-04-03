@@ -20,17 +20,19 @@ public class AutonGrabAndTurnCommandGroup extends SequentialCommandGroup {
     addCommands(
       new ResetDriveEncodersCommand(),
       new ResetGyroCommand(),
-      new AutonDrivePIDCommand(25.0),
-      new AutonRotateDegreesCommand(120.0),
-      // new AutonDrivePIDCommand(-30.0)
-      // new ParallelDeadlineGroup(
-      //   new AutonDriveCommand(60.0)
-      //   ,
-      //   new IndexInCommand(RobotContainer.indexSubsystem)
-      // )
-      // ,
-      // new AutonRotateDegreesCommand(180)
-      // ,
+      new AutonDrivePIDCommand(20.0),
+      new FindCargoCommand().withTimeout(5),
+      new AutonRotateDegreesCommand(150.0, true),
+      new ShootStuffCommand(RobotContainer.shooterSubsystem).withTimeout(5.0),
+      new ResetDriveEncodersCommand(),
+      new AutonDrivePIDCommand(-30.0),
+      // new ResetGyroCommand(),
+      new AutonRotateDegreesCommand(0.0, false),
+      new FindCargoCommand().withTimeout(5),
+      new AutonRotateDegreesCommand(100.0, false),
+      new ResetDriveEncodersCommand(),
+      new AutonDrivePIDCommand(100.0),
+      new AutonRotateDegreesCommand(150.0, true),
       new ShootStuffCommand(RobotContainer.shooterSubsystem).withTimeout(5.0)
 
 

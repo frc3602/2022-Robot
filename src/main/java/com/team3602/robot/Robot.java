@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
 
     RobotContainer.shooterSubsystem.InitShooter();
 
-    RobotContainer.pixySubsystem.setDefaultCommand(new PixyCamGetBlocksCommand());
+    //RobotContainer.pixySubsystem.setDefaultCommand(new PixyCamGetBlocksCommand());
 
    RobotContainer.visionSubsystem.init();
    RobotContainer.ledSubsystem.Init();

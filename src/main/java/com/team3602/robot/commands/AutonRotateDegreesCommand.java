@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class AutonRotateDegreesCommand extends CommandBase {
 
   double angle = 0.0;
+  boolean seekHub = false;
   /** Creates a new AutonRotateDegreesCommand. */
-  public AutonRotateDegreesCommand(double angle) {
+  public AutonRotateDegreesCommand(double angle, boolean seekHub) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveSubsystem);
 
     this.angle = angle;
+    this.seekHub = seekHub;
   }
 
   // Called when the command is initially scheduled.
@@ -25,6 +27,12 @@ public class AutonRotateDegreesCommand extends CommandBase {
   {
     RobotContainer.autonRotatePIDSubsystem.setSetpoint(angle);
     RobotContainer.autonRotatePIDSubsystem.enable();
+    
+    System.out.println("AutonRotateDegreesCommand init " + angle);
+
+
+
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,11 +44,17 @@ public class AutonRotateDegreesCommand extends CommandBase {
   public void end(boolean interrupted)
   {
     RobotContainer.autonRotatePIDSubsystem.disable();
+
+    System.out.println("AutonRotateDegreesCommand end " + angle + " " + interrupted);
+
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
-    return RobotContainer.autonRotatePIDSubsystem.onTarget();
+  public boolean isFinished()
+  {
+    boolean hasTarget = RobotContainer.visionSubsystem.validTarget();
+    boolean onTarget = RobotContainer.autonRotatePIDSubsystem.onTarget();
+    return (hasTarget && seekHub) || onTarget;
   }
 }

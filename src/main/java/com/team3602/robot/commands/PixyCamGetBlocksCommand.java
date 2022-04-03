@@ -12,7 +12,7 @@ public class PixyCamGetBlocksCommand extends CommandBase {
   /** Creates a new PixyCamGetBlocksCommand. */
   public PixyCamGetBlocksCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.pixySubsystem);
+    //addRequirements(RobotContainer.pixySubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +23,7 @@ public class PixyCamGetBlocksCommand extends CommandBase {
   @Override
   public void execute()
   {
-    //RobotContainer.pixySubsystem.GetBlockInfo();
+    RobotContainer.pixySubsystem.GetBlockInfo();
   }
 
   // Called once the command ends or is interrupted.

@@ -7,6 +7,7 @@ package com.team3602.robot.subsystems;
 import java.util.ArrayList;
 
 import com.team3602.robot.Constants;
+import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.PixeyCam;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -58,11 +59,15 @@ public class PixySubsystem extends SubsystemBase {
   @Override
   public void periodic()
     {
-    logDataToSmartDashboard();
+    //logDataToSmartDashboard();
     loopCounter++;
     if(loopCounter>=1)
       {
-        GetBlockInfo();
+        if(RobotContainer.pixyRotatePIDSubsystem.IsRunning())
+        {
+          GetBlockInfo();
+
+        }
         loopCounter=0;
       }
     }

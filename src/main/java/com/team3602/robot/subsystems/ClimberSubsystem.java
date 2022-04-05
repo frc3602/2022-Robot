@@ -74,7 +74,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void StartMove(ClimbStageEnum stage)
   {
-    RobotContainer.ledSubsystem.StartMove(CurrentStage());
+   // RobotContainer.ledSubsystem.FinishMove(CurrentStage());
     isMoving = true;
   }
 
@@ -82,7 +82,7 @@ public class ClimberSubsystem extends SubsystemBase {
   {
     currentStage = stage;
     isMoving = false;
-    RobotContainer.ledSubsystem.FinishMove(CurrentStage());
+    //RobotContainer.ledSubsystem.StartMove(CurrentStage());
   }
 
   public void ResetEncoders()

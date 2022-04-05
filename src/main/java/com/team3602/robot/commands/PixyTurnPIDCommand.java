@@ -19,7 +19,7 @@ public class PixyTurnPIDCommand extends PIDCommand {
   public PixyTurnPIDCommand() {
     super(
         // The controller that the command will use
-        new PIDController(0.025, 0.0, 0.0),
+        new PIDController(0.02, 0.0, 0.0),
         // This should return the measurement
         () -> RobotContainer.pixySubsystem.getLargestBlockX(),
         // This should return the setpoint (can also be a constant)

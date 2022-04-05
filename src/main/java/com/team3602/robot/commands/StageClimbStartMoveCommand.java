@@ -16,7 +16,7 @@ public class StageClimbStartMoveCommand extends CommandBase {
   /** Creates a new StageClimbStartMoveCommand. */
   public StageClimbStartMoveCommand(ClimbStageEnum stage) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.climberSubsystem);
+    //addRequirements(RobotContainer.climberSubsystem);
 
     this.stage = stage;
   }

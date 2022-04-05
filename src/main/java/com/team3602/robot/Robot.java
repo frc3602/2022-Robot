@@ -15,6 +15,7 @@ import com.team3602.robot.commands.PixyCamGetBlocksCommand;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -35,6 +36,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     robotContainer = new RobotContainer();
     //robotContainer.Init();
+
+    LiveWindow.disableAllTelemetry();
 
     // Sets the default command to the drive command
     RobotContainer.driveSubsystem.configureMotors();

@@ -18,7 +18,7 @@ public class StageClimbFinishMoveCommand extends CommandBase {
   public StageClimbFinishMoveCommand( Constants.Climber.ClimbStageEnum stage)
   {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.climberSubsystem);
+    //addRequirements(RobotContainer.climberSubsystem);
 
     this.stage = stage;
   }

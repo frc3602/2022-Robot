@@ -25,6 +25,8 @@ public class AutonRotateDegreesCommand extends CommandBase {
   @Override
   public void initialize()
   {
+    if(seekHub)
+      RobotContainer.visionSubsystem.lightOn();
     RobotContainer.autonRotatePIDSubsystem.setSetpoint(angle);
     RobotContainer.autonRotatePIDSubsystem.enable();
     
@@ -44,6 +46,7 @@ public class AutonRotateDegreesCommand extends CommandBase {
   public void end(boolean interrupted)
   {
     RobotContainer.autonRotatePIDSubsystem.disable();
+    RobotContainer.visionSubsystem.lightOff();
 
     System.out.println("AutonRotateDegreesCommand end " + angle + " " + interrupted);
 

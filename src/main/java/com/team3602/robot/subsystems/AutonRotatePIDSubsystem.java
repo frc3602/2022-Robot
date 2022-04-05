@@ -23,7 +23,7 @@ public class AutonRotatePIDSubsystem extends PIDSubsystem {
     setSetpoint(0); // Sets where the PID controller should move the system
 
     getController().enableContinuousInput(180.0, -180.0); //parameters moved to the controller. call getController() for access
-    getController().setIntegratorRange(0.4, -0.4);
+    getController().setIntegratorRange(0.45, -0.45);
 
     getController().setTolerance(2.0);
 

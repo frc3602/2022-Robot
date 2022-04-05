@@ -16,6 +16,7 @@ import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.subsystems.DriveSubsystem;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -27,6 +28,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @author Cody Wellman
  */
 public class DriveCommand extends CommandBase {
+
+  private final SlewRateLimiter xspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter yspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter rotLimiter = new SlewRateLimiter(3);  
+
   /**
    * Constructor for {@link DriveCommand} class to set subsystem requirements.
    */
@@ -59,20 +65,22 @@ public class DriveCommand extends CommandBase {
 
     rotate *= throttle;
 
-    // speed = 0.0;
-    // turn = 0.0;
-    // rotate = 0.0;
+    speed = xspeedLimiter.calculate(speed);
+
+    turn = yspeedLimiter.calculate(turn);
+
+    rotate = rotLimiter.calculate(rotate);
 
     if(!RobotContainer.rotateToTargetSubsystem.IsRunning())
     {
-      if(RobotContainer.pixyRotatePIDSubsystem.isEnabled())
-      {
-        rotate = RobotContainer.pixyRotatePIDSubsystem.GetOutputValue();
-      }
-      if(RobotContainer.driveSpeedPIDSubsystem.isEnabled())
-      {
-        speed = RobotContainer.driveSpeedPIDSubsystem.GetOutputValue();
-      }
+      // if(RobotContainer.pixyRotatePIDSubsystem.isEnabled())
+      // {
+      //   rotate = RobotContainer.pixyRotatePIDSubsystem.GetOutputValue();
+      // }
+      // if(RobotContainer.driveSpeedPIDSubsystem.isEnabled())
+      // {
+      //   speed = RobotContainer.driveSpeedPIDSubsystem.GetOutputValue();
+      // }
 
       RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
     }

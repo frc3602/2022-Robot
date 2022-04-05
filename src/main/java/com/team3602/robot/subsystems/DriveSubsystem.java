@@ -47,9 +47,6 @@ public class DriveSubsystem extends SubsystemBase {
   // MecanumDrive Information
   private MecanumDrive mecanumDrive;
 
-  private final SlewRateLimiter xspeedLimiter = new SlewRateLimiter(3);
-  private final SlewRateLimiter yspeedLimiter = new SlewRateLimiter(3);
-  private final SlewRateLimiter rotLimiter = new SlewRateLimiter(3);  
 
   /**
    * Constructor for {@link DriveSubsystem} class to run the
@@ -157,11 +154,11 @@ public class DriveSubsystem extends SubsystemBase {
       if(RobotContainer.climberSubsystem.ClimberActive())
         maxSpeed = 0.5;
 
-      double xSpeed = xspeedLimiter.calculate(y) * maxSpeed;
+      double xSpeed = maxSpeed;
 
-      double ySpeed = yspeedLimiter.calculate(x) * maxSpeed;
+      double ySpeed =  maxSpeed;
 
-      double rot = rotLimiter.calculate(z) * maxSpeed;
+      double rot = maxSpeed;
 
       RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(xSpeed, ySpeed, rot);
   }

@@ -26,6 +26,7 @@ public class AutonRotatePIDSubsystem extends PIDSubsystem {
     getController().setIntegratorRange(0.45, -0.45);
 
     getController().setTolerance(2.0);
+    getController().isContinuousInputEnabled();
 
     
     disable();

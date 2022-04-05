@@ -11,8 +11,6 @@
 
 package com.team3602.robot;
 
-import com.team3602.robot.commands.PixyCamGetBlocksCommand;
-
 // WPILib Imports
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -35,7 +33,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
-    //robotContainer.Init();
 
     LiveWindow.disableAllTelemetry();
 
@@ -48,8 +45,6 @@ public class Robot extends TimedRobot {
     RobotContainer.climberSubsystem.setDefaultCommand(RobotContainer.climberControl);
 
     RobotContainer.shooterSubsystem.InitShooter();
-
-    //RobotContainer.pixySubsystem.setDefaultCommand(new PixyCamGetBlocksCommand());
 
    RobotContainer.visionSubsystem.init();
    RobotContainer.ledSubsystem.Init();
@@ -76,6 +71,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+
+    RobotContainer.driveSubsystem.resetGyro();
+
     m_autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {
@@ -92,17 +90,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
 
-      //RobotContainer.shooterSubsystem.setShooterMotorRPM(Constants.Shooter.defaultShooterRPM);
-
     }
-
     RobotContainer.driveSubsystem.ResetEncoders();
-    
-    if(Constants.testingEnabled)
-    {
-      SmartDashboard.putNumber("TestShooterSpeed", 3500);
-    }
-    // RobotContainer.climberSubsystem.ResetTheClimb();
 
     robotContainer.ClearStickeyFaults();
 

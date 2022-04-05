@@ -11,8 +11,26 @@
 
 package com.team3602.robot;
 import com.team3602.robot.commands.*;
+import com.team3602.robot.commands.Autonomous.Auton2BallCommand;
+import com.team3602.robot.commands.Autonomous.Auton3BallCommand;
+import com.team3602.robot.commands.Autonomous.AutonGrabAndTurnCommandGroup;
+import com.team3602.robot.commands.Autonomous.AutonReverseAndShootCommandGroup;
+import com.team3602.robot.commands.Autonomous.FindCargoCommand;
+import com.team3602.robot.commands.Autonomous.SimpleTurnToAngleCommand;
+import com.team3602.robot.commands.Climber.ClimberControlCommand;
+import com.team3602.robot.commands.Climber.StageClimbReadyCommandGroup;
+import com.team3602.robot.commands.Climber.StageClimbResetCommandGroup;
+import com.team3602.robot.commands.Index.IndexInCommand;
+import com.team3602.robot.commands.Index.IndexStopCommand;
+import com.team3602.robot.commands.Obsolete.TestIntakeCommand;
+import com.team3602.robot.commands.Shooter.ShootStuffCommand;
+import com.team3602.robot.commands.Shooter.SlamDunkCommand;
 import com.team3602.robot.subsystems.*;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotState;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -42,15 +60,16 @@ public class RobotContainer {
   public static ClimberControlCommand climberControl = new ClimberControlCommand(climberSubsystem);
   public static IndexStopCommand indexStop = new IndexStopCommand(indexSubsystem);
   public static ShootStuffCommand shootStuff = new ShootStuffCommand(shooterSubsystem);
-  public static ShootStopCommand shootStop = new ShootStopCommand(shooterSubsystem);
 
-  public static ReportStuffCommand reportCommand = new ReportStuffCommand();
   public static StageClimbReadyCommandGroup climbReadyCommand = new StageClimbReadyCommandGroup();
   public static StageClimbResetCommandGroup climbResetCommand = new StageClimbResetCommandGroup();
+
+
   public static AutonGrabAndTurnCommandGroup autonGrabAndTurnCommandGroup = new AutonGrabAndTurnCommandGroup();
   public static AutonReverseAndShootCommandGroup autonReverseAndShootCommandGroup = new AutonReverseAndShootCommandGroup();
-
- // PowerDistribution powerHub = new PowerDistribution(Constants.powerDistributionHubCANID, ModuleType.kRev);
+  public static Auton3BallCommand auton3BallCommand = new Auton3BallCommand();
+  public static Auton2BallCommand auton2BallCommand = new Auton2BallCommand();
+  public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   // Operator interfaces
   public static OI oi;
@@ -68,6 +87,21 @@ public class RobotContainer {
    */
   public RobotContainer() {
     configureButtonBindings();
+
+    autoChooser.setDefaultOption("3 ball", auton3BallCommand);
+    autoChooser.addOption("2 ball", auton2BallCommand);
+
+    if(!DriverStation.isFMSAttached())
+    {
+      autoChooser.addOption("testAuto 90", new SimpleTurnToAngleCommand(90));
+      autoChooser.addOption("testAuto 45", new SimpleTurnToAngleCommand(45));
+      autoChooser.addOption("testAuto -45", new SimpleTurnToAngleCommand(-45));
+      autoChooser.addOption("testAuto -90", new SimpleTurnToAngleCommand(-90));
+      autoChooser.addOption("testAuto 180", new SimpleTurnToAngleCommand(180));
+    }
+    
+    // Put the chooser on the dashboard
+    SmartDashboard.putData(autoChooser);    
   }
 
   public void ClearStickeyFaults()
@@ -111,10 +145,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand()
-  {
-    //return autonReverseAndShootCommandGroup;
-    return autonGrabAndTurnCommandGroup;
-    //return new AutonDrivePIDCommand(20.0);
-
-  }
+    {
+      return autoChooser.getSelected();
+    }
 }

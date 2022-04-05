@@ -12,13 +12,12 @@
 package com.team3602.robot.subsystems;
 
 import com.team3602.robot.Constants;
-import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Climber.ClimbStageEnum;
-import com.team3602.robot.commands.ClimberSetLocationCoordiatedCommandGroup;
-import com.team3602.robot.commands.DummyTimerCommand;
-import com.team3602.robot.commands.StageClimbFinishMoveCommand;
-import com.team3602.robot.commands.StageClimbStartMoveCommand;
+import com.team3602.robot.commands.Climber.ClimberSetLocationCoordiatedCommandGroup;
+import com.team3602.robot.commands.Climber.DummyTimerCommand;
+import com.team3602.robot.commands.Climber.StageClimbFinishMoveCommand;
+import com.team3602.robot.commands.Climber.StageClimbStartMoveCommand;
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;

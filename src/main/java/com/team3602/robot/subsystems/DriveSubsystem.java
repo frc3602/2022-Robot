@@ -68,7 +68,7 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic()
     {
-      //logDataToSmartDashboard();
+      logDataToSmartDashboard();
     }
 
   /**
@@ -78,19 +78,19 @@ public class DriveSubsystem extends SubsystemBase {
   {
     if(Constants.testingEnabled)
     {
-      SmartDashboard.putNumber("Front Left distance reading:", GetEncoderDistance(frontLeft));
-      SmartDashboard.putNumber("frontLeft.getSelectedSensorPosition reading:", frontLeft.getSelectedSensorPosition());
-      SmartDashboard.putNumber("Back Left distance reading:", GetEncoderDistance(backLeft));
-      SmartDashboard.putNumber("Front Right distance reading:", GetEncoderDistance(frontRight));
-      SmartDashboard.putNumber("Back Right distance reading:", GetEncoderDistance(backRight));
+      // SmartDashboard.putNumber("Front Left distance reading:", GetEncoderDistance(frontLeft));
+      // SmartDashboard.putNumber("frontLeft.getSelectedSensorPosition reading:", frontLeft.getSelectedSensorPosition());
+      // SmartDashboard.putNumber("Back Left distance reading:", GetEncoderDistance(backLeft));
+      // SmartDashboard.putNumber("Front Right distance reading:", GetEncoderDistance(frontRight));
+      // SmartDashboard.putNumber("Back Right distance reading:", GetEncoderDistance(backRight));
 
-      SmartDashboard.putNumber("GetAverageDistance reading:", GetAverageDistance());
+      // SmartDashboard.putNumber("GetAverageDistance reading:", GetAverageDistance());
 
       // SmartDashboard.putNumber("gyro roll", navX.getRoll());
       // SmartDashboard.putNumber("gyro Yaw", navX.getYaw());
       // SmartDashboard.putNumber("gyro pitch", navX.getPitch());
-      // SmartDashboard.putNumber("gyro getGyroAngle", getGyroAngle());
-      SmartDashboard.putNumber("GetAverageSpeed reading:", GetAverageSpeed());
+      SmartDashboard.putNumber("gyro getGyroAngle", getGyroAngle());
+      // SmartDashboard.putNumber("GetAverageSpeed reading:", GetAverageSpeed());
 
   }
     /*
@@ -154,13 +154,17 @@ public class DriveSubsystem extends SubsystemBase {
       if(RobotContainer.climberSubsystem.ClimberActive())
         maxSpeed = 0.5;
 
-      double xSpeed = maxSpeed;
+      double xSpeed = x * maxSpeed;
 
-      double ySpeed =  maxSpeed;
+      double ySpeed = y *  maxSpeed;
 
-      double rot = maxSpeed;
+      double rot = z * maxSpeed;
 
-      RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(xSpeed, ySpeed, rot);
+      SmartDashboard.putNumber("Drive cart Speed", xSpeed);
+      SmartDashboard.putNumber("Drive cart turn", ySpeed);
+      SmartDashboard.putNumber("Drive cart rotate", rot);
+  
+      RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(ySpeed, xSpeed, rot);
   }
 
   public void ResetEncoders()

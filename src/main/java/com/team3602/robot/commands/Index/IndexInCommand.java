@@ -24,11 +24,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @author Cody Wellman
  */
 public class IndexInCommand extends CommandBase {
+  double speed = 0.0;
   /**
    * Constructor for {@link IndexInCommand} class to set subsystem requirements.
    */
-  public IndexInCommand(IndexSubsystem subsystem) {
+  public IndexInCommand(double speed) {
     addRequirements(RobotContainer.indexSubsystem);
+    this.speed = speed;
   }
 
   @Override
@@ -37,7 +39,7 @@ public class IndexInCommand extends CommandBase {
 
   @Override
   public void execute() {
-    RobotContainer.indexSubsystem.indexIn();
+    RobotContainer.indexSubsystem.indexIn(speed);
   }
 
   @Override

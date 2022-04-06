@@ -51,6 +51,11 @@ public class DriveCommand extends CommandBase {
     double turn = OI.joystick.getRawAxis(0);
     double rotate = OI.joystick.getRawAxis(2);
 
+    SmartDashboard.putNumber("Drive Raw Speed", speed);
+    SmartDashboard.putNumber("Drive Raw turn", turn);
+    SmartDashboard.putNumber("Drive Raw rotate", rotate);
+
+
     double rawThrottle = OI.joystick.getRawAxis(3);
 
     double throttle = ((1.0 - rawThrottle)  / 4.0) + 0.5;
@@ -82,7 +87,12 @@ public class DriveCommand extends CommandBase {
       //   speed = RobotContainer.driveSpeedPIDSubsystem.GetOutputValue();
       // }
 
-      RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
+
+    SmartDashboard.putNumber("Drive adj Speed", speed);
+    SmartDashboard.putNumber("Drive adj turn", turn);
+    SmartDashboard.putNumber("Drive adj rotate", rotate);
+
+    RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
     }
 
     RobotContainer.climberSubsystem.ReoportStuff();

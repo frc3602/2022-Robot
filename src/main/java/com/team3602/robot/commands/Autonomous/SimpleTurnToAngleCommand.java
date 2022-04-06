@@ -6,13 +6,16 @@ package com.team3602.robot.commands.Autonomous;
 
 import com.team3602.robot.RobotContainer;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SimpleTurnToAngleCommand extends CommandBase {
 
   double targetAngle = 0.0;
   double error = 0.0;
-  double kP = 0.25;
+  double kP = 0.025;
+
+  int finishCount = 0;
 
   /** Creates a new SimpleTurnToAngleCommand. */
   public SimpleTurnToAngleCommand(double angle) {
@@ -30,7 +33,7 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   @Override
   public void initialize()
   {
-
+    SmartDashboard.putBoolean("Turn Angle Active", true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,24 +42,34 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   {
     error = calculateError();
 
-    double rotate = Math.min(0.5, error * kP); // cap at 50% rotate speed
+    SmartDashboard.putNumber("Turn Angle Error", error);
 
-    RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, rotate * -1.0);
+    double rotate = Math.min(0.25, error * kP); // cap at 50% rotate speed
+    
+    SmartDashboard.putNumber("Turn Angle rotate", rotate);
+
+
+    RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, rotate /* * -1.0*/);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted)
   {
- 
+    SmartDashboard.putBoolean("Turn Angle Active", false);
+    RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, 0.0);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished()
   {
-    if(Math.abs(error - targetAngle) < 3.0)
-      return true;
+    if(Math.abs(error /*- targetAngle*/) < 3.0)
+      finishCount++;
+
+      if(finishCount > 20)
+        return true;
 
     return false;
   }

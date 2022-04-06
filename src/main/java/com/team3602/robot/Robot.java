@@ -91,6 +91,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
 
     }
+    RobotContainer.driveSubsystem.resetGyro();
     RobotContainer.driveSubsystem.ResetEncoders();
 
     robotContainer.ClearStickeyFaults();

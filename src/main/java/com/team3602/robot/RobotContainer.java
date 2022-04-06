@@ -121,7 +121,7 @@ public class RobotContainer {
     //  OI.indexInButton.whenReleased(RobotContainer.indexStop);
     // OI.indexOutButton.whenReleased(RobotContainer.indexStop);
 
-    OI.indexInButton.whileHeld(new IndexInCommand(indexSubsystem));
+    OI.indexInButton.whileHeld(new IndexInCommand(1.0));
     OI.indexOutButton.whileHeld(new TestIntakeCommand(-1.0));
 
     // Shooter commands & buttons

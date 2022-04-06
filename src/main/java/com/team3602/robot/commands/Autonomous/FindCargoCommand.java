@@ -41,7 +41,7 @@ public class FindCargoCommand extends CommandBase {
   @Override
   public void execute()
   {
-    RobotContainer.indexSubsystem.indexIn();
+    RobotContainer.indexSubsystem.indexIn(1.0);
 
     lowerBall = RobotContainer.indexSubsystem.indexSensorBottom();
     upperBall = RobotContainer.indexSubsystem.indexSensorTop();

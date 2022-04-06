@@ -5,6 +5,7 @@
 package com.team3602.robot.commands.Autonomous;
 
 import com.team3602.robot.RobotContainer;
+import com.team3602.robot.commands.Index.IndexInCommand;
 import com.team3602.robot.commands.Shooter.ShootStuffCommand;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -20,8 +21,9 @@ public class Auton2BallCommand extends SequentialCommandGroup {
     addCommands(
       new ResetDriveEncodersCommand(),
       new ResetGyroCommand(),
+      new IndexInCommand(0.25).withTimeout(0.125),
       new FindCargoCommand().withTimeout(5),
-      new AutonRotateDegreesCommand(150.0, true),
+      new SimpleTurnToAngleCommand(150.0),
       new ShootStuffCommand(RobotContainer.shooterSubsystem).withTimeout(5.0)
     );
   }

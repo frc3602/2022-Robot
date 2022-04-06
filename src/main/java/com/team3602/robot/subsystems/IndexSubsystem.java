@@ -16,8 +16,8 @@ import com.team3602.robot.Constants.Index;
 
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+// import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+// import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -37,7 +37,7 @@ public class IndexSubsystem extends SubsystemBase {
   // Creates the motors & controllers and sets the CAN IDs for each one
   WPI_TalonSRX indexMotorTop = new WPI_TalonSRX(Index.indexMotorTopCANID);
   WPI_TalonSRX indexMotorBottom = new WPI_TalonSRX(Index.indexMotorBottomCANID);
-  WPI_TalonSRX indexLift = new WPI_TalonSRX(Index.indexLiftCANID);
+  // WPI_TalonSRX indexLift = new WPI_TalonSRX(Index.indexLiftCANID);
 
   DigitalInput indexSensorTop = new DigitalInput(Index.indexSensorTopID);
   DigitalInput indexSensorBottom = new DigitalInput(Index.indexSensorBottomID);
@@ -115,9 +115,9 @@ public class IndexSubsystem extends SubsystemBase {
     indexMotorBottom.set(ControlMode.PercentOutput, -1.0);
   }
 
-  public void indexIn()
+  public void indexIn(double speed)
   {
-    DropIntake();
+    // DropIntake();
     checkSensors();
 
     if(indexSensorTop() && indexSensorBottom())
@@ -127,12 +127,12 @@ public class IndexSubsystem extends SubsystemBase {
     else if(indexSensorTop())
     {
       indexMotorTop.set(ControlMode.PercentOutput, 0.0);
-      indexMotorBottom.set(ControlMode.PercentOutput, -0.99);
+      indexMotorBottom.set(ControlMode.PercentOutput, -0.99 * speed);
     }
     else
     {
-      indexMotorTop.set(ControlMode.PercentOutput, 0.8);
-      indexMotorBottom.set(ControlMode.PercentOutput, -0.99);
+      indexMotorTop.set(ControlMode.PercentOutput, 0.8 * speed);
+      indexMotorBottom.set(ControlMode.PercentOutput, -0.99 * speed);
     }
 
 
@@ -150,7 +150,7 @@ public class IndexSubsystem extends SubsystemBase {
    * Method to stop the magazine / index motors.
    */
   public void stopMotors() {
-    LiftIntake();
+    // LiftIntake();
     indexMotorTop.set(ControlMode.PercentOutput, 0.0);
     indexMotorBottom.set(ControlMode.PercentOutput, 0.0);
   }
@@ -161,15 +161,15 @@ public class IndexSubsystem extends SubsystemBase {
     indexMotorBottom.set(ControlMode.PercentOutput, -1.0 * speed);
   }
 
-  public void LiftIntake()
-  {
-    indexLift.set(ControlMode.PercentOutput, 0.60);
-  }
+  // public void LiftIntake()
+  // {
+  //   indexLift.set(ControlMode.PercentOutput, 0.60);
+  // }
 
-  public void DropIntake()
-  {
-    indexLift.set(ControlMode.PercentOutput, -0.5);
-  }
+  // public void DropIntake()
+  // {
+  //   indexLift.set(ControlMode.PercentOutput, -0.5);
+  // }
 
 
   /**
@@ -183,7 +183,7 @@ public class IndexSubsystem extends SubsystemBase {
     indexMotorBottom.setNeutralMode(NeutralMode.Brake);
 
 
-    indexLift.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
-    indexLift.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
+    // indexLift.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
+    // indexLift.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);
   }
 }

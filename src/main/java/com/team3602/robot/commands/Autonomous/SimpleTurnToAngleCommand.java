@@ -33,6 +33,7 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   @Override
   public void initialize()
   {
+    System.out.println("SimpleTurnToAngleCommand init " + targetAngle);
     SmartDashboard.putBoolean("Turn Angle Active", true);
   }
 
@@ -41,6 +42,7 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   public void execute()
   {
     error = calculateError();
+    System.out.println("SimpleTurnToAngleCommand execute " + targetAngle + " error " + error);
 
     SmartDashboard.putNumber("Turn Angle Error", error);
 
@@ -56,6 +58,8 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   @Override
   public void end(boolean interrupted)
   {
+    System.out.println("SimpleTurnToAngleCommand end " + targetAngle);
+
     SmartDashboard.putBoolean("Turn Angle Active", false);
     RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, 0.0);
 
@@ -65,10 +69,14 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   @Override
   public boolean isFinished()
   {
-    if(Math.abs(error /*- targetAngle*/) < 3.0)
-      finishCount++;
+    System.out.println("SimpleTurnToAngleCommand isfinished " + targetAngle + " error " + error);
 
-      if(finishCount > 20)
+    if(Math.abs(error /*- targetAngle*/) < 3.0)
+    {
+      finishCount++;
+    }
+
+      if(finishCount > 10)
         return true;
 
     return false;

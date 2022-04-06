@@ -75,8 +75,9 @@ public class SimpleTurnToAngleCommand extends CommandBase {
     {
       finishCount++;
     }
+    System.out.println("SimpleTurnToAngleCommand isfinished" + targetAngle);
 
-      if(finishCount > 10)
+    if(finishCount > 10)
         return true;
 
     return false;

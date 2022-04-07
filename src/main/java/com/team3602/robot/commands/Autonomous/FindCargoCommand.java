@@ -32,7 +32,7 @@ public class FindCargoCommand extends CommandBase {
   @Override
   public void initialize()
   {
-    RobotContainer.driveSpeedPIDSubsystem.setSetpoint(50.0);
+    RobotContainer.driveSpeedPIDSubsystem.setSetpoint(70.0);
     RobotContainer.driveSpeedPIDSubsystem.enable();
     RobotContainer.pixyRotatePIDSubsystem.enable();
   }
@@ -45,6 +45,29 @@ public class FindCargoCommand extends CommandBase {
 
     lowerBall = RobotContainer.indexSubsystem.indexSensorBottom();
     upperBall = RobotContainer.indexSubsystem.indexSensorTop();
+
+    if(onlyOneBall)
+      {
+        if(lowerBall)
+        {
+          allCount++;
+        }
+        else
+        {
+          allCount = 0;
+        }
+      }
+    else
+      {
+        if(upperBall && lowerBall)
+        {
+          allCount++;
+        }
+        else
+        {
+          allCount = 0;
+        }
+      }
 
     if((upperBall || onlyOneBall) && lowerBall)
     {

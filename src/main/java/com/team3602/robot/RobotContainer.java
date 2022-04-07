@@ -34,6 +34,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 /**
  * The RobotContainer class provides subsytems and commands.
@@ -93,11 +94,19 @@ public class RobotContainer {
 
     if(!DriverStation.isFMSAttached())
     {
-      autoChooser.addOption("testAuto 90", new SimpleTurnToAngleCommand(90));
-      autoChooser.addOption("testAuto 45", new SimpleTurnToAngleCommand(45));
-      autoChooser.addOption("testAuto -45", new SimpleTurnToAngleCommand(-45));
-      autoChooser.addOption("testAuto -90", new SimpleTurnToAngleCommand(-90));
-      autoChooser.addOption("testAuto 180", new SimpleTurnToAngleCommand(180));
+      autoChooser.addOption("testAuto Multiturn",
+      new SequentialCommandGroup(
+        new SimpleTurnToAngleCommand(45, false),
+        new SimpleTurnToAngleCommand(-45, false),
+        new SimpleTurnToAngleCommand(90, false),
+        new SimpleTurnToAngleCommand(-90, false),
+        new SimpleTurnToAngleCommand(180, false)
+        )
+      );
+
+      autoChooser.addOption("testAuto 90", new SimpleTurnToAngleCommand(90, false));
+      autoChooser.addOption("testAuto -90", new SimpleTurnToAngleCommand(-90, false));
+      autoChooser.addOption("testAuto 180", new SimpleTurnToAngleCommand(180, false));
     }
     
     // Put the chooser on the dashboard
@@ -146,6 +155,10 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand()
     {
-      return autoChooser.getSelected();
+      System.out.println("getAutonomousCommand");
+
+      Command aCommand =  autoChooser.getSelected();
+      System.out.println("getAutonomousCommand " + aCommand);
+      return aCommand;
     }
 }

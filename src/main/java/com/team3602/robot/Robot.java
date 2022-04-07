@@ -50,6 +50,8 @@ public class Robot extends TimedRobot {
    RobotContainer.ledSubsystem.Init();
 
    robotContainer.ClearStickeyFaults();
+   RobotContainer.driveSubsystem.resetGyro();
+
  }
 
   @Override
@@ -72,6 +74,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
+    System.out.println("autonomousInit");
+
+
     RobotContainer.driveSubsystem.resetGyro();
 
     m_autonomousCommand = robotContainer.getAutonomousCommand();
@@ -87,10 +92,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
 
-    }
+    // }
     RobotContainer.driveSubsystem.resetGyro();
     RobotContainer.driveSubsystem.ResetEncoders();
 

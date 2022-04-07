@@ -13,15 +13,18 @@ public class SimpleTurnToAngleCommand extends CommandBase {
 
   double targetAngle = 0.0;
   double error = 0.0;
-  double kP = 0.025;
+  double kP = 0.02;
 
   int finishCount = 0;
 
+  boolean seekHub = false;
   /** Creates a new SimpleTurnToAngleCommand. */
-  public SimpleTurnToAngleCommand(double angle) {
+  public SimpleTurnToAngleCommand(double angle, boolean seekHub) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveSubsystem);
     targetAngle = angle;
+
+    this.seekHub = seekHub;
   }
 
   double calculateError()
@@ -33,6 +36,13 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   @Override
   public void initialize()
   {
+    // if(seekHub)
+    //   RobotContainer.visionSubsystem.lightOn();
+
+
+    error = calculateError();
+    finishCount = 0;
+
     System.out.println("SimpleTurnToAngleCommand init " + targetAngle);
     SmartDashboard.putBoolean("Turn Angle Active", true);
   }
@@ -46,7 +56,7 @@ public class SimpleTurnToAngleCommand extends CommandBase {
 
     SmartDashboard.putNumber("Turn Angle Error", error);
 
-    double rotate = Math.min(0.25, error * kP); // cap at 50% rotate speed
+    double rotate = Math.min(0.45, error * kP); // cap at 50% rotate speed
     
     SmartDashboard.putNumber("Turn Angle rotate", rotate);
 
@@ -60,6 +70,9 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   {
     System.out.println("SimpleTurnToAngleCommand end " + targetAngle);
 
+    //RobotContainer.visionSubsystem.lightOff();
+
+
     SmartDashboard.putBoolean("Turn Angle Active", false);
     RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, 0.0);
 
@@ -71,11 +84,25 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   {
     System.out.println("SimpleTurnToAngleCommand isfinished " + targetAngle + " error " + error);
 
-    if(Math.abs(error /*- targetAngle*/) < 3.0)
+    // if(seekHub && RobotContainer.visionSubsystem.validTarget() )
+    // {
+
+    // }
+    boolean onTarget = Math.abs(error /*- targetAngle*/) < 4.0;
+    boolean hasTarget = RobotContainer.visionSubsystem.validTarget();
+    
+    // if(Math.abs(error /*- targetAngle*/) < 3.0 || (seekHub && RobotContainer.visionSubsystem.validTarget()))
+    if((hasTarget && seekHub) || onTarget)
     {
       finishCount++;
     }
-    System.out.println("SimpleTurnToAngleCommand isfinished" + targetAngle);
+    else
+    {
+      finishCount = 0;
+    }
+  
+  
+    System.out.println("SimpleTurnToAngleCommand isfinished" + targetAngle + " finishCount " + finishCount);
 
     if(finishCount > 10)
         return true;

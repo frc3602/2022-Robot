@@ -23,7 +23,7 @@ public class Auton2BallCommand extends SequentialCommandGroup {
       new ResetGyroCommand(),
       new IndexInCommand(0.25).withTimeout(0.125),
       new FindCargoCommand().withTimeout(5),
-      new SimpleTurnToAngleCommand(150.0),
+      new SimpleTurnToAngleCommand(180.0, false),
       new ShootStuffCommand(RobotContainer.shooterSubsystem).withTimeout(5.0)
     );
   }

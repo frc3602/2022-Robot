@@ -11,13 +11,12 @@
 
 package com.team3602.robot.subsystems;
 
-import com.team3602.robot.Constants;
-
 // WPILib Imports
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -178,7 +177,7 @@ public class VisionSubsystem extends SubsystemBase {
   public boolean noValidTarget() {
     double validTarget = tv.getDouble(0.0);
     if (validTarget == 0) {
-      if(Constants.testingEnabled)
+      if(!DriverStation.isFMSAttached())
       {
         System.out.println("ERROR: Vision Target was lost");
       }
@@ -192,7 +191,7 @@ public class VisionSubsystem extends SubsystemBase {
    * Method to log information to the Smart Dashboard.
    */
   public void logDataToSmartDashboard() {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
     SmartDashboard.putNumber("LimelightX", GetTX());
     SmartDashboard.putNumber("LimelightY", GetTY());

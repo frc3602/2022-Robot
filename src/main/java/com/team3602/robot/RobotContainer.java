@@ -13,8 +13,6 @@ package com.team3602.robot;
 import com.team3602.robot.commands.*;
 import com.team3602.robot.commands.Autonomous.Auton2BallCommand;
 import com.team3602.robot.commands.Autonomous.Auton3BallCommand;
-import com.team3602.robot.commands.Autonomous.AutonGrabAndTurnCommandGroup;
-import com.team3602.robot.commands.Autonomous.AutonReverseAndShootCommandGroup;
 import com.team3602.robot.commands.Autonomous.FindCargoCommand;
 import com.team3602.robot.commands.Autonomous.SimpleTurnToAngleCommand;
 import com.team3602.robot.commands.Climber.ClimberControlCommand;
@@ -22,18 +20,18 @@ import com.team3602.robot.commands.Climber.StageClimbReadyCommandGroup;
 import com.team3602.robot.commands.Climber.StageClimbResetCommandGroup;
 import com.team3602.robot.commands.Index.IndexInCommand;
 import com.team3602.robot.commands.Index.IndexStopCommand;
+import com.team3602.robot.commands.Obsolete.AutonGrabAndTurnCommandGroup;
+import com.team3602.robot.commands.Obsolete.AutonReverseAndShootCommandGroup;
 import com.team3602.robot.commands.Obsolete.TestIntakeCommand;
 import com.team3602.robot.commands.Shooter.ShootStuffCommand;
 import com.team3602.robot.commands.Shooter.SlamDunkCommand;
 import com.team3602.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.Command;
-//import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 /**

@@ -6,6 +6,7 @@ package com.team3602.robot.commands.Autonomous;
 
 import com.team3602.robot.RobotContainer;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -43,8 +44,12 @@ public class SimpleTurnToAngleCommand extends CommandBase {
     error = calculateError();
     finishCount = 0;
 
+    if(!DriverStation.isFMSAttached())
+    {
     System.out.println("SimpleTurnToAngleCommand init " + targetAngle);
     SmartDashboard.putBoolean("Turn Angle Active", true);
+
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -52,13 +57,18 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   public void execute()
   {
     error = calculateError();
-    System.out.println("SimpleTurnToAngleCommand execute " + targetAngle + " error " + error);
 
-    SmartDashboard.putNumber("Turn Angle Error", error);
 
     double rotate = Math.min(0.45, error * kP); // cap at 50% rotate speed
     
+    if(!DriverStation.isFMSAttached())
+    {
+    System.out.println("SimpleTurnToAngleCommand execute " + targetAngle + " error " + error);
+
+    SmartDashboard.putNumber("Turn Angle Error", error);
     SmartDashboard.putNumber("Turn Angle rotate", rotate);
+
+    }
 
 
     RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, rotate /* * -1.0*/);
@@ -68,12 +78,14 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   @Override
   public void end(boolean interrupted)
   {
+    if(!DriverStation.isFMSAttached())
+    {
     System.out.println("SimpleTurnToAngleCommand end " + targetAngle);
-
-    //RobotContainer.visionSubsystem.lightOff();
-
-
     SmartDashboard.putBoolean("Turn Angle Active", false);
+    }
+
+    // RobotContainer.visionSubsystem.lightOff();
+
     RobotContainer.driveSubsystem.driveCartesian(0.0, 0.0, 0.0);
 
   }
@@ -82,7 +94,6 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   @Override
   public boolean isFinished()
   {
-    System.out.println("SimpleTurnToAngleCommand isfinished " + targetAngle + " error " + error);
 
     // if(seekHub && RobotContainer.visionSubsystem.validTarget() )
     // {
@@ -100,9 +111,15 @@ public class SimpleTurnToAngleCommand extends CommandBase {
     {
       finishCount = 0;
     }
-  
-  
+
+    if(!DriverStation.isFMSAttached())
+    {
+    System.out.println("SimpleTurnToAngleCommand isfinished " + targetAngle + " error " + error);
+
     System.out.println("SimpleTurnToAngleCommand isfinished" + targetAngle + " finishCount " + finishCount);
+    }
+  
+  
 
     if(finishCount > 10)
         return true;

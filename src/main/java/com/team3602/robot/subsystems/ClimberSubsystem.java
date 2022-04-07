@@ -25,6 +25,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // WPILib Imports
@@ -86,8 +87,9 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void ResetEncoders()
   {
-  if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     System.out.println("ClimberSubsystem ResetEncoders");
+    
   pivotInnerLeft.setSelectedSensorPosition(0.0);
   extendInnerLeft.setSelectedSensorPosition(0.0); 
   pivotInnerRight.setSelectedSensorPosition(0.0); 
@@ -119,7 +121,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void ReoportStuff()
   {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
     SmartDashboard.putNumber("pivotInnerLeft", pivotInnerLeft.getSelectedSensorPosition());
     SmartDashboard.putNumber("pivotInnerRight", pivotInnerRight.getSelectedSensorPosition());

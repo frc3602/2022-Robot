@@ -11,12 +11,12 @@
 
 package com.team3602.robot.commands;
 
-import com.team3602.robot.Constants;
 import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.subsystems.DriveSubsystem;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -51,16 +51,21 @@ public class DriveCommand extends CommandBase {
     double turn = OI.joystick.getRawAxis(0);
     double rotate = OI.joystick.getRawAxis(2);
 
+    if(!DriverStation.isFMSAttached())
+    {
     SmartDashboard.putNumber("Drive Raw Speed", speed);
     SmartDashboard.putNumber("Drive Raw turn", turn);
     SmartDashboard.putNumber("Drive Raw rotate", rotate);
+
+    }
+
 
 
     double rawThrottle = OI.joystick.getRawAxis(3);
 
     double throttle = ((1.0 - rawThrottle)  / 4.0) + 0.5;
 
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
       SmartDashboard.putNumber("Twist Trottle", throttle);
     }
@@ -88,9 +93,12 @@ public class DriveCommand extends CommandBase {
       // }
 
 
-    SmartDashboard.putNumber("Drive adj Speed", speed);
-    SmartDashboard.putNumber("Drive adj turn", turn);
-    SmartDashboard.putNumber("Drive adj rotate", rotate);
+      if(!DriverStation.isFMSAttached())
+      {
+      SmartDashboard.putNumber("Drive adj Speed", speed);
+      SmartDashboard.putNumber("Drive adj turn", turn);
+      SmartDashboard.putNumber("Drive adj rotate", rotate);
+      }
 
     RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);
     }

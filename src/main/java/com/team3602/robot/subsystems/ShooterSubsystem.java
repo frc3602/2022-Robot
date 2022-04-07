@@ -20,6 +20,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -183,7 +184,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
 
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
       SmartDashboard.putNumber("SetPoint Ticks",  RPM2Speed(targetShooterMotorRPM));
 
@@ -231,7 +232,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
       double distance = calculateDistance();
 
-      if(Constants.testingEnabled)
+      if(!DriverStation.isFMSAttached())
       {
        // System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
         SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);

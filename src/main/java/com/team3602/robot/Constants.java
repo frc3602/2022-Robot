@@ -19,7 +19,7 @@ package com.team3602.robot;
  */
 public interface Constants {
 
-  boolean testingEnabled = true;
+  //boolean testingEnabled = true;
 
     	/**
 	 * Which PID slot to pull gains from. Starting 2018, you can choose from

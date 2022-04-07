@@ -4,11 +4,11 @@
 
 package com.team3602.robot.subsystems;
 
-import com.team3602.robot.Constants;
 import com.team3602.robot.OI;
 import com.team3602.robot.RobotContainer;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
@@ -51,7 +51,7 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
   public void useOutput(double output, double setpoint) {
     // turnValue = output;
 
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
     SmartDashboard.putNumber("RotateToTarget PID Output", output );
     SmartDashboard.putBoolean("RotateToTarget useOutput IsRunning", IsRunning() );
@@ -73,7 +73,7 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
   public double getMeasurement() {
     double x = RobotContainer.visionSubsystem.GetTX(); // updates x value
 
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
       SmartDashboard.putNumber("PID Error", x );
 
     return x;
@@ -93,7 +93,7 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
   @Override
   public void enable()
     {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
       System.out.println("enable");
     isRunning = true;
     super.enable();
@@ -102,7 +102,7 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
 
   public void disable()
     {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
       System.out.println("disable");
     isRunning = false;
     super.disable();

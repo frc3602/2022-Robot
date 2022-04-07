@@ -9,6 +9,7 @@ import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.PixeyCam;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
@@ -43,7 +44,7 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
   @Override
   public void useOutput(double output, double setpoint)
   {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
     SmartDashboard.putNumber("PixyRotatePIDSubsystem PID Output", output );
 
@@ -80,7 +81,7 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
   @Override
   public void enable()
     {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
       System.out.println("enable");
     isRunning = true;
     super.enable();
@@ -89,7 +90,7 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
 
   public void disable()
     {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
       System.out.println("disable");
     isRunning = false;
     super.disable();

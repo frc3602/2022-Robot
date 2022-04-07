@@ -22,7 +22,6 @@ public class Auton3BallCommand extends SequentialCommandGroup {
     addCommands(
       new ResetDriveEncodersCommand(),
       new ResetGyroCommand(),
-      //new AutonDrivePIDCommand(5.0),
       new ParallelCommandGroup(
         new IndexInCommand(0.25).withTimeout(0.25),
         new AutonDrivePIDCommand(15.0)
@@ -36,7 +35,6 @@ public class Auton3BallCommand extends SequentialCommandGroup {
       new SimpleTurnToAngleCommand(-65, false),
       new ResetDriveEncodersCommand(),
       new AutonDrivePIDCommand(70.0),
-      // new ResetGyroCommand(),
       new FindCargoCommand(true).withTimeout(4),
       new SimpleTurnToAngleCommand(75.0, false),
       new ShootStuffCommand(RobotContainer.shooterSubsystem).withTimeout(5.0)

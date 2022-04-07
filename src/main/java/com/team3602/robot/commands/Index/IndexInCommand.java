@@ -12,7 +12,6 @@
 package com.team3602.robot.commands.Index;
 
 import com.team3602.robot.RobotContainer;
-import com.team3602.robot.subsystems.IndexSubsystem;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.CommandBase;

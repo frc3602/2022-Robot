@@ -2,9 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package com.team3602.robot.commands.Autonomous;
+package com.team3602.robot.commands.Obsolete;
 
 import com.team3602.robot.RobotContainer;
+import com.team3602.robot.commands.Autonomous.AutonDrivePIDCommand;
+import com.team3602.robot.commands.Autonomous.FindCargoCommand;
+import com.team3602.robot.commands.Autonomous.ResetDriveEncodersCommand;
+import com.team3602.robot.commands.Autonomous.ResetGyroCommand;
 import com.team3602.robot.commands.Shooter.ShootStuffCommand;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;

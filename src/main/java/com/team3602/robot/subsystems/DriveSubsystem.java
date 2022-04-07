@@ -24,7 +24,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
@@ -76,7 +76,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void logDataToSmartDashboard()
   {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
       // SmartDashboard.putNumber("Front Left distance reading:", GetEncoderDistance(frontLeft));
       // SmartDashboard.putNumber("frontLeft.getSelectedSensorPosition reading:", frontLeft.getSelectedSensorPosition());
@@ -160,9 +160,12 @@ public class DriveSubsystem extends SubsystemBase {
 
       double rot = z * maxSpeed;
 
+    if(!DriverStation.isFMSAttached())
+    {
       SmartDashboard.putNumber("Drive cart Speed", xSpeed);
       SmartDashboard.putNumber("Drive cart turn", ySpeed);
       SmartDashboard.putNumber("Drive cart rotate", rot);
+    }
   
       RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(ySpeed, xSpeed, rot);
   }
@@ -171,10 +174,7 @@ public class DriveSubsystem extends SubsystemBase {
   {
     System.out.println("ResetEncoders drivetrain");
 
-    //frontLeft.getSensorCollection().setIntegratedSensorPosition(0.0, Constants.kTimeoutMs);
     frontLeft.setSelectedSensorPosition(0.0);
-    //System.out.println("ResetEncoders drivetrain errorcode: " + errCode);
-
     backLeft.setSelectedSensorPosition(0.0);
     frontRight.setSelectedSensorPosition(0.0);
     backRight.setSelectedSensorPosition(0.0);

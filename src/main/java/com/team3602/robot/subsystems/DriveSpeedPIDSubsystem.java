@@ -4,10 +4,10 @@
 
 package com.team3602.robot.subsystems;
 
-import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 public class DriveSpeedPIDSubsystem extends PIDSubsystem
@@ -61,7 +61,7 @@ public class DriveSpeedPIDSubsystem extends PIDSubsystem
   @Override
   public void enable()
     {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
       System.out.println("enable");
     isRunning = true;
     super.enable();
@@ -70,7 +70,7 @@ public class DriveSpeedPIDSubsystem extends PIDSubsystem
 
   public void disable()
     {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
       System.out.println("disable");
     isRunning = false;
     super.disable();

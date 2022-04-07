@@ -2,11 +2,11 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package com.team3602.robot.commands.Autonomous;
+package com.team3602.robot.commands.Obsolete;
 
-import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -37,7 +37,7 @@ public class AutonDriveCommand extends CommandBase {
   @Override
   public void execute()
   {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
       SmartDashboard.putNumber("Average Wheels", RobotContainer.driveSubsystem.GetAverageDistance());
     }
@@ -55,7 +55,7 @@ public class AutonDriveCommand extends CommandBase {
   @Override
   public boolean isFinished()
   {
-    if(Constants.testingEnabled)
+    if(!DriverStation.isFMSAttached())
     {
       SmartDashboard.putNumber("AutonDriveCommand difference", RobotContainer.driveSubsystem.GetAverageDistance() - distance);
     }

@@ -83,10 +83,10 @@ public class DriveCommand extends CommandBase {
 
     if(!RobotContainer.rotateToTargetSubsystem.IsRunning())
     {
-      // if(RobotContainer.pixyRotatePIDSubsystem.isEnabled())
-      // {
-      //   rotate = RobotContainer.pixyRotatePIDSubsystem.GetOutputValue();
-      // }
+      if(RobotContainer.pixyRotatePIDSubsystem.isEnabled())
+      {
+        rotate = RobotContainer.pixyRotatePIDSubsystem.GetOutputValue();
+      }
       // if(RobotContainer.driveSpeedPIDSubsystem.isEnabled())
       // {
       //   speed = RobotContainer.driveSpeedPIDSubsystem.GetOutputValue();

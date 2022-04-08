@@ -87,8 +87,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void ResetEncoders()
   {
-    if(!DriverStation.isFMSAttached())
-    System.out.println("ClimberSubsystem ResetEncoders");
+    // if(!DriverStation.isFMSAttached())
+    // System.out.println("ClimberSubsystem ResetEncoders");
     
   pivotInnerLeft.setSelectedSensorPosition(0.0);
   extendInnerLeft.setSelectedSensorPosition(0.0); 
@@ -123,24 +123,24 @@ public class ClimberSubsystem extends SubsystemBase {
   {
     if(!DriverStation.isFMSAttached())
     {
-    SmartDashboard.putNumber("pivotInnerLeft", pivotInnerLeft.getSelectedSensorPosition());
-    SmartDashboard.putNumber("pivotInnerRight", pivotInnerRight.getSelectedSensorPosition());
-    SmartDashboard.putNumber("pivotOuterLeft", pivotOuterLeft.getSelectedSensorPosition());
-    SmartDashboard.putNumber("pivotOuterRight", pivotOuterRight.getSelectedSensorPosition());
-    SmartDashboard.putNumber("extendInnerLeft", extendInnerLeft.getSelectedSensorPosition());
-    SmartDashboard.putNumber("extendInnerRight", extendInnerRight.getSelectedSensorPosition());
-    SmartDashboard.putNumber("extendOuterLeft", extendOuterLeft.getSelectedSensorPosition());
-    SmartDashboard.putNumber("extendOuterRight", extendOuterRight.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("pivotInnerLeft", pivotInnerLeft.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("pivotInnerRight", pivotInnerRight.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("pivotOuterLeft", pivotOuterLeft.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("pivotOuterRight", pivotOuterRight.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("extendInnerLeft", extendInnerLeft.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("extendInnerRight", extendInnerRight.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("extendOuterLeft", extendOuterLeft.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("extendOuterRight", extendOuterRight.getSelectedSensorPosition());
 
-    SmartDashboard.putNumber("GetCurrentOuterLeftLength", GetCurrentOuterLeftLength());
-    SmartDashboard.putNumber("GetCurrentInnerLeftLength", GetCurrentInnerLeftLength());
-    SmartDashboard.putNumber("GetCurrentOuterRightLength", GetCurrentOuterRightLength());
-    SmartDashboard.putNumber("GetCurrentInnerRightLength", GetCurrentInnerRightLength());
+    // SmartDashboard.putNumber("GetCurrentOuterLeftLength", GetCurrentOuterLeftLength());
+    // SmartDashboard.putNumber("GetCurrentInnerLeftLength", GetCurrentInnerLeftLength());
+    // SmartDashboard.putNumber("GetCurrentOuterRightLength", GetCurrentOuterRightLength());
+    // SmartDashboard.putNumber("GetCurrentInnerRightLength", GetCurrentInnerRightLength());
 
-    SmartDashboard.putNumber("GetCurrentOuterLeftAngle", GetCurrentOuterLeftAngle());
-    SmartDashboard.putNumber("GetCurrentOuterRightAngle", GetCurrentOuterRightAngle());
-    SmartDashboard.putNumber("GetCurrentInnerLeftAngle", GetCurrentInnerLeftAngle());
-    SmartDashboard.putNumber("GetCurrentInnerRightAngle", GetCurrentInnerRightAngle());
+    // SmartDashboard.putNumber("GetCurrentOuterLeftAngle", GetCurrentOuterLeftAngle());
+    // SmartDashboard.putNumber("GetCurrentOuterRightAngle", GetCurrentOuterRightAngle());
+    // SmartDashboard.putNumber("GetCurrentInnerLeftAngle", GetCurrentInnerLeftAngle());
+    // SmartDashboard.putNumber("GetCurrentInnerRightAngle", GetCurrentInnerRightAngle());
 
     }
 

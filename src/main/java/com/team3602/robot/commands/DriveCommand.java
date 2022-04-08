@@ -53,9 +53,9 @@ public class DriveCommand extends CommandBase {
 
     if(!DriverStation.isFMSAttached())
     {
-    SmartDashboard.putNumber("Drive Raw Speed", speed);
-    SmartDashboard.putNumber("Drive Raw turn", turn);
-    SmartDashboard.putNumber("Drive Raw rotate", rotate);
+    // SmartDashboard.putNumber("Drive Raw Speed", speed);
+    // SmartDashboard.putNumber("Drive Raw turn", turn);
+    // SmartDashboard.putNumber("Drive Raw rotate", rotate);
 
     }
 
@@ -67,7 +67,7 @@ public class DriveCommand extends CommandBase {
 
     if(!DriverStation.isFMSAttached())
     {
-      SmartDashboard.putNumber("Twist Trottle", throttle);
+      // SmartDashboard.putNumber("Twist Trottle", throttle);
     }
 
     if(Math.abs(rotate) <= 0.2)
@@ -95,9 +95,9 @@ public class DriveCommand extends CommandBase {
 
       if(!DriverStation.isFMSAttached())
       {
-      SmartDashboard.putNumber("Drive adj Speed", speed);
-      SmartDashboard.putNumber("Drive adj turn", turn);
-      SmartDashboard.putNumber("Drive adj rotate", rotate);
+      // SmartDashboard.putNumber("Drive adj Speed", speed);
+      // SmartDashboard.putNumber("Drive adj turn", turn);
+      // SmartDashboard.putNumber("Drive adj rotate", rotate);
       }
 
     RobotContainer.driveSubsystem.driveCartesian(speed, turn, rotate);

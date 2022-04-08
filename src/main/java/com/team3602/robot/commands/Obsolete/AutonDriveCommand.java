@@ -39,7 +39,7 @@ public class AutonDriveCommand extends CommandBase {
   {
     if(!DriverStation.isFMSAttached())
     {
-      SmartDashboard.putNumber("Average Wheels", RobotContainer.driveSubsystem.GetAverageDistance());
+      // SmartDashboard.putNumber("Average Wheels", RobotContainer.driveSubsystem.GetAverageDistance());
     }
     RobotContainer.driveSubsystem.driveCartesian(speed, 0.0, 0.0);
   }
@@ -57,7 +57,7 @@ public class AutonDriveCommand extends CommandBase {
   {
     if(!DriverStation.isFMSAttached())
     {
-      SmartDashboard.putNumber("AutonDriveCommand difference", RobotContainer.driveSubsystem.GetAverageDistance() - distance);
+      // SmartDashboard.putNumber("AutonDriveCommand difference", RobotContainer.driveSubsystem.GetAverageDistance() - distance);
     }
 
     // if( Math.abs(RobotContainer.driveSubsystem.GetAverageDistance() - distance) < 5.0)

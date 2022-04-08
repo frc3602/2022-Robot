@@ -193,10 +193,10 @@ public class VisionSubsystem extends SubsystemBase {
   public void logDataToSmartDashboard() {
     if(!DriverStation.isFMSAttached())
     {
-    SmartDashboard.putNumber("LimelightX", GetTX());
-    SmartDashboard.putNumber("LimelightY", GetTY());
-    SmartDashboard.putNumber("LimelightArea", ta.getDouble(0.0));
-    SmartDashboard.putBoolean("ValidTargetightArea", validTarget());
+    // SmartDashboard.putNumber("LimelightX", GetTX());
+    // SmartDashboard.putNumber("LimelightY", GetTY());
+    // SmartDashboard.putNumber("LimelightArea", ta.getDouble(0.0));
+    // SmartDashboard.putBoolean("ValidTargetightArea", validTarget());
 
 
     }

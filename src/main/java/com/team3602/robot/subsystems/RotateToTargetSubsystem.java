@@ -51,12 +51,12 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
   public void useOutput(double output, double setpoint) {
     // turnValue = output;
 
-    if(!DriverStation.isFMSAttached())
-    {
-    SmartDashboard.putNumber("RotateToTarget PID Output", output );
-    SmartDashboard.putBoolean("RotateToTarget useOutput IsRunning", IsRunning() );
+    // if(!DriverStation.isFMSAttached())
+    // {
+    // SmartDashboard.putNumber("RotateToTarget PID Output", output );
+    // SmartDashboard.putBoolean("RotateToTarget useOutput IsRunning", IsRunning() );
       
-    }
+    // }
 
 
     double speed = OI.joystick.getRawAxis(1) * -1.0;
@@ -73,8 +73,8 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
   public double getMeasurement() {
     double x = RobotContainer.visionSubsystem.GetTX(); // updates x value
 
-    if(!DriverStation.isFMSAttached())
-      SmartDashboard.putNumber("PID Error", x );
+    // if(!DriverStation.isFMSAttached())
+    //   SmartDashboard.putNumber("PID Error", x );
 
     return x;
   }

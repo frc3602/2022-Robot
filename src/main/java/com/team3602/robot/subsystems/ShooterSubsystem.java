@@ -184,16 +184,16 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
 
-    if(!DriverStation.isFMSAttached())
-    {
-      SmartDashboard.putNumber("SetPoint Ticks",  RPM2Speed(targetShooterMotorRPM));
+    // if(!DriverStation.isFMSAttached())
+    // {
+    //   SmartDashboard.putNumber("SetPoint Ticks",  RPM2Speed(targetShooterMotorRPM));
 
-      SmartDashboard.putNumber("SetPoint", targetShooterMotorRPM);
-      SmartDashboard.putNumber("ProcessVariable", shooterMotor.getSelectedSensorVelocity());
+    //   SmartDashboard.putNumber("SetPoint", targetShooterMotorRPM);
+    //   SmartDashboard.putNumber("ProcessVariable", shooterMotor.getSelectedSensorVelocity());
   
-      SmartDashboard.putBoolean("IsShooterSpeedOnTarget", IsShooterSpeedOnTarget());
+    //   SmartDashboard.putBoolean("IsShooterSpeedOnTarget", IsShooterSpeedOnTarget());
   
-    }
+    // }
     
 
   }
@@ -232,11 +232,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
       double distance = calculateDistance();
 
-      if(!DriverStation.isFMSAttached())
-      {
-       // System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
-        SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
-      }
+      // if(!DriverStation.isFMSAttached())
+      // {
+      //  // System.out.println("CalculateAndSetMotorSpeeds Distance: " + distance);
+      //   SmartDashboard.putNumber("CalculateAndSetMotorSpeeds Distance: ", distance);
+      // }
 
     //some magic decimal crazyness going on
     newTargetShooterMotorRPM = CalculateMagicMath(distance);

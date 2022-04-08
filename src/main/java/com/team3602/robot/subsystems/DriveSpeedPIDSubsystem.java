@@ -61,8 +61,8 @@ public class DriveSpeedPIDSubsystem extends PIDSubsystem
   @Override
   public void enable()
     {
-    if(!DriverStation.isFMSAttached())
-      System.out.println("enable");
+    // if(!DriverStation.isFMSAttached())
+    //   System.out.println("enable");
     isRunning = true;
     super.enable();
     }
@@ -70,8 +70,8 @@ public class DriveSpeedPIDSubsystem extends PIDSubsystem
 
   public void disable()
     {
-    if(!DriverStation.isFMSAttached())
-      System.out.println("disable");
+    // if(!DriverStation.isFMSAttached())
+    //   System.out.println("disable");
     isRunning = false;
     super.disable();
     }

@@ -46,8 +46,8 @@ public class SimpleTurnToAngleCommand extends CommandBase {
 
     if(!DriverStation.isFMSAttached())
     {
-    System.out.println("SimpleTurnToAngleCommand init " + targetAngle);
-    SmartDashboard.putBoolean("Turn Angle Active", true);
+    // System.out.println("SimpleTurnToAngleCommand init " + targetAngle);
+    // SmartDashboard.putBoolean("Turn Angle Active", true);
 
     }
   }
@@ -63,10 +63,10 @@ public class SimpleTurnToAngleCommand extends CommandBase {
     
     if(!DriverStation.isFMSAttached())
     {
-    System.out.println("SimpleTurnToAngleCommand execute " + targetAngle + " error " + error);
+    // System.out.println("SimpleTurnToAngleCommand execute " + targetAngle + " error " + error);
 
-    SmartDashboard.putNumber("Turn Angle Error", error);
-    SmartDashboard.putNumber("Turn Angle rotate", rotate);
+    // SmartDashboard.putNumber("Turn Angle Error", error);
+    // SmartDashboard.putNumber("Turn Angle rotate", rotate);
 
     }
 
@@ -80,8 +80,8 @@ public class SimpleTurnToAngleCommand extends CommandBase {
   {
     if(!DriverStation.isFMSAttached())
     {
-    System.out.println("SimpleTurnToAngleCommand end " + targetAngle);
-    SmartDashboard.putBoolean("Turn Angle Active", false);
+    // System.out.println("SimpleTurnToAngleCommand end " + targetAngle);
+    // SmartDashboard.putBoolean("Turn Angle Active", false);
     }
 
     // RobotContainer.visionSubsystem.lightOff();
@@ -114,9 +114,9 @@ public class SimpleTurnToAngleCommand extends CommandBase {
 
     if(!DriverStation.isFMSAttached())
     {
-    System.out.println("SimpleTurnToAngleCommand isfinished " + targetAngle + " error " + error);
+    // System.out.println("SimpleTurnToAngleCommand isfinished " + targetAngle + " error " + error);
 
-    System.out.println("SimpleTurnToAngleCommand isfinished" + targetAngle + " finishCount " + finishCount);
+    // System.out.println("SimpleTurnToAngleCommand isfinished" + targetAngle + " finishCount " + finishCount);
     }
   
   

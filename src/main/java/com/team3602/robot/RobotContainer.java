@@ -11,6 +11,7 @@
 
 package com.team3602.robot;
 import com.team3602.robot.commands.*;
+import com.team3602.robot.commands.Autonomous.Auton1BallCommand;
 import com.team3602.robot.commands.Autonomous.Auton2BallCommand;
 import com.team3602.robot.commands.Autonomous.Auton3BallCommand;
 import com.team3602.robot.commands.Autonomous.FindCargoCommand;
@@ -68,6 +69,7 @@ public class RobotContainer {
   public static AutonReverseAndShootCommandGroup autonReverseAndShootCommandGroup = new AutonReverseAndShootCommandGroup();
   public static Auton3BallCommand auton3BallCommand = new Auton3BallCommand();
   public static Auton2BallCommand auton2BallCommand = new Auton2BallCommand();
+  public static Auton1BallCommand auton1BallCommand = new Auton1BallCommand();
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   // Operator interfaces
@@ -89,23 +91,24 @@ public class RobotContainer {
 
     autoChooser.setDefaultOption("3 ball", auton3BallCommand);
     autoChooser.addOption("2 ball", auton2BallCommand);
+    autoChooser.addOption("1 ball", auton1BallCommand);
 
-    if(!DriverStation.isFMSAttached())
-    {
-      autoChooser.addOption("testAuto Multiturn",
-      new SequentialCommandGroup(
-        new SimpleTurnToAngleCommand(45, false),
-        new SimpleTurnToAngleCommand(-45, false),
-        new SimpleTurnToAngleCommand(90, false),
-        new SimpleTurnToAngleCommand(-90, false),
-        new SimpleTurnToAngleCommand(180, false)
-        )
-      );
+    // if(!DriverStation.isFMSAttached())
+    // {
+    //   autoChooser.addOption("testAuto Multiturn",
+    //   new SequentialCommandGroup(
+    //     new SimpleTurnToAngleCommand(45, false),
+    //     new SimpleTurnToAngleCommand(-45, false),
+    //     new SimpleTurnToAngleCommand(90, false),
+    //     new SimpleTurnToAngleCommand(-90, false),
+    //     new SimpleTurnToAngleCommand(180, false)
+    //     )
+    //   );
 
-      autoChooser.addOption("testAuto 90", new SimpleTurnToAngleCommand(90, false));
-      autoChooser.addOption("testAuto -90", new SimpleTurnToAngleCommand(-90, false));
-      autoChooser.addOption("testAuto 180", new SimpleTurnToAngleCommand(180, false));
-    }
+    //   autoChooser.addOption("testAuto 90", new SimpleTurnToAngleCommand(90, false));
+    //   autoChooser.addOption("testAuto -90", new SimpleTurnToAngleCommand(-90, false));
+    //   autoChooser.addOption("testAuto 180", new SimpleTurnToAngleCommand(180, false));
+    // }
     
     // Put the chooser on the dashboard
     SmartDashboard.putData(autoChooser);    

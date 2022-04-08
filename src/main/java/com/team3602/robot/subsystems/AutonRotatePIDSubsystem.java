@@ -37,9 +37,9 @@ public class AutonRotatePIDSubsystem extends PIDSubsystem {
   {
     if(!DriverStation.isFMSAttached())
     {
-    SmartDashboard.putNumber("AutonRotatePIDSubsystem PID Output", output );
+    // SmartDashboard.putNumber("AutonRotatePIDSubsystem PID Output", output );
 
-    SmartDashboard.putBoolean("AutonRotatePIDSubsystem useOutput IsRunning", IsRunning() );
+    // SmartDashboard.putBoolean("AutonRotatePIDSubsystem useOutput IsRunning", IsRunning() );
 
     }
 
@@ -69,8 +69,8 @@ public class AutonRotatePIDSubsystem extends PIDSubsystem {
   @Override
   public void enable()
     {
-    if(!DriverStation.isFMSAttached())
-      System.out.println("enable");
+    // if(!DriverStation.isFMSAttached())
+      // System.out.println("enable");
     isRunning = true;
     super.enable();
     }
@@ -78,8 +78,8 @@ public class AutonRotatePIDSubsystem extends PIDSubsystem {
 
   public void disable()
     {
-    if(!DriverStation.isFMSAttached())
-      System.out.println("disable");
+    // if(!DriverStation.isFMSAttached())
+      // System.out.println("disable");
     isRunning = false;
     super.disable();
     }

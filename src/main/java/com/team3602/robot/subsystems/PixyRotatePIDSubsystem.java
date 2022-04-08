@@ -44,13 +44,13 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
   @Override
   public void useOutput(double output, double setpoint)
   {
-    if(!DriverStation.isFMSAttached())
-    {
-    SmartDashboard.putNumber("PixyRotatePIDSubsystem PID Output", output );
+    // if(!DriverStation.isFMSAttached())
+    // {
+    // SmartDashboard.putNumber("PixyRotatePIDSubsystem PID Output", output );
 
-    SmartDashboard.putBoolean("PixyRotatePIDSubsystem useOutput IsRunning", IsRunning() );
+    // SmartDashboard.putBoolean("PixyRotatePIDSubsystem useOutput IsRunning", IsRunning() );
 
-    }
+    // }
 
     outputValue = output * -1.0;
 
@@ -81,8 +81,8 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
   @Override
   public void enable()
     {
-    if(!DriverStation.isFMSAttached())
-      System.out.println("enable");
+    // if(!DriverStation.isFMSAttached())
+    //   System.out.println("enable");
     isRunning = true;
     super.enable();
     }
@@ -90,8 +90,8 @@ public class PixyRotatePIDSubsystem extends PIDSubsystem
 
   public void disable()
     {
-    if(!DriverStation.isFMSAttached())
-      System.out.println("disable");
+    // if(!DriverStation.isFMSAttached())
+    //   System.out.println("disable");
     isRunning = false;
     super.disable();
     }

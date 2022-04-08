@@ -89,7 +89,7 @@ public class DriveSubsystem extends SubsystemBase {
       // SmartDashboard.putNumber("gyro roll", navX.getRoll());
       // SmartDashboard.putNumber("gyro Yaw", navX.getYaw());
       // SmartDashboard.putNumber("gyro pitch", navX.getPitch());
-      SmartDashboard.putNumber("gyro getGyroAngle", getGyroAngle());
+      // SmartDashboard.putNumber("gyro getGyroAngle", getGyroAngle());
       // SmartDashboard.putNumber("GetAverageSpeed reading:", GetAverageSpeed());
 
   }
@@ -162,9 +162,9 @@ public class DriveSubsystem extends SubsystemBase {
 
     if(!DriverStation.isFMSAttached())
     {
-      SmartDashboard.putNumber("Drive cart Speed", xSpeed);
-      SmartDashboard.putNumber("Drive cart turn", ySpeed);
-      SmartDashboard.putNumber("Drive cart rotate", rot);
+      // SmartDashboard.putNumber("Drive cart Speed", xSpeed);
+      // SmartDashboard.putNumber("Drive cart turn", ySpeed);
+      // SmartDashboard.putNumber("Drive cart rotate", rot);
     }
   
       RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(ySpeed, xSpeed, rot);

@@ -11,6 +11,7 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.CTREUpdates;
 import com.team3602.robot.Constants;
 import com.team3602.robot.Constants.Climber;
 import com.team3602.robot.Constants.Climber.ClimbStageEnum;
@@ -102,6 +103,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void InitPositions()
   {
+    
     ExtendInner(0.0);
     ExtendOuter(0.0);
     PivotInner(0.0);
@@ -431,20 +433,28 @@ public class ClimberSubsystem extends SubsystemBase {
   private void configureMotors()
   {
     configurePivotMotor(pivotInnerLeft);
+    CTREUpdates.UpdateMotorValues(pivotInnerLeft);
     pivotInnerLeft.setInverted(true);
 
     configurePivotMotor(pivotInnerRight);
+    CTREUpdates.UpdateMotorValues(pivotInnerRight);
 
     configurePivotMotor(pivotOuterLeft);
+    CTREUpdates.UpdateMotorValues(pivotOuterLeft);
     pivotOuterLeft.setInverted(true);
 
     configurePivotMotor(pivotOuterRight);
+    CTREUpdates.UpdateMotorValues(pivotOuterRight);
 
     configureExtendMotor(extendInnerLeft);
+    CTREUpdates.UpdateMotorValues(extendInnerLeft);
     configureExtendMotor(extendInnerRight);
+    CTREUpdates.UpdateMotorValues(extendInnerRight);
     
     configureExtendMotor(extendOuterLeft);
+    CTREUpdates.UpdateMotorValues(extendOuterLeft);
     configureExtendMotor(extendOuterRight);
+    CTREUpdates.UpdateMotorValues(extendOuterRight);
 
   }
 

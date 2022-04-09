@@ -11,6 +11,7 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.CTREUpdates;
 import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Shooter;
@@ -269,21 +270,21 @@ public class ShooterSubsystem extends SubsystemBase {
   return ret;
   }
 
-  public void GetPIDValuesFromDash()
-  {
-    double p = SmartDashboard.getNumber("Shooter P Gain", 0.25);
-    double i = SmartDashboard.getNumber("Shooter I Gain", 0);
-    double d = SmartDashboard.getNumber("Shooter D Gain", 0);
-    // double iz = SmartDashboard.getNumber("I Zone", 0);
-    double ff = SmartDashboard.getNumber("Shooter Feed Forward", 0.5);
+  // public void GetPIDValuesFromDash()
+  // {
+  //   double p = SmartDashboard.getNumber("Shooter P Gain", 0.25);
+  //   double i = SmartDashboard.getNumber("Shooter I Gain", 0);
+  //   double d = SmartDashboard.getNumber("Shooter D Gain", 0);
+  //   // double iz = SmartDashboard.getNumber("I Zone", 0);
+  //   double ff = SmartDashboard.getNumber("Shooter Feed Forward", 0.5);
 
 
-    /* Config the Velocity closed loop gains in slot0 */
-    shooterMotor.config_kF(Constants.kPIDLoopIdx, ff, Constants.kTimeoutMs);
-    shooterMotor.config_kP(Constants.kPIDLoopIdx, p, Constants.kTimeoutMs);
-    shooterMotor.config_kI(Constants.kPIDLoopIdx, i, Constants.kTimeoutMs);
-    shooterMotor.config_kD(Constants.kPIDLoopIdx, d, Constants.kTimeoutMs);
-  }
+  //   /* Config the Velocity closed loop gains in slot0 */
+  //   shooterMotor.config_kF(Constants.kPIDLoopIdx, ff, Constants.kTimeoutMs);
+  //   shooterMotor.config_kP(Constants.kPIDLoopIdx, p, Constants.kTimeoutMs);
+  //   shooterMotor.config_kI(Constants.kPIDLoopIdx, i, Constants.kTimeoutMs);
+  //   shooterMotor.config_kD(Constants.kPIDLoopIdx, d, Constants.kTimeoutMs);
+  // }
 
   /**
    * Method to set the shooter motor to factory defaults and coast mode.
@@ -340,10 +341,13 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.configMotionCruiseVelocity(RPM2Speed(3500), Constants.kTimeoutMs);
     shooterMotor.configMotionAcceleration(RPM2Speed(3500) / 3.0, Constants.kTimeoutMs);
 
-    SmartDashboard.putNumber("Shooter P Gain", RobotContainer.kGains_Velocit.kP);
-    SmartDashboard.putNumber("Shooter I Gain", RobotContainer.kGains_Velocit.kI);
-    SmartDashboard.putNumber("Shooter D Gain", RobotContainer.kGains_Velocit.kD);
-    SmartDashboard.putNumber("Shooter Feed Forward", RobotContainer.kGains_Velocit.kF);
+    // SmartDashboard.putNumber("Shooter P Gain", RobotContainer.kGains_Velocit.kP);
+    // SmartDashboard.putNumber("Shooter I Gain", RobotContainer.kGains_Velocit.kI);
+    // SmartDashboard.putNumber("Shooter D Gain", RobotContainer.kGains_Velocit.kD);
+    // SmartDashboard.putNumber("Shooter Feed Forward", RobotContainer.kGains_Velocit.kF);
+
+    CTREUpdates.UpdateMotorValues(shooterMotor);
+
 
 
   }

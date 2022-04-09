@@ -11,10 +11,10 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.CTREUpdates;
 import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Drivetrain;
-
 // Phoenix & navX Imports
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -191,6 +191,11 @@ public class DriveSubsystem extends SubsystemBase {
     backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     backRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+
+    CTREUpdates.UpdateMotorValues(frontLeft);
+    CTREUpdates.UpdateMotorValues(backLeft);
+    CTREUpdates.UpdateMotorValues(frontRight);
+    CTREUpdates.UpdateMotorValues(backRight);
 
     // // backLeft.configFactoryDefault();
     // frontRight.configFactoryDefault();

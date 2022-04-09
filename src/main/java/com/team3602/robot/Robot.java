@@ -77,6 +77,7 @@ public class Robot extends TimedRobot {
 
 
     RobotContainer.driveSubsystem.resetGyro();
+    RobotContainer.climberSubsystem.InitPositions();
 
     m_autonomousCommand = robotContainer.getAutonomousCommand();
 
@@ -97,6 +98,8 @@ public class Robot extends TimedRobot {
     }
     RobotContainer.driveSubsystem.resetGyro();
     RobotContainer.driveSubsystem.ResetEncoders();
+    RobotContainer.climberSubsystem.InitPositions();
+
 
     robotContainer.ClearStickeyFaults();
 

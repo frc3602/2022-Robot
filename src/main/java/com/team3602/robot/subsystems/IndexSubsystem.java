@@ -11,8 +11,8 @@
 
 package com.team3602.robot.subsystems;
 
+import com.team3602.robot.CTREUpdates;
 import com.team3602.robot.Constants.Index;
-
 // Phoenix Imports
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -128,7 +128,7 @@ public class IndexSubsystem extends SubsystemBase {
     }
     else
     {
-      indexMotorTop.set(ControlMode.PercentOutput, 0.8 * speed);
+      indexMotorTop.set(ControlMode.PercentOutput, 0.75 * speed);
       indexMotorBottom.set(ControlMode.PercentOutput, -0.99 * speed);
     }
 
@@ -178,6 +178,10 @@ public class IndexSubsystem extends SubsystemBase {
 
     indexMotorTop.setNeutralMode(NeutralMode.Brake);
     indexMotorBottom.setNeutralMode(NeutralMode.Brake);
+    CTREUpdates.UpdateMotorValues(indexMotorTop);
+    CTREUpdates.UpdateMotorValues(indexMotorBottom);
+
+    
 
 
     // indexLift.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs);

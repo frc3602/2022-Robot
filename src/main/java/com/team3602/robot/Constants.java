@@ -157,10 +157,10 @@ public interface Constants {
 
   public interface LEDColorStrip
   {
-    public static int ledPWMPort = 0;
+    public static int ledPWMPort = 1;
     public static int ledSegmentLength = 72;
     public static int ledSegmentSections = 2;
-    public static int ledDeadSpace = 0;
+    public static int ledDeadSpace = 6;
     public static int repeatSegmentCount = 4;
 
 

@@ -112,16 +112,21 @@ public class EColorStrip
 
     public void SetAllColor(Color color)
       {
-      Color newColor = CapColorBrightness(color, LEDColorStrip.brightnessPercentage);
+      //Color newColor = CapColorBrightness(color, LEDColorStrip.brightnessPercentage);
 
-      for(var j = 0; j < LEDColorStrip.repeatSegmentCount; j++)
-        {
-          for (var i = 0; i < length; i++)
-          {
-          ledBuffer.setLED(i + (length * j), newColor);
-          }
+      for (var index = 0; index < sections; index++)
+      {
+        SetSectionColor(index, color);
+      }
+
+      // for(var j = 0; j < LEDColorStrip.repeatSegmentCount; j++)
+      //   {
+      //     for (var i = 0; i < length; i++)
+      //     {
+      //     ledBuffer.setLED(i + (length * j), newColor);
+      //     }
     
-        }
+      //   }
 
       System.out.println("SetAllColor");          
 
@@ -131,6 +136,7 @@ public class EColorStrip
     public void SetSectionColor(int index, Color color)
       {
       int firstIndex = sectionSize * index;
+
       int lastIndex = firstIndex + sectionSize;
       Color newColor = CapColorBrightness(color, LEDColorStrip.brightnessPercentage);
 
@@ -146,11 +152,19 @@ public class EColorStrip
         return;
         }
 
+        int fudgeFactor = 0;
+      if(index > 0)
+        {
+          fudgeFactor = 6;
+  
+        }
+  
+
       for(var j = 0; j < LEDColorStrip.repeatSegmentCount; j++)
       {
-        for (var i = firstIndex; i < lastIndex; i++)
+        for (var i = firstIndex - fudgeFactor; i < lastIndex ; i++)
         {
-        ledBuffer.setLED(i + (length * j), newColor);
+        ledBuffer.setLED(i + (length * j) - fudgeFactor, newColor);
         }
       }
   

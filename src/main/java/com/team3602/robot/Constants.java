@@ -184,8 +184,17 @@ public interface Constants {
     int xboxControllerPort = 1;
 
 
-    int indexInButton = 1;
-    int indexOutButton = 3;
-    int shooterButton = 2;
+    int joystickButton1  = 1;
+    int joystickButton2  = 2;
+    int joystickButton3  = 3;
+    int joystickButton4  = 4;
+    int joystickButton5  = 5;
+    int joystickButton6  = 6;
+    int joystickButton7  = 7;
+    int joystickButton8  = 8;
+    int joystickButton9  = 9;
+    int joystickButton10 = 10;
+    int joystickButton11 = 11;
+    int joystickButton12 = 12;
   }
 }

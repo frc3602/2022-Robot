@@ -24,6 +24,7 @@ import com.team3602.robot.commands.Index.IndexStopCommand;
 import com.team3602.robot.commands.Obsolete.AutonGrabAndTurnCommandGroup;
 import com.team3602.robot.commands.Obsolete.AutonReverseAndShootCommandGroup;
 import com.team3602.robot.commands.Obsolete.TestIntakeCommand;
+import com.team3602.robot.commands.Shooter.BigDumpCommand;
 import com.team3602.robot.commands.Shooter.ShootStuffCommand;
 import com.team3602.robot.commands.Shooter.SlamDunkCommand;
 import com.team3602.robot.subsystems.*;
@@ -125,27 +126,24 @@ public class RobotContainer {
    * Method to define button -> command mappings.
    */
   private void configureButtonBindings() {
-    // Index commands & buttons
-    // OI.indexInButton.whileHeld(new IndexInCommand(indexSubsystem));
-    // OI.indexOutButton.whenPressed(new IndexOutCommand(indexSubsystem));
-    //  OI.indexInButton.whenReleased(RobotContainer.indexStop);
-    // OI.indexOutButton.whenReleased(RobotContainer.indexStop);
-
-    OI.indexInButton.whileHeld(new IndexInCommand(1.0));
-    OI.indexOutButton.whileHeld(new TestIntakeCommand(-1.0));
-
-    // Shooter commands & buttons
-    //OI.shooterButton.whileHeld(new TestShooterSpeedCommand());
-    OI.shooterButton.whileHeld(new ShootStuffCommand(shooterSubsystem));
-
-    OI.dunkButton.whenHeld(new SlamDunkCommand());
-
+    // joystick bindings
     
+    OI.joybutton1.whileHeld(new IndexInCommand(1.0));
+
+    OI.joyButton2.whileHeld(new ShootStuffCommand(shooterSubsystem));
+
+    OI.joyButton3.whenHeld(new SlamDunkCommand());
+    OI.joyButton4.whenHeld(new BigDumpCommand());
+
+    OI.joyButton5.whileHeld(new TestIntakeCommand(-1.0));
+    
+
+    OI.joyButton11.whileHeld(new DriveWithPixyCommand());
+    OI.joyButton12.whileHeld(new FindCargoCommand());
+
+    // xbox bindings
     OI.startButton.whenPressed(climbResetCommand);
     OI.menuButton.whenPressed(climbReadyCommand);
-
-    OI.button11.whileHeld(new DriveWithPixyCommand());
-    OI.button12.whileHeld(new FindCargoCommand());
 
 }
 

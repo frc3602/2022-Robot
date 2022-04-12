@@ -30,12 +30,15 @@ public class OI {
     public static XboxController xboxController = new XboxController(Controller.xboxControllerPort);
 
     // Creates all the buttons for the joystick
-    public static JoystickButton indexInButton = new JoystickButton(joystick, Controller.indexInButton);
-    public static JoystickButton indexOutButton = new JoystickButton(joystick,3);
-    public static JoystickButton shooterButton = new JoystickButton(joystick, Controller.shooterButton);
-    public static JoystickButton dunkButton = new JoystickButton(joystick,4);
-    public static JoystickButton button11 = new JoystickButton(joystick,11);
-    public static JoystickButton button12 = new JoystickButton(joystick,12);
+    public static JoystickButton joybutton1 = new JoystickButton(joystick, Controller.joystickButton1);
+    public static JoystickButton joyButton2 = new JoystickButton(joystick, Controller.joystickButton2);
+    public static JoystickButton joyButton3 = new JoystickButton(joystick, Controller.joystickButton3);
+    public static JoystickButton joyButton4 = new JoystickButton(joystick, Controller.joystickButton4);
+    public static JoystickButton joyButton5 = new JoystickButton(joystick, Controller.joystickButton5);
+
+
+    public static JoystickButton joyButton11 = new JoystickButton(joystick, Controller.joystickButton11);
+    public static JoystickButton joyButton12 = new JoystickButton(joystick, Controller.joystickButton12);
 
     // public enum Button {
     //     kLeftBumper(5),

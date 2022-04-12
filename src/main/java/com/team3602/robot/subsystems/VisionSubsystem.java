@@ -179,7 +179,9 @@ public class VisionSubsystem extends SubsystemBase {
     if (validTarget == 0) {
       if(!DriverStation.isFMSAttached())
       {
-        System.out.println("ERROR: Vision Target was lost");
+        //System.out.println("ERROR: Vision Target was lost");
+
+        SmartDashboard.putBoolean("ValidTarget", validTarget == 0);
       }
       return true;
     } else {

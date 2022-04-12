@@ -14,7 +14,8 @@ public class SimpleTurnToAngleCommand extends CommandBase {
 
   double targetAngle = 0.0;
   double error = 0.0;
-  double kP = 0.02;
+  //double kP = 0.02;
+  double kP = 0.04;
 
   int finishCount = 0;
 
@@ -59,7 +60,7 @@ public class SimpleTurnToAngleCommand extends CommandBase {
     error = calculateError();
 
 
-    double rotate = Math.min(0.45, error * kP); // cap at 50% rotate speed
+    double rotate = Math.min(0.40, error * kP); // cap at 50% rotate speed
     
     if(!DriverStation.isFMSAttached())
     {
@@ -99,7 +100,7 @@ public class SimpleTurnToAngleCommand extends CommandBase {
     // {
 
     // }
-    boolean onTarget = Math.abs(error /*- targetAngle*/) < 4.0;
+    boolean onTarget = Math.abs(error /*- targetAngle*/) < 1.75;
     boolean hasTarget = RobotContainer.visionSubsystem.validTarget();
     
     // if(Math.abs(error /*- targetAngle*/) < 3.0 || (seekHub && RobotContainer.visionSubsystem.validTarget()))

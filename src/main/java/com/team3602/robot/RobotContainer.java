@@ -93,22 +93,22 @@ public class RobotContainer {
     autoChooser.addOption("2 ball", auton2BallCommand);
     autoChooser.addOption("1 ball", auton1BallCommand);
 
-    // if(!DriverStation.isFMSAttached())
-    // {
-    //   autoChooser.addOption("testAuto Multiturn",
-    //   new SequentialCommandGroup(
-    //     new SimpleTurnToAngleCommand(45, false),
-    //     new SimpleTurnToAngleCommand(-45, false),
-    //     new SimpleTurnToAngleCommand(90, false),
-    //     new SimpleTurnToAngleCommand(-90, false),
-    //     new SimpleTurnToAngleCommand(180, false)
-    //     )
-    //   );
+    if(!DriverStation.isFMSAttached())
+    {
+      autoChooser.addOption("testAuto Multiturn",
+      new SequentialCommandGroup(
+        new SimpleTurnToAngleCommand(45, false),
+        new SimpleTurnToAngleCommand(-45, false),
+        new SimpleTurnToAngleCommand(90, false),
+        new SimpleTurnToAngleCommand(-90, false),
+        new SimpleTurnToAngleCommand(180, false)
+        )
+      );
 
-    //   autoChooser.addOption("testAuto 90", new SimpleTurnToAngleCommand(90, false));
-    //   autoChooser.addOption("testAuto -90", new SimpleTurnToAngleCommand(-90, false));
-    //   autoChooser.addOption("testAuto 180", new SimpleTurnToAngleCommand(180, false));
-    // }
+      autoChooser.addOption("testAuto 90", new SimpleTurnToAngleCommand(90, false));
+      autoChooser.addOption("testAuto -90", new SimpleTurnToAngleCommand(-90, false));
+      autoChooser.addOption("testAuto 180", new SimpleTurnToAngleCommand(180, false));
+    }
     
     // Put the chooser on the dashboard
     SmartDashboard.putData(autoChooser);    

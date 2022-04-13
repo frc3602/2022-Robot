@@ -17,10 +17,10 @@ public class Auton1BallCommand extends SequentialCommandGroup {
     addCommands(
       new ResetDriveEncodersCommand(),
       new ResetGyroCommand(),
-      new AutonDrivePIDCommand(-30.0),
-      new ShootStuffCommand(RobotContainer.shooterSubsystem).withTimeout(5.0),
-      new ResetDriveEncodersCommand(),
-      new AutonDrivePIDCommand(-30.0)
+      new AutonDrivePIDCommand(-90.0),
+      new ShootStuffCommand(RobotContainer.shooterSubsystem).withTimeout(5.0)
+      // new ResetDriveEncodersCommand(),
+      // new AutonDrivePIDCommand(-30.0)
 
     );
   }

@@ -31,8 +31,8 @@ public class AutonDrivePIDCommand extends PIDCommand {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveSubsystem);
     // Configure additional PID options by calling `getController` here.
-    getController().setIntegratorRange(-0.40, 0.40);
-    getController().setTolerance(1.0);
+    getController().setIntegratorRange(-0.45, 0.45);
+    getController().setTolerance(1.5);
     //getController().enableContinuousInput(minimumInput, maximumInput);
     // );
   }

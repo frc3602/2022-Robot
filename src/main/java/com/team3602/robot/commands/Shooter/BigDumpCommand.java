@@ -18,7 +18,7 @@ public class BigDumpCommand extends CommandBase {
   @Override
   public void initialize()
   {
-    RobotContainer.shooterSubsystem.setShooterMotorRPM(1100);
+    RobotContainer.shooterSubsystem.setShooterMotorRPM(2000);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

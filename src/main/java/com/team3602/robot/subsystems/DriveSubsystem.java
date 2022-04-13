@@ -15,10 +15,13 @@ import com.team3602.robot.CTREUpdates;
 import com.team3602.robot.Constants;
 import com.team3602.robot.RobotContainer;
 import com.team3602.robot.Constants.Drivetrain;
+
 // Phoenix & navX Imports
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.Pigeon2;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 // WPILib Imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -42,7 +45,9 @@ public class DriveSubsystem extends SubsystemBase {
   WPI_TalonFX backRight = new WPI_TalonFX(Drivetrain.driveBackRightCANID);
 
   // NavX for Gyro
-  private AHRS navX;
+  // private AHRS navX;
+
+  private WPI_Pigeon2 pigeon2;
 
   // MecanumDrive Information
   private MecanumDrive mecanumDrive;
@@ -58,11 +63,13 @@ public class DriveSubsystem extends SubsystemBase {
 
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
-    try {
-      navX = new AHRS(SPI.Port.kMXP);
-    } catch (RuntimeException ex) {
-      System.out.println("ERROR: Unable to instantiate navX" + ex.getMessage());
-    }
+    pigeon2 = new WPI_Pigeon2(42);
+
+    // try {
+    //   navX = new AHRS(SPI.Port.kMXP);
+    // } catch (RuntimeException ex) {
+    //   System.out.println("ERROR: Unable to instantiate navX" + ex.getMessage());
+    // }
   }
 
   @Override
@@ -133,14 +140,14 @@ public class DriveSubsystem extends SubsystemBase {
    * Method to get the current angle of the navX gyro.
    */
   public double getGyroAngle() {
-    return navX.getAngle();
+    return pigeon2.getAngle();
   }
 
   /**
    * Method to reset the value of the navX gyro.
    */
   public void resetGyro() {
-    navX.reset();
+    pigeon2.reset();
   }
 
   /**

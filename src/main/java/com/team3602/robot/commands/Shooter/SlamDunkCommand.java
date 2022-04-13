@@ -18,7 +18,7 @@ public class SlamDunkCommand extends CommandBase {
   @Override
   public void initialize()
   {
-    RobotContainer.shooterSubsystem.setShooterMotorRPM(2000);
+    RobotContainer.shooterSubsystem.setShooterMotorRPM(1100);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

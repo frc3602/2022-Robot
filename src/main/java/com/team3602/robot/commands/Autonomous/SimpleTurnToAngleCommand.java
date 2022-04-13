@@ -100,7 +100,7 @@ public class SimpleTurnToAngleCommand extends CommandBase {
     // {
 
     // }
-    boolean onTarget = Math.abs(error /*- targetAngle*/) < 1.75;
+    boolean onTarget = Math.abs(error /*- targetAngle*/) < 2.0;
     boolean hasTarget = RobotContainer.visionSubsystem.validTarget();
     
     // if(Math.abs(error /*- targetAngle*/) < 3.0 || (seekHub && RobotContainer.visionSubsystem.validTarget()))

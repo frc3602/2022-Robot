@@ -39,7 +39,7 @@ public class RotateToTargetSubsystem extends PIDSubsystem {
     getController().setIntegratorRange(-0.125, 0.125);
 
 //    getController().setTolerance(Shooter.rotationalErrorTolerance);
-    getController().setTolerance(7.5);
+    getController().setTolerance(5.0); // Start off with 7.5
 
     //m_controller.setTolerance(Shooter.rotationalErrorTolerance);
     //setAbsoluteTolerance(Shooter.rotationalErrorTolerance); 

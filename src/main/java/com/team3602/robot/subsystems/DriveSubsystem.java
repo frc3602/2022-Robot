@@ -21,6 +21,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.Pigeon2;
+import com.ctre.phoenix.sensors.PigeonIMU_StatusFrame;
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 // WPILib Imports
@@ -45,9 +46,9 @@ public class DriveSubsystem extends SubsystemBase {
   WPI_TalonFX backRight = new WPI_TalonFX(Drivetrain.driveBackRightCANID);
 
   // NavX for Gyro
-  // private AHRS navX;
+  private AHRS navX;
 
-  private WPI_Pigeon2 pigeon2;
+  // private WPI_Pigeon2 pigeon2;
 
   // MecanumDrive Information
   private MecanumDrive mecanumDrive;
@@ -63,13 +64,38 @@ public class DriveSubsystem extends SubsystemBase {
 
     mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
-    pigeon2 = new WPI_Pigeon2(42);
+    // pigeon2 = new WPI_Pigeon2(42);
 
-    // try {
-    //   navX = new AHRS(SPI.Port.kMXP);
-    // } catch (RuntimeException ex) {
-    //   System.out.println("ERROR: Unable to instantiate navX" + ex.getMessage());
-    // }
+    // CondStatus_1_General(0x042000),
+    // CondStatus_9_SixDeg_YPR(0x042200), 
+    // CondStatus_6_SensorFusion(0x042140), 
+    // CondStatus_11_GyroAccum(0x042280), 
+    // CondStatus_2_GeneralCompass(0x042040), 
+    // CondStatus_3_GeneralAccel(0x042080), 
+    // CondStatus_10_SixDeg_Quat(0x042240), 
+    // RawStatus_4_Mag(0x041CC0), 
+    // BiasedStatus_2_Gyro(0x041C40), 
+    // BiasedStatus_4_Mag(0x041CC0), 
+    // BiasedStatus_6_Accel(0x41D40);
+  
+
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_1_General, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_9_SixDeg_YPR, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_6_SensorFusion, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_11_GyroAccum, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_2_GeneralCompass, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_3_GeneralAccel, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_10_SixDeg_Quat, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.RawStatus_4_Mag, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.BiasedStatus_2_Gyro, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.BiasedStatus_4_Mag, 255);
+    // pigeon2.setStatusFramePeriod(PigeonIMU_StatusFrame.BiasedStatus_6_Accel, 255);
+
+    try {
+      navX = new AHRS(SPI.Port.kMXP);
+    } catch (RuntimeException ex) {
+      System.out.println("ERROR: Unable to instantiate navX" + ex.getMessage());
+    }
   }
 
   @Override
@@ -140,14 +166,14 @@ public class DriveSubsystem extends SubsystemBase {
    * Method to get the current angle of the navX gyro.
    */
   public double getGyroAngle() {
-    return pigeon2.getAngle();
+    return navX.getAngle();
   }
 
   /**
    * Method to reset the value of the navX gyro.
    */
   public void resetGyro() {
-    pigeon2.reset();
+    navX.reset();
   }
 
   /**
